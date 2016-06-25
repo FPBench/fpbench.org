@@ -2,6 +2,38 @@ body {
   min-width: 400px;
   max-width: 800px;
   margin: 30px auto;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 14pt;
+  font-family: Helvetica, Arial, sans;
+  font-size: 18px;
 }
+
+header img { float: left; margin-right: 1em; }
+header h1 { height: 150px; line-height: 150px; font-size: 36px; margin: 0; }
+header { overflow: auto; margin-bottom: 3em; }
+
+a { color: #3465a4 }
+a:hover { color: #204a87 }
+a:visited { color: #5c3566 }
+a:active { color: #4e9a06 }
+
+p { margin: 0 0 1em 0; }
+h1 { font-size: 24px; font-weight: bold; margin: 3em 0 0 0; }
+h2 { font-size: 20px; font-weight: bold; margin: 2em 0 0 0; }
+h3 { font-size: 18px; font-weight: bold; margin: 1em 0 0 0; }
+code { font-size: 16px; }
+
+data.suite-name { font-family: mono; }
+
+.grammar { font-family: mono; font-size: 16px; }
+.grammar dt { font-weight: bold; margin-top: 1em; }
+.grammar dt:after { content: " ≔" }
+.grammar dd { margin-left: 0; }
+.grammar dd:before { content: "| " }
+.grammar dt + dd:before { content: "  "; white-space: pre; }
+
+a[href^=\#g\:]:before { content: "‹" }
+a[href^=\#g\:]:after { content: "›" }
+a[href^=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-size: 16px; }
+
+aside { border: 1px solid black; width: 10em; float: right; padding: 1em; margin: 0 1em; }
+
+.code-terms dt { font-family: mono; font-size: 16px; font-weight: bold; margin-top: 1em; }
