@@ -8,7 +8,7 @@ body {
 
 header img { float: left; margin-right: 1em; }
 header h1 { height: 150px; line-height: 150px; font-size: 36px; margin: 0; }
-header { overflow: auto; margin-bottom: 3em; }
+body > header { overflow: auto; margin-bottom: 3em; }
 
 a { color: #3465a4 }
 a:hover { color: #204a87 }
