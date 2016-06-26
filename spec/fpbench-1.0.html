@@ -142,11 +142,20 @@
     <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>,
     <code>==</code>, and <code>!=</code> are supported, as are the
     boolean operators <code>and</code>, <code>or</code>,
-    and <code>not</code>. The comparison and boolean operators take an
-    arbitrary number of arguments. A comparison operator with more
-    than two operators is interpreted as the conjuction of all ordered
-    pairs of arguments. For example, <code>(&lt; 1 2 3)</code> is
-    true and <code>(!= 1 2 1)</code> is false.
+    and <code>not</code>.</p>
+
+  <p>
+    The comparison operators and boolean
+    operators <code>and</code> and <code>or</code> take an arbitrary
+    number of arguments. A comparison operator with more than two
+    operators is interpreted as the conjuction of all ordered pairs of
+    arguments. For example, <code>(&lt; 1 2 3)</code> is true
+    and <code>(!= 1 2 1)</code> is false. In other
+    words, <code>==</code> tests that all its arguments are
+    equal; <code>!=</code> tests that all its arguments are distinct;
+    and <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
+    and <code>&gt;=</code> test that their arguments are sorted in the
+    appropriate order.
   </p>
   
   <h3>Supported constants</h3>
