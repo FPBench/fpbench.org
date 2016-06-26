@@ -92,7 +92,7 @@
       <dd>:<a href="#g:symbol">symbol</a> <a href="#g:string">string</a></dd>
       <dd>:<a href="#g:symbol">symbol</a> ( <a href="#g:symbol">symbol</a>* )</dd>
     </dl>
-    <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> are defined below <a href="#g:operation">operation</a>, while all other tokens are defined as in <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB 2.5</a>. </caption>
+    <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a> are defined below, while all other tokens are defined as in <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB 2.5</a>. </caption>
   </figure>
   
   <p>
@@ -107,7 +107,7 @@
     semicolon (<code>;</code>) are treated as comments and ignored.
   </p>
 
-  <h3>Supported operations</h3>
+  <h3 id="g:operation">Supported operations</h3>
 
   <aside>
     Arithmetic operations are binary, because floating-point
@@ -157,7 +157,7 @@
     appropriate order.
   </p>
   
-  <h3>Supported constants</h3>
+  <h3 id="g:constant">Supported constants</h3>
 
   <p>
     The floating-point constants <code>E</code>, <code>LOG2E</code>,
