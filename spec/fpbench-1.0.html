@@ -187,9 +187,7 @@
   </p>
 
   <p>
-    Expressions return either floating-point values or boolean values,
-    with the precision of floating-point values formally undefined
-    (but usually specified with a <code>:type</code> property).
+    Expressions return either floating-point values or boolean values.
     Operations that receive values of mixed or incorrect types, such
     a <code>(+ 1 TRUE)</code> are illegal and the results of
     evaluating them undefined.
@@ -280,8 +278,11 @@
 
       <dt>:type</dt>
       <dd>
-        Describes the floating point precision originally used in
-        whatever source the expression is drawn from.
+        Describes the floating point precision used for floating point
+        values in the expression, using the IEEE-754 names (such
+        as <code>binary32</code> and <code>binary64</code>). If
+        no <code>:type</code> property is specified, implementations
+        should assume <code>binary64</code> floating-point values.
       </dd>
 
       <dt>:pre</dt>
