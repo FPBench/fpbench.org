@@ -65,10 +65,14 @@
   <h3>Syntax</h3>
 
   <p>
-    The syntax is a simple S-expression syntax modeled on SMT-LIB2.
-    The following grammar describes an FPCore benchmark.
+    The syntax is a simple S-expression syntax
+    with the following grammar.
   </p>
-  
+
+  <aside>
+    FPCore was modelled on SMT-LIB2, an input standard for SMT solvers.
+  </aside>
+
   <figure>
     <dl class="grammar">
       <dt id="g:fpcore">FPCore</dt>
@@ -86,7 +90,7 @@
       <dd>( if <a href="#g:expr" title="conditional">expr</a> <a href="#g:expr" title="Branch if condition is true">expr</a> <a href="#g:expr" title="Branch if condition is false">expr</a> )</dd>
       <dd>( let ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr">expr</a> )</dd>
       <dd>( while <a href="#g:expr">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expr for variable">expr</a> ]* ) <a href="#g:expr">expr</a> )</dd>
-      
+
       <dt id="g:property">property</dt>
       <dd>:<a href="#g:symbol">symbol</a> <a href="#g:expr">expr</a></dd>
       <dd>:<a href="#g:symbol">symbol</a> <a href="#g:string">string</a></dd>
@@ -94,41 +98,45 @@
     </dl>
     <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a> are defined below, while all other tokens are defined as in <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB 2.5</a>. </caption>
   </figure>
-  
+
   <p>
     In this grammar, an <a href="#g:fpcore">FPCore</a> term describes
     a single benchmark, with a set of free variables, a collection of
     metadata properties, and the floating-point expression defining
-    the benchmark. The additional tokens <a id="g:symbol">symbol</a>,
-    <a id="g:numeral">numeral</a>, <a id="g:decimal">decimal</a>,
-    and <a id="g:string">string</a> are defined exactly as in 
-    <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB
-    2.5</a>. White-space is ignored, and lines starting with the
+    the benchmark. White-space is ignored, and lines starting with the
     semicolon (<code>;</code>) are treated as comments and ignored.
+    The additional tokens <a id="g:symbol">symbol</a>,
+    <a id="g:numeral">numeral</a>, <a id="g:decimal">decimal</a>,
+    and <a id="g:string">string</a> are defined exactly as in
+    <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB
+    2.5</a>.
   </p>
 
+  </section>
+
+
+
+  <section>
   <h3 id="g:operation">Supported operations</h3>
 
   <aside>
-    Arithmetic operations are binary, because floating-point
-    arithmetic is non-associative. Since boolean operations are,
-    however, exact, they may be given arbitrarily many arguments.
+    By covering all functions in <code>math.h</code>, FPCore covers
+    common library functions in C, Fortran, and Matlab.
   </aside>
 
   <p>
     All floating-point functions from
-    C11 <a href="http://en.cppreference.com/w/c/numeric/math"><code>math.h</code></a>
-    are supported. These functions are a superset of the
-    floating-point intrinsics from Fortran 2003. The arithmetic
+    C11 <a href="http://en.cppreference.com/w/c/numeric/math"><code>math.h</code></a>,
+    plus the arithmetic
     functions <code>+</code>, <code>*</code>, <code>-</code>,
-    and <code>/</code> are supported. All are binary operators,
-    except <code>-</code>, which can also be unary negation. For the
-    C11 functions, the un-suffixed names are used
-    (use <code>exp</code>, not <code>expf</code>).
+    and <code>/</code> are supported. The arithmetic functions are all
+    binary operators, except <code>-</code> which can be unary to
+    represent negation. For the C11 functions, the un-suffixed names
+    are used (use <code>exp</code>, not <code>expf</code>).
   </p>
-  
+
   <p>
-    Following IEEE754 and common C and Fortran implementations, FPCore
+    Following IEEE-754 and common C and Fortran implementations, FPCore
     does not prescribe an accuracy to any mathematical functions
     except the arithmetic operators, <code>sqrt</code>,
     and <code>fma</code>. If the exact accuracy is important, we
@@ -141,22 +149,33 @@
     <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>,
     <code>==</code>, and <code>!=</code> are supported, as are the
     boolean operators <code>and</code>, <code>or</code>,
-    and <code>not</code>.</p>
+    and <code>not</code>.
+  </p>
+
+  <aside>
+    Arithmetic operations are binary, because floating-point
+    arithmetic is non-associative. Since boolean operations are,
+    however, exact, they may be given arbitrarily many arguments.
+  </aside>
 
   <p>
-    The comparison operators and boolean
-    operators <code>and</code> and <code>or</code> take an arbitrary
-    number of arguments. A comparison operator with more than two
-    operators is interpreted as the conjuction of all ordered pairs of
-    arguments. For example, <code>(&lt; 1 2 3)</code> is true
-    and <code>(!= 1 2 1)</code> is false. In other
-    words, <code>==</code> tests that all its arguments are
-    equal; <code>!=</code> tests that all its arguments are distinct;
+    The comparison operators and boolean operators <code>and</code>
+    and <code>or</code> take an arbitrary number of arguments. A
+    comparison operator with more than two operators is interpreted as
+    the conjuction of all ordered pairs of arguments. For
+    example, <code>(&lt; 1 2 3)</code> is true and <code>(!= 1 2
+    1)</code> is false. In other words, <code>==</code> tests that all
+    its arguments are equal; <code>!=</code> tests that all its
+    arguments are distinct;
     and <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-    and <code>&gt;=</code> test that their arguments are sorted in the
-    appropriate order.
+    and <code>&gt;=</code> test that their arguments are sorted (in
+    the appropriate order, with equal elements allowed
+    for <code>&lt;=</code> and <code>&gt;=</code>, and disallowed
+    for <code>&lt;</code> and <code>&gt;</code>.
   </p>
-  
+  </section>
+
+  <section>
   <h3 id="g:constant">Supported constants</h3>
 
   <p>
@@ -172,19 +191,20 @@
     are assumed to be the closest floating-point number to the
     mathematically-accurate value of the constant.
   </p>
-  
+
   <p>
     Additionally, the boolean constants <code>TRUE</code>
     and <code>FALSE</code> are supported.
   </p>
-  
+
   <h3>Semantics</h3>
 
-  <p>
-    Property values do not affect the semantics of an FPCore
-    expression. However, the precision of floating-point values is
-    usually specified using the <code>:type</code> property.
-  </p>
+  <aside>
+    When FPCore expressions used mixed or incorrect types, we expect
+    tools to inform the user of their error. FPBench will provide a
+    type checker for FPBench expressions to help users diagnose and
+    fix any undefined behavior.
+  </aside>
 
   <p>
     Expressions return either floating-point values or boolean values.
@@ -224,7 +244,7 @@
     update expressions for each variable are evaluated, and then each
     bound variable is re-bound to the value of the update expression.
   </p>
-  
+
   <p>
     For example, <code>(while (&lt; i 1) ([i 0 (+ i 1)]) i)</code> is
     evaluated by evaluating <code>0</code> to 0;
@@ -235,15 +255,16 @@
     evaluating <code>(&lt; i 1)</code> to falsehood;
     and finally evaluating <code>i</code> to 1.
   </p>
-  
+
   <p>
     If a loop has multiple variables, all of the update expressions
     are evaluated before any variable is re-bound; in other words,
     the <emph>old</emph> values of every bound variable is used to
     evaluate the update expression.
   </p>
+  </section>
 </section>
-  
+
 <section id="props">
   <header>
     <h2>FPCore metadata properties</h2>
@@ -261,14 +282,14 @@
         A string name for the benchmark. If a name is needed and not
         provided, we recommend using the body expression.
       </dd>
-      
+
       <dt>:description</dt>
       <dd>
         A string description for the benchmark and its inputs. We
         recommend describing the physical meaning and units of inputs
         when applicable.
       </dd>
-      
+
       <dt>:cite</dt>
       <dd>
         A list of symbols that describe the sources of the benchmark.
@@ -292,20 +313,13 @@
         accuracy of the benchmark.
       </dd>
     </dl>
-    
+
     <p>
       Additionally, properties prefixed by the name of a tool (such
       as <code>:xxx-foobar</code>) are reserved for definition by that
       tool. Only that tool may define the meaning of those properties;
       other tools should not depend on the meaning of those
       properties, nor must the defining tool keep the meaning constant.
-    </p>
-    
-    <p>
-      Proposals for extensions to FPBench must not define additional
-      un-prefixed properties; instead, they should use the proposal
-      name as a prefix until the proposal is accepted into an FPBench
-      version.
     </p>
 
   </header>

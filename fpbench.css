@@ -34,6 +34,11 @@ a[href^=\#g\:]:before { content: "‹" }
 a[href^=\#g\:]:after { content: "›" }
 a[href^=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-size: 16px; }
 
-aside { border: 1px solid black; width: 10em; float: right; padding: 1em; margin: 0 1em; }
+aside { border: 1px solid black; width: 200px; float: right; padding: 25px; margin: 0 25px; }
+
+@media (min-width: 1200px) {
+    body { margin-right: 300px; }
+    aside { margin-right: -275px; }
+}
 
 .code-terms dt { font-family: mono; font-size: 16px; font-weight: bold; margin-top: 1em; }
