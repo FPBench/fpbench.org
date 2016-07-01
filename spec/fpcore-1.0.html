@@ -29,13 +29,18 @@
   </p>
 
   <ol>
-    <li><a href="#fpcore">The FPCore input format</a></li>
-    <li><a href="#props">Properties of FPCore benchmarks</a></li>
-    <li><a href="#measure">Standard measures of error</a></li>
+    <li><a href="fpcore-1.0.html">The FPCore input format</a></li>
+    <li><a href="metadata-1.0.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-1.0.html">Standard measures of error</a></li>
   </ol>
 </header>
 
+<div class="warn">
+  This is a draft specification. It is subject to unannounced changes.
+</div>
+
 <section id="fpcore">
+
 <header>
   <h2>FPCore benchmark format</h2>
 
@@ -94,6 +99,7 @@
       <dt id="g:property">property</dt>
       <dd>:<a href="#g:symbol">symbol</a> <a href="#g:expr">expr</a></dd>
       <dd>:<a href="#g:symbol">symbol</a> <a href="#g:string">string</a></dd>
+      <dd>:<a href="#g:symbol">symbol</a> <a href="#g:symbol">symbol</a></dd>
       <dd>:<a href="#g:symbol">symbol</a> ( <a href="#g:symbol">symbol</a>* )</dd>
     </dl>
     <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a> are defined below, while all other tokens are defined as in <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB 2.5</a>. </caption>
@@ -263,66 +269,6 @@
     evaluate the update expression.
   </p>
   </section>
-</section>
-
-<section id="props">
-  <header>
-    <h2>FPCore metadata properties</h2>
-
-    <p>
-      The metadata properties allow describing additional information
-      about each benchmark, such as their name, description,
-      precision, citations, or preconditions. FPBench 1.0 defines the
-      meaning of the following properties:
-    </p>
-
-    <dl class="code-terms">
-      <dt>:name</dt>
-      <dd>
-        A string name for the benchmark. If a name is needed and not
-        provided, we recommend using the body expression.
-      </dd>
-
-      <dt>:description</dt>
-      <dd>
-        A string description for the benchmark and its inputs. We
-        recommend describing the physical meaning and units of inputs
-        when applicable.
-      </dd>
-
-      <dt>:cite</dt>
-      <dd>
-        A list of symbols that describe the sources of the benchmark.
-        We recommend making available a BibTeX file which uses the
-        same symbols as keys.
-      </dd>
-
-      <dt>:type</dt>
-      <dd>
-        Describes the floating point precision used for floating point
-        values in the expression, using the IEEE-754 names (such
-        as <code>binary32</code> and <code>binary64</code>). If
-        no <code>:type</code> property is specified, implementations
-        should assume <code>binary64</code> floating-point values.
-      </dd>
-
-      <dt>:pre</dt>
-      <dd>
-        A precondition on inputs to the benchmark. Tools should not
-        use points that fail the precondition to determine the
-        accuracy of the benchmark.
-      </dd>
-    </dl>
-
-    <p>
-      Additionally, properties prefixed by the name of a tool (such
-      as <code>:xxx-foobar</code>) are reserved for definition by that
-      tool. Only that tool may define the meaning of those properties;
-      other tools should not depend on the meaning of those
-      properties, nor must the defining tool keep the meaning constant.
-    </p>
-
-  </header>
 </section>
 
 </main>

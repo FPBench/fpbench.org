@@ -23,6 +23,9 @@ code { font-size: 16px; }
 
 data.suite-name { font-family: mono; }
 
+div.warn { background: #fcc; border: 5px solid #f88; padding: 1em;
+           text-align: center; font-size: 120%; }
+
 .grammar { font-family: mono; font-size: 16px; }
 .grammar dt { font-weight: bold; margin-top: 1em; }
 .grammar dt:after { content: " ≔" }
@@ -30,9 +33,9 @@ data.suite-name { font-family: mono; }
 .grammar dd:before { content: "| " }
 .grammar dt + dd:before { content: "  "; white-space: pre; }
 
-a[href^=\#g\:]:before { content: "‹" }
-a[href^=\#g\:]:after { content: "›" }
-a[href^=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-size: 16px; }
+a[href*=\#g\:]:before { content: "‹" }
+a[href*=\#g\:]:after { content: "›" }
+a[href*=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-size: 16px; }
 
 aside { border: 1px solid black; width: 200px; float: right; padding: 25px; margin: 0 25px; }
 

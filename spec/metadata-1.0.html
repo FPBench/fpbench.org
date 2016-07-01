@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en_US">
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench</title>
+  <link rel="stylesheet" type="text/css" href="../fpbench.css">
+</head>
+<body>
+
+<header>
+  <img id='logo' src='../img/logo.png' height='150' alt='FPBench Logo' />
+  <h1>FPBench</h1>
+</header>
+
+<main>
+<header>
+  <h1>FPBench 1.0 standards</h1>
+
+  <p>
+    <a href="../../">FPBench</a> is a standard benchmark suite for the
+    floating point community to organize its efforts around. The
+    benchmark suite is organized around a common format and a common set
+    of measures of accuracy. FPBench 1.0 is the first version of this
+    common format and set of measures.
+  </p>
+
+  <p>
+    FPBench 1.0 standardizes:
+  </p>
+
+  <ol>
+    <li><a href="fpcore-1.0.html">The FPCore input format</a></li>
+    <li><a href="metadata-1.0.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-1.0.html">Standard measures of error</a></li>
+  </ol>
+
+</header>
+
+<div class="warn">
+  This is a draft specification. It is subject to unannounced changes.
+</div>
+
+<section id="props">
+<header>
+  <h2>FPCore metadata properties</h2>
+
+  <p>
+    The metadata properties allow describing additional information
+    about each benchmark, such as their name, description,
+    precision, citations, or preconditions.
+  </p>
+</header>
+
+
+<p>
+  FPBench 1.0 defines the meaning of the following properties:
+</p>
+
+<dl class="code-terms">
+  <dt>:name</dt>
+  <dd>
+    A string name for the benchmark. If a name is needed and not
+    provided, we recommend using the body expression.
+  </dd>
+
+  <dt>:description</dt>
+  <dd>
+    A string description for the benchmark and its inputs. We
+    recommend describing the physical meaning and units of inputs
+    when applicable.
+  </dd>
+
+  <dt>:cite</dt>
+  <dd>
+    A list of symbols that describe the sources of the benchmark.
+    We recommend making available a BibTeX file which uses the
+    same symbols as keys.
+  </dd>
+
+  <dt>:type</dt>
+  <dd>
+    Describes the floating point precision used for floating point
+    values in the expression. It is expected to be a symbol for one of
+    the IEEE-754 names (such as <code>binary32</code>
+    and <code>binary64</code>). If no <code>:type</code> property is
+    specified, implementations should assume <code>binary64</code>
+    floating-point values.
+  </dd>
+
+  <dt>:pre</dt>
+  <dd>
+    A precondition on inputs to the benchmark. Tools should not use
+    points that fail the precondition to determine the accuracy of the
+    benchmark. It is expected to be
+    an <a href="fpcore-1.0.html#g:expression">expression</a> that
+    returns a boolean value.
+  </dd>
+  
+  <dt>:mathh-version</dt>
+  <dd>
+    The library used in the source to implement floating-point
+    operations. It is expected to be a symbol corresponding to a
+    library version, such as <code>gnu-libm-2.34</code>.
+  </dd>
+</dl>
+
+<p>
+  Additionally, properties prefixed by the name of a tool (such
+  as <code>:xxx-foobar</code>) are reserved for definition by that
+  tool. Only that tool may define the meaning of those properties;
+  other tools should not depend on the meaning of those
+  properties, nor must the defining tool keep the meaning constant.
+</p>
+
+</section>
+
+</main>
