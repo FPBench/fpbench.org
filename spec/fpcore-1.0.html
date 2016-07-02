@@ -87,8 +87,7 @@
       </dd>
 
       <dt id="g:expr">expr</dt>
-      <dd><a href="#g:numeral">numeral</a></dd>
-      <dd><a href="#g:decimal">decimal</a></dd>
+      <dd><a href="#g:number">numeral</a></dd>
       <dd><a href="#g:constant">constant</a></dd>
       <dd><a href="#g:symbol">symbol</a></dd>
       <dd>( <a href="#g:operation">operation</a> <a href="#g:expr">expr</a>* )</dd>
@@ -108,10 +107,40 @@
   <p>
     In this grammar, an <a href="#g:fpcore">FPCore</a> term describes
     a single benchmark, with a set of free variables, a collection of
-    metadata properties, and the floating-point expression defining
-    the benchmark. White-space is ignored, and lines starting with the
-    semicolon (<code>;</code>) are treated as comments and ignored.
-    The additional tokens <a id="g:symbol">symbol</a>,
+    <a href="metadata-1.0.html">metadata properties</a>, and the
+    floating-point expression defining the benchmark. White-space is
+    ignored, and lines starting with the semicolon (<code>;</code>)
+    are treated as comments and ignored. The basic tokens are defined
+    as expected:
+  </p>
+
+  <dl class="code-terms">
+    <dt id="g:symbol">symbol</dt>
+    <dd>Any sequence of letters, digits, or characters from the
+    set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit.</dd>
+
+    <dt id="g:number">numeral</dt>
+    <dd>An optional plus (<code>+</code>) or minus (<code>-</code>)
+      sign followed by any number of digits. These may be optionally
+      by a period (<code>.</code>), another sequence of digits, which
+      themselves may be optionally followed by an <code>e</code>,
+      optional plus or minus sign, and a sequence of digits.</dd>
+
+    <dt id="g:string">string</dt>
+    <dd>Any sequence of printable characters, spaces, tabs, or
+      carriage returns, delimited by double quotes
+      (<code>&quot;</code>). Within the double quotes, backslashes
+      (<code>\</code>) have special meaning. A backslash followed by a
+      double quote represents a double quote and does not terminate
+      the string; a backslash followed by a backslash represents a
+      backslash; other escapes may also be supported by
+      implementations, but their meaning is not defined in this
+      standard. We recommend that implementations only use escapes
+      defined in the C or Matlab standrad libraries.</dd>
+  </dl>
+
+The additional
+    tokens <a id="g:symbol">symbol</a>,
     <a id="g:numeral">numeral</a>, <a id="g:decimal">decimal</a>,
     and <a id="g:string">string</a> are defined exactly as in
     <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB
@@ -142,12 +171,14 @@
   </p>
 
   <p>
-    Following IEEE-754 and common C and Fortran implementations, FPCore
-    does not prescribe an accuracy to any mathematical functions
-    except the arithmetic operators, <code>sqrt</code>,
+    Following IEEE-754 and common C and Fortran implementations,
+    FPCore does not prescribe an accuracy to any mathematical
+    functions except the arithmetic operators, <code>sqrt</code>,
     and <code>fma</code>. If the exact accuracy is important, we
     recommend that benchmark users declare the implementation used and
-    its accuracy.
+    its accuracy with
+    the <a href="metadata-1.0.html"><code>:math-library</code></a>
+    property.
   </p>
 
   <p>
@@ -216,7 +247,9 @@
     Expressions return either floating-point values or boolean values.
     Operations that receive values of mixed or incorrect types, such
     a <code>(+ 1 TRUE)</code> are illegal and the results of
-    evaluating them undefined.
+    evaluating them undefined. The precision of floating-point values
+    is specified with
+    the <a href="metadata-1.0.html"><code>:type</code></a> property.
   </p>
 
   <p>
