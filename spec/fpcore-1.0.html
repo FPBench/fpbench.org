@@ -87,7 +87,7 @@
       </dd>
 
       <dt id="g:expr">expr</dt>
-      <dd><a href="#g:number">numeral</a></dd>
+      <dd><a href="#g:number">number</a></dd>
       <dd><a href="#g:constant">constant</a></dd>
       <dd><a href="#g:symbol">symbol</a></dd>
       <dd>( <a href="#g:operation">operation</a> <a href="#g:expr">expr</a>* )</dd>
@@ -98,10 +98,9 @@
       <dt id="g:property">property</dt>
       <dd>:<a href="#g:symbol">symbol</a> <a href="#g:expr">expr</a></dd>
       <dd>:<a href="#g:symbol">symbol</a> <a href="#g:string">string</a></dd>
-      <dd>:<a href="#g:symbol">symbol</a> <a href="#g:symbol">symbol</a></dd>
       <dd>:<a href="#g:symbol">symbol</a> ( <a href="#g:symbol">symbol</a>* )</dd>
     </dl>
-    <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a> are defined below, while all other tokens are defined as in <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB 2.5</a>. </caption>
+    <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>, as well as base tokens like <a href="#g:number">number</a>, are defined below. </caption>
   </figure>
 
   <p>
@@ -119,7 +118,7 @@
     <dd>Any sequence of letters, digits, or characters from the
     set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit.</dd>
 
-    <dt id="g:number">numeral</dt>
+    <dt id="g:number">number</dt>
     <dd>An optional plus (<code>+</code>) or minus (<code>-</code>)
       sign followed by any number of digits. These may be optionally
       by a period (<code>.</code>), another sequence of digits, which
@@ -138,14 +137,6 @@
       standard. We recommend that implementations only use escapes
       defined in the C or Matlab standrad libraries.</dd>
   </dl>
-
-The additional
-    tokens <a id="g:symbol">symbol</a>,
-    <a id="g:numeral">numeral</a>, <a id="g:decimal">decimal</a>,
-    and <a id="g:string">string</a> are defined exactly as in
-    <a href="http://smtlib.cs.uiowa.edu/language.shtml">SMT-LIB
-    2.5</a>.
-  </p>
 
   </section>
 
