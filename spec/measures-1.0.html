@@ -115,13 +115,14 @@
   outputs for a fixed input, while backward error measures the difference
   between inputs for a fixed output. Formally:
 </p>
+<aside> Where \(n\) is the number of arguments. </aside>
 <figure>
 \[
   \epsilon_{fwd}(f, \hat{f}, x) = \varepsilon(f(x), \hat{f}(x))
 \]
 \[
   \epsilon_{bwd}(f, \hat{f}, x) =
-    \min \left\{ \varepsilon(x, x') : x' \in \mathbb{F}^n \land {\hat f}(x') = f(x) \right\}.
+    \min \left\{ \varepsilon(x, x') : x' \in \mathbb{F}^n \land {\hat f}(x') = f(x) \right\}
 \]
 </figure>
 
@@ -140,11 +141,14 @@
   behaviour across multiple inputs. Existing tools use either maximum or
   average error for this task. Formally:
 </p>
+<aside>
+  Where \(N\) is the number of valid inputs, and \(n\) is the number of arguments.
+</aside>
 <figure>
 \[
   E_{\text{max}}(f, \hat{f}) = \max \left\{\epsilon(f, \hat{f}, x) : x \in \mathbb{F}^n\right\}
   \quad \text{and} \quad
-  E_{\text{avg}}(f, \hat{f}) = \frac{1}{N} \sum_{x\in \mathbb{F}^n} \epsilon(f, \hat{f}, x) \enspace .
+  E_{\text{avg}}(f, \hat{f}) = \frac{1}{N} \sum_{x\in \mathbb{F}^n} \epsilon(f, \hat{f}, x)
 \]
 </figure>
 
