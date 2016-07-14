@@ -135,7 +135,7 @@
       backslash; other escapes may also be supported by
       implementations, but their meaning is not defined in this
       standard. We recommend that implementations only use escapes
-      defined in the C or Matlab standrad libraries.</dd>
+      defined in the C or Matlab standard libraries.</dd>
   </dl>
 
   </section>
@@ -197,7 +197,7 @@
     arguments are distinct;
     and <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
     and <code>&gt;=</code> test that their arguments are sorted (in
-    the appropriate order, with equal elements allowed
+    the appropriate order), with equal elements allowed
     for <code>&lt;=</code> and <code>&gt;=</code>, and disallowed
     for <code>&lt;</code> and <code>&gt;</code>.
   </p>
@@ -215,7 +215,7 @@
     defined just like their analogs in
     <a href="http://www.gnu.org/software/libc/manual/html_node/Mathematical-Constants.html">GNU libc</a>.
     This gives FPCore support for all constants
-    commonly-provided by C and Fortran implementations. All constants
+    commonly provided by C and Fortran implementations. All constants
     are assumed to be the closest floating-point number to the
     mathematically-accurate value of the constant.
   </p>
@@ -240,7 +240,7 @@
     a <code>(+ 1 TRUE)</code> are illegal and the results of
     evaluating them undefined. The precision of floating-point values
     is specified with
-    the <a href="metadata-1.0.html"><code>:type</code></a> property.
+    the <a href="metadata-1.0.html"><code>:precision</code></a> property.
   </p>
 
   <p>
@@ -259,8 +259,8 @@
     simultaneously. Thus, <code>(let ([a b] [b a]) (- a b))</code> is
     the same as <code>(- b a)</code> and <code>(let ([a 1] [b a])
     b)</code> is illegal unless <code>a</code> is available in the
-    context. Sequential bindings are equivalent to
-    nested <code>let</code>s.
+    context. For sequentially binding variables, use nested
+    <code>let</code>s.
   </p>
 
   <p>
@@ -270,7 +270,7 @@
     while loop is evaluated by initializing all bound variables by
     evaluating the initial expression and then evaluating the
     conditional. If the conditional is false, the return expression is
-    evaluated and its value returned. If the condition is false, the
+    evaluated and its value returned. If the condition is true, the
     update expressions for each variable are evaluated, and then each
     bound variable is re-bound to the value of the update expression.
   </p>
