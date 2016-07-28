@@ -8,8 +8,10 @@
 <body>
 
 <header>
-  <img id='logo' src='../img/logo.png' height='150' alt='FPBench Logo' />
-  <h1>FPBench</h1>
+    <a href='.' style='color: black; text-decoration: none;'>
+      <img src='img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>FPBench</h1>
+    </a>
 </header>
 
 <main>
@@ -75,7 +77,8 @@
   </p>
 
   <aside>
-    FPCore was modelled on SMT-LIB2, an input standard for SMT solvers.
+    FPCore was modelled on <a href='http://smtlib.cs.uiowa.edu/'>SMT-LIB2</a>,
+    an input standard for SMT solvers.
   </aside>
 
   <figure>
@@ -121,9 +124,10 @@
     <dt id="g:number">number</dt>
     <dd>An optional plus (<code>+</code>) or minus (<code>-</code>)
       sign followed by any number of digits. These may be optionally
-      by a period (<code>.</code>), another sequence of digits, which
-      themselves may be optionally followed by an <code>e</code>,
-      optional plus or minus sign, and a sequence of digits.</dd>
+      separated by a period (<code>.</code>), another sequence of
+      digits, which themselves may be optionally followed by
+      an <code>e</code>, optional plus or minus sign, and a sequence
+      of digits.</dd>
 
     <dt id="g:string">string</dt>
     <dd>Any sequence of printable characters, spaces, tabs, or
