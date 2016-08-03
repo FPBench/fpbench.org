@@ -297,34 +297,37 @@
 
   <p>
     Bindings in a <code>let</code> expression are evaluated
-    simultaneously. Thus, <code>(let ([a b] [b a]) (- a b))</code> is
+    simultaneously, as in a simultaneous substitution.
+    Thus, <code>(let ([a b] [b a]) (- a b))</code> is
     the same as <code>(- b a)</code> and <code>(let ([a 1] [b a])
     b)</code> is illegal unless <code>a</code> is available in the
     context. For sequentially binding variables, use nested
     <code>let</code>s.
   </p>
 
-  <p>
-    A while loop contains a conditional, a list of bound variables,
-    and a return expression. The context for both the conditional and
-    the return expression includes all of the bound variables. The
-    while loop is evaluated by initializing all bound variables by
-    evaluating the initial expression and then evaluating the
-    conditional. If the conditional is false, the return expression is
-    evaluated and its value returned. If the condition is true, the
-    update expressions for each variable are evaluated, and then each
-    bound variable is re-bound to the value of the update expression.
-  </p>
 
   <p>
-    For example, <code>(while (&lt; i 1) ([i 0 (+ i 1)]) i)</code> is
-    evaluated by evaluating <code>0</code> to 0;
-    binding <code>i</code> to 0;
-    evaluating <code>(&lt; i 1)</code> to truth;
-    evaluating <code>(+ i 1)</code> to 1;
-    re-binding <code>i</code> to 1;
-    evaluating <code>(&lt; i 1)</code> to falsehood;
-    and finally evaluating <code>i</code> to 1.
+    A while loop contains a conditional, a list of bound variables,
+    and a return expression. Both the conditional and
+    the return expression may refer to the bound variables.
+    While loops are evaluated according the equality:
+  </p>
+
+  <pre style="width: 55ex; margin: 1em auto"><code>(while <var>cond</var> ([<var>x</var> <var>x0</var> <var>x*</var>] ...) <var>body</var>)
+<hr style="border-style: double; border-width: 4px 0 0"/>(if (let ([<var>x</var> <var>x0</var>] ...) <var>cond</var>)
+  (while <var>cond</var> ([<var>x</var> (let ([<var>x</var> <var>x0</var>] ...) x*) <var>x*</var>] ...) <var>body</var>)
+  (let ([<var>x</var> <var>x0</var>] ...) body))</code></pre>
+
+  <p>
+    In other words,
+    the bound variables are initialized by evaluating the initial expression
+    in the surrounding context.
+    On each iteration, the conditional is evaluated in the bound context.
+    If the conditional is false, the return expression is
+    evaluated (in the bound context) and its value is returned.
+    If the condition is true, the
+    update expressions for each variable are evaluated (in the bound context),
+    and then each bound variable is updated to its new value.
   </p>
 
   <p>
@@ -332,6 +335,17 @@
     are evaluated before any variable is re-bound; in other words,
     the <emph>old</emph> values of every bound variable is used to
     evaluate the update expression.
+  </p>
+
+  <p>
+    For example, <code>(while (&lt; i 1) ([i 0 (+ i 1)] [j 0 (+ i j)]) (+ j 1))</code> is
+    evaluated by evaluating <code>0</code> to 0;
+    binding <code>i</code> to 0 and <code>j</code> to 0;
+    evaluating <code>(&lt; i 1)</code> to truth;
+    evaluating <code>(+ i 1)</code> to 1 and <code>(+ i j)</code> to 0;
+    re-binding <code>i</code> to 1 and <code>j</code> to 0;
+    evaluating <code>(&lt; i 1)</code> to falsehood;
+    and finally evaluating <code>(+ j 1)</code> to 1.
   </p>
   </section>
 </section>
