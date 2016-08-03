@@ -37,13 +37,16 @@ a[href*=\#g\:]:before { content: "‹" }
 a[href*=\#g\:]:after { content: "›" }
 a[href*=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-size: 16px; }
 
-aside { border: 1px solid black; width: 200px; float: right; padding: 25px; margin: 0 25px; }
+aside { border: 1px solid black; width: 200px; float: right; padding: 24px; margin: 0 25px; }
 
 @media (min-width: 1200px) {
     body { margin-right: 300px; }
     aside { margin-right: -275px; }
 }
 
-.code-terms dt { font-family: mono; font-size: 16px; font-weight: bold; margin-top: 1em; }
+dl.code-terms dt { font-family: mono; font-size: 16px; font-weight: bold; margin-top: 1em; }
+table.code-terms { width: 100%; table-layout: fixed; margin: 1em 0; }
+table.code-terms col { width: 20%; }
+table.code-terms td { font-family: mono; font-size: 16px; }
 
 code.regex { white-space: pre; }

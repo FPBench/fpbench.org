@@ -152,19 +152,70 @@
   <h3 id="g:operation">Supported operations</h3>
 
   <aside>
-    By covering all functions in <code>math.h</code>, FPCore covers
-    common library functions in C, Fortran, and Matlab.
+    FPCore covers common library functions in C, Fortran, and Matlab.
+  </aside>
+
+  <p>The following operations are supported:</p>
+
+  <table class="code-terms">
+    <colgroup><col><col><col><col><col></colgroup>
+    <thead><th colspan="5">Supported Floating-Point Mathematical Functions</th></thead>
+    <tbody>
+    <tr>
+    <td>+</td><td>-</td><td>*</td><td>/</td><td>fabs</td>
+    </tr><tr>
+    <td>fma</td><td>exp</td><td>exp2</td><td>expm1</td><td>log</td>
+    </tr><tr>
+    <td>log10</td><td>log2</td><td>log1p</td><td>pow</td><td>sqrt</td>
+    </tr><tr>
+    <td>cbrt</td><td>hypot</td><td>sin</td><td>cos</td><td>tan</td>
+    </tr><tr>
+    <td>asin</td><td>acos</td><td>atan</td><td>atan2</td><td>sinh</td>
+    </tr><tr>
+    <td>cosh</td><td>tanh</td><td>asinh</td><td>acosh</td><td>atanh</td>
+    </tr><tr>
+    <td>erf</td><td>erfc</td><td>tgamma</td><td>lgamma</td><td>ceil</td>
+    </tr><tr>
+    <td>floor</td><td>fmod</td><td>remainder</td><td>fmax</td><td>fmin</td>
+    </tr><tr>
+    <td>fdim</td><td>copysign</td><td>trunc</td><td>round</td><td>nearbyint</td>
+    </tr>
+    <tbody>
+    <thead><th colspan="5">Supported Floating-Point Boolean Functions</th></thead>
+    <tr>
+    <td>&lt;</td><td>&gt;</td><td>&lt;=</td><td>&gt;=</td><td>==</td>
+    </tr><tr>
+    <td>!=</td><td>and</td><td>or</td><td>not</td><td>isfinite</td>
+    </tr><tr>
+    <td>isinf</td><td>isnan</td><td>isnormal</td><td>signbit</td>
+    </tr>
+  </table>
+
+  <aside>
+    Arithmetic operations are binary, because floating-point
+    arithmetic is non-associative. Since boolean operations are,
+    however, exact, they may be given arbitrarily many arguments.
   </aside>
 
   <p>
-    All floating-point functions from
-    C11 <a href="http://en.cppreference.com/w/c/numeric/math"><code>math.h</code></a>,
-    plus the arithmetic
-    functions <code>+</code>, <code>*</code>, <code>-</code>,
-    and <code>/</code> are supported. The arithmetic functions are all
-    binary operators, except <code>-</code> which can be unary to
-    represent negation. For the C11 functions, the un-suffixed names
-    are used (use <code>exp</code>, not <code>expf</code>).
+    except <code>-</code> which can be unary to represent negation.
+    All operations have the same signature as the equivalent operations
+    in <a href="http://en.cppreference.com/w/c/numeric/math">C11</a>.
+    The arithmetic functions are all binary operators,
+    The comparison operators and boolean operators <code>and</code>
+    and <code>or</code> take an arbitrary number of arguments.
+  </p>
+
+  <p>A comparison operator with more than two operators is interpreted
+    as the conjuction of all ordered pairs of arguments. In other
+    words, <code>==</code> tests that all
+    its arguments are equal; <code>!=</code> tests that all its
+    arguments are distinct;
+    and <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
+    and <code>&gt;=</code> test that their arguments are sorted (in
+    the appropriate order), with equal elements allowed
+    for <code>&lt;=</code> and <code>&gt;=</code>, and disallowed
+    for <code>&lt;</code> and <code>&gt;</code>.
   </p>
 
   <p>
@@ -178,35 +229,6 @@
     property.
   </p>
 
-  <p>
-    Additionally, the comparison operators <code>&lt;</code>,
-    <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>,
-    <code>==</code>, and <code>!=</code> are supported, as are the
-    boolean operators <code>and</code>, <code>or</code>,
-    and <code>not</code>.
-  </p>
-
-  <aside>
-    Arithmetic operations are binary, because floating-point
-    arithmetic is non-associative. Since boolean operations are,
-    however, exact, they may be given arbitrarily many arguments.
-  </aside>
-
-  <p>
-    The comparison operators and boolean operators <code>and</code>
-    and <code>or</code> take an arbitrary number of arguments. A
-    comparison operator with more than two operators is interpreted as
-    the conjuction of all ordered pairs of arguments. For
-    example, <code>(&lt; 1 2 3)</code> is true and <code>(!= 1 2
-    1)</code> is false. In other words, <code>==</code> tests that all
-    its arguments are equal; <code>!=</code> tests that all its
-    arguments are distinct;
-    and <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-    and <code>&gt;=</code> test that their arguments are sorted (in
-    the appropriate order), with equal elements allowed
-    for <code>&lt;=</code> and <code>&gt;=</code>, and disallowed
-    for <code>&lt;</code> and <code>&gt;</code>.
-  </p>
   </section>
 
   <section>
