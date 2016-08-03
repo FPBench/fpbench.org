@@ -54,18 +54,12 @@
 </header>
 
   <figure>
-    <pre><code class="fpcore">(FPCore (x0)
-  :name "Sine Newton"
-  :cite (darulova-kuncak-2014)
-  :pre (< (abs x0) 1)
-  (while (< i 10)
-    ([x x0 (- x (/ (+ (+ (- x (/ (pow x 3) 6.0)) (/ (pow x 5) 120.0))
-                      (/ (pow x 7) 5040.0))
-                   (+ (+ (- 1.0 (/ (* x x) 2.0)) (/ (pow x 4) 24.0))
-                      (/ (pow x 6) 720.0))))]
-     [i 0 (+ i 1)])
-    x))</code></pre>
-    <caption>An example FPCore program, from the <data value="benchmarks/rosa.fpcore" class="suite-name">rosa</data> suite.</caption>
+    <pre><code class="fpcore">(FPCore (x)
+ :name "NMSE example 3.1"
+ :cite (hamming-1987)
+ :pre (>= x 0)
+ (- (sqrt (+ x 1)) (sqrt x)))</code></pre>
+    <caption>An example FPCore program, from the <data value="benchmarks/hamming-ch3.fpcore" class="suite-name">hamming-ch3</data> suite.</caption>
   </figure>
 
   <section>
