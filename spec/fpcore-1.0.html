@@ -180,8 +180,9 @@
     </tr><tr>
     <td>fdim</td><td>copysign</td><td>trunc</td><td>round</td><td>nearbyint</td>
     </tr>
-    <tbody>
+    </tbody>
     <thead><th colspan="5">Supported Testing Operations</th></thead>
+    <tbody>
     <tr>
     <td>&lt;</td><td>&gt;</td><td>&lt;=</td><td>&gt;=</td><td>==</td>
     </tr><tr>
@@ -189,6 +190,7 @@
     </tr><tr>
     <td>isinf</td><td>isnan</td><td>isnormal</td><td>signbit</td>
     </tr>
+    </tbody>
   </table>
 
   <aside>
@@ -234,23 +236,34 @@
   <section>
   <h3 id="g:constant">Supported constants</h3>
 
+  <p>The following constants are supported:</p>
+
+  <table class="code-terms">
+    <colgroup><col><col><col><col><col></colgroup>
+    <thead><th colspan="5">Supported Mathematical Constants</th></thead>
+    <tbody>
+    <tr>
+    <td>E</td><td>LOG2E</td><td>LOG10E</td><td>LN2</td><td>LN10</td>
+    </tr><tr>
+    <td>PI</td><td>PI_2</td><td>PI_4</td><td>1_PI</td><td>2_PI</td>
+    </tr><tr>
+    <td>2_SQRTPI</td><td>SQRT2</td><td>SQRT1_2</td><td>INFINITY</td><td>NAN</td></tr>
+    </tbody>
+    <thead><th colspan="5">Supported Boolean Operations</th></thead>
+    <tbody>
+    <tr>
+    <td>TRUE</td><td>FALSE</td>
+    </tr>
+    </tbody>
+  </table>
+
   <p>
-    The floating-point constants <code>E</code>, <code>LOG2E</code>,
-    <code>LOG10E</code>, <code>LN2</code>, <code>LN10</code>,
-    <code>PI</code>, <code>PI_2</code>, <code>PI_4</code>,
-    <code>1_PI</code>, <code>2_PI</code>, <code>2_SQRTPI</code>,
-    <code>SQRT2</code>, and <code>SQRT1_2</code> are supported,
-    defined just like their analogs in
+    The floating-point constants defined just like their analogs in
     <a href="http://www.gnu.org/software/libc/manual/html_node/Mathematical-Constants.html">GNU libc</a>.
     This gives FPCore support for all constants
     commonly provided by C and Fortran implementations. All constants
     are assumed to be the closest floating-point number to the
     mathematically-accurate value of the constant.
-  </p>
-
-  <p>
-    Additionally, the boolean constants <code>TRUE</code>
-    and <code>FALSE</code> are supported.
   </p>
 
   <h3>Semantics</h3>
