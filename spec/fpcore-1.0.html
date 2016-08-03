@@ -113,15 +113,20 @@
   <dl class="code-terms">
     <dt id="g:symbol">symbol</dt>
     <dd>Any sequence of letters, digits, or characters from the
-    set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit.</dd>
+      set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit.
+      The regular expression
+      <code class="regex">[a-zA-Z~!@$%^&*_\-+=<>.?/:][a-zA-Z0-9~!@$%^&*_\-+=<>.?/:]*</code>
+      implements this definition for ASCII alphabets.</dd>
 
     <dt id="g:number">number</dt>
     <dd>An optional plus (<code>+</code>) or minus (<code>-</code>)
-      sign followed by any number of digits. These may be optionally
-      separated by a period (<code>.</code>), another sequence of
+      sign followed by any sequence of digits. These may be optionally
+      followed by a period (<code>.</code>) and another sequence of
       digits, which themselves may be optionally followed by
       an <code>e</code>, optional plus or minus sign, and a sequence
-      of digits.</dd>
+      of digits. The regular expression
+      <code class="regex">[-+]?[0-9]+(\.[0-9]+(e[-+]?[0-9]+)?)?</code>
+      implements this definition.</dd>
 
     <dt id="g:string">string</dt>
     <dd>Any sequence of printable characters, spaces, tabs, or
@@ -133,7 +138,10 @@
       backslash; other escapes may also be supported by
       implementations, but their meaning is not defined in this
       standard. We recommend that implementations only use escapes
-      defined in the C or Matlab standard libraries.</dd>
+      defined in the C or Matlab standard libraries.
+      The regular expression
+      <code class="regex">&quot;([\x20-\x5b\x5d-\x7e]|\\[&quot;\\])+?&quot;</code>
+      implements this definition for ASCII alphabets.</dd>
   </dl>
 
   </section>
