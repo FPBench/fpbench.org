@@ -249,7 +249,7 @@
     </tr><tr>
     <td>2_SQRTPI</td><td>SQRT2</td><td>SQRT1_2</td><td>INFINITY</td><td>NAN</td></tr>
     </tbody>
-    <thead><th colspan="5">Supported Boolean Operations</th></thead>
+    <thead><th colspan="5">Supported Boolean Constants</th></thead>
     <tbody>
     <tr>
     <td>TRUE</td><td>FALSE</td>
@@ -276,12 +276,28 @@
   </aside>
 
   <p>
-    Expressions return either floating-point values or boolean values.
+    FPCore expressions can describe concrete floating-point
+    computations, abstract specifications of those computations, or
+    intermediates between the two. The semantics of FPCore are
+    correspondingly flexible.
+  </p>
+
+  <p>
+    FPCore does not restrict the representation used to represent
+    values when evaluating FPCore expressions. Numeric values can be
+    floating point values of various precision, fixed point values, or
+    (for abstract uses) mathematical reals, though individual FPCore
+    expressions can use
+    the <a href="metadata-1.0.html"><code>:precision</code></a>
+    property to clarify what representation is expected. Evaluation
+    nonetheless proceeds by fixed rules.
+  </p>
+
+  <p>
+    Expressions return either numeric values or boolean values.
     Operations that receive values of mixed or incorrect types, such
-    a <code>(+ 1 TRUE)</code> are illegal and the results of
-    evaluating them undefined. The precision of floating-point values
-    is specified with
-    the <a href="metadata-1.0.html"><code>:precision</code></a> property.
+    as <code>(+ 1 TRUE)</code> are illegal and the results of
+    evaluating them undefined.
   </p>
 
   <p>
@@ -289,10 +305,9 @@
   </p>
 
   <p>
-    The condition expression in a <code>if</code> is evaluated in order
-    to determine which branch is evaluated to find the value of the
-    expression. The condition expression must return a boolean, while
-    both branches must return values of the same type.
+    An <code>if</code> expression evaluates the conditional to a
+    boolean and then returns the result of evaluating the branch
+    chosen by the conditional.
   </p>
 
   <p>
