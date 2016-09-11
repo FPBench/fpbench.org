@@ -40,7 +40,7 @@ a[href*=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-
 aside { border: 1px solid black; width: 200px; float: right; padding: 24px; margin: 0 25px; }
 
 @media (min-width: 1200px) {
-    body { margin-right: 300px; }
+    body.gutter { padding-right: 300px; }
     aside { margin-right: -275px; }
 }
 
