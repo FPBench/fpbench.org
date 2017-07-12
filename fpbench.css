@@ -16,6 +16,11 @@ a:hover { color: #204a87 }
 a:visited { color: #5c3566 }
 a:active { color: #4e9a06 }
 
+nav h2 { font-size: 18px; font-weight: bold; }
+nav li { font-size: 18px; list-style: none; }
+nav ul { padding: 0; }
+nav.columns { display: flex; flex-direction: row; justify-content: space-around; }
+
 p { margin: 0 0 1em 0; }
 h1 { font-size: 24px; font-weight: bold; margin: 3em 0 0 0; }
 h2 { font-size: 20px; font-weight: bold; margin: 2em 0 0 0; }
