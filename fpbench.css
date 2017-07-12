@@ -6,9 +6,10 @@ body {
   font-size: 18px;
 }
 
-header img { float: left; margin-right: 3em; }
-header h1 { height: 150px; line-height: 150px; font-size: 36px; margin: 0; }
 body > header { overflow: auto; margin-bottom: 3em; }
+body > header a { display: block; }
+body > header img { float: left; margin-right: 3em; }
+body > header h1 { padding-top: 1em; font-size: 36px; margin: 0; }
 
 a { color: #3465a4 }
 a:hover { color: #204a87 }
