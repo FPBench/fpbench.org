@@ -21,14 +21,9 @@
 
   <p>
     <a href="../">FPBench</a> is a standard benchmark suite for the
-    floating point community to organize its efforts around. The
-    benchmark suite is organized around a common format and a common set
-    of measures of accuracy. FPBench 1.0 is the first version of this
-    common format and set of measures.
-  </p>
-
-  <p>
-    FPBench 1.0 standardizes:
+    floating point community. The benchmark suite contains a common format
+    for floating-point computation and metadata and a common set
+    of accuracy measures:
   </p>
 
   <ol>
@@ -72,8 +67,8 @@
   </p>
 
   <aside>
-    FPCore was modelled on <a href='http://smtlib.cs.uiowa.edu/'>SMT-LIB2</a>,
-    an input standard for SMT solvers.
+    FPCore is modelled on <a href='http://smtlib.cs.uiowa.edu/'>SMT-LIB2</a>,
+    an input format for SMT solvers.
   </aside>
 
   <figure>
@@ -114,10 +109,9 @@
   <dl class="code-terms">
     <dt id="g:symbol">symbol</dt>
     <dd>Any sequence of letters, digits, or characters from the
-      set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit.
-      The regular expression
-      <code class="regex">[a-zA-Z~!@$%^&*_\-+=<>.?/:][a-zA-Z0-9~!@$%^&*_\-+=<>.?/:]*</code>
-      implements this definition for ASCII alphabets.</dd>
+      set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit,
+      implemented for ASCII by the regular expression:
+      <pre class="expr"><code>[a-zA-Z~!@$%^&*_\-+=<>.?/:][a-zA-Z0-9~!@$%^&*_\-+=<>.?/:]*</code></pre></dd>
 
     <dt id="g:number">number</dt>
     <dd>An optional plus (<code>+</code>) or minus (<code>-</code>)
@@ -125,9 +119,8 @@
       followed by a period (<code>.</code>) and another sequence of
       digits, which themselves may be optionally followed by
       an <code>e</code>, optional plus or minus sign, and a sequence
-      of digits. The regular expression
-      <code class="regex">[-+]?[0-9]+(\.[0-9]+(e[-+]?[0-9]+)?)?</code>
-      implements this definition.</dd>
+      of digits, implemented for ASCII by the regular expression:
+      <pre class="expr"><code>[-+]?[0-9]+(\.[0-9]+(e[-+]?[0-9]+)?)?</code></pre></dd>
 
     <dt id="g:string">string</dt>
     <dd>Any sequence of printable characters, spaces, tabs, or
@@ -140,9 +133,8 @@
       implementations, but their meaning is not defined in this
       standard. We recommend that implementations only use escapes
       defined in the C or Matlab standard libraries.
-      The regular expression
-      <code class="regex">&quot;([\x20-\x5b\x5d-\x7e]|\\[&quot;\\])+?&quot;</code>
-      implements this definition for ASCII alphabets.</dd>
+      This definition is implemented for ASCII by the regular expression:
+      <pre class="expr"><code>&quot;([\x20-\x5b\x5d-\x7e]|\\[&quot;\\])+?&quot;</code></pre></dd>
   </dl>
 
   </section>
@@ -201,12 +193,12 @@
   </aside>
 
   <p>
-    except <code>-</code> which can be unary to represent negation.
     All operations have the same signature as the equivalent operations
     in <a href="http://en.cppreference.com/w/c/numeric/math">C11</a>.
     The arithmetic functions are all binary operators,
-    The comparison operators and boolean operators <code>and</code>
-    and <code>or</code> take an arbitrary number of arguments.
+    except that unary <code>-</code> represents negation.
+    The comparison operators and boolean <code>and</code>
+    and <code>or</code> allow an arbitrary number of arguments.
   </p>
 
   <p>A comparison operator with more than two operators is interpreted
@@ -226,9 +218,8 @@
     FPCore does not prescribe an accuracy to any mathematical
     functions except the arithmetic operators, <code>sqrt</code>,
     and <code>fma</code>. If the exact accuracy is important, we
-    recommend that benchmark users declare the implementation used and
-    its accuracy with
-    the <a href="metadata-1.0.html"><code>:math-library</code></a>
+    recommend that benchmark users declare the implementation used
+    with the <a href="metadata-1.0.html"><code>:math-library</code></a>
     property.
   </p>
 
@@ -238,6 +229,10 @@
   <h3 id="g:constant">Supported constants</h3>
 
   <p>The following constants are supported:</p>
+
+  <aside>
+    FPCore supports all constants commonly provided by C and Fortran implementations.
+  </aside>
 
   <table class="code-terms">
     <colgroup><col><col><col><col><col></colgroup>
@@ -261,10 +256,8 @@
   <p>
     The floating-point constants defined just like their analogs in
     <a href="http://www.gnu.org/software/libc/manual/html_node/Mathematical-Constants.html">GNU libc</a>.
-    This gives FPCore support for all constants
-    commonly provided by C and Fortran implementations. All constants
-    are assumed to be the closest floating-point number to the
-    mathematically-accurate value of the constant.
+    All constants must evaluate to a value
+    as close as possible to their mathematically-accurate real value.
   </p>
 
   <h3>Semantics</h3>
@@ -297,72 +290,66 @@
   <p>
     Expressions return either numeric values or boolean values.
     Operations that receive values of mixed or incorrect types, such
-    as <code>(+ 1 TRUE)</code> are illegal and the results of
+    as <code>(+ 1 TRUE)</code>, are illegal and the results of
     evaluating them undefined.
   </p>
 
-  <p>
-    The semantics of function application are standard.
-  </p>
+  <dl class="code-terms">
+    <dt>Function application</dt>
+    <dd>
+      The semantics of function application are standard.
+    </dd>
 
-  <p>
-    An <code>if</code> expression evaluates the conditional to a
-    boolean and then returns the result of evaluating the branch
-    chosen by the conditional.
-  </p>
+    <dt><code>if</code> expressions</dt>
+    <dd>
+      An <code>if</code> expression evaluates the conditional to a
+      boolean and then returns the result of the first branch if the
+      conditional is true or the second branch if the conditional is
+      false.
+    </dd>
 
-  <p>
-    Bindings in a <code>let</code> expression are evaluated
-    simultaneously, as in a simultaneous substitution.
-    Thus, <code>(let ([a b] [b a]) (- a b))</code> is
-    the same as <code>(- b a)</code> and <code>(let ([a 1] [b a])
-    b)</code> is illegal unless <code>a</code> is available in the
-    context. For sequentially binding variables, use nested
-    <code>let</code>s.
-  </p>
+    <dt><code>let</code> expressions</dt>
+    <dd>
+      Bindings in a <code>let</code> expression are evaluated
+      simultaneously, as in a simultaneous substitution.
+      Thus, <code>(let ([a b] [b a]) (- a b))</code> is
+      the same as <code>(- b a)</code> and <code>(let ([a 1] [b a])
+        b)</code> is illegal unless <code>a</code> is available in the
+      context. For sequentially binding variables, use nested
+      <code>let</code>s.
+    </dd>
 
+    <dt><code>while</code> expressions</dt>
+    <dd>
+      <p>
+        A <code>while</code> loop contains a conditional, a list of
+        bound variables, and a return expression. Both the conditional
+        and the return expression may refer to the bound variables.
+        While loops are evaluated according the equality:
+      </p>
 
-  <p>
-    A while loop contains a conditional, a list of bound variables,
-    and a return expression. Both the conditional and
-    the return expression may refer to the bound variables.
-    While loops are evaluated according the equality:
-  </p>
+      <pre style="width: 55ex; margin: 1em auto"><code>(while <var>cond</var> ([<var>x</var> <var>x0</var> <var>x*</var>] ...) <var>body</var>)
+          <hr style="border-style: double; border-width: 4px 0 0"/>(if (let ([<var>x</var> <var>x0</var>] ...) <var>cond</var>)
+    (while <var>cond</var> ([<var>x</var> (let ([<var>x</var> <var>x0</var>] ...) x*) <var>x*</var>] ...) <var>body</var>)
+    (let ([<var>x</var> <var>x0</var>] ...) body))</code></pre>
 
-  <pre style="width: 55ex; margin: 1em auto"><code>(while <var>cond</var> ([<var>x</var> <var>x0</var> <var>x*</var>] ...) <var>body</var>)
-<hr style="border-style: double; border-width: 4px 0 0"/>(if (let ([<var>x</var> <var>x0</var>] ...) <var>cond</var>)
-  (while <var>cond</var> ([<var>x</var> (let ([<var>x</var> <var>x0</var>] ...) x*) <var>x*</var>] ...) <var>body</var>)
-  (let ([<var>x</var> <var>x0</var>] ...) body))</code></pre>
-
-  <p>
-    In other words,
-    the bound variables are initialized by evaluating the initial expression
-    in the surrounding context.
-    On each iteration, the conditional is evaluated in the bound context.
-    If the conditional is false, the return expression is
-    evaluated (in the bound context) and its value is returned.
-    If the condition is true, the
-    update expressions for each variable are evaluated (in the bound context),
-    and then each bound variable is updated to its new value.
-  </p>
-
-  <p>
-    If a loop has multiple variables, all of the update expressions
-    are evaluated before any variable is re-bound; in other words,
-    the <emph>old</emph> values of every bound variable is used to
-    evaluate the update expression.
-  </p>
-
-  <p>
-    For example, <code>(while (&lt; i 1) ([i 0 (+ i 1)] [j 0 (+ i j)]) (+ j 1))</code> is
-    evaluated by evaluating <code>0</code> to 0;
-    binding <code>i</code> to 0 and <code>j</code> to 0;
-    evaluating <code>(&lt; i 1)</code> to truth;
-    evaluating <code>(+ i 1)</code> to 1 and <code>(+ i j)</code> to 0;
-    re-binding <code>i</code> to 1 and <code>j</code> to 0;
-    evaluating <code>(&lt; i 1)</code> to falsehood;
-    and finally evaluating <code>(+ j 1)</code> to 1.
-  </p>
+      <p>
+        In other words,
+        the list of bound variables gives
+        the variable's name,
+        its initial value,
+        and the value it is updated to after each iteration.
+        The loop is executed by
+        initializing all bound variables
+        and then
+        evaluating the condition
+        and simultaneously updating the variables
+        until the condition returns false.
+        Once the condition returns false,
+        the return expression is evaluated
+        and its value is returned.
+      </p>
+    </dd>
   </section>
 </section>
 
