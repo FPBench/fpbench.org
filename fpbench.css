@@ -16,10 +16,10 @@ a:hover { color: #204a87 }
 a:visited { color: #5c3566 }
 a:active { color: #4e9a06 }
 
-nav h2 { font-size: 18px; font-weight: bold; }
+nav h2 { font-size: 18px; font-weight: bold; margin: 0; border-bottom: 1px solid gray; }
 nav li { font-size: 18px; list-style: none; }
 nav ul { padding: 0; }
-nav.columns { display: flex; flex-direction: row; justify-content: space-around; }
+.columns { display: flex; flex-direction: row; justify-content: space-around; }
 
 p { margin: 0 0 1em 0; }
 h1 { font-size: 24px; font-weight: bold; margin: 3em 0 0 0; }
@@ -43,7 +43,7 @@ a[href*=\#g\:]:before { content: "‹" }
 a[href*=\#g\:]:after { content: "›" }
 a[href*=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-size: 16px; }
 
-aside { border: 1px solid black; width: 200px; float: right; padding: 24px; margin: 0 25px; }
+aside { border: 1px solid black; width: 200px; float: right; clear: right; padding: 24px; margin: 0 25px; }
 
 @media (min-width: 1200px) {
     body.gutter { padding-right: 300px; }
@@ -56,3 +56,7 @@ table.code-terms col { width: 20%; }
 table.code-terms td { font-family: mono; font-size: 16px; }
 
 pre.expr { text-align: center; font-family: monospace; }
+
+table.counts { width: 25%; }
+table.counts thead th { text-align: left; border-bottom: 1px solid gray; }
+table.counts tr td:nth-child(2) { text-align: right; }
