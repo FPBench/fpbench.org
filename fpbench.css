@@ -11,8 +11,8 @@ body > header a { display: block; }
 body > header img { float: left; margin-right: 3em; }
 body > header h1 { padding-top: 1em; font-size: 36px; margin: 0; }
 
-a { color: #3465a4 }
-a:hover { color: #204a87 }
+a { color: #3465a4; text-decoration: none; }
+a:hover { color: #204a87; text-decoration: underline; }
 a:visited { color: #5c3566 }
 a:active { color: #4e9a06 }
 
@@ -25,7 +25,7 @@ p { margin: 0 0 1em 0; }
 h1 { font-size: 24px; font-weight: bold; margin: 3em 0 0 0; }
 h2 { font-size: 20px; font-weight: bold; margin: 2em 0 0 0; }
 h3 { font-size: 18px; font-weight: bold; margin: 1em 0 0 0; }
-code { font-size: 16px; }
+pre, code { font-size: 16px; }
 
 data.suite-name { font-family: mono; }
 
@@ -56,6 +56,7 @@ table.code-terms col { width: 20%; }
 table.code-terms td { font-family: mono; font-size: 16px; }
 
 pre.expr { text-align: center; font-family: monospace; }
+pre.shell::before { content: "$ "; font-weight: bold; }
 
 table.counts { width: 25%; }
 table.counts thead th { text-align: left; border-bottom: 1px solid gray; }
