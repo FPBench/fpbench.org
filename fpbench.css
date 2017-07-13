@@ -21,7 +21,7 @@ li { margin: .25em 0; overflow: none; }
 nav h2 { font-size: 18px; font-weight: bold; margin: 0; border-bottom: 1px solid gray; }
 nav li { font-size: 18px; list-style: none; }
 nav ul { padding: 0; }
-.columns { display: flex; flex-direction: row; justify-content: space-around; }
+.columns { display: flex; flex-direction: row; justify-content: space-around; margin: 1em 0; }
 
 p { margin: 0 0 1em 0; }
 h1 { font-size: 24px; font-weight: bold; margin: 3em 0 0 0; }
