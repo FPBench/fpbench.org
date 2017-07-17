@@ -21,7 +21,7 @@
   <h2 id="fpcore">The FPCore reference interpreter</h2>
   
   <p>
-    The reference interpreter is located in the <kbd>tools/<kbd>
+    The reference interpreter is located in the <kbd>tools/</kbd>
     directory of the FPBench <a href="https://github.com/FPBench/FPBench">codebase</a>,
     and can be run with:
   </p>
@@ -29,7 +29,7 @@
   <pre class="shell">racket tools/fpcore.rkt <var>arguments ...</var> &lt; <var>file.fpcore</var></pre>
 
   <p>The <var>arguments</var> in this case are real numbers using the
-  standard floating-point <a href="spec/fpcore-1.0.href#g:fpcore">number</a>
+  standard floating-point <a href="spec/fpcore-1.0.html#g:number">number</a>
   syntax. For example, running:</p>
 
   <pre class="shell">racket tools/fpcore.rkt 1.0 2.0
@@ -40,7 +40,7 @@
   <h2 id="core2c">Export to C</h2>
   
   <p>
-    The FPCore exporter to C is located in the <kbd>tools/<kbd>
+    The FPCore exporter to C is located in the <kbd>tools/</kbd>
     directory of the FPBench <a href="https://github.com/FPBench/FPBench">codebase</a>,
     and can be run with:
   </p>
@@ -48,7 +48,7 @@
   <pre class="shell">racket tools/core2c.rkt &lt; <var>file.fpcore</var> &gt; <var>file.c</var></pre>
 
   <p>The <var>arguments</var> in this case are real numbers using the
-  standard floating-point <a href="spec/fpcore-1.0.href#g:fpcore">number</a>
+  standard floating-point <a href="spec/fpcore-1.0.html#g:number">number</a>
   syntax. For example, running:</p>
 
   <pre class="shell">racket tools/core2c.rkt &gt; example.c
