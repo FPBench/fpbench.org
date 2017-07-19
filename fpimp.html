@@ -83,9 +83,9 @@
     <pre class="shell">racket tools/imp2core.rkt <var>[options]</var> &lt; <var>file.fpimp</var> &gt; <var>file.fpcore</var></pre>
     
     <p>The <code>imp2core</code> compiler
-    preserves <a href="#g:property">property</a>s, making it an easy
-    way to write FPCore without having to translate from an imperative
-    language by hand.</p>
+    preserves <a href="#g:property">property</a>s, and compiles each
+    FPImp program to multiple FPCore computations, one for each output
+    of the FPImp program.</p>
 
     <p><code>imp2core</code> accepts two options that modify its
     behavior:</p>
@@ -103,12 +103,17 @@
       This option allows using shorthand arithmetic operators, but
       makes the actual order of operations, important for
       floating-point computation, less clear.</dd>
+
+      <dt>--one-to-one</dt>
+      <dd>For some uses, it is important that one FPImp program
+      compile to a single FPCore program, even if the FPImp program
+      contains multiple outputs. The <code>--one-to-one</code> option
+      can be set to <code>first</code> to use only the first output of
+      the FPImp expression, or
+      to <code>add</code>, <code>min</code>, <code>max</code>,
+      or <code>mult</code> to use that operator to combine the outputs
+      of the FPImp expression.</dd>
     </dl>
-    
-    <p>For now, the <code>imp2core</code> compiles an FPImp program
-    with multiple output values to a single FPCore program which
-    outputs the sum of those output values together. This will
-    eventually be fixed.</p>
   </section>
 
   <section>
