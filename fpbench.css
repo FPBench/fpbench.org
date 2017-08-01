@@ -70,3 +70,5 @@ ol time {
     color: gray;
 }
 ol.timeline li { margin: 1em 0; }
+
+.columns .logo { width: 125px; height: 125px; margin-top: 1em }
