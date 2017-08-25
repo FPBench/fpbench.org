@@ -47,9 +47,17 @@
     the <var>value</var>. Best used by inverting the predicate to
     filter out benchmarks that use unsupported
     operations. <code>if</code>, <code>while</code>,
-    and <code>let</code> are considered operators.</dd>
-    <dt>precision</dt>
-    <dd>Allows FPCore benchmarks whose precision is specified to be the <var>value</var> in the <code>:precision</code> field.</dd>
+    and <code>let</code> are considered
+    operators. <code>operation</code> is a synonym
+    for <code>operator</code></dd>
+    <dt>operators</dt>
+    <dd>Allows the FPCore benchmark to contain only operators from a
+    list, given by providing multiple <var>value</var> arguments. Note
+    that while both <code>operator</code> and <code>operators</code>
+    examine the operators used in a benchmark, they filter by fairly
+    different predicates.</dd>
+    <dt><var>property</var></dt>
+    <dd>Allows FPCore benchmarks whose <var>property</var> property is specified to be the given <var>value</var>, or, if no <var>value</var> is provided, that some value is specified.</dd>
   </dl>
 
   <p>The filter script's intended use is in selecting a supported
