@@ -9,7 +9,7 @@ body {
 body > header { overflow: auto; margin-bottom: 3em; }
 body > header a { display: block; }
 body > header img { float: left; margin-right: 3em; }
-body > header h1 { padding-top: 1em; font-size: 36px; margin: 0; }
+body > header h1 { padding-top: 1em; font-size: 200%; margin: 0; }
 
 a { color: #3465a4; text-decoration: none; }
 a:hover { color: #204a87; text-decoration: underline; }
@@ -18,23 +18,23 @@ a:active { color: #4e9a06 }
 
 li { margin: .25em 0; overflow: none; }
 
-nav h2 { font-size: 18px; font-weight: bold; margin: 0; border-bottom: 1px solid gray; }
-nav li { font-size: 18px; list-style: none; }
+nav h2 { font-size: 100%; font-weight: bold; margin: 0; border-bottom: 1px solid gray; }
+nav li { font-size: 100%; list-style: none; }
 nav ul { padding: 0; }
 .columns { display: flex; flex-direction: row; justify-content: space-around; margin: 1em 0; }
 
 p { margin: 0 0 1em 0; }
-h1 { font-size: 24px; font-weight: bold; margin: 3em 0 0 0; }
-h2 { font-size: 20px; font-weight: bold; margin: 2em 0 0 0; }
-h3 { font-size: 18px; font-weight: bold; margin: 1em 0 0 0; }
-pre, code { font-size: 16px; }
+h1 { font-size: 133%; font-weight: bold; margin: 3em 0 0 0; }
+h2 { font-size: 111%; font-weight: bold; margin: 2em 0 0 0; }
+h3 { font-size: 100%; font-weight: bold; margin: 1em 0 0 0; }
+pre, code { font-size: 88%; }
 
 data.suite-name { font-family: mono; }
 
 div.warn { background: #fcc; border: 5px solid #f88; padding: 1em;
            text-align: center; font-size: 120%; }
 
-.grammar { font-family: mono; font-size: 16px; }
+.grammar { font-family: mono; font-size: 88%; }
 .grammar dt { font-weight: bold; margin-top: 1em; }
 .grammar dt:after { content: " ≔" }
 .grammar dd { margin-left: 0; }
@@ -43,7 +43,7 @@ div.warn { background: #fcc; border: 5px solid #f88; padding: 1em;
 
 a[href*=\#g\:]:before { content: "‹" }
 a[href*=\#g\:]:after { content: "›" }
-a[href*=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-size: 16px; }
+a[href*=\#g\:] { color: #204a87; text-decoration: none; font-family: mono; font-size: 88%; }
 
 aside { border: 1px solid black; width: 200px; float: right; clear: right; padding: 24px; margin: 0 25px; }
 
@@ -52,10 +52,10 @@ aside { border: 1px solid black; width: 200px; float: right; clear: right; paddi
     aside { margin-right: -275px; }
 }
 
-dl.code-terms dt { font-family: mono; font-size: 16px; font-weight: bold; margin-top: 1em; }
+dl.code-terms dt { font-family: mono; font-size: 88%; font-weight: bold; margin-top: 1em; }
 table.code-terms { width: 100%; table-layout: fixed; margin: 1em 0; }
 table.code-terms col { width: 20%; }
-table.code-terms td { font-family: mono; font-size: 16px; }
+table.code-terms td { font-family: mono; font-size: 88%; }
 
 pre.expr { text-align: center; font-family: monospace; }
 pre.shell::before { content: "$ "; font-weight: bold; }
