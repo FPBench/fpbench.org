@@ -70,7 +70,7 @@
   <figure>
     <dl class="grammar">
       <dt id="g:fpcore">FPCore</dt>
-      <dd>( FPCore (<a href="#g:symbol" title="Free variables in benchmark">symbol</a>)*
+      <dd>( FPCore (<a href="#g:symbol" title="Free variables in benchmark">symbol</a>*)
         <a href="#g:property" title="Metadata properties of the benchmark">property</a>*
         <a href="#g:expr" title="Benchmark expr">expr</a> )
       </dd>
@@ -79,7 +79,7 @@
       <dd><a href="#g:number">number</a></dd>
       <dd><a href="#g:constant">constant</a></dd>
       <dd><a href="#g:symbol">symbol</a></dd>
-      <dd>( <a href="#g:operation">operation</a> <a href="#g:expr">expr</a>* )</dd>
+      <dd>( <a href="#g:operation">operation</a> <a href="#g:expr">expr</a>+ )</dd>
       <dd>( if <a href="#g:expr" title="conditional">expr</a> <a href="#g:expr" title="Branch if condition is true">expr</a> <a href="#g:expr" title="Branch if condition is false">expr</a> )</dd>
       <dd>( let ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr">expr</a> )</dd>
       <dd>( while <a href="#g:expr">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expr for variable">expr</a> ]* ) <a href="#g:expr">expr</a> )</dd>
@@ -116,7 +116,7 @@
       digits, which themselves may be optionally followed by
       an <code>e</code>, optional plus or minus sign, and a sequence
       of digits, implemented for ASCII by the regular expression:
-      <pre class="expr"><code>[-+]?[0-9]+(\.[0-9]+(e[-+]?[0-9]+)?)?</code></pre></dd>
+      <pre class="expr"><code>[-+]?[0-9]+(\.[0-9]+)?(e[-+]?[0-9]+)?</code></pre></dd>
 
     <dt id="g:string">string</dt>
     <dd>Any sequence of printable characters, spaces, tabs, or
