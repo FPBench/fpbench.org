@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>The Floating-point Community</title>
+  <link rel="stylesheet" type="text/css" href="fpbench.css">
+</head>
+<body>
+  <header>
+    <a href='.' style='color: black; text-decoration: none;'>
+      <img src='img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>The Floating-point Community</h1>
+      <p>Tools from the Floating-point Research World</p>
+    </a>
+  </header>
+  
+  <p>
+    The floating-point research community has developed many tools
+    that authors of numerical software can use to test, analyze, or
+    improve their code. They are listed here in alphabetical order.
+  </p>
+
+  <dl>
+    <dt><a href="https://github.com/rutgers-apl/alive-nj">Alive-NJ</a></dt>
+    <dd>Alive-NJ verifies that LLVM IR optimizations don't change
+    program behavior, and includes support for floating-point
+    instructions. Alive-NJ has found five bugs in LLVM optimization
+    passes.</dd>
+
+    <dt><a href="http://www.astree.ens.fr/">Astreé</a></dt>
+    <dd>Astreé is a static analysis tool for C that can prove the
+    absence of runtime exceptions, including in the presence of
+    floating-point operations. It has been used to prove the absence
+    of runtime exceptions in flight control software for Airbus
+    planes.</dd>
+
+    <dt><a href="https://bitbucket.org/icl/bonsai">BONSAI</a></dt>
+    <dd>BONSAI tests and tunes computational kernels.</dd>
+
+    <dt><a href="http://www.lix.polytechnique.fr/Labo/Sylvie.Putot/fluctuat.html">Fluctuat</a></dt>
+    <dd>Fluctuat is a static analysis tool for C that can characterize
+    the errors caused by the approximation inherent in floating-point
+    arithmetic. Fluctuat has been used to verify safety-critical
+    embedded systems.</dd>
+
+    <dt><a href="https://sites.google.com/site/fptaylordemo/">FPTaylor</a></dt>
+    <dd>FPTaylor is a tool for providing strong guarantees on the
+    round-off errors in floating-point computations.</dd>
+
+    <dt><a href="https://github.com/soarlab/FPTuner">FPTuner</a></dt>
+    <dd>FPTuner is a tool to choose the precision used to compute
+    floating-point expressions to maximize program speed while
+    maintaining strong guarantees about the error of the resulting
+    computation.</dd>
+
+    <dt><a href="http://gappa.gforge.inria.fr/">Gappa</a></dt>
+    <dd>Gappa is a tool to help automated reasoning about
+    floating-point and fixed-point arithmetic. It has been used to
+    prove
+    the <a href="https://gforge.inria.fr/scm/browser.php?group_id=5929&extra=crlibm">CRlibm</a>
+    implementations of elementary functions correct.</dd>
+
+    <dt><a href="https://herbie.uwplse.org">Herbie</a></dt>
+    <dd>Herbie is a tool to automatically improve the accuracy of
+    floating-point expressions. Herbie has been used to fix two bugs
+    in <a href="http://mathjs.org/">math.js</a>.</dd>
+
+    <dt><a href="http://herbgrind.ucsd.edu/">Herbgrind</a></dt>
+    <dd>Herbgrind is a dynamic analysis tool for binaries to help find
+    the root cause of floating-point error in large programs.</dd>
+
+    <dt><a href="http://www.ti3.tu-harburg.de/rump/intlab/">IntLab</a></dt>
+    <dd>IntLab is a fast implementation of interval arithmetic for
+    Matlab and Octave. IntLab focuses on the provable correctness of
+    its results and on speed.</dd>
+
+    <dt><a href="https://github.com/4tXJ7f/alive">Alive</a></dt>
+    <dd>Alive verifies that LLVM IR optimizations don't change program
+    behavior, and includes support for floating-point instructions in
+    an extension named LifeJacket. Alive has verified 43 LLVM
+    optimizations and discovered eight incorrect ones.</dd>
+
+    <dt><a href="https://github.com/corvette-berkeley/precimonious">Precimonious</a></dt>
+    <dd>Precimonious finds parts of a program where lower
+    floating-point precision can be used, thus making the program
+    faster, without violating accuracy constraints.</dd>
+
+    <dt><a href="http://precisa.nianet.org/">PRECiSA</a></dt>
+    <dd>PRECiSA is a fully-automatic static analysis tool for
+    estimating the round-off error of floating-point expressions in
+    the PVS language.</dd>
+
+    <dt><a href="http://nl-certify.forge.ocamlcore.org/real2float.html">Real2Float</a></dt>
+    <dd>Real2Float can provide upper bounds for floating-point
+    round-off errors using several different optimization
+    techniques.</dd>
+
+    <dt><a href="http://formalverification.cs.utah.edu/grt/">S3FP</a></dt>
+    <dd>S3FP is a tool to search for inputs that cause floating-point expressions to hvae high error.</dd>
+
+    <!-- Could not find a website
+    <dt>Salsa</dt>
+    <dd></dd>
+
+    <dt>Sardinia</dt>
+    <dd></dd>
+    -->
+
+    <!-- Could not find a website
+    <dt>SOAP</dt>
+    <dd></dd>
+    -->
+
+    <dt><a href="http://stoke.stanford.edu/">STOKE</a></dt>
+    <dd>STOKE is a optimizer and program synthesizer for x86-64 binary code. STOKE can trade off accuracy for performance for floating-point computations.</dd>
+  </dl>
+
+</body>
+</html>
