@@ -52,7 +52,9 @@ aside { border: 1px solid black; width: 200px; float: right; clear: right; paddi
     aside { margin-right: -275px; }
 }
 
-dl.code-terms dt { font-family: mono; font-size: 88%; font-weight: bold; margin-top: 1em; }
+dl dt { font-weight: bold; margin-top: 1em; }
+
+dl.code-terms dt { font-family: mono; font-size: 88%; }
 table.code-terms { width: 100%; table-layout: fixed; margin: 1em 0; }
 table.code-terms col { width: 20%; }
 table.code-terms td { font-family: mono; font-size: 88%; }
