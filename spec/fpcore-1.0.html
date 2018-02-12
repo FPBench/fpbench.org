@@ -324,9 +324,10 @@
         While loops are evaluated according the equality:
       </p>
 
-      <pre style="width: 55ex; margin: 1em auto"><code>(while <var>cond</var> ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>body</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(if (let ([<var>x</var> <var>init</var>] ...) <var>cond</var>)
-    (while <var>cond</var> ([<var>x</var> (let ([<var>x</var> <var>init</var>] ...) <var>update</var>) <var>update</var>] ...) <var>body</var>)
-    (let ([<var>x</var> <var>init</var>] ...) body))</code></pre>
+      <pre style="width: 55ex; margin: 1em auto"><code>(while <var>cond</var> ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>body</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let ([<var>x</var> <var>init</var>] ...)
+  (if <var>cond</var>)
+    (while <var>cond</var> ([<var>x</var> <var>update</var> <var>update</var>] ...) <var>body</var>)
+    body)</code></pre>
 
       <p>
         In other words,
