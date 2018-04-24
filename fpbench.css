@@ -66,11 +66,18 @@ table.counts { width: 25%; }
 table.counts thead th { text-align: left; border-bottom: 1px solid gray; }
 table.counts tr td:nth-child(2) { text-align: right; }
 
+ol.timeline, ol.papers-list { margin: 0; }
+
 ol.timeline { list-style: none; padding: 0 0 0 4em; }
 ol time {
     float: left; width: 4em; margin-left: -4em; clear: left;
     color: gray;
 }
-ol.timeline li { margin: 1em 0; }
+ol.timeline li { margin-bottom: 1em; }
 
 .columns .logo { width: 125px; height: 125px; margin-top: 1em }
+
+ol.papers-list { list-style: inside none; padding: 0; }
+ol.papers-list li { margin-bottom: 1em; }
+ol.papers-list header { margin-bottom: .25em; }
+ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font-style: italic; }
