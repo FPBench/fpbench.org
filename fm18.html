@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench at FM’18</title>
+  <link rel="stylesheet" type="text/css" href="fpbench.css">
+</head>
+<body>
+  <header>
+    <a href='.' style='color: black; text-decoration: none;'>
+      <img src='img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>FPBench at FM’18</h1>
+      <p>Combining Tools for Optimization and Analysis of Floating-Point Computations</p>
+    </a>
+  </header>
+
+
+  <p>The second paper on <a href="./">FPBench</a> was published at the
+    Formal Methods conference in 2018.</p>
+
+  <h2>Abstract</h2>
+
+  <blockquote class="abstract">
+    Recent renewed interest in optimizing and analyzing floating-point
+    programs has lead to a diverse array of new tools for numerical programs.
+    These tools are often complementary, each focusing on a distinct aspect of
+    numerical programming.  Building reliable floating point applications
+    typically requires addressing several of these aspects, which makes easy
+    composition essential. This paper describes the composition of two recent
+    floating-point tools: Herbie, which performs accuracy optimization, and
+    Daisy, which performs accuracy verification. We find that the combination
+    provides numerous benefits to users, such as being able to use Daisy to check
+    whether Herbie's unsound optimizations improved the worst-case roundoff
+    error, as well as benefits to tool authors, including uncovering a number of
+    bugs in both tools. The combination also allowed us to compare the different
+    program rewriting techniques implemented by these tools for the first time.
+    The paper lays out a road map for combining other floating-point tools and
+    for surmounting common challenges.
+  </blockquote>
+
+  <h2>Paper</h2>
+
+  <p>
+    The paper uses the FPBench benchmarks and tooling to combine and
+    compare the Herbie and Diasy tools. The paper demonstrates the
+    importance of testing combinations of tools and describes some of
+    the challenges that had to be surmounted. It is available
+    in <a href="fm18-paper.pdf">PDF format</a>. All code described in
+    the paper is
+    also <a href="https://github.com/FPBench/FPBench/tree/daisy-herbie">freely
+    available online</a>.
+  </p>
+
+</body>
+</html>
