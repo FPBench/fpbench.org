@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en_US">
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench Metadata 1.1</title>
+  <link rel="stylesheet" type="text/css" href="../fpbench.css">
+</head>
+<body class="gutter">
+
+<header>
+    <a href='..' style='color: black; text-decoration: none;'>
+      <img src='../img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>Metadata 1.1 (DRAFT VERSION)</h1>
+      <p>Common metadata for floating-point computations</p>
+    </a>
+</header>
+
+<main>
+<header>
+  <h1>FPBench 1.1 standards</h1>
+
+  <p>
+    <a href="../">FPBench</a> is a standard benchmark suite for the
+    floating point community. The benchmark suite contains a common format
+    for floating-point computation and metadata and a common set
+    of accuracy measures:
+  </p>
+
+  <ol>
+    <li><a href="fpcore-1.1.html">The FPCore input format</a></li>
+    <li><a href="metadata-1.1.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-1.1.html">Standard measures of error</a></li>
+  </ol>
+
+</header>
+
+<section id="props">
+<header>
+  <h2>FPCore metadata properties</h2>
+
+  <p>
+    The metadata properties allow describing additional information
+    about each benchmark, such as their name, description,
+    precision, citations, or preconditions.
+  </p>
+</header>
+
+
+<p>
+  FPBench 1.1 defines the meaning of the following properties:
+</p>
+
+<dl class="code-terms">
+  <dt id="p:name">:name</dt>
+  <dd>
+    A string name for the benchmark. If a name is needed and not
+    provided, we recommend using the body expression.
+  </dd>
+
+  <dt id="p:description">:description</dt>
+  <dd>
+    A string description for the benchmark and its inputs. We
+    recommend describing the physical meaning and units of inputs
+    when applicable.
+  </dd>
+
+  <dt id="p:cite">:cite</dt>
+  <dd>
+    A list of symbols that describe the sources of the benchmark.
+    We recommend making available a BibTeX file which uses the
+    same symbols as keys.
+  </dd>
+
+  <dt id="p:precision">:precision</dt>
+  <dd>
+    Describes the floating-point precision used for <a href="fpcore-1.1.html#rounding">rounding</a>. It is expected
+    to be a symbol for one of the IEEE 754 names (such as <code>binary32</code>
+    and <code>binary64</code>) or one of the special values <code>real</code> or
+    <code>integer</code>. <code>real</code> precision indicates that no rounding
+    should take place, while <code>integer</code> precision specifies the behavior of
+    (unbounded) mathematical integers. If no <code>:precision</code> property is specified,
+    implementations should assume a sane default, such as <code>binary64</code> or
+    possibly <code>real</code> depending on the application domain.
+  </dd>
+
+  <dt id="p:round">:round</dt>
+  <dd>
+    The floating-point rounding mode used for <a href="fpcore-1.1.html#rounding">rounding</a>. Expected to be one of the IEEE 754 modes
+    <code>nearestEven</code>, <code>nearestAway</code>, <code>toPositive</code>,
+    <code>toNegative</code>, or <code>toZero</code>.
+  </dd>
+
+  <aside>
+    If a <code>:spec</code> is not provided for a benchmark, the assumed <code>:spec</code>
+    will use the same expression as the benchmark, but a rounding context with <code>real</code>
+    precision. This makes sense for most precision-independent benchmarks that implement a real
+    function directly.
+  </aside>
+
+  <dt id="p:pre">:pre</dt>
+  <dd>
+    A precondition on inputs to the benchmark. Tools should not use
+    points that fail the precondition to determine the accuracy of the
+    benchmark. It is expected to be
+    an <a href="fpcore-1.1.html#g:expr">expression</a> that
+    returns a boolean value. A rounding context can be given explicitly
+    for the expression, but if it is not, the default rounding context is assumed
+    to have <code>real</code> precision rather than the overall properties specified
+    for the FPCore.
+  </dd>
+
+  <dt id="p:spec">:spec</dt>
+  <dd>
+    A real-valued function approximated by the benchmark. If not provided,
+    then it is assumed to be the body of the benchmark. As with preconditions
+    specified with <code>:pre</code>, a rounding context can be provided explicitly,
+    but it is assumed to have <code>real</code> precision rather than the overall properties specified
+    for the FPCore.
+  </dd>
+
+  <dt id="p:math-library">:math-library</dt>
+  <dd>
+    The library used in the source to implement floating-point
+    operations. It is expected to be a symbol identifying a library
+    implementation and version, such as <code>gnu-libm-2.34</code>.
+  </dd>
+</dl>
+
+<p>
+  Additionally, properties prefixed by the name of a tool (such
+  as <code>:xxx-foobar</code>) are reserved for definition by that
+  tool. Only that tool may define the meaning of those properties;
+  other tools should not depend on the meaning of those
+  properties, nor must the defining tool keep the meaning constant.
+</p>
+
+</section>
+
+</main>
