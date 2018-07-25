@@ -51,7 +51,7 @@
  :cite (hamming-1987)
  :pre (>= x 0)
  (- (sqrt (+ x 1)) (sqrt x)))</code></pre>
-    <caption>An example FPCore program, from the <data value="benchmarks/hamming-ch3.fpcore" class="suite-name">hamming-ch3</data> suite.</caption>
+    <caption>An example FPCore benchmark, from the <data value="benchmarks/hamming-ch3.fpcore" class="suite-name">hamming-ch3</data> suite.</caption>
   </figure>
 
   <figure>
@@ -411,7 +411,7 @@
     to be controlled via a rounding context. The context consists of
     a set of <a href="metadata-1.1.html">metadata properties</a> which
     are initially inherited from the overall properties of the FPCore
-    and can be updated for a subexpression by wrapping it with a
+    benchmark and can be updated for a subexpression by wrapping it with a
     ! annotation, or for a program input by supplying an annotation on the argument.
   </p>
 
@@ -433,8 +433,8 @@
 
   <aside>
     The same precision context can be specified in multiple ways, and tracking the context can be
-    complex. To make the context more regular, an FPCore can be put into canonical form, where
-    each operation, constant, and input is directly annotated with its rounding context.
+    complex. To make the context more regular, an FPCore benchmark can be put into canonical form,
+    where each operation, constant, and input is directly annotated with its rounding context.
   </aside>
 
   <p>
@@ -445,7 +445,7 @@
   </p>
 
   <p>
-    FPCore does not restrict the behvior of the rounding function or the set
+    FPCore does not restrict the behavior of the rounding function or the set
     of metadata properties that its behavior depends on. Some common precision
     and rounding direction properties are described for the metadata properties
     <a href="metadata-1.1.html#p:precision"><code>:precision</code></a> and <a href="metadata-1.1.html#p:round"><code>:round</code></a>.
