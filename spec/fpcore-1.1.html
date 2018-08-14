@@ -395,9 +395,9 @@
     <dd>
       <p>
         A <code>!</code> annotation updates the rounding context for a
-        subexpression. All metadata properties in the current rounding context
-        are removed and replaced with the properties provided in the annotation.
-        See <a href="#rounding">rounding</a>.
+        subexpression. Properties specified in the annotation are set
+        to the provided values, and all other properties are inherited
+        from the parent context. See <a href="#rounding">rounding</a>.
       </p>
     </dd>
   </dl>
@@ -420,15 +420,16 @@
   </p>
 
   <figure>
-    <pre><code>(! :precision binary64
-      (let ([ y (! :precision binary32 (- x 1))])
-      (+ y 1)))))</code></pre>
+    <pre><code>(! :precision binary64 :round nearestEven
+  (let ([ y (! :precision binary32 (- x 1))])
+    (+ y 1)))))</code></pre>
   </figure>
 
   <p>
     the subtraction will take place in a context with <code>binary32</code> precision, but the
     addition will take place in a context that has inherited <code>binary64</code> precision
-    from the annotation enclosing the entire <code>let</code>.
+    from the annotation enclosing the entire <code>let</code>. Both operations will take place
+    in a context that has inherited <code>nearestEven</code> rounding behavior.
   </p>
 
   <aside>
@@ -461,6 +462,139 @@
     but tools are not required to be able to represent arbitrary real numbers exactly.
   </p>
 
+  </section>
+
+  <section id="examples">
+  <h3>Examples</h3>
+
+  <dl class="code-terms">
+    <dt id="e:casting">Rounding with <code>cast</code></dt>
+    <dd>
+      <p>
+        The <code>cast</code> operation is necessary for explicitly rounding values
+        without performing other numerical operations. Precision annotations specified
+        with <code>!</code> never cause any numerical operations to occur; they only
+        change the rounding context.
+      </p>
+
+      <p>
+        For example, the expression
+      </p>
+
+      <figure>
+        <pre><code>(! :precision binary64 (! :precision binary32 x))</code></pre>
+      </figure>
+
+      <p>
+        will not round the value of the variable <code>x</code>. This expression is the
+        same as simply specifying
+      </p>
+
+      <figure>
+        <pre><code>x</code></pre>
+      </figure>
+
+      <p>
+        regardless of the rounding context. To round <code>x</code>, it is necessary
+        to <code>cast</code> it in a context with the desired precision. The expression
+      </p>
+
+      <figure>
+        <pre><code>(! :precision binary64 (! :precision binary32 (cast x)))</code></pre>
+      </figure>
+
+      <p>
+        will round <code>x</code> to <code>binary32</code> precision (here the outer
+        annotation for <code>binary64</code> precision is redundant, as it will be overwritten by the
+        inner one), while the expression
+      </p>
+
+      <figure>
+        <pre><code>(! :precision binary64 (cast (! :precision binary32 (cast x))))</code></pre>
+      </figure>
+
+      <p>
+        will round <code>x</code> twice, first to <code>binary32</code> precision, and then from <code>binary32</code>
+        to <code>binary64</code> precision.
+      </p>
+
+      <p>
+        Because numerical operations already round their outputs, it should not be necessary
+        to <code>cast</code> in most cases, unless double rounding is specifically intended.
+        For example, in an expression such as
+      </p>
+
+      <figure>
+        <pre><code>(! :precision binary64
+  (let ([ x (+ y 1)])
+    x))</code></pre>
+      </figure>
+
+      <p>
+        the value stored in x will already be rounded to <code>binary64</code> precision,
+        as the addition is done in a context with that precision. Inserting an explicit
+        <code>cast</code> around either the addition or the use of <code>x</code> would
+        cause double rounding, and while in the case of <code>binary64</code> precision
+        this is a no-op, for other rounding contexts it could lead to undesirable behavior.
+      </p>
+    </dd>
+
+    <dt id="e:inheritance">Inheriting properties in rounding contexts</dt>
+    <dd>
+      <p>
+        All properties not explicitly specified in a <code>!</code> precision annotation
+        are inherited from the parent context. For the top level expression in an
+        FPCore benchmark, the parent context includes all the overall properties of the benchmark.
+      </p>
+
+      <p>
+        For example, in the following benchmark
+      </p>
+
+      <figure>
+        <pre><code class="fpcore">(FPCore ()
+ :name "foo"
+ :math-library gnu-libm-2.34
+ :spec 0
+  (! :precision binary64 (sin PI)))</code></pre>
+      </figure>
+
+      <p>
+        the <code>sin</code> operation will take place in a context with <code>name</code>
+        <code>"foo"</code>, <code>math-library</code> <code>gnu-libm-2.34</code>, <code>spec</code> 0, and
+        <code>binary64</code> precision. Even properties that are seemingly unrelated to
+        rounding, such as the name of the benchmark, are inherited. The FPCore standard does
+        not prohibit tools from implementing rounding functions that depend on these properties,
+        or other tool-specific properties, although having a rounding function that depends on
+        <code>name</code> is not advised.
+      </p>
+
+      <p>
+        Properties in the rounding context might come from multiple different annotations. For example,
+        in the expression
+      </p>
+
+      <figure>
+        <pre><code>(! :math-library gnu-libm-2.34 (! :round toZero (! :precision binary32 (+ x 1))))</code></pre>
+      </figure>
+
+      <p>
+        the addition will take place as expected in a context with <code>binary32</code> precision,
+        <code>toZero</code> rounding direction, and the <code>gnu-libm-2.34</code> math library. This
+        can be useful if some, but not all, of the properties are shared by multiple subexpressions.
+        For example, in the expression
+      </p>
+
+      <figure>
+        <pre><code>(! :precision binary64 (- (! :round toPositive (+ x y)) (! :round toNegative (+ x y))))</code></pre>
+      </figure>
+
+      <p>
+        all of the operations will take place in a context with <code>binary64</code> precision, but the additions
+        will use different rounding directions.
+      </p>
+    </dd>
+  </dl>
   </section>
 </section>
 
