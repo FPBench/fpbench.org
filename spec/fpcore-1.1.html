@@ -28,6 +28,7 @@
 
   <ol>
     <li><a href="fpcore-1.1.html">The FPCore input format</a></li>
+    <li><a href="examples-1.1.html">FPCore example inputs</a></li>
     <li><a href="metadata-1.1.html">Metadata for FPCore benchmarks</a></li>
     <li><a href="measures-1.1.html">Standard measures of error</a></li>
   </ol>
@@ -112,6 +113,11 @@
     </dl>
     <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>, as well as base tokens like <a href="#g:decnum">decnum</a>, are defined below. </caption>
   </figure>
+
+  <aside>
+    Note that free variabels to a benchmark can be <code>!</code> annotated.
+    These annotations are used for specifying that variable's precision.
+  </aside>
 
   <p>
     In this grammar, an <a href="#g:fpcore">FPCore</a> term describes
@@ -286,13 +292,6 @@
   <section id="semantics">
   <h3>Semantics</h3>
 
-  <aside>
-    When FPCore expressions used mixed or incorrect types, we expect
-    tools to inform the user of their error. FPBench will provide a
-    type checker for FPBench expressions to help users diagnose and
-    fix any undefined behavior.
-  </aside>
-
   <p>
     FPCore expressions can describe concrete floating-point
     computations, abstract specifications of those computations, or
@@ -302,24 +301,28 @@
 
   <p>
     Values in FPCore expressions are either boolean values or extended
-    real numbers, which can be actual real numbers (usualy rounded to some
-    finite precision) or special
-    floating-point values such as infinities and NaN. Numerical operations are
-    treated as rounded real operations: they take extended real values as input
-    and return the corresponding extended real result, rounded according to the
-    rounding context. The behavior of rounding and the rounding context is
-    described in detail under <a href="#rounding">rounding</a>.
+    real numbers, which can be actual real numbers (usually rounded to
+    some finite precision) or special floating-point values such as
+    infinities and NaN. Numerical operations take extended real values
+    as input and return the corresponding extended real result,
+    rounded according to a <i>rounding context</i>. The behavior of
+    rounding and the rounding context is described in detail
+    under <a href="#rounding">Rounding</a>.
   </p>
+
+  <aside>
+    When FPCore expressions used mixed or incorrect types, we expect
+    tools to inform the user of their error. FPBench provides a type
+    checker to help users diagnose and fix any undefined behavior.
+  </aside>
 
   <p>
     Operations that receive values of mixed or incorrect types, such
     as <code>(+ 1 TRUE)</code>, are illegal and the results of
-    evaluating them undefined. If tools do not support the rounding context
-    specified for a computation, the result is similarly undefined, and the
-    tool should give some indication for the reason of failure.
+    evaluating them undefined.
   </p>
 
-  <dl class="code-terms">
+  <dl>
     <dt>Function application</dt>
     <dd>
       The semantics of function application are standard.
@@ -340,10 +343,13 @@
       Thus, <code>(let ([a b] [b a]) (- a b))</code> is
       the same as <code>(- b a)</code> and <code>(let ([a 1] [b a])
         b)</code> is illegal unless <code>a</code> is available in the
-      context. For sequentially binding variables, use nested
+      context. For sequentially binding variables, nest
       <code>let</code>s.
     </dd>
 
+    <aside>
+      FPCore expressions with loops can be easier to author using the <a href="../fpimp.html">FPImp</a> intermediate language.
+    </aside>
     <dt><code>while</code> expressions</dt>
     <dd>
       <p>
@@ -353,35 +359,25 @@
         While loops are evaluated according the equality:
       </p>
 
-      <pre style="width: 55ex; margin: 1em auto"><code>(while <var>cond</var> ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>body</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let ([<var>x</var> <var>init</var>] ...)
-  (if <var>cond</var>)
-    (while <var>cond</var> ([<var>x</var> <var>update</var> <var>update</var>] ...) <var>body</var>)
-    body)</code></pre>
+      <pre style="width: 55ex; margin: 1em auto"><code>(while <var>cond</var> ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let ([<var>x</var> <var>init</var>] ...)
+  (if <var>cond</var>
+    (while <var>cond</var> ([<var>x</var> <var>update</var> <var>update</var>] ...) <var>retexpr</var>)
+    <var>retexpr</var>)</code></pre>
 
       <p>
-        In other words,
-        the list of bound variables gives
-        the variable's name,
-        its initial value,
-        and the value it is updated to after each iteration.
-        The loop is executed by
-        initializing all bound variables
-        and then
-        evaluating the condition
-        and simultaneously updating the variables
-        until the condition returns false.
-        Once the condition returns false,
-        the return expression is evaluated
-        and its value is returned.
+        In other words, the list of bound variables gives the
+        variable's name, its initial value, and the expression by
+        which it is updated to after each iteration. The loop
+        initializes all bound variables; evaluates the condition; if
+        true, simultaneously updates the variables with the update
+        expression and repeats; if false, the return expression is
+        evaluated and its value is returned.
       </p>
     </dd>
 
     <aside>
-      <code>cast</code> is useful for explicitly rounding variables.
-      Normally, variables reflect a call by value semantics and are not rounded
-      where they appear as values.
+      <code>cast</code> is used for double-rounding—see <a href="examples-1.1.html#cast">the examples</a>. Nested <code>!</code> annotations change the rounding context but do not multiply round values.
     </aside>
-
     <dt><code>cast</code> expressions</dt>
     <dd>
       <p>
@@ -397,7 +393,7 @@
         A <code>!</code> annotation updates the rounding context for a
         subexpression. Properties specified in the annotation are set
         to the provided values, and all other properties are inherited
-        from the parent context. See <a href="#rounding">rounding</a>.
+        from the parent context. See <a href="#rounding">Rounding</a>.
       </p>
     </dd>
   </dl>
@@ -408,15 +404,61 @@
 
   <p>
     FPCore allows the precision of program inputs, constants, and operations
-    to be controlled via a rounding context. The context consists of
-    a set of <a href="metadata-1.1.html">metadata properties</a> which
-    are initially inherited from the overall properties of the FPCore
-    benchmark and can be updated for a subexpression by wrapping it with a
-    ! annotation, or for a program input by supplying an annotation on the argument.
+    to be controlled via a <i>rounding context</i>. The context consists of
+    a set of <a href="metadata-1.1.html">metadata properties</a>, which
+    affect how function application, casts, and constants are rounded.
   </p>
 
   <p>
-    Rounding contexts use lexical scoping. For example, in the expression
+    Number literals, mathematical constants, and program inputs are
+    rounded according to the rounding context. Variables, however, are
+    not rounded where they appear as values (since they hold rounded
+    values, either from the expressions where they are bound or from
+    rounded program inputs).
+  </p>
+
+  <p>
+    Function applications round their results using the rounding context.
+    More precisely, a function application
+    <code>(<var>f</var> <var>e<sub>1</sub></var> ...)</code> in a
+    rounding context <var>ρ</var> must evaluate to the same value as
+    if <code><var>f</var></code> were evaluated in exact real
+    arithmetic, and then rounded according to the rounding context.
+    Formally:
+  </p>
+
+  <pre style="width: 80%; margin: 1em auto; text-align: center">
+    v<sub>i</sub> = ⟦<var>e<sub>i</sub></var>⟧<sub>ρ</sub> <hr style="border-style: double; border-width: 4px 0 0" /> ⟦ <code>(<var>f</var> <var>e<sub>i</sub></var> ...)</code> ⟧<sub>ρ</sub> = round( ρ, ⟦f⟧(v<sub>i</sub> , ... ) )
+  </pre>
+
+  <p>
+    Casts behave identically to applying the identity function (and
+    then rounding the result).
+  </p>
+
+  <p>
+    FPCore does not restrict the behavior of the rounding function or the set
+    of metadata properties that its behavior depends on. Some common precision
+    and rounding direction properties are described for the metadata properties
+    <a href="metadata-1.1.html#p:precision"><code>:precision</code></a>
+    and <a href="metadata-1.1.html#p:round"><code>:round</code></a>.
+    Tools are not required to support all of these rounding behaviors,
+    and are allowed to introduce new ones and new metadata properties
+    to control them.
+  </p>
+
+  <aside>
+    The same precision context can be specified in multiple ways.
+    FPBench will provide tools to transform rounding contexts into
+    normal forms.
+  </aside>
+
+  <p>
+    Rounding contexts are initialized with the properties of the
+    overall FPCore benchmark and are updated with
+    <code>!</code> annotations. Program inputs can also be annotated
+    to describe the precision of the input.
+    <code>!</code> use lexical scoping. For example, in the expression
   </p>
 
   <figure>
@@ -426,176 +468,31 @@
   </figure>
 
   <p>
-    the subtraction will take place in a context with <code>binary32</code> precision, but the
-    addition will take place in a context that has inherited <code>binary64</code> precision
-    from the annotation enclosing the entire <code>let</code>. Both operations will take place
-    in a context that has inherited <code>nearestEven</code> rounding behavior.
-  </p>
-
-  <aside>
-    The same precision context can be specified in multiple ways, and tracking the context can be
-    complex. To make the context more regular, an FPCore benchmark can be put into canonical form,
-    where each operation, constant, and input is directly annotated with its rounding context.
-  </aside>
-
-  <p>
-    Number literals, mathematical constants, and program inputs
-    are also rounded according to the rounding context. Variables are not rounded
-    where they appear as values, but will usually hold rounded values, either from
-    the expressions where they are bound or from rounded program inputs.
+    the subtraction will take place in a context
+    with <code>binary32</code> precision, but the addition will take
+    place in a context that has inherited <code>binary64</code>
+    precision from the annotation enclosing the
+    entire <code>let</code>. Both operations will take place in a
+    context that has inherited <code>nearestEven</code> rounding
+    behavior. The <a href="examples-1.1.html#inheriting">examples</a>
+    contain more details.
   </p>
 
   <p>
-    FPCore does not restrict the behavior of the rounding function or the set
-    of metadata properties that its behavior depends on. Some common precision
-    and rounding direction properties are described for the metadata properties
-    <a href="metadata-1.1.html#p:precision"><code>:precision</code></a> and <a href="metadata-1.1.html#p:round"><code>:round</code></a>.
-    Tools are not required to support all of these rounding behaviors, and are allowed
-    to introduce new ones and new metadata properties to control them.
+    If tools do not support the rounding context specified for a
+    computation, the result is undefined, and the tool should give
+    some indication of the reason for the failure. FPCore does not
+    restrict the representation used internally by a tool to store
+    values. Numeric values can be floating-point values of various
+    precisions, fixed-point values, intervals, or any sort of symbolic
+    representations of mathematical real numbers. Though FPCore can
+    represent exact real computations, tools are not required to be
+    able to represent arbitrary real numbers exactly.
   </p>
 
-  <p>
-    Similarly, FPCore does not restrict the representation used internally by a tool
-    to store values. Numeric values can be floating-point values of various precisions,
-    fixed-point values, or symbolic representations of mathematical real numbers. This specification
-    uses mathematical reals as a universal way to describe the value of any representation,
-    but tools are not required to be able to represent arbitrary real numbers exactly.
-  </p>
-
-  </section>
-
-  <section id="examples">
-  <h3>Examples</h3>
-
-  <dl class="code-terms">
-    <dt id="e:casting">Rounding with <code>cast</code></dt>
-    <dd>
-      <p>
-        The <code>cast</code> operation is necessary for explicitly rounding values
-        without performing other numerical operations. Precision annotations specified
-        with <code>!</code> never cause any numerical operations to occur; they only
-        change the rounding context.
-      </p>
-
-      <p>
-        For example, the expression
-      </p>
-
-      <figure>
-        <pre><code>(! :precision binary64 (! :precision binary32 x))</code></pre>
-      </figure>
-
-      <p>
-        will not round the value of the variable <code>x</code>. This expression is the
-        same as simply specifying
-      </p>
-
-      <figure>
-        <pre><code>x</code></pre>
-      </figure>
-
-      <p>
-        regardless of the rounding context. To round <code>x</code>, it is necessary
-        to <code>cast</code> it in a context with the desired precision. The expression
-      </p>
-
-      <figure>
-        <pre><code>(! :precision binary64 (! :precision binary32 (cast x)))</code></pre>
-      </figure>
-
-      <p>
-        will round <code>x</code> to <code>binary32</code> precision (here the outer
-        annotation for <code>binary64</code> precision is redundant, as it will be overwritten by the
-        inner one), while the expression
-      </p>
-
-      <figure>
-        <pre><code>(! :precision binary64 (cast (! :precision binary32 (cast x))))</code></pre>
-      </figure>
-
-      <p>
-        will round <code>x</code> twice, first to <code>binary32</code> precision, and then from <code>binary32</code>
-        to <code>binary64</code> precision.
-      </p>
-
-      <p>
-        Because numerical operations already round their outputs, it should not be necessary
-        to <code>cast</code> in most cases, unless double rounding is specifically intended.
-        For example, in an expression such as
-      </p>
-
-      <figure>
-        <pre><code>(! :precision binary64
-  (let ([ x (+ y 1)])
-    x))</code></pre>
-      </figure>
-
-      <p>
-        the value stored in x will already be rounded to <code>binary64</code> precision,
-        as the addition is done in a context with that precision. Inserting an explicit
-        <code>cast</code> around either the addition or the use of <code>x</code> would
-        cause double rounding, and while in the case of <code>binary64</code> precision
-        this is a no-op, for other rounding contexts it could lead to undesirable behavior.
-      </p>
-    </dd>
-
-    <dt id="e:inheritance">Inheriting properties in rounding contexts</dt>
-    <dd>
-      <p>
-        All properties not explicitly specified in a <code>!</code> precision annotation
-        are inherited from the parent context. For the top level expression in an
-        FPCore benchmark, the parent context includes all the overall properties of the benchmark.
-      </p>
-
-      <p>
-        For example, in the following benchmark
-      </p>
-
-      <figure>
-        <pre><code class="fpcore">(FPCore ()
- :name "foo"
- :math-library gnu-libm-2.34
- :spec 0
-  (! :precision binary64 (sin PI)))</code></pre>
-      </figure>
-
-      <p>
-        the <code>sin</code> operation will take place in a context with <code>name</code>
-        <code>"foo"</code>, <code>math-library</code> <code>gnu-libm-2.34</code>, <code>spec</code> 0, and
-        <code>binary64</code> precision. Even properties that are seemingly unrelated to
-        rounding, such as the name of the benchmark, are inherited. The FPCore standard does
-        not prohibit tools from implementing rounding functions that depend on these properties,
-        or other tool-specific properties, although having a rounding function that depends on
-        <code>name</code> is not advised.
-      </p>
-
-      <p>
-        Properties in the rounding context might come from multiple different annotations. For example,
-        in the expression
-      </p>
-
-      <figure>
-        <pre><code>(! :math-library gnu-libm-2.34 (! :round toZero (! :precision binary32 (+ x 1))))</code></pre>
-      </figure>
-
-      <p>
-        the addition will take place as expected in a context with <code>binary32</code> precision,
-        <code>toZero</code> rounding direction, and the <code>gnu-libm-2.34</code> math library. This
-        can be useful if some, but not all, of the properties are shared by multiple subexpressions.
-        For example, in the expression
-      </p>
-
-      <figure>
-        <pre><code>(! :precision binary64 (- (! :round toPositive (+ x y)) (! :round toNegative (+ x y))))</code></pre>
-      </figure>
-
-      <p>
-        all of the operations will take place in a context with <code>binary64</code> precision, but the additions
-        will use different rounding directions.
-      </p>
-    </dd>
-  </dl>
   </section>
 </section>
 
 </main>
+</body>
+</html>
