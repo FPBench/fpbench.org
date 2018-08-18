@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench</title>
+  <link rel="stylesheet" type="text/css" href="fpbench.css">
+</head>
+<body>
+  <header>
+    <a href='.' style='color: black; text-decoration: none;'>
+      <img src='img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>FPBench Notes for Implementors</h1>
+      <p>Getting started with FPBench</p>
+    </a>
+  </header>
+
+  <aside>
+    These notes are a guide for implementors of FPBench. If they seem
+    to conflict with the standards, the standards text takes priority.
+  </aside>
+
+  <p>
+    As the FPBench feature set grows, implementing FPBench can look
+    more and more intimidating. But it shouldn't. These notes are our
+    collective advice on implementing the FPBench standards, and
+    should clarify the standards.
+  </p>
+
+  <h2>What you can skip</h2>
+
+  <p>
+    Not every feature of the standard needs to be implemented. For example,
+  </p>
+
+  <ul>
+    <li>Metadata properties, such as <code>:math-library</code>, are optional.</li>
+    <li>Operations and constants, such as <code>log2</code> or <code>PI</code>, are optional</li>
+    <li>Syntactic constructs, such as the different number formats, are optional</li>
+    <li>Semantic constructs, such as conditionals and loops, are optional</li>
+    <li>Rounding modes and precisions, such as <code>binary32</code>, are optional</li>
+  </ul>
+
+  <p>
+    Focus on correctness for features you <em>do</em> implement,
+    rather than the breadth of features you support. Plus, correctly
+    implementing a feature usually only requires care, while
+    implementing new features can require fundamental research.
+  </p>
+
+  <p>
+    Different interpretations are more harmful to interoperability
+    than missing features. Tools should, however, publish which
+    features they support. Users can then use tools like the
+    FPBench <code>filter</code> script to select the subsets of their
+    benchmarks supported by a tool.
+  </p>
+
+  <h2>What you can reject</h2>
+
+  <p>
+    Tools are free to reject any FPCore as unsupported. The FPCore
+    standard is quite flexible, but this flexibility means that it is
+    difficult for a tool to behave equally well on all inputs. For
+    example, mixed-precision operations can be tedious to implement,
+    while loops may be outside the purview of many techniques.
+  </p>
+
+  <p>
+    Tools should, however, make sure to raise an error when an FPCore
+    is unsupported, instead of simply returning invalid results. For
+    example, a tool that does not support mixed precision operations
+    should raise an error instead of ignoring the precision
+    annotations and producing incorrect results.
+  </p>
+
+  <h2>What you can add</h2>
+
+  <p>
+    Tools are free to add features to the standard, as long as they
+    namespace them to avoid conflicts. For example, tools can add:
+  </p>
+
+  <ul>
+    <li>Custom metadata properties, such as <code>:herbie-status</code>.</li>
+    <li>Custom operations or constants, such as <code>median</code> or <code>PHI</code></li>
+    <li>Custom syntactic constructs, such as new number formats or strings</li>
+    <li>Custom semantic constructs, such as nondeterminism or fixpoints</li>
+    <li>Custom rounding modes and precisions, such as <code>posit16</code> or <code>(fixed 12 4)</code></li>
+    <li>Custom types, such as complex numbers or matrices</li>
+  </ul>
+
+  <p>
+    Namespaced names, like <code>rosa-accuracy</code> are
+    future-proof, while it is possible that future standards might
+    define standard functions like <code>median</code>. Where multiple
+    plausible interpretations exist, namedspaced names are better.
+  </p>
+</body>
+</html>
