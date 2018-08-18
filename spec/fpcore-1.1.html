@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en_US">
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench FPCore 1.1</title>
+  <link rel="stylesheet" type="text/css" href="../fpbench.css">
+</head>
+<body class="gutter">
+
+<header>
+    <a href='..' style='color: black; text-decoration: none;'>
+      <img src='../img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>FPCore 1.1 (DRAFT VERSION)</h1>
+      <p>A common format for floating-point computations</p>
+    </a>
+</header>
+
+<main>
+<header>
+  <h1>FPBench 1.1 standards</h1>
+
+  <p>
+    <a href="../">FPBench</a> is a standard benchmark suite for the
+    floating-point community. The benchmark suite contains a common format
+    for floating-point computation and metadata and a common set
+    of accuracy measures:
+  </p>
+
+  <ol>
+    <li><a href="fpcore-1.1.html">The FPCore input format</a></li>
+    <li><a href="examples-1.1.html">FPCore example inputs</a></li>
+    <li><a href="metadata-1.1.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-1.1.html">Standard measures of error</a></li>
+  </ol>
+</header>
+
+<section id="fpcore">
+
+<header>
+  <h2>FPCore benchmark format</h2>
+
+  <p>
+    FPCore is the format used for FPBench benchmarks. It is a simple
+    functional programming language with conditionals and
+    loops. The syntax is an easy-to-parse S-expression syntax.
+  </p>
+</header>
+
+  <figure>
+    <pre><code class="fpcore">(FPCore (x)
+ :name "NMSE example 3.1"
+ :cite (hamming-1987)
+ :pre (>= x 0)
+ (- (sqrt (+ x 1)) (sqrt x)))</code></pre>
+    <caption>An example FPCore benchmark, from the <data value="benchmarks/hamming-ch3.fpcore" class="suite-name">hamming-ch3</data> suite.</caption>
+  </figure>
+
+  <figure>
+    <pre><code class="fpcore">(FPCore (x)
+ :name "round with addition"
+ :spec (round x)
+ (let ([n (! :precision binary64 6755399441055744)])
+   (! :precision binary64 :round nearestEven (- (+ x n) n))))</code></pre>
+    <caption>An example of a precision-specific computation.</caption>
+  </figure>
+
+  <section id="syntax">
+  <h3>Syntax</h3>
+
+  <p>
+    Benchmarks use a simple S-expression syntax
+    with the following grammar.
+  </p>
+
+  <aside>
+    FPCore is modelled on <a href='http://smtlib.cs.uiowa.edu/'>SMT-LIB2</a>,
+    an input format for SMT solvers.
+  </aside>
+
+  <figure>
+    <dl class="grammar">
+      <dt id="g:fpcore">FPCore</dt>
+      <dd>( FPCore (<a href="#g:argument" title="Free variables in benchmark">argument</a>*)
+        <a href="#g:property" title="Metadata properties of the benchmark">property</a>*
+        <a href="#g:expr" title="Benchmark expression">expr</a> )
+      </dd>
+
+      <dt id="g:argument">argument</dt>
+      <dd><a href="#g:symbol" title="Name of free variable">symbol</a></dd>
+      <dd>( ! <a href="#g:property" title="Rounding context for free variable">property</a>* <a href="#g:symbol" title="Name of free variable">symbol</a> )</dd>
+
+      <dt id="g:expr">expr</dt>
+      <dd><a href="#g:number" title="A number">number</a></dd>
+      <dd><a href="#g:constant" title="A mathematical constant">constant</a></dd>
+      <dd><a href="#g:symbol" title="A variable">symbol</a></dd>
+      <dd>( <a href="#g:operation" title="Mathematical operation to perform">operation</a> <a href="#g:expr" title="Inputs to operation">expr</a>+ )</dd>
+      <dd>( if <a href="#g:expr" title="Conditional">expr</a> <a href="#g:expr" title="Branch if condition is true">expr</a> <a href="#g:expr" title="Branch if condition is false">expr</a> )</dd>
+      <dd>( let ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
+      <dd>( while <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
+      <dd>( cast <a href="#g:expr" title="Expression to round with current rounding context">expr</a> )</dd>
+      <dd>( ! <a href="#g:property" title="Rounding context for expression">property</a>* <a href="#g:expr" title="Expression annotated by rounding context">expr</a> )</dd>
+
+      <dt id="g:number">number</dt>
+      <dd><a href="#g:decnum" title="A decimal number literal">decnum</a></dd>
+      <dd><a href="#g:hexnum" title="A hexadecimal number literal">hexnum</a></dd>
+      <dd><a href="#g:rational" title="A rational number">rational</a></dd>
+      <dd>( digits <a href="#g:decnum" title="Significand">decnum</a> <a href="#g:decnum" title="Exponent">decnum</a> <a href="#g:decnum" title="Base">decnum</a> )</dd>
+
+      <dt id="g:property">property</dt>
+      <dd>:<a href="#g:symbol" title="Property name">symbol</a> <a href="#g:expr" title="Property value given as expression">expr</a></dd>
+      <dd>:<a href="#g:symbol" title="Property name">symbol</a> <a href="#g:string" title="Property value given as string">string</a></dd>
+      <dd>:<a href="#g:symbol" title="Property name">symbol</a> ( <a href="#g:symbol" title="Property value given as list of symbols">symbol</a>* )</dd>
+    </dl>
+    <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>, as well as base tokens like <a href="#g:decnum">decnum</a>, are defined below. </caption>
+  </figure>
+
+  <aside>
+    Note that free variabels to a benchmark can be <code>!</code> annotated.
+    These annotations are used for specifying that variable's precision.
+  </aside>
+
+  <p>
+    In this grammar, an <a href="#g:fpcore">FPCore</a> term describes
+    a single benchmark, with a set of free variables, a collection of
+    <a href="metadata-1.1.html">metadata properties</a>, and the
+    floating-point expression defining the benchmark. White-space is
+    ignored, and lines starting with the semicolon (<code>;</code>)
+    are treated as comments and ignored. The basic tokens are defined
+    as expected:
+  </p>
+
+  <dl class="code-terms">
+    <dt id="g:symbol">symbol</dt>
+    <dd>Any sequence of letters, digits, or characters from the
+      set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit,
+      implemented for ASCII by the regular expression:
+      <pre class="expr"><code>[a-zA-Z~!@$%^&*_\-+=<>.?/:][a-zA-Z0-9~!@$%^&*_\-+=<>.?/:]*</code></pre></dd>
+
+    <dt id="g:decnum">decnum</dt>
+    <dd>An optional plus (<code>+</code>) or minus (<code>-</code>)
+      sign followed by either a sequence of decimal digits which
+      may optionally be followed by a period (<code>.</code>) and another
+      sequence of digits, or by a period and a sequence
+      of digits. This may be followed by an <code>e</code>, an optional plus
+      or minus sign, and a final sequence of digits. This definition is implemented
+      for ASCII by the regular expression:
+      <pre class="expr"><code>[-+]?([0-9]+(\.[0-9]+)?|\.[0-9]+)(e[-+]?[0-9]+)?</code></pre></dd>
+
+    <dt id="g:hexnum">hexnum</dt>
+    <dd>An optional plus (<code>+</code>) or minus (<code>-</code>) sign,
+      followed by the hexadecimal literal identifier <code>0x</code>,
+      all followed by either a sequence of hexadecimal digits (<code>[0-9a-f]</code>) which
+      may optionally be followed by a period (<code>.</code>) and another
+      sequence of hex digits, or by a period and a sequence
+      of hex digits. This may be followed by a <code>p</code>, an optional plus
+      or minus sign, and a sequence of decimal digits. This definition is implemented
+      for ASCII by the following regular expression, which is case-insensitive:
+      <pre class="expr"><code>[+-]?0x([0-9a-f]+(\.[0-9a-f]+)?|\.[0-9a-f]+)(p[-+]?[0-9]+)?</code></pre></dd>
+
+    <dt id="g:rational">rational</dt>
+    <dd>An optional plus (<code>+</code>) or minus (<code>-</code>) sign,
+      followed by a sequence of decimal digits that form the numerator, followed by
+      a slash (<code>/</code>), followed by a nonzero sequence of decimal digits that
+      form the denominator. This definition is implemented for ASCII by the regular expression:
+      <pre class="expr"><code>[+-]?[0-9]+/[0-9]*[1-9][0-9]*</code></pre></dd>
+
+    <dt id="g:string">string</dt>
+    <dd>Any sequence of printable characters, spaces, tabs, or
+      carriage returns, delimited by double quotes
+      (<code>&quot;</code>). Within the double quotes, backslashes
+      (<code>\</code>) have special meaning. A backslash followed by a
+      double quote represents a double quote and does not terminate
+      the string; a backslash followed by a backslash represents a
+      backslash; other escapes may also be supported by
+      implementations, but their meaning is not defined in this
+      standard. We recommend that implementations only use escapes
+      defined in the C or Matlab standard libraries.
+      This definition is implemented for ASCII by the regular expression:
+      <pre class="expr"><code>&quot;([\x20-\x21\x23-\x5b\x5d-\x7e]|\\[&quot;\\])*&quot;</code></pre></dd>
+  </dl>
+  </section>
+
+  <section id="g:operation">
+  <h3>Supported operations</h3>
+
+  <aside>
+    FPCore covers common library functions in C, Fortran, and Matlab.
+  </aside>
+
+  <p>The following operations are supported:</p>
+
+  <table class="code-terms">
+    <colgroup><col><col><col><col><col></colgroup>
+    <thead><th colspan="5">Supported Mathematical Operations</th></thead>
+    <tbody>
+    <tr>
+    <td>+</td><td>-</td><td>*</td><td>/</td><td>fabs</td>
+    </tr><tr>
+    <td>fma</td><td>exp</td><td>exp2</td><td>expm1</td><td>log</td>
+    </tr><tr>
+    <td>log10</td><td>log2</td><td>log1p</td><td>pow</td><td>sqrt</td>
+    </tr><tr>
+    <td>cbrt</td><td>hypot</td><td>sin</td><td>cos</td><td>tan</td>
+    </tr><tr>
+    <td>asin</td><td>acos</td><td>atan</td><td>atan2</td><td>sinh</td>
+    </tr><tr>
+    <td>cosh</td><td>tanh</td><td>asinh</td><td>acosh</td><td>atanh</td>
+    </tr><tr>
+    <td>erf</td><td>erfc</td><td>tgamma</td><td>lgamma</td><td>ceil</td>
+    </tr><tr>
+    <td>floor</td><td>fmod</td><td>remainder</td><td>fmax</td><td>fmin</td>
+    </tr><tr>
+    <td>fdim</td><td>copysign</td><td>trunc</td><td>round</td><td>nearbyint</td>
+    </tr>
+    </tbody>
+    <thead><th colspan="5">Supported Testing Operations</th></thead>
+    <tbody>
+    <tr>
+    <td>&lt;</td><td>&gt;</td><td>&lt;=</td><td>&gt;=</td><td>==</td>
+    </tr><tr>
+    <td>!=</td><td>and</td><td>or</td><td>not</td><td>isfinite</td>
+    </tr><tr>
+    <td>isinf</td><td>isnan</td><td>isnormal</td><td>signbit</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <aside>
+    Arithmetic operations are binary, because floating-point
+    arithmetic is non-associative. Since boolean operations are,
+    however, exact, they may be given arbitrarily many arguments.
+  </aside>
+
+  <p>
+    All operations have the same signature as the equivalent operations
+    in <a href="http://en.cppreference.com/w/c/numeric/math">C11</a>.
+    The arithmetic functions are all binary operators,
+    except that unary <code>-</code> represents negation.
+    The comparison operators and boolean <code>and</code>
+    and <code>or</code> allow an arbitrary number of arguments.
+  </p>
+
+  <p>A comparison operator with more than two operators is interpreted
+    as the conjuction of all ordered pairs of arguments. In other
+    words, <code>==</code> tests that all
+    its arguments are equal; <code>!=</code> tests that all its
+    arguments are distinct;
+    and <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
+    and <code>&gt;=</code> test that their arguments are sorted (in
+    the appropriate order), with equal elements allowed
+    for <code>&lt;=</code> and <code>&gt;=</code>, and disallowed
+    for <code>&lt;</code> and <code>&gt;</code>.
+  </p>
+  </section>
+
+  <section id="g:constant">
+  <h3>Supported constants</h3>
+
+  <p>The following constants are supported:</p>
+
+  <aside>
+    FPCore supports all constants commonly provided by C and Fortran implementations.
+  </aside>
+
+  <table class="code-terms">
+    <colgroup><col><col><col><col><col></colgroup>
+    <thead><th colspan="5">Supported Mathematical Constants</th></thead>
+    <tbody>
+    <tr>
+    <td>E</td><td>LOG2E</td><td>LOG10E</td><td>LN2</td><td>LN10</td>
+    </tr><tr>
+    <td>PI</td><td>PI_2</td><td>PI_4</td><td>1_PI</td><td>2_PI</td>
+    </tr><tr>
+    <td>2_SQRTPI</td><td>SQRT2</td><td>SQRT1_2</td><td>INFINITY</td><td>NAN</td></tr>
+    </tbody>
+    <thead><th colspan="5">Supported Boolean Constants</th></thead>
+    <tbody>
+    <tr>
+    <td>TRUE</td><td>FALSE</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p>
+    The floating-point constants are defined just like their analogs in
+    <a href="http://www.gnu.org/software/libc/manual/html_node/Mathematical-Constants.html">GNU libc</a>.
+    All constants must evaluate to a value as close as possible to their
+    mathematically-accurate real value, according to the rounding context.
+  </p>
+  </section>
+
+  <section id="semantics">
+  <h3>Semantics</h3>
+
+  <p>
+    FPCore expressions can describe concrete floating-point
+    computations, abstract specifications of those computations, or
+    intermediates between the two. The semantics of FPCore are
+    correspondingly flexible, and are made explicit by the rounding context.
+  </p>
+
+  <p>
+    Values in FPCore expressions are either boolean values or extended
+    real numbers, which can be actual real numbers (usually rounded to
+    some finite precision) or special floating-point values such as
+    infinities and NaN. Numerical operations take extended real values
+    as input and return the corresponding extended real result,
+    rounded according to a <i>rounding context</i>. The behavior of
+    rounding and the rounding context is described in detail
+    under <a href="#rounding">Rounding</a>.
+  </p>
+
+  <aside>
+    When FPCore expressions used mixed or incorrect types, we expect
+    tools to inform the user of their error. FPBench provides a type
+    checker to help users diagnose and fix any undefined behavior.
+  </aside>
+
+  <p>
+    Operations that receive values of mixed or incorrect types, such
+    as <code>(+ 1 TRUE)</code>, are illegal and the results of
+    evaluating them undefined.
+  </p>
+
+  <dl>
+    <dt>Function application</dt>
+    <dd>
+      The semantics of function application are standard.
+    </dd>
+
+    <dt><code>if</code> expressions</dt>
+    <dd>
+      An <code>if</code> expression evaluates the conditional to a
+      boolean and then returns the result of the first branch if the
+      conditional is true or the second branch if the conditional is
+      false.
+    </dd>
+
+    <dt><code>let</code> expressions</dt>
+    <dd>
+      Bindings in a <code>let</code> expression are evaluated
+      simultaneously, as in a simultaneous substitution.
+      Thus, <code>(let ([a b] [b a]) (- a b))</code> is
+      the same as <code>(- b a)</code> and <code>(let ([a 1] [b a])
+        b)</code> is illegal unless <code>a</code> is available in the
+      context. For sequentially binding variables, nest
+      <code>let</code>s.
+    </dd>
+
+    <aside>
+      FPCore expressions with loops can be easier to author using the <a href="../fpimp.html">FPImp</a> intermediate language.
+    </aside>
+    <dt><code>while</code> expressions</dt>
+    <dd>
+      <p>
+        A <code>while</code> loop contains a conditional, a list of
+        bound variables, and a return expression. Both the conditional
+        and the return expression may refer to the bound variables.
+        While loops are evaluated according the equality:
+      </p>
+
+      <pre style="width: 55ex; margin: 1em auto"><code>(while <var>cond</var> ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let ([<var>x</var> <var>init</var>] ...)
+  (if <var>cond</var>
+    (while <var>cond</var> ([<var>x</var> <var>update</var> <var>update</var>] ...) <var>retexpr</var>)
+    <var>retexpr</var>)</code></pre>
+
+      <p>
+        In other words, the list of bound variables gives the
+        variable's name, its initial value, and the expression by
+        which it is updated to after each iteration. The loop
+        initializes all bound variables; evaluates the condition; if
+        true, simultaneously updates the variables with the update
+        expression and repeats; if false, the return expression is
+        evaluated and its value is returned.
+      </p>
+    </dd>
+
+    <aside>
+      <code>cast</code> is used for double-rounding—see <a href="examples-1.1.html#cast">the examples</a>. Nested <code>!</code> annotations change the rounding context but do not multiply round values.
+    </aside>
+    <dt><code>cast</code> expressions</dt>
+    <dd>
+      <p>
+        A <code>cast</code> performs explicit rounding according to the
+        rounding context. If the context specifies real precision, it is
+        guaranteed to be a no-op.
+      </p>
+    </dd>
+
+    <dt><code>!</code> annotations</dt>
+    <dd>
+      <p>
+        A <code>!</code> annotation updates the rounding context for a
+        subexpression. Properties specified in the annotation are set
+        to the provided values, and all other properties are inherited
+        from the parent context. See <a href="#rounding">Rounding</a>.
+      </p>
+    </dd>
+  </dl>
+  </section>
+
+  <section id="rounding">
+  <h3>Rounding</h3>
+
+  <p>
+    FPCore allows the precision of program inputs, constants, and operations
+    to be controlled via a <i>rounding context</i>. The context consists of
+    a set of <a href="metadata-1.1.html">metadata properties</a>, which
+    affect how function application, casts, and constants are rounded.
+  </p>
+
+  <p>
+    Number literals, mathematical constants, and program inputs are
+    rounded according to the rounding context. Variables, however, are
+    not rounded where they appear as values (since they hold rounded
+    values, either from the expressions where they are bound or from
+    rounded program inputs).
+  </p>
+
+  <p>
+    Function applications round their results using the rounding context.
+    More precisely, a function application
+    <code>(<var>f</var> <var>e<sub>1</sub></var> ...)</code> in a
+    rounding context <var>ρ</var> must evaluate to the same value as
+    if <code><var>f</var></code> were evaluated in exact real
+    arithmetic, and then rounded according to the rounding context.
+    Formally:
+  </p>
+
+  <pre style="width: 80%; margin: 1em auto; text-align: center">
+    v<sub>i</sub> = ⟦<var>e<sub>i</sub></var>⟧<sub>ρ</sub> <hr style="border-style: double; border-width: 4px 0 0" /> ⟦ <code>(<var>f</var> <var>e<sub>i</sub></var> ...)</code> ⟧<sub>ρ</sub> = round( ρ, ⟦f⟧(v<sub>i</sub> , ... ) )
+  </pre>
+
+  <p>
+    Casts behave identically to applying the identity function (and
+    then rounding the result).
+  </p>
+
+  <p>
+    FPCore does not restrict the behavior of the rounding function or the set
+    of metadata properties that its behavior depends on. Some common precision
+    and rounding direction properties are described for the metadata properties
+    <a href="metadata-1.1.html#p:precision"><code>:precision</code></a>
+    and <a href="metadata-1.1.html#p:round"><code>:round</code></a>.
+    Tools are not required to support all of these rounding behaviors,
+    and are allowed to introduce new ones and new metadata properties
+    to control them.
+  </p>
+
+  <aside>
+    The same precision context can be specified in multiple ways.
+    FPBench will provide tools to transform rounding contexts into
+    normal forms.
+  </aside>
+
+  <p>
+    Rounding contexts are initialized with the properties of the
+    overall FPCore benchmark and are updated with
+    <code>!</code> annotations. Program inputs can also be annotated
+    to describe the precision of the input.
+    <code>!</code> annotations use lexical scoping. For example, in the expression
+  </p>
+
+  <figure>
+    <pre><code>(! :precision binary64 :round nearestEven
+  (let ([ y (! :precision binary32 (- x 1))])
+    (+ y 1)))))</code></pre>
+  </figure>
+
+  <p>
+    the subtraction will take place in a context
+    with <code>binary32</code> precision, but the addition will take
+    place in a context that has inherited <code>binary64</code>
+    precision from the annotation enclosing the
+    entire <code>let</code>. Both operations will take place in a
+    context that has inherited <code>nearestEven</code> rounding
+    behavior. The <a href="examples-1.1.html#inheriting">examples</a>
+    contain more details.
+  </p>
+
+  <p>
+    If tools do not support the rounding context specified for a
+    computation, the result is undefined, and the tool should give
+    some indication of the reason for the failure. FPCore does not
+    restrict the representation used internally by a tool to store
+    values. Numeric values can be floating-point values of various
+    precisions, fixed-point values, intervals, or any sort of symbolic
+    representations of mathematical real numbers. Though FPCore can
+    represent exact real computations, tools are not required to be
+    able to represent arbitrary real numbers exactly.
+  </p>
+
+  </section>
+</section>
+
+</main>
+</body>
+</html>
