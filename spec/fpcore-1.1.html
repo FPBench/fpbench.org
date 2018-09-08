@@ -81,13 +81,13 @@
     <dl class="grammar">
       <dt id="g:fpcore">FPCore</dt>
       <dd>( FPCore (<a href="#g:argument" title="Free variables in benchmark">argument</a>*)
-        <a href="#g:property" title="Metadata properties of the benchmark">property</a>*
+        <a href="metadata-1.1.html#g:property" title="Metadata properties of the benchmark">property</a>*
         <a href="#g:expr" title="Benchmark expression">expr</a> )
       </dd>
 
       <dt id="g:argument">argument</dt>
       <dd><a href="#g:symbol" title="Name of free variable">symbol</a></dd>
-      <dd>( ! <a href="#g:property" title="Rounding context for free variable">property</a>* <a href="#g:symbol" title="Name of free variable">symbol</a> )</dd>
+      <dd>( ! <a href="metadata-1.1.html#g:property" title="Rounding context for free variable">property</a>* <a href="#g:symbol" title="Name of free variable">symbol</a> )</dd>
 
       <dt id="g:expr">expr</dt>
       <dd><a href="#g:number" title="A number">number</a></dd>
@@ -98,20 +98,15 @@
       <dd>( let ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
       <dd>( while <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
       <dd>( cast <a href="#g:expr" title="Expression to round with current rounding context">expr</a> )</dd>
-      <dd>( ! <a href="#g:property" title="Rounding context for expression">property</a>* <a href="#g:expr" title="Expression annotated by rounding context">expr</a> )</dd>
+      <dd>( ! <a href="metadata-1.1.html#g:property" title="Rounding context for expression">property</a>* <a href="#g:expr" title="Expression annotated by rounding context">expr</a> )</dd>
 
       <dt id="g:number">number</dt>
       <dd><a href="#g:decnum" title="A decimal number literal">decnum</a></dd>
       <dd><a href="#g:hexnum" title="A hexadecimal number literal">hexnum</a></dd>
       <dd><a href="#g:rational" title="A rational number">rational</a></dd>
       <dd>( digits <a href="#g:decnum" title="Significand">decnum</a> <a href="#g:decnum" title="Exponent">decnum</a> <a href="#g:decnum" title="Base">decnum</a> )</dd>
-
-      <dt id="g:property">property</dt>
-      <dd>:<a href="#g:symbol" title="Property name">symbol</a> <a href="#g:expr" title="Property value given as expression">expr</a></dd>
-      <dd>:<a href="#g:symbol" title="Property name">symbol</a> <a href="#g:string" title="Property value given as string">string</a></dd>
-      <dd>:<a href="#g:symbol" title="Property name">symbol</a> ( <a href="#g:symbol" title="Property value given as list of symbols">symbol</a>* )</dd>
     </dl>
-    <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>, as well as base tokens like <a href="#g:decnum">decnum</a>, are defined below. </caption>
+    <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>, as well as base tokens like <a href="#g:decnum">decnum</a>, are defined below, while <a href="metadata-1.1.html#g:property">property</a> is defined in <a href="metadata-1.1.html">the Metadata 1.1</a> standard. </caption>
   </figure>
 
   <aside>
