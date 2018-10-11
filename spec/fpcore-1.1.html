@@ -130,12 +130,6 @@
   </p>
 
   <dl class="code-terms">
-    <dt id="g:symbol">symbol</dt>
-    <dd>Any sequence of letters, digits, or characters from the
-      set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit,
-      implemented for ASCII by the regular expression:
-      <pre class="expr"><code>[a-zA-Z~!@$%^&*_\-+=<>.?/:][a-zA-Z0-9~!@$%^&*_\-+=<>.?/:]*</code></pre></dd>
-
     <dt id="g:decnum">decnum</dt>
     <dd>An optional plus (<code>+</code>) or minus (<code>-</code>)
       sign followed by either a sequence of decimal digits which
@@ -163,6 +157,13 @@
       a slash (<code>/</code>), followed by a nonzero sequence of decimal digits that
       form the denominator. This definition is implemented for ASCII by the regular expression:
       <pre class="expr"><code>[+-]?[0-9]+/[0-9]*[1-9][0-9]*</code></pre></dd>
+
+    <dt id="g:symbol">symbol</dt>
+    <dd>Any sequence of letters, digits, or characters from the
+      set <code>~!@$%^&*_-+=<>.?/:</code> not starting with a digit
+      and not matching any other basic token.
+      In ASCII, all symbols match by this regular expression:
+      <pre class="expr"><code>[a-zA-Z~!@$%^&*_\-+=<>.?/:][a-zA-Z0-9~!@$%^&*_\-+=<>.?/:]*</code></pre></dd>
 
     <dt id="g:string">string</dt>
     <dd>Any sequence of printable characters, spaces, tabs, or
