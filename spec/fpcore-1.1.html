@@ -261,6 +261,8 @@
 
   <aside>
     FPCore supports all constants commonly provided by C and Fortran implementations.
+    In most cases, the "M_" prefix from math.h is omitted, except for 1_PI, 2_PI, and
+    2_SQRTPI, where it is retained so the constant name is a symbol.
   </aside>
 
   <table class="code-terms">
@@ -270,9 +272,9 @@
     <tr>
     <td>E</td><td>LOG2E</td><td>LOG10E</td><td>LN2</td><td>LN10</td>
     </tr><tr>
-    <td>PI</td><td>PI_2</td><td>PI_4</td><td>1_PI</td><td>2_PI</td>
+    <td>PI</td><td>PI_2</td><td>PI_4</td><td>M_1_PI</td><td>M_2_PI</td>
     </tr><tr>
-    <td>2_SQRTPI</td><td>SQRT2</td><td>SQRT1_2</td><td>INFINITY</td><td>NAN</td></tr>
+    <td>M_2_SQRTPI</td><td>SQRT2</td><td>SQRT1_2</td><td>INFINITY</td><td>NAN</td></tr>
     </tbody>
     <thead><th colspan="5">Supported Boolean Constants</th></thead>
     <tbody>
