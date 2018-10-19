@@ -107,9 +107,22 @@
       <dd>( digits <a href="#g:decnum" title="Significand">decnum</a> <a href="#g:decnum" title="Exponent">decnum</a> <a href="#g:decnum" title="Base">decnum</a> )</dd>
 
       <dt id="g:property">property</dt>
-      <dd>:<a href="#g:symbol" title="Property name">symbol</a> <a href="#g:expr" title="Property value given as expression">expr</a></dd>
-      <dd>:<a href="#g:symbol" title="Property name">symbol</a> <a href="#g:string" title="Property value given as string">string</a></dd>
-      <dd>:<a href="#g:symbol" title="Property name">symbol</a> ( <a href="#g:symbol" title="Property value given as list of symbols">symbol</a>* )</dd>
+      <dd>:<a href="fpcore-1.1.html#g:symbol" title="Property name">symbol</a> <a href="#g:data" title="Property value">data</a></dd>
+
+      <aside>
+        Note that metadata can contain
+        arbitrary <a href="fpcore-1.1.html#g:data">data</a>, including
+        expressions. Implementations may want to special-case
+        properties whose values are expressions, to simplify support
+        for <a href="metadata-1.1.html#p:pre">:pre</a>
+        and <a href="metadata-1.1.html#p:spec">:spec</a>.
+      </aside>
+
+      <dt id="g:data">data</dt>
+      <dd><a href="fpcore-1.1.html#g:symbol" title="Symbols are a datum">symbol</a></dd>
+      <dd><a href="fpcore-1.1.html#g:number" title="Numbers are a datum">number</a></dd>
+      <dd><a href="fpcore-1.1.html#g:string" title="Strings are a datum">string</a></dd>
+      <dd>( <a href="#g:data" title="Several data are a datum">data</a>* )</dd>
     </dl>
     <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>, as well as base tokens like <a href="#g:decnum">decnum</a>, are defined below. </caption>
   </figure>
