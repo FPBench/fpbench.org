@@ -1,29 +1,37 @@
 SOURCES = {
-    "solovyev-et-al-2015": "FPTaylor",
-    "herbie-2015": "Herbie",
-    "darulova-kuncak-2014": "Rosa",
-    "damouche-martel-chapoutot-fmics15": "Salsa",
-    "damouche-martel-chapoutot-nsv14": "Salsa",
-    "damouche-martel-chapoutot-cf15": "Salsa",
-    "atkinson-1989": "Salsa",
-    "golub-vanloan-1996": "Salsa",
+    "solovyev-et-al-2015": "Utah",
+    "herbie-2015": "UW",
+    "darulova-kuncak-2014": "MPI-SWS",
+    "damouche-martel-chapoutot-fmics15": "UPVD",
+    "damouche-martel-chapoutot-nsv14": "UPVD",
+    "damouche-martel-chapoutot-cf15": "UPVD",
+    "atkinson-1989": "UPVD",
+    "golub-vanloan-1996": "UPVD",
 }
 
 function source_table(data) {
     var source_counts = {"(other)": 0};
     data.forEach(function(core) {
-        var used = false;
+        var used = {};
         (core[":cite"] || []).forEach(function(cite) {
             var source = SOURCES[cite]
-            if (source && !used) {
+            if (source && !used[source]) {
                 source_counts[source] = source_counts[source] || 0;
                 source_counts[source]++;
-                used = true;
+                used[source] = true;
             }
         });
         if (!used) source_counts["(other)"]++;
     })
     return source_counts;
+}
+
+function has_source(core, source) {
+    var cites = core[":cite"] || [];
+    for (var i = 0; i < cites.length; i++) {
+        if (SOURCES[cites[i]] == source) return true;
+    }
+    return false;
 }
 
 FEATURES = {
@@ -106,6 +114,17 @@ function update_tables(data) {
     update_table("source", $sources, source_table(data));
     update_table("feature", $features, feature_table(data));
     update_table("domain", $domains, domain_table(data));
+
+    var $contribs = document.querySelectorAll(".columns")
+    for (var i = 1; i < $contribs.length; i++) { // Skip first one!
+        var subtables = $contribs[i].querySelectorAll("table");
+        var $features = subtables[0], $domains = subtables[1];
+        var source = $contribs[i].dataset.source;
+        var subdata = data.filter(function(x) {return has_source(x, source);});
+        update_table(source + " feature", $features, feature_table(subdata));
+        update_table(source + " domain", $domains, domain_table(subdata));
+        
+    }
 }
 
 function load_benchmarks(data) {
