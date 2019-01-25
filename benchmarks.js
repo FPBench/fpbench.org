@@ -34,6 +34,7 @@ function get_search() {
     var predicate = new Predicate();
     document.querySelector("#search").value.split(/\s+/g).forEach(function(word) {
         var field = ":name";
+        var invert = false;
 
         if (word.indexOf(":") !== -1) {
             field = word.substr(0, word.indexOf(":"));
@@ -47,8 +48,14 @@ function get_search() {
             }
         }
 
+        if (word[0] == "!") {
+            var invert = !invert;
+            word = word.substr(1);
+        }
+
         predicate.and(function(core) {
-            return core[field] && ("" + core[field]).toLowerCase().indexOf(word.toLowerCase()) !== -1;
+            var bool = core[field] && ("" + core[field]).toLowerCase().indexOf(word.toLowerCase()) !== -1;
+            return invert != bool; // xor
         });
     });
     return predicate;
