@@ -14,6 +14,7 @@ function Element(tagname, props, children) {
     var $elt = document.createElement(tagname);
     if (props.text) $elt.textContent = props.text;
     if (props.href) $elt.href = props.href;
+    if (props.download) $elt.download = props.download;
     if (props.classes) {
         for (var i = 0; i < props.classes.length; i++) {
             $elt.classList.add(props.classes[i]);
@@ -90,12 +91,13 @@ function render_result(core) {
         extra_data(core),
 
         Element("div", { classes: ["links"], }, [
-            /* TODO: Get these links up
             Element("strong", { text: "External tools:" }),
+            /* TODO: Get these links up
             Element("a", { text: "Herbie", href: "" }),
             Element("a", { text: "Titanic", href: "" }),
             Element("a", { text: "Daisy", href: "" }),
             */
+            Element("a", { text: "Download", download: "benchmark.fpcore", href: "data:;base64," + btoa(core.core)})
         ]),
     ]);
     out.addEventListener("click", function() { out.classList.toggle("open"); });
