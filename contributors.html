@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench Contributors</title>
+  <link rel="stylesheet" type="text/css" href="fpbench.css">
+</head>
+<body>
+  <header>
+    <a href='.' style='color: black; text-decoration: none;'>
+      <img src='img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>FPBench Contributors</h1>
+      <p>Sources of benchmarks</p>
+    </a>
+  </header>
+
+  <p><a href=".">FPBench</a> includes a suite of benchmarks, drawn
+  from published floating-point research.</p>
+
+  <figure class="columns" id="benchmark-stats">
+    <table class="counts">
+      <thead>
+        <th colspan="2">Contributors</th>
+      </thead>
+      <tr><td><a href="#MPI-SWS">MPI-SWS</a></td><td>34</td></tr>
+      <tr><td><a href="#UW">UW</a></td><td>31</td></tr>
+      <tr><td><a href="#UPVD">UPVD</a></td><td>26</td></tr>
+      <tr><td><a href="#Utah">Utah</a></td><td>17</td></tr>
+    </table>
+    <table class="counts">
+      <thead>
+        <th colspan="2">Features used</th>
+      </thead>
+      <tr><td>Arithmetic</td><td>115</td></tr>
+      <tr><td>Temporaries</td><td>58</td></tr>
+      <tr><td>Comparison</td><td>34</td></tr>
+      <tr><td>Loops</td><td>29</td></tr>
+      <tr><td>Exponents</td><td>18</td></tr>
+      <tr><td>Trigonometry</td><td>14</td></tr>
+      <tr><td>Conditionals</td><td>11</td></tr>
+    </table>
+    <table class="counts">
+      <thead>
+        <th colspan="2">Domains</th>
+      </thead>
+      <tr><td>Textbook</td><td>28</td></tr>
+      <tr><td>Mathematics</td><td>25</td></tr>
+      <tr><td>Controls</td><td>10</td></tr>
+      <tr><td>Science</td><td>10</td></tr>
+      <tr><td>(unknown)</td><td>39</td></tr>
+    </table>
+  </figure>
+
+  <p>These benchmarks have been contributed by multiple research
+  groups. These contributions are listed here in chronological order.
+  Each listed paper has all its evaluation examples incorporated into
+  FPBench.</p>
+
+  <p>For each benchmark, FPBench records its name (preferably as used
+  in a paper), descriptive information such as citations, and finally
+  semantic metadata such as the precision used and preconditions.</p>
+
+  <h2 id="Utah">The CPU group at the University of Utah</h2>
+
+  <figure class="columns" data-source="Utah">
+    <img class="logo" src="img/uu-cpu.png" />
+    <table class="counts">
+      <thead>
+        <th colspan="2">Features used</th>
+      </thead>
+      <tr><td>Arithmetic</td><td>17</td></tr>
+      <tr><td>Temporaries</td><td>8</td></tr>
+      <tr><td>Trigonometry</td><td>2</td></tr>
+      <tr><td>Exponents</td><td>1</td></tr>
+    </table>
+    <table class="counts">
+      <thead>
+        <th colspan="2">Domains</th>
+      </thead>
+      <tr><td>(unknown)</td><td>21</td></tr>
+    </table>
+  </figure>
+
+  <p>
+    The <a href="http://parallel.utah.edu/">Center for Parallel
+    Computing at Utah</a> group's FPTaylor project contributed 21
+    benchmarks, many short textbook examples and mathematical
+    computations.
+  </p>
+
+  <ul class="paper-list">
+    <li>
+      Rigorous Estimation of Floating-Point Round-off Errors with Symbolic Taylor Expansions<br/>
+      Alexey Solovyev, Charlie Jacobsen, Zvonimir Rakamaric, Ganesh Gopalakrishnan, <i>FM'15</i>
+    </li>
+  </ul>
+
+  <h2 id="MPI-SWS">The AVA group at the Max Plank Institute for Software Systems</h2>
+
+  <figure class="columns" data-source="MPI-SWS">
+    <img class="logo" src="img/mpi-ava.png" />
+    <table class="counts">
+      <thead>
+        <th colspan="2">Features used</th>
+      </thead>
+      <tr><td>Arithmetic</td><td>34</td></tr>
+      <tr><td>Temporaries</td><td>21</td></tr>
+      <tr><td>Comparison</td><td>5</td></tr>
+      <tr><td>Conditionals</td><td>5</td></tr>
+    </table>
+    <table class="counts">
+      <thead>
+        <th colspan="2">Domains</th>
+      </thead>
+      <tr><td>Science</td><td>10</td></tr>
+      <tr><td>Mathematics</td><td>5</td></tr>
+      <tr><td>Controls</td><td>4</td></tr>
+      <tr><td>(unknown)</td><td>18</td></tr>
+    </table>
+  </figure>
+
+  <p>
+    The Automated Verification and Approximation group's Rosa project
+    contributed 37 benchmarks, mostly drawn from scientific
+    computations and control theory.
+  </p>
+
+  <ul class="paper-list">
+    <li>
+      Sound Compilation of the Reals<br/>
+      Eva Darulova, Viktor Kuncak, <i>POPL'14</i>
+    </li>
+  </ul>
+  
+  <h2 id="UPVD">The LAMPS group at the Université de Perpignan Via Domitia</h2>
+
+  <figure class="columns" data-source="UPVD">
+    <img class="logo" src="img/upd-lamps.png" />
+    <table class="counts">
+      <thead>
+        <th colspan="2">Features used</th>
+      </thead>
+      <tr><td>Arithmetic</td><td>26</td></tr>
+      <tr><td>Temporaries</td><td>26</td></tr>
+      <tr><td>Loops</td><td>26</td></tr>
+      <tr><td>Comparison</td><td>26</td></tr>
+      <tr><td>Conditionals</td><td>6</td></tr>
+      <tr><td>Trigonometry</td><td>2</td></tr>
+    </table>
+    <table class="counts">
+      <thead>
+        <th colspan="2">Domains</th>
+      </thead>
+      <tr><td>Mathematics</td><td>19</td></tr>
+      <tr><td>Controls</td><td>6</td></tr>
+    </table>
+  </figure>
+
+  <p>
+    The <a href="http://lamps.univ-perp.fr/LAMPS/Accueil.html">Laboratoire
+    de Mathématiques et de Physique</a> group's Salsa project
+    contributed 25 benchmarks, all programs with loops drawn from
+    mathematical algorithms and control theory.
+  </p>
+
+  <ul class="paper-list">
+    <li>
+      Intra-procedural Optimization of the Numerical Accuracy of Programs<br/>
+      Nasrine Damouche, Matthieu Martel, Alexandre Chapoutot, <i>FMICS'15</i>
+    </li>
+    <li>
+      Transformation of a PID Controller for Numerical Accuracy<br/>
+      Nasrine Damouche, Matthieu Martel, Alexandre Chapoutot, <i>NSV'15</i>
+    </li>
+    <li>
+      Optimizing the Accuracy of a Rocket Trajectory Simulation by Program Transformation<br/>
+      Nasrine Damouche, Matthieu Martel, Alexandre Chapoutot, <i>CF'15</i>
+    </li>
+  </ul>
+
+  <h2 id="UW">The PLSE group at the University of Washington</h2>
+
+  <figure class="columns" data-source="UW">
+    <img class="logo" src="img/uw-plse.jpg" />
+    <table class="counts">
+      <thead>
+        <th colspan="2">Features used</th>
+      </thead>
+      <tr><td>Arithmetic</td><td>31</td></tr>
+      <tr><td>Exponents</td><td>14</td></tr>
+      <tr><td>Trigonometry</td><td>9</td></tr>
+    </table>
+    <table class="counts">
+      <thead>
+        <th colspan="2">Domains</th>
+      </thead>
+      <tr><td>Textbook</td><td>28</td></tr>
+    </table>
+  </figure>
+  
+  <p>
+    The <a href="https://uwplse.org">Programming Languages and
+    Software Engineering</a>
+    group's <a href="https://herbie.uwplse.org">Herbie</a> project
+    contributed 28 benchmarks, mostly drawn from Richard
+    Hamming's <i>Numerical Methods for Scientists and Engineers</i>.
+  </p>
+
+  <ul class="paper-list">
+    <li>
+      <a href="http://herbie.uwplse.org/pldi15.html">Automatically Improving Accuracy for Floating-point Expressions</a><br/>
+      Pavel Panchekha, Alex Sanchez-Stern, James R. Wilcox, Zachary Tatlock, <i>PLDI'15</i>
+    </li>
+  </ul>
+
+  <script src="benchmarks.js"></script>
+  <script src="benchmarks.jsonp"></script>
+</body>
+</html>

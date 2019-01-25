@@ -1,132 +1,124 @@
-SOURCES = {
-    "solovyev-et-al-2015": "Utah",
-    "herbie-2015": "UW",
-    "darulova-kuncak-2014": "MPI-SWS",
-    "damouche-martel-chapoutot-fmics15": "UPVD",
-    "damouche-martel-chapoutot-nsv14": "UPVD",
-    "damouche-martel-chapoutot-cf15": "UPVD",
-    "atkinson-1989": "UPVD",
-    "golub-vanloan-1996": "UPVD",
+var DATA = {};
+
+function Predicate() {
+    this.f = function(x) { return true; };
 }
 
-function source_table(data) {
-    var source_counts = {"(other)": 0};
-    data.forEach(function(core) {
-        var used = {};
-        (core[":cite"] || []).forEach(function(cite) {
-            var source = SOURCES[cite]
-            if (source && !used[source]) {
-                source_counts[source] = source_counts[source] || 0;
-                source_counts[source]++;
-                used[source] = true;
+Predicate.prototype.and = function(f) {
+    var old_f = this.f;
+    this.f = function(x) { return old_f(x) && f(x); };
+    return this;
+}
+
+function Element(tagname, props, children) {
+    var $elt = document.createElement(tagname);
+    if (props.text) $elt.textContent = props.text;
+    if (props.href) $elt.href = props.href;
+    if (props.classes) {
+        for (var i = 0; i < props.classes.length; i++) {
+            $elt.classList.add(props.classes[i]);
+        }
+    }
+
+    function addAll(c) {
+        if (!c) return;
+        else if (Array.isArray(c)) c.map(addAll);
+        else $elt.appendChild(c);
+    }
+    addAll(children);
+    return $elt;
+}
+
+function get_search() {
+    var predicate = new Predicate();
+    document.querySelector("#search").value.split(/\s+/g).forEach(function(word) {
+        var field = ":name";
+
+        if (word.indexOf(":") !== -1) {
+            field = word.substr(0, word.indexOf(":"));
+            word = word.substr(word.indexOf(":") + 1);
+            if (field == "domain") {
+                field = ":fpbench-domain";
+            } else if (field == "from") {
+                field = ":cite";
+            } else if (["body", "arguments", "operators"].indexOf(field) == -1) {
+                field = ":" + field;
             }
+        }
+
+        predicate.and(function(core) {
+            return ("" + (core[field] || "")).toLowerCase().indexOf(word.toLowerCase()) !== -1;
         });
-        if (!used) source_counts["(other)"]++;
-    })
-    return source_counts;
-}
-
-function has_source(core, source) {
-    var cites = core[":cite"] || [];
-    for (var i = 0; i < cites.length; i++) {
-        if (SOURCES[cites[i]] == source) return true;
-    }
-    return false;
-}
-
-FEATURES = {
-    Arithmetic: "+ - * / sqrt fabs".split(" "),
-    Temporaries: ["let"],
-    Loops: ["while"],
-    Comparison: "and or not == != < > <= >=".split(" "),
-    Conditionals: ["if"],
-    Exponents: "exp pow log".split(" "),
-    Trigonometry: "sin cos tan asin acos atan".split(" "),
-}
-
-function feature_table(data) {
-    var op_feature = {};
-    for (var i in FEATURES) FEATURES[i].forEach(function(op) { op_feature[op] = i; });
-
-    var feature_counts = {};
-    data.forEach(function(core) {
-        var feature_used = {};
-        core.operators.forEach(function(op) {
-            var feature = op_feature[op];
-            if (!feature) console.warn("No feature for operator", op);
-            if (!feature_used[feature]) {
-                feature_used[feature] = true;
-                feature_counts[feature] = feature_counts[feature] || 0;
-                feature_counts[feature]++;
-            }
-        })
     });
-
-    // Check that the operators to features assignment is good
-    var operators_used = [];
-    data.forEach(function(core) { operators_used = operators_used.concat(core.operators); });
-    var operators_named = [];
-    for (var i in FEATURES) operators_named = operators_named.concat(FEATURES[i]);
-    operators_named = new Set(operators_named);
-    (new Set(operators_used)).forEach(function(op) {
-        if (!operators_named.has(op)) console.warn("No feature for operator", op);
-    });
-
-    return feature_counts;
+    return predicate;
 }
 
-function domain_table(data) {
-    var domain_counts = {"(unknown)": 0};
-    data.forEach(function(core) {
-        var domain = core[":fpbench-domain"];
-        if (domain) {
-            domain = domain[0].toUpperCase() + domain.substr(1);
-            domain_counts[domain] = domain_counts[domain] || 0;
-            domain_counts[domain]++;
-        } else {
-            domain_counts["(unknown)"]++;
-        }
-    });
-    return domain_counts;
+function render_datum(key, elt, value) {
+    return Element("div", { classes: ["datum", elt] }, [
+        Element("strong", { text: key }),
+        Element(elt, { text: value }),
+    ]);
 }
 
-function update_table(name, table, counts) {
-    var used_items = {};
-    [].forEach.call(table.querySelectorAll("tbody tr"), function($row) {
-        var cells = $row.querySelectorAll("td");
-        var item = cells[0].textContent;
-        if (!counts[item]) throw "Invalid " + name + " " + item;
-        used_items[item] = true;
-        cells[1].innerText = counts[item];
-    });
-    for (var item in table) {
-        if (table.hasOwnProperty(item) && !used_items[item]) {
-            console.warn("No row for " + name, item);
+function extra_data(core) {
+    var out = [];
+    for (var i in core) {
+        if (core.hasOwnProperty(i) &&
+            [":name", ":description", "arguments", "operators", ":precision",
+             ":fpbench-domain", ":cite", ":pre", "body", "core"].indexOf(i) === -1) {
+            out.push(render_datum(i.substr(1), "code", core[i]));
         }
     }
+    return out;
 }
 
-function update_tables(data) {
-    var $stats = document.querySelector("#benchmark-stats");
-    var tables = $stats.querySelectorAll("table");
-    var $sources = tables[0], $features = tables[1], $domains = tables[2];
-    
-    update_table("source", $sources, source_table(data));
-    update_table("feature", $features, feature_table(data));
-    update_table("domain", $domains, domain_table(data));
+function render_result(core) {
+    var out = Element("div", {}, [
+        Element("h2", { text: core[":name"] || "(unnamed)" }, [
+            Element("a", { classes: ["more"], text: "more" })
+        ]),
+        core[":description"] && render_datum("Description", "p", core[":description"]),
 
-    var $contribs = document.querySelectorAll(".columns")
-    for (var i = 1; i < $contribs.length; i++) { // Skip first one!
-        var subtables = $contribs[i].querySelectorAll("table");
-        var $features = subtables[0], $domains = subtables[1];
-        var source = $contribs[i].dataset.source;
-        var subdata = data.filter(function(x) {return has_source(x, source);});
-        update_table(source + " feature", $features, feature_table(subdata));
-        update_table(source + " domain", $domains, domain_table(subdata));
-        
+        render_datum("Arguments", "span", core.arguments.join(", ")),
+        core[":precision"] && render_datum("Precision", "span", core[":precision"]),
+        core[":fpbench-domain"] && render_datum("Domain", "span", core[":fpbench-domain"][0].toUpperCase() + core[":fpbench-domain"].substr(1)),
+        core[":cite"] && render_datum("From", "span", core[":cite"].join(", ")),
+
+        core[":pre"] && render_datum("Precondition", "pre", core[":pre"]),
+        render_datum("Body", "pre", core.body),
+
+        extra_data(core),
+
+        Element("div", { classes: ["links"], }, [
+            /* TODO: Get these links up
+            Element("strong", { text: "External tools:" }),
+            Element("a", { text: "Herbie", href: "" }),
+            Element("a", { text: "Titanic", href: "" }),
+            Element("a", { text: "Daisy", href: "" }),
+            */
+        ]),
+    ]);
+    out.addEventListener("click", function() { out.classList.toggle("open"); });
+    return out;
+}
+
+function render_results() {
+    var $out = document.querySelector("#benchmarks");
+    var predicate = get_search();
+    var subdata = DATA.filter(predicate.f);
+
+    while ($out.children.length) $out.children[0].remove();
+
+    for (var i = 0; i < subdata.length; i++) {
+        var $row = render_result(subdata[i]);
+        $out.appendChild($row);
     }
+
+    document.querySelector("#overlay").textContent = subdata.length + " benchmarks";
 }
 
 function load_benchmarks(data) {
-    update_tables(data);
+    DATA = data;
+    render_results();
+    document.querySelector("#search").addEventListener("change", render_results);
 }

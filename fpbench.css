@@ -87,3 +87,39 @@ ol.papers-list { list-style: inside none; padding: 0; }
 ol.papers-list li { margin-bottom: 1em; }
 ol.papers-list header { margin-bottom: .25em; }
 ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font-style: italic; }
+
+#benchmark-search #search { box-sizing: border-box; width: 100%; }
+#benchmark-search .search-container { position: relative; }
+#benchmark-search #overlay {
+    position: absolute; right: 1ex; top: calc(50% - .5em);
+    color: #aaa; font-weight: bold;
+}
+
+#benchmarks > div > * { display: none; }
+#benchmarks > div h2 { display: block; }
+#benchmarks > div a.more { display: block; }
+#benchmarks > div.open > * { display: block; }
+#benchmarks > div.open a.more { display: none; }
+
+#benchmarks > div { padding: 1ex; border: 3px solid transparent; }
+#benchmarks > div:hover, #benchmarks > div.open {
+    background: #f8f8f8; border: 3px solid #eee; box-shadow: 0 0 5px #eee;
+}
+#benchmarks div.links { background: #eee; margin: 0 -1ex -1ex -1ex; padding: 1ex; text-align: right; clear: both; }
+#benchmarks div.links strong { color: #888; float: left;  }
+#benchmarks div.links a { margin-right: 1em; }
+#benchmarks div.links a:before { width: 1em; background-image: attr(data-icon); background-size: contain; }
+#benchmarks div.links a:after { content: " »"; }
+
+#benchmarks a.more { float: right; cursor: pointer; }
+#benchmarks a.more:after { content: " »"; }
+#benchmarks h2 { font-size: 100%; font-weight: normal; margin: 0; }
+#benchmarks > div.open h2 { font-size: 110%; font-weight: bold; }
+
+#benchmarks div.datum { margin: 1em 1em 1em 0; float: left; min-width: 8em; }
+#benchmarks div.datum.pre, #benchmarks div.datum.p { clear: both; float: none; }
+#benchmarks div.datum strong {
+    display: block; font-size: 80%; font-weight: bold;
+    color: #aaa; text-transform: uppercase;
+}
+#benchmarks pre { margin-top: 0; }
