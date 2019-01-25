@@ -55,7 +55,7 @@ function get_search() {
 
         predicate.and(function(core) {
             var bool = core[field] && ("" + core[field]).toLowerCase().indexOf(word.toLowerCase()) !== -1;
-            return invert != bool; // xor
+            return invert ? !bool : bool;
         });
     });
     return predicate;
