@@ -36,6 +36,11 @@ function get_search() {
         var field = ":name";
         var invert = false;
 
+        if (word[0] == "!") {
+            var invert = !invert;
+            word = word.substr(1);
+        }
+
         if (word.indexOf(":") !== -1) {
             field = word.substr(0, word.indexOf(":"));
             word = word.substr(word.indexOf(":") + 1);
@@ -46,11 +51,6 @@ function get_search() {
             } else if (["body", "arguments", "operators"].indexOf(field) == -1) {
                 field = ":" + field;
             }
-        }
-
-        if (word[0] == "!") {
-            var invert = !invert;
-            word = word.substr(1);
         }
 
         predicate.and(function(core) {
