@@ -48,7 +48,7 @@ function get_search() {
         }
 
         predicate.and(function(core) {
-            return ("" + (core[field] || "")).toLowerCase().indexOf(word.toLowerCase()) !== -1;
+            return core[field] && ("" + core[field]).toLowerCase().indexOf(word.toLowerCase()) !== -1;
         });
     });
     return predicate;
