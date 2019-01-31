@@ -80,44 +80,40 @@
 
   <dt id="p:precision">:precision</dt>
   <dd>
-    Describes the floating-point precision used for <a href="fpcore-1.1.html#rounding">rounding</a>.
-    The precision can be provided in two forms: a short form, which is a single <a href="fpcore-1.1.html#g:symbol">symbol</a>,
-    or a long form, which is a list of parameters.
+    Describes the floating-point precision used
+    for <a href="fpcore-1.1.html#rounding">rounding</a>, using a list
+    naming a precision family and its parameters, or using a
+    short-hand <a href="fpcore-1.1.html#g:symbol">symbol</a>
+    synonymous with such a list.
 
-    FPBench supports the following short forms:
-    <ul>
-      <li>Common IEEE 754 formats: <code>binary16</code>, <code>binary32</code>, and <code>binary64</code></li>
-      <li>Common Posit formats: <code>posit8</code>, <code>posit16</code>, <code>posit32</code>, and <code>posit64</code></li>
-    </ul>
+    <dl class="code-terms">
+      <dt>(float <var>e</var> <var>s</var>)</dt>
+      <dd>An IEEE-754 binary floating-point value with <var>e</var>
+      exponent bits and <var>s</var> significant bits (including the
+      implicit bits). <code>binary64</code> and <code>binary32</code>
+      are common shorthands.</dd>
 
-    FPBench supports the following long forms:
-    <ul>
-      <li>
-        IEEE 754 floating-point: <code>(float <i>‹w›</i> <i>‹p›</i>)</code>,
-        where <code><i>‹w›</i></code> is the number of bits in the exponent,
-        and <code><i>‹p›</i></code> is the number of bits in the significand (including the implicit bit).
-        The short form <code>binary64</code> is the same as <code>(float 11 53)</code>.
-      </li>
-      <li>
-        Posits: <code>(posit <i>‹es›</i> <i>‹nbits›</i>)</code>,
-        where <code><i>‹es›</i></code> is the number of exponent bits,
-        and <code><i>‹nbits›</i></code> is the total number of bits in the posit.
-        The short form <code>posit32</code> is the same as <code>(posit 2 32)</code>.
-      </li>
-      <li>
-        Fixed-point: <code>(fixed <i>‹e›</i> <i>‹p›</i>)</code>,
-        where <code><i>‹e›</i></code> is the exponent
-        and <code><i>‹p›</i></code> is the number of bits of precision,
-        including one bit to the left of the exponent.
-      </li>
-    </ul>
+      <dt>(posit <var>es</var> <var>nbits</var>)</dt>
+      <dd>Posits, where <var>es</var> is the number of exponent bits
+      and <var>nbits</var> is the total number of
+      bits. <code>posit8</code>, <code>posit16</code>, <code>posit32</code>,
+      and <code>posit64</code> are common shorthands.</dd>
 
-    Additionally, the special short forms <code>real</code> and <code>integer</code> can be provided.
-    <code>real</code> precision indicates that no rounding should take place,
-    while <code>integer</code> precision specifies the behavior of(unbounded) mathematical integers.
-    If no <code>:precision</code> property is specified,
-    implementations should assume a sane default,
-    such as <code>binary64</code> or possibly <code>real</code> depending on the application domain.
+      <dt>(fixed <var>i</var> <var>f</var>)</dt>
+      <dd>Fixed point, with <var>i</var> integer bits and <var>f</var>
+      fractional bits.</dd>
+
+      <dt>real</dt>
+      <dd>A special precision for arbitrary real numbers, where no rounding takes place.</dd>
+
+      <dt>integer</dt>
+      <dd>A special precision for mathematical integers, where no rounding takes place.</dd>
+    </dl>
+
+    Where no <code>:precision</code> property is specified,
+    implementations should assume a sane default, such
+    as <code>binary64</code> or possibly <code>real</code> depending
+    on the application domain.
   </dd>
 
   <dt id="p:round">:round</dt>
