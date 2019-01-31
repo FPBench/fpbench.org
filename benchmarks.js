@@ -11,19 +11,15 @@ Predicate.prototype.and = function(f) {
 }
 
 function Element(tagname, props, children) {
+    if (!children) { children = props; props = {}; }
+
     var $elt = document.createElement(tagname);
-    if (props.text) $elt.textContent = props.text;
-    if (props.href) $elt.href = props.href;
-    if (props.download) $elt.download = props.download;
-    if (props.classes) {
-        for (var i = 0; i < props.classes.length; i++) {
-            $elt.classList.add(props.classes[i]);
-        }
-    }
+    for (var i in props) if (Object.hasOwnProperty(props, i)) $elt[i] = props[i];
 
     function addAll(c) {
         if (!c) return;
         else if (Array.isArray(c)) c.map(addAll);
+        else if (typeof c == "string") $elt.appendChild(document.createTextNode(c))
         else $elt.appendChild(c);
     }
     addAll(children);
@@ -62,9 +58,9 @@ function get_search() {
 }
 
 function render_datum(key, elt, value) {
-    return Element("div", { classes: ["datum", elt] }, [
-        Element("strong", { text: key }),
-        Element(elt, { text: value }),
+    return Element("div", { className: "datum "+elt }, [
+        Element("strong", key),
+        Element(elt, value),
     ]);
 }
 
@@ -81,9 +77,10 @@ function extra_data(core) {
 }
 
 function render_result(core) {
-    var out = Element("div", {}, [
-        Element("h2", { text: core[":name"] || "(unnamed)" }, [
-            Element("a", { classes: ["more"], text: "more" })
+    var out = Element("div", [
+        Element("h2", [
+            core[":name"] || "(unnamed)", 
+            Element("a", { className: "more" }, "more")
         ]),
         core[":description"] && render_datum("Description", "p", core[":description"]),
 
@@ -97,16 +94,15 @@ function render_result(core) {
 
         extra_data(core),
 
-        Element("div", { classes: ["links"], }, [
-            Element("strong", { text: "External tools:" }),
-            /* TODO: Get these links up
-            Element("a", { text: "Herbie", href: "" }),
-            Element("a", { text: "Titanic", href: "" }),
-            Element("a", { text: "Daisy", href: "" }),
-            */
-            Element("a", { text: "Download", download: "benchmark.fpcore", href: "data:;base64," + btoa(core.core)})
+        Element("div", { className: "links", }, [
+            Element("strong", "External tools:"),
+            Element("a", {
+                download: "benchmark.fpcore",
+                href: "data:;base64," + btoa(core.core)
+            }, "Download"),
         ]),
     ]);
+
     out.addEventListener("click", function() { out.classList.toggle("open"); });
     return out;
 }
@@ -117,11 +113,7 @@ function render_results() {
     var subdata = DATA.filter(predicate.f);
 
     while ($out.children.length) $out.children[0].remove();
-
-    for (var i = 0; i < subdata.length; i++) {
-        var $row = render_result(subdata[i]);
-        $out.appendChild($row);
-    }
+    subdata.map(render_result).foreach($out.appendChild.bind($out));
 
     document.querySelector("#overlay").textContent = subdata.length + " benchmarks";
 }
