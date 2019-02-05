@@ -58,6 +58,7 @@ aside {
 }
 
 dl dt { font-weight: bold; margin-top: 1em; }
+dl { margin: 1em 0; }
 
 dl.code-terms dt { font-family: mono; font-size: 88%; }
 table.code-terms { width: 100%; table-layout: fixed; margin: 1em 0; }
