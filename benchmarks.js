@@ -76,10 +76,23 @@ function extra_data(core) {
     return out;
 }
 
+function create_titanic_permalink(core) {
+    var u = new URL("http://sliver.cs.washington.edu:8011");
+    var s = new URLSearchParams({
+        "core": core.core,
+        "float_override": false,
+        "posit_override": false,
+    });
+
+    u.search = s.toString();
+    //console.log(u.toString());
+    return u.toString();
+}
+
 function render_result(core) {
     var out = Element("div", [
         Element("h2", [
-            core[":name"] || "(unnamed)", 
+            core[":name"] || "(unnamed)",
             Element("a", { className: "more" }, "more")
         ]),
         core[":description"] && render_datum("Description", "p", core[":description"]),
@@ -100,6 +113,9 @@ function render_result(core) {
                 download: "benchmark.fpcore",
                 href: "data:;base64," + btoa(core.core)
             }, "Download"),
+            Element("a", {
+                href: create_titanic_permalink(core)
+            }, "Titanic"),
         ]),
     ]);
 
@@ -113,7 +129,7 @@ function render_results() {
     var subdata = DATA.filter(predicate.f);
 
     while ($out.children.length) $out.children[0].remove();
-    subdata.map(render_result).foreach($out.appendChild.bind($out));
+    subdata.map(render_result).forEach($out.appendChild.bind($out));
 
     document.querySelector("#overlay").textContent = subdata.length + " benchmarks";
 }
