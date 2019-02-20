@@ -14,7 +14,7 @@ function Element(tagname, props, children) {
     if (!children) { children = props; props = {}; }
 
     var $elt = document.createElement(tagname);
-    for (var i in props) if (Object.hasOwnProperty(props, i)) $elt[i] = props[i];
+    for (var i in props) if (props.hasOwnProperty(i)) $elt[i] = props[i];
 
     function addAll(c) {
         if (!c) return;
