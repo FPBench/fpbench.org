@@ -77,7 +77,7 @@ function extra_data(core) {
 }
 
 function create_titanic_permalink(core) {
-    var u = new URL("http://sliver.cs.washington.edu:8011");
+    var u = new URL("http://sliver.cs.washington.edu:8009");
     var s = new URLSearchParams({
         "core": core.core,
         "float_override": false,
