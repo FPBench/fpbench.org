@@ -67,12 +67,35 @@ function render_datum(key, elt, value) {
     ]);
 }
 
+function render_example(example) {
+    var out = [];
+    for (var i in example) {
+        if (!example.hasOwnProperty(i)) continue;
+        out.push(Element("code", { className: "label" }, i));
+        out.push(" ");
+        out.push(example[i]);
+        out.push(", ");
+    }
+    out.pop();
+    return out;
+}
+
+function render_arguments(args) {
+    var out = [];
+    for (var i = 0; i < args.length; i++) {
+        out.push(Element("code", [args[i]]))
+        out.push(", ");
+    }
+    out.pop();
+    return out;
+}
+
 function extra_data(core) {
     var out = [];
     for (var i in core) {
         if (core.hasOwnProperty(i) &&
             [":name", ":description", "arguments", "operators", ":precision",
-             ":fpbench-domain", ":cite", ":pre", "body", "core"].indexOf(i) === -1) {
+             ":fpbench-domain", ":cite", ":pre", "body", "core", ":example"].indexOf(i) === -1) {
             out.push(render_datum(i.substr(1), "code", core[i]));
         }
     }
@@ -92,8 +115,9 @@ function render_result(core) {
     var out = Element("div", [
         Element("h2", [ core[":name"] || "(unnamed)", more_link ]),
         core[":description"] && render_datum("Description", "p", core[":description"]),
+        core[":example"] && render_datum("Example", "span", render_example(core[":example"])),
 
-        render_datum("Arguments", "span", core.arguments.join(", ")),
+        render_datum("Arguments", "span", render_arguments(core.arguments)),
         core[":precision"] && render_datum("Precision", "span", core[":precision"]),
         core[":fpbench-domain"] && render_datum("Domain", "span", core[":fpbench-domain"][0].toUpperCase() + core[":fpbench-domain"].substr(1)),
         core[":cite"] && render_datum("From", "span", core[":cite"].join(", ")),
