@@ -28,7 +28,8 @@ function Element(tagname, props, children) {
 
 function get_search() {
     var predicate = new Predicate();
-    document.querySelector("#search").value.split(/\s+/g).forEach(function(word) {
+    predicate.text = document.querySelector("#search").value;
+    predicate.text.split(/\s+/g).forEach(function(word) {
         var field = ":name";
         var invert = false;
 
@@ -125,19 +126,30 @@ function render_result(core) {
     return out;
 }
 
-function render_results() {
+function render_results(evt) {
     var $out = document.querySelector("#benchmarks");
     var predicate = get_search();
+    if (predicate.text) {
+        history.replaceState(null, "", "#" + encodeURIComponent(predicate.text));
+    } else {
+        history.replaceState(null, "", location.href.substr(0, location.href.length - location.hash.length));
+    }
     var subdata = DATA.filter(predicate.f);
 
     while ($out.children.length) $out.children[0].remove();
     subdata.map(render_result).forEach($out.appendChild.bind($out));
 
     document.querySelector("#overlay").textContent = subdata.length + " benchmarks";
+    if (evt) evt.preventDefault();
 }
 
 function load_benchmarks(data) {
     DATA = data;
+    if (window.location.hash) {
+        var s = decodeURIComponent(window.location.hash.substr(1));
+        document.querySelector("#search").value = s;
+    }
     render_results();
     document.querySelector("#search").addEventListener("change", render_results);
+    document.querySelector("#benchmark-search").addEventListener("submit", render_results);
 }
