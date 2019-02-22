@@ -77,16 +77,11 @@ function extra_data(core) {
 }
 
 function create_titanic_permalink(core) {
-    var u = new URL("http://titanic.uwplse.org");
-    var s = new URLSearchParams({
-        "core": core.core,
-        "float_override": false,
-        "posit_override": false,
-    });
+    return "http://titanic.uwplse.org?core=" + encodeURIComponent(core.core) + "&float_override=false&posit_override=false";
+}
 
-    u.search = s.toString();
-    //console.log(u.toString());
-    return u.toString();
+function create_herbie_permalink(core) {
+    return "http://herbie.uwplse.org/demo/improve?formula=" + encodeURIComponent(core.core);
 }
 
 function render_result(core) {
@@ -110,6 +105,9 @@ function render_result(core) {
             Element("a", {
                 href: create_titanic_permalink(core)
             }, "Titanic"),
+            Element("a", {
+                href: create_herbie_permalink(core)
+            }, "Herbie"),
             // Leave this tool as the last one
             Element("a", {
                 download: "benchmark.fpcore",
