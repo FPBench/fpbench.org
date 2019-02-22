@@ -90,11 +90,9 @@ function create_titanic_permalink(core) {
 }
 
 function render_result(core) {
+    var more_link = Element("a", { className: "more" }, "more");
     var out = Element("div", [
-        Element("h2", [
-            core[":name"] || "(unnamed)",
-            Element("a", { className: "more" }, "more")
-        ]),
+        Element("h2", [ core[":name"] || "(unnamed)", more_link ]),
         core[":description"] && render_datum("Description", "p", core[":description"]),
 
         render_datum("Arguments", "span", core.arguments.join(", ")),
@@ -120,7 +118,12 @@ function render_result(core) {
         ]),
     ]);
 
-    out.addEventListener("click", function() { out.classList.toggle("open"); });
+    out.addEventListener("click", function() { out.classList.add("open"); more_link.textContent = "less" });
+    more_link.addEventListener("click", function(e) {
+        out.classList.toggle("open");
+        e.stopPropagation();
+        more_link.textContent = out.classList.contains("open") ? "less" : "more";
+    });
     return out;
 }
 

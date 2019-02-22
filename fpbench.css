@@ -100,7 +100,7 @@ ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font
 #benchmarks > div h2 { display: block; }
 #benchmarks > div a.more { display: block; }
 #benchmarks > div.open > * { display: block; }
-#benchmarks > div.open a.more { display: none; }
+#benchmarks > div.open a.more:after { content: " «"; }
 
 #benchmarks > div { padding: 1ex; border: 3px solid transparent; }
 #benchmarks > div:hover, #benchmarks > div.open {
