@@ -106,6 +106,7 @@ ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font
 #benchmarks > div:hover, #benchmarks > div.open {
     background: #f8f8f8; border: 3px solid #eee; box-shadow: 0 0 5px #eee;
 }
+#benchmarks > div.open { margin: 10px 0; }
 #benchmarks div.links { background: #eee; margin: 0 -1ex -1ex -1ex; padding: 1ex; text-align: right; clear: both; }
 #benchmarks div.links strong { color: #888; float: left;  }
 #benchmarks div.links a { margin-right: 1em; }
