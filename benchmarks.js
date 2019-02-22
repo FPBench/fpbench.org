@@ -110,12 +110,13 @@ function render_result(core) {
         Element("div", { className: "links", }, [
             Element("strong", "External tools:"),
             Element("a", {
+                href: create_titanic_permalink(core)
+            }, "Titanic"),
+            // Leave this tool as the last one
+            Element("a", {
                 download: "benchmark.fpcore",
                 href: "data:;base64," + btoa(core.core)
             }, "Download"),
-            Element("a", {
-                href: create_titanic_permalink(core)
-            }, "Titanic"),
         ]),
     ]);
 
