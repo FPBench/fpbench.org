@@ -45,6 +45,8 @@ function get_search() {
                 field = ":fpbench-domain";
             } else if (field == "from") {
                 field = ":cite";
+            } else if (field == "operator") {
+                field = "operators"
             } else if (["body", "arguments", "operators"].indexOf(field) == -1) {
                 field = ":" + field;
             }
@@ -139,7 +141,7 @@ function render_results(evt) {
     while ($out.children.length) $out.children[0].remove();
     subdata.map(render_result).forEach($out.appendChild.bind($out));
 
-    document.querySelector("#overlay").textContent = subdata.length + " benchmarks";
+    document.querySelector("#num-found").textContent = subdata.length + " benchmarks";
     if (evt) evt.preventDefault();
 }
 
@@ -152,4 +154,8 @@ function load_benchmarks(data) {
     render_results();
     document.querySelector("#search").addEventListener("change", render_results);
     document.querySelector("#benchmark-search").addEventListener("submit", render_results);
+    document.querySelector("#overlay .help").addEventListener("click", function() {
+        this.classList.toggle("active");
+        document.querySelector("#help").classList.toggle("active");
+    })
 }

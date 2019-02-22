@@ -19,9 +19,37 @@
   <form method="get" action="#" id="benchmark-search">
     <div class="search-container">
       <input id="search" type="text" />
-      <span id="overlay"></span>
+      <div id="overlay">
+        <span id="num-found"></span>
+        <span class="help" title="Search operator help">?</span>
+      </div>
     </div>
   </form>
+
+  <section id="help">
+    <p>Type multiple search terms into the search bar to search for
+    benchmarks that match all the terms. Search terms are
+    case-insensitive. Search operators are supported:</p>
+
+    <dl class="code-terms">
+      <dt>operator:<var>fn</var></dt>
+      <dd>Uses operator <var>fn</var>; for example, <code>operator:exp</code></dd>
+
+      <dt>from:<var>paper</var></dt>
+      <dd>Cited in <var>paper</var>; for example, <code>from:darulova</code></dd>
+
+      <dt>!<var>term<var></dt>
+      <dd>Negates the search of <var>term</var>; for example, <code>!operator:pow</code></dd>
+
+      <dt><var>parameter</var>:</dt>
+      <dd>Benchmarks with any value for <code>:<var>parameter</var></code>; for example, <code>rosa-ensuring:</code></dd>
+
+      <dt><var>parameter</var>:<var>text</var></dt>
+      <dd>Benchmarks whose <code>:<var>parameter</var></code> value includes <var>text</var>; for example, <code>domain:math</code>
+    </dl>
+
+    <p>Bookmark or email the URL to save or share a search!</p>
+  </section>
   
   <section id="benchmarks">
 

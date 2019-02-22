@@ -95,6 +95,14 @@ ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font
     position: absolute; right: 1ex; top: calc(50% - .5em);
     color: #aaa; font-weight: bold;
 }
+#benchmark-search .help {
+    width: 18px; height: 18px; border-radius: 9px; display: inline-block; 
+    background: #aaa; color: white;
+    text-align: center; font-size: 17.5px; vertical-align: top;
+}
+#benchmark-search .help.active, #benchmark-search .help:hover {
+    background: #999; cursor: pointer;
+}
 
 #benchmarks > div > * { display: none; }
 #benchmarks > div h2 { display: block; }
@@ -125,3 +133,11 @@ ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font
     color: #aaa; text-transform: uppercase;
 }
 #benchmarks pre { margin-top: 0; }
+
+#help {
+    padding: 1ex; line-height: 1.5;
+    border: 1px solid #aaa; border-top: none;
+    display: none;
+}
+#help.active { display: block; }
+#help > p:last-child { margin-bottom: 0; }
