@@ -1,5 +1,17 @@
 var DATA = {};
 
+var DOIS = {
+    "damouche-martel-chapoutot-fmics15": "10.1007/978-3-319-19458-5_3",
+    "damouche-martel-chapoutot-nsv14": "10.1016/j.entcs.2015.10.006",
+    "feron-ieee10": "10.1109/MCS.2010.938196",
+    "damouche-martel-chapoutot-cf15": "10.1145/2742854.2742894",
+    "abdelmalek-bit71": "10.1007/BF01939404",
+    "darulova-kuncak-2014": "10.1145/2535838.2535874",
+    "solovyev-et-al-2015": "10.1007/978-3-319-19249-9_33",
+    "herbie-2015": "10.1145/2813885.2737959",
+    "precimonious-2013": "10.1145/2503210.2503296",
+};
+
 function Predicate() {
     this.f = function(x) { return true; };
 }
@@ -90,6 +102,20 @@ function render_arguments(args) {
     return out;
 }
 
+function render_cite(cite) {
+    var out = [];
+    for (var i = 0; i < cite.length; i++) {
+        var elt = Element("a", [cite[i]]);
+        if (DOIS[cite[i]]) {
+            elt.href = "http://dx.doi.org/" + DOIS[cite[i]];
+        }
+        out.push(elt);
+        out.push(", ");
+    }
+    out.pop();
+    return out;
+}
+
 function extra_data(core) {
     var out = [];
     for (var i in core) {
@@ -120,7 +146,7 @@ function render_result(core) {
         render_datum("Arguments", "span", render_arguments(core.arguments)),
         core[":precision"] && render_datum("Precision", "span", core[":precision"]),
         core[":fpbench-domain"] && render_datum("Domain", "span", core[":fpbench-domain"][0].toUpperCase() + core[":fpbench-domain"].substr(1)),
-        core[":cite"] && render_datum("From", "span", core[":cite"].join(", ")),
+        core[":cite"] && render_datum("From", "span", render_cite(core[":cite"])),
 
         core[":pre"] && render_datum("Precondition", "pre", core[":pre"]),
         render_datum("Body", "pre", core.body),
