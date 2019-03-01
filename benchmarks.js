@@ -129,7 +129,7 @@ function extra_data(core) {
 }
 
 function create_titanic_permalink(core) {
-    return "http://titanic.uwplse.org?core=" + encodeURIComponent(core.core) + "&float_override=false&posit_override=false";
+    return "http://titanic.uwplse.org/evaluate?core=" + encodeURIComponent(core.core) + "&float_override=false&posit_override=false";
 }
 
 function create_herbie_permalink(core) {
