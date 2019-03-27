@@ -10,6 +10,10 @@ body > header { overflow: auto; margin-bottom: 3em; }
 body > header a { display: block; }
 body > header img { float: left; margin-right: 3em; }
 body > header h1 { padding-top: 1em; font-size: 200%; margin: 0; }
+@media screen and (max-width: 600px) {
+    body > header img { height: 50px; margin: 0 .5em; }
+    body > header h1 { font-size: 120%; padding-top: 0; }
+}
 
 a[href] { color: #3465a4; text-decoration: none; }
 a[href]:hover { color: #204a87; text-decoration: underline; }
@@ -127,7 +131,9 @@ ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font
 #benchmarks > div.open h2 { font-size: 110%; font-weight: bold; }
 
 #benchmarks div.datum { margin: 1em 1em 1em 0; float: left; min-width: 8em; }
-#benchmarks div.datum.pre, #benchmarks div.datum.p { clear: both; float: none; }
+#benchmarks div.datum.pre, #benchmarks div.datum.p { 
+    margin: 0; clear: both; float: none; overflow: auto;
+}
 #benchmarks div.datum strong {
     display: block; font-size: 80%; font-weight: bold;
     color: #aaa; text-transform: uppercase;
