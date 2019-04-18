@@ -6,14 +6,16 @@ body {
   font-size: 18px;
 }
 
-body > header { overflow: auto; margin-bottom: 3em; }
-body > header a { display: block; }
-body > header img { float: left; margin-right: 3em; }
-body > header h1 { padding-top: 1em; font-size: 200%; margin: 0; }
+body > header { overflow: auto; margin-bottom: 3em; font-size: 122.22%; }
+body > header img { float: left; margin-right: 1em; height: 100px; }
+body > header h1 { font-size: 150%; margin: 0; line-height: 1.2121; }
 @media screen and (max-width: 600px) {
     body > header img { height: 50px; margin: 0 .5em; }
     body > header h1 { font-size: 120%; padding-top: 0; }
 }
+body > header p { margin: 0; }
+body > header ul { list-style: outside none; padding: 0; margin: .25em 0 0; }
+body > header li { display: inline; margin-right: 1em; }
 
 a[href] { color: #3465a4; text-decoration: none; }
 a[href]:hover { color: #204a87; text-decoration: underline; }
