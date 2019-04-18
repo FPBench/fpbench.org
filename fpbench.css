@@ -7,7 +7,7 @@ body {
 }
 
 body > header { overflow: auto; margin-bottom: 3em; font-size: 122.22%; }
-body > header img { float: left; margin-right: 1em; height: 100px; }
+body > header img { float: left; margin-right: 1.5em; height: 100px; }
 body > header h1 { font-size: 150%; margin: 0; line-height: 1.2121; }
 @media screen and (max-width: 600px) {
     body > header img { height: 50px; margin: 0 .5em; }
