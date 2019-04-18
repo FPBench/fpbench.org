@@ -83,8 +83,8 @@ ol.timeline, ol.papers-list { margin: 0; }
 
 ol.timeline { list-style: none; padding: 0 0 0 5em; }
 ol time {
-    float: left; width: 5em; margin-left: -5em; clear: left;
-    color: gray;
+    float: left; width: 4.5em; margin-left: -5em; clear: left;
+    text-align: right; color: gray;
 }
 ol.timeline li { margin-bottom: 1em; }
 
