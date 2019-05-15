@@ -102,7 +102,9 @@
       <dd>( <a href="#g:operation" title="Mathematical operation to perform">operation</a> <a href="#g:expr" title="Inputs to operation">expr</a>+ )</dd>
       <dd>( if <a href="#g:expr" title="Conditional">expr</a> <a href="#g:expr" title="Branch if condition is true">expr</a> <a href="#g:expr" title="Branch if condition is false">expr</a> )</dd>
       <dd>( let ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
+      <dd>( let* ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
       <dd>( while <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
+      <dd>( while* <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
       <dd>( cast <a href="#g:expr" title="Expression to round with current rounding context">expr</a> )</dd>
       <dd>( ! <a href="#g:property" title="Rounding context for expression">property</a>* <a href="#g:expr" title="Expression annotated by rounding context">expr</a> )</dd>
 
@@ -430,6 +432,72 @@
         with <var>b</var> ≥ 2. The sign of the value is determined by the sign
         of <var>m</var>.
       </p>
+    </dd>
+
+    <dt><code>let*</code> and <code>while*</code></dt>
+    <dd>
+      <p>
+        <code>let*</code> and <code>while*</code> expressions
+        are sequentially binding variants of <code>let</code> and <code>while</code>,
+        familiar from most lisp dialects.
+        Rather than being evaluated simultaneously,
+        the bindings are evaluated in order,
+        so that <code>(let* ([a b] [b a]) (- a b))</code>
+        is the same as <code>(- b b)</code>
+        and <code>(let* ([a 1] [b a])b)</code>
+        is the same as <code>1</code>.
+        The initializations and updates in the body of a <code>while*</code> loop
+        are performed sequentially in an analogous way.
+      </p>
+
+      <p>
+        <code>let*</code> expressions can be desugared
+        into nested <code>let</code> expressions by the following rule:
+      </p>
+
+        <pre style="width: 45ex; margin: 1em auto"><code>(let* ([<var>a</var> <var>a-value</var>] [<var>b</var> <var>b-value</var>] ...) <var>body</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let ([<var>a</var> <var>a-value</var>])
+  (let ([<var>b</var> <var>b-value</var>])
+    ...
+      <var>body</var>))</code></pre>
+
+      <p>
+        Similarly, <code>while*</code> loops can be desugared
+        into regular, simultaneously-binding <code>while</code> and <code>let</code> expressions:
+      </p>
+      <aside>
+        Note that desugaring <code>while*</code> loops results in a quadratic increase in the size of the loop initializations and updates.
+      </aside>
+      <pre style="width: 70ex; margin: 1em auto"><code>(while* <var>cond</var> ([<var>x</var> <var>x-init</var> <var>x-update</var>] [<var>y</var> <var>y-init</var> <var>y-update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(while <var>cond</var>
+  ([<var>x</var>
+    (let ([<var>x</var> <var>x-init</var>])
+      (let ([<var>y</var> <var>y-init</var>])
+        ...
+          <var>x</var>))
+    (let ([<var>x</var> <var>x-update</var>])
+      (let ([<var>y</var> <var>y-update</var>])
+        ...
+          <var>x</var>))]
+   [<var>y</var>
+    (let ([<var>x</var> <var>x-init</var>])
+      (let ([<var>y</var> <var>y-init</var>])
+        ...
+          <var>y</var>))
+    (let ([<var>x</var> <var>x-update</var>])
+      (let ([<var>y</var> <var>y-update</var>])
+        ...
+          <var>y</var>))]
+   ...)
+  <var>retexpr</var>)</code></pre>
+
+      <p>
+        Alternatively, a <code>while*</code> loop can be given semantics directly
+        in terms of <code>let*</code>, according to the equality:
+      </p>
+
+      <pre style="width: 55ex; margin: 1em auto"><code>(while* <var>cond</var> ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let* ([<var>x</var> <var>init</var>] ...)
+  (if <var>cond</var>
+    (while* <var>cond</var> ([<var>x</var> <var>update</var> <var>update</var>] ...) <var>retexpr</var>)
+    <var>retexpr</var>)</code></pre>
     </dd>
   </dl>
   </section>
