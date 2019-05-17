@@ -102,17 +102,17 @@
       <dd>( <a href="#g:operation" title="Mathematical operation to perform">operation</a> <a href="#g:expr" title="Inputs to operation">expr</a>+ )</dd>
       <dd>( if <a href="#g:expr" title="Conditional">expr</a> <a href="#g:expr" title="Branch if condition is true">expr</a> <a href="#g:expr" title="Branch if condition is false">expr</a> )</dd>
       <dd>( let ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
-      <dd>( let* ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
+      <dd class="sugar">( let* ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
       <dd>( while <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
-      <dd>( while* <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
+      <dd class="sugar">( while* <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
       <dd>( cast <a href="#g:expr" title="Expression to round with current rounding context">expr</a> )</dd>
       <dd>( ! <a href="#g:property" title="Rounding context for expression">property</a>* <a href="#g:expr" title="Expression annotated by rounding context">expr</a> )</dd>
 
       <dt id="g:number">number</dt>
-      <dd><a href="#g:decnum" title="A decimal number literal">decnum</a></dd>
-      <dd><a href="#g:hexnum" title="A hexadecimal number literal">hexnum</a></dd>
+      <dd class="sugar"><a href="#g:decnum" title="A decimal number literal">decnum</a></dd>
+      <dd class="sugar"><a href="#g:hexnum" title="A hexadecimal number literal">hexnum</a></dd>
       <dd><a href="#g:rational" title="A rational number">rational</a></dd>
-      <dd>( digits <a href="#g:decnum" title="Significand">decnum</a> <a href="#g:decnum" title="Exponent">decnum</a> <a href="#g:decnum" title="Base">decnum</a> )</dd>
+      <dd class="sugar">( digits <a href="#g:decnum" title="Significand">decnum</a> <a href="#g:decnum" title="Exponent">decnum</a> <a href="#g:decnum" title="Base">decnum</a> )</dd>
 
       <dt id="g:property">property</dt>
       <dd>:<a href="fpcore-1.1.html#g:symbol" title="Property name">symbol</a> <a href="#g:data" title="Property value">data</a></dd>
@@ -132,7 +132,11 @@
       <dd><a href="fpcore-1.1.html#g:string" title="Strings are a datum">string</a></dd>
       <dd>( <a href="#g:data" title="Several data are a datum">data</a>* )</dd>
     </dl>
-    <caption>High-level grammar of FPCore. The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>, as well as base tokens like <a href="#g:decnum">decnum</a>, are defined below. </caption>
+    <caption>High-level grammar of FPCore.
+      The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>,
+      as well as base tokens like <a href="#g:decnum">decnum</a>, are defined below.
+      Grammatical constructions in <span class="sugar">pink</span> are syntactic sugar,
+      and can desugared into the other constructs.</caption>
   </figure>
 
   <aside>
