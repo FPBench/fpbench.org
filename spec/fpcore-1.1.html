@@ -181,7 +181,11 @@
       followed by a sequence of decimal digits that form the numerator, followed by
       a slash (<code>/</code>), followed by a nonzero sequence of decimal digits that
       form the denominator. This definition is implemented for ASCII by the regular expression:
-      <pre class="expr"><code>[+-]?[0-9]+/[0-9]*[1-9][0-9]*</code></pre></dd>
+      <pre class="expr"><code>[+-]?[0-9]+/[0-9]*[1-9][0-9]*</code></pre>
+      Every other kind of numeric literal only expresses rational numbers,
+      so every other type of numeric literal can be considered syntax sugar
+      for rational numbers.
+    </dd>
 
     <dt id="g:symbol">symbol</dt>
     <dd>Any sequence of letters, digits, or characters from the
@@ -459,10 +463,8 @@
         into nested <code>let</code> expressions by the following rule:
       </p>
 
-        <pre style="width: 45ex; margin: 1em auto"><code>(let* ([<var>a</var> <var>a-value</var>] [<var>b</var> <var>b-value</var>] ...) <var>body</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let ([<var>a</var> <var>a-value</var>])
-  (let ([<var>b</var> <var>b-value</var>])
-    ...
-      <var>body</var>))</code></pre>
+        <pre style="width: 45ex; margin: 1em auto"><code>(let* ([<var>var</var> <var>value</var>] <var>rest</var> ...) <var>body</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let ([<var>var</var> <var>value</var>])
+  (let* (<var>rest</var> ...) <var>body</var>))</code></pre>
 
       <p>
         Similarly, <code>while*</code> loops can be desugared
