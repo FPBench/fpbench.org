@@ -76,6 +76,8 @@
   <p>
     Benchmarks use a simple S-expression syntax
     with the following grammar.
+    Grammatical constructions in <span class="sugar">pink</span> are syntactic sugar,
+    and can desugared into the other constructs.</caption>
   </p>
 
   <aside>
@@ -109,9 +111,9 @@
       <dd>( ! <a href="#g:property" title="Rounding context for expression">property</a>* <a href="#g:expr" title="Expression annotated by rounding context">expr</a> )</dd>
 
       <dt id="g:number">number</dt>
+      <dd><a href="#g:rational" title="A rational number">rational</a></dd>
       <dd class="sugar"><a href="#g:decnum" title="A decimal number literal">decnum</a></dd>
       <dd class="sugar"><a href="#g:hexnum" title="A hexadecimal number literal">hexnum</a></dd>
-      <dd><a href="#g:rational" title="A rational number">rational</a></dd>
       <dd class="sugar">( digits <a href="#g:decnum" title="Significand">decnum</a> <a href="#g:decnum" title="Exponent">decnum</a> <a href="#g:decnum" title="Base">decnum</a> )</dd>
 
       <dt id="g:property">property</dt>
@@ -135,8 +137,6 @@
     <caption>High-level grammar of FPCore.
       The tokens <a href="#g:constant">constant</a> and <a href="#g:operation">operation</a>,
       as well as base tokens like <a href="#g:decnum">decnum</a>, are defined below.
-      Grammatical constructions in <span class="sugar">pink</span> are syntactic sugar,
-      and can desugared into the other constructs.</caption>
   </figure>
 
   <aside>
@@ -155,6 +155,17 @@
   </p>
 
   <dl class="code-terms">
+    <dt id="g:rational">rational</dt>
+    <dd>An optional plus (<code>+</code>) or minus (<code>-</code>) sign,
+      followed by a sequence of decimal digits that form the numerator, followed by
+      a slash (<code>/</code>), followed by a nonzero sequence of decimal digits that
+      form the denominator. This definition is implemented for ASCII by the regular expression:
+      <pre class="expr"><code>[+-]?[0-9]+/[0-9]*[1-9][0-9]*</code></pre>
+      Every other kind of numeric literal only expresses rational numbers,
+      so every other type of numeric literal can be considered syntax sugar
+      for rational numbers.
+    </dd>
+
     <dt id="g:decnum">decnum</dt>
     <dd>An optional plus (<code>+</code>) or minus (<code>-</code>)
       sign followed by either a sequence of decimal digits which
@@ -175,17 +186,6 @@
       or minus sign, and a sequence of decimal digits. This definition is implemented
       for ASCII by the following regular expression, which is case-insensitive:
       <pre class="expr"><code>[+-]?0x([0-9a-f]+(\.[0-9a-f]+)?|\.[0-9a-f]+)(p[-+]?[0-9]+)?</code></pre></dd>
-
-    <dt id="g:rational">rational</dt>
-    <dd>An optional plus (<code>+</code>) or minus (<code>-</code>) sign,
-      followed by a sequence of decimal digits that form the numerator, followed by
-      a slash (<code>/</code>), followed by a nonzero sequence of decimal digits that
-      form the denominator. This definition is implemented for ASCII by the regular expression:
-      <pre class="expr"><code>[+-]?[0-9]+/[0-9]*[1-9][0-9]*</code></pre>
-      Every other kind of numeric literal only expresses rational numbers,
-      so every other type of numeric literal can be considered syntax sugar
-      for rational numbers.
-    </dd>
 
     <dt id="g:symbol">symbol</dt>
     <dd>Any sequence of letters, digits, or characters from the
@@ -468,30 +468,18 @@
 
       <p>
         Similarly, <code>while*</code> loops can be desugared
-        into regular, simultaneously-binding <code>while</code> and <code>let</code> expressions:
+        into regular, simultaneously-binding <code>while</code> and <code>let*</code> expressions (which can be further desugared into <code>let</code>s):
       </p>
       <aside>
         Note that desugaring <code>while*</code> loops results in a quadratic increase in the size of the loop initializations and updates.
       </aside>
       <pre style="width: 70ex; margin: 1em auto"><code>(while* <var>cond</var> ([<var>x</var> <var>x-init</var> <var>x-update</var>] [<var>y</var> <var>y-init</var> <var>y-update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(while <var>cond</var>
   ([<var>x</var>
-    (let ([<var>x</var> <var>x-init</var>])
-      (let ([<var>y</var> <var>y-init</var>])
-        ...
-          <var>x</var>))
-    (let ([<var>x</var> <var>x-update</var>])
-      (let ([<var>y</var> <var>y-update</var>])
-        ...
-          <var>x</var>))]
+    (let* ([<var>x</var> <var>x-init</var>] [<var>y</var> <var>y-init</var>] ...) <var>x</var>))
+    (let* ([<var>x</var> <var>x-update</var>] [<var>y</var> <var>y-update</var>] ...) <var>x</var>))]
    [<var>y</var>
-    (let ([<var>x</var> <var>x-init</var>])
-      (let ([<var>y</var> <var>y-init</var>])
-        ...
-          <var>y</var>))
-    (let ([<var>x</var> <var>x-update</var>])
-      (let ([<var>y</var> <var>y-update</var>])
-        ...
-          <var>y</var>))]
+    (let* ([<var>x</var> <var>x-init</var>] [<var>y</var> <var>y-init</var>] ...) <var>y</var>))
+    (let* ([<var>x</var> <var>x-update</var>] [<var>y</var> <var>y-update</var>] ...) <var>y</var>))]
    ...)
   <var>retexpr</var>)</code></pre>
 
