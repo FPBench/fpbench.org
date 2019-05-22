@@ -93,26 +93,35 @@
     synonymous with such a list.
 
     <dl class="code-terms">
-      <dt>(float <var>e</var> <var>s</var>)</dt>
+      <dt>(float <var>e</var> <var>nbits</var>)</dt>
       <dd>An IEEE-754 binary floating-point value with <var>e</var>
-      exponent bits and <var>s</var> significant bits (including the
-      implicit bits). <code>binary64</code> and <code>binary32</code>
-      are common shorthands.</dd>
+      exponent bits and <var>nbits</var> total bits.
+      <code>binary32</code> and <code>binary64</code> are common shorthands,
+      for <code>(float 8 32)</code> and <code>(float 11 64)</code> respectively.</dd>
 
       <dt>(posit <var>es</var> <var>nbits</var>)</dt>
-      <dd>Posits with <var>es</var> exponent bits and <var>nbits</var>
-      total bits. <code>posit8</code>, <code>posit16</code>,
-      <code>posit32</code>, and <code>posit64</code> are common shorthands.</dd>
+      <dd>Posits with <var>es</var> exponent bits and <var>nbits</var> total bits.
+      Common shorthands include <code>posit8</code> for <code>(posit 0 8)</code>,
+      <code>posit16</code> for <code>(posit 1 16)</code>,
+      <code>posit32</code> for <code>(posit 2 32)</code>,
+      and <code>posit64</code> for <code>(posit 3 64)</code>.</dd>
 
-      <dt>(fixed <var>i</var> <var>f</var>)</dt>
-      <dd>Fixed point, with <var>i</var> integer bits and <var>f</var>
-      fractional bits.</dd>
+      <dt>(fixed <var>scale</var> <var>nbits</var>)</dt>
+      <dd>Fixed point, with <var>nbits</var> total bits
+      and a scale factor of 2 ^ <var>scale</var>.
+      One bit will store the sign, using two's complement.
+      For example, (fixed 0 8) can represent the 8-bit integers from -128 to 127,
+      while (fixed -8 8) can represent magnitudes from -128/128 to 127/128 in steps of 1/128.
+      Overflow behavior is determined by the
+      <a href="metadata-1.1.html#p:overflow">overflow</a> property.</dd>
 
       <dt>real</dt>
       <dd>A special precision for arbitrary real numbers, where no rounding takes place.</dd>
 
       <dt>integer</dt>
-      <dd>A special precision for mathematical integers, where no rounding takes place.</dd>
+      <dd>A special precision for mathematical integers, where no rounding takes place.
+      Implementations should assume that all values with this precision are indeed integers:
+      if a non-integer value is computed, implementations can signal an error.</dd>
     </dl>
 
     Where no <code>:precision</code> property is specified,
@@ -126,6 +135,23 @@
     The floating-point rounding mode used for <a href="fpcore-1.1.html#rounding">rounding</a>. Expected to be one of the IEEE 754 modes
     <code>nearestEven</code>, <code>nearestAway</code>, <code>toPositive</code>,
     <code>toNegative</code>, or <code>toZero</code>.
+  </dd>
+
+  <dt id="p:overflow">:overflow</dt>
+  <dd>
+    The rounding behavior to use when a fixed-point value overflows.
+    Possible values include:
+
+    <dl class="code-terms">
+      <dt>infinity</dt>
+      <dd>Produce a floating-point-like infinity on overflow.</dd>
+
+      <dt>clamp</dt>
+      <dd>Clamp the value to the largest representable magnitude.</dd>
+
+      <dt>wrap</dt>
+      <dd>Wrap the significand using two's complement arithmetic.</dd>
+    </dl>
   </dd>
 
   <aside>

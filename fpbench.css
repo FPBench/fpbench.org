@@ -45,7 +45,6 @@ div.warn { background: #fcc; border: 5px solid #f88; padding: 1em;
 .grammar dt:after { content: " ≔" }
 .grammar dd { margin-left: 0; }
 .grammar dd:before { content: "| " }
-.grammar dt + dd:before { content: "  "; white-space: pre; }
 
 a[href*=\#g\:]:before { content: "‹" }
 a[href*=\#g\:]:after { content: "›" }
@@ -152,3 +151,6 @@ ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font
 }
 #help.active { display: block; }
 #help > p:last-child { margin-bottom: 0; }
+
+.sugar { color: #e75480; }
+.sugar a[href*=\#g\:] { color: darkred; }
