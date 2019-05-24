@@ -31,7 +31,8 @@ body > h2 { background: #72be49; padding: .5em; border-radius: 20px; overflow: a
 li { margin: .25em 0; overflow: none; }
 
 .columns { display: flex; flex-direction: row; justify-content: space-around; margin: 1em 0; }
-.columns ul { padding: 0; list-style: none; font-size: 120%; }
+.columns h2 { margin-bottom: 0; }
+.columns ul { padding: 0; list-style: none; font-size: 120%; margin: 0; }
 /* Logos on contributors page */
 .columns .logo { width: 125px; height: 125px; margin-top: 1em }
 
