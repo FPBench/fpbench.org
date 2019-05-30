@@ -152,5 +152,3 @@ ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font
 #help.active { display: block; }
 #help > p:last-child { margin-bottom: 0; }
 
-.sugar { color: #e75480; }
-.sugar a[href*=\#g\:] { color: darkred; }
