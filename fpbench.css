@@ -47,6 +47,7 @@ h1 { font-size: 133%; font-weight: bold; margin: 3em 0 1em 0; }
 h2 { font-size: 122%; font-weight: bold; margin: 2em 0 .5em 0; }
 h3 { font-size: 100%; font-weight: bold; margin: 1em 0 .25em 0; }
 pre, code { font-size: 88%; }
+pre { overflow: auto; background: #eeeeef; padding: .5ex; }
 
 data { font-family: mono; }
 
@@ -104,8 +105,8 @@ ol.timeline li { margin-bottom: 1em; }
 
 ol.papers-list { list-style: inside none; padding: 0; }
 ol.papers-list li { margin-bottom: 1em; line-height: 1.5; }
-ol.papers-list header { margin-bottom: .25em; font-size: 85%; }
-ol.papers-list header h3 { font-size: 120%; margin: 0; font-weight: normal; font-style: italic; }
+.paper { margin-bottom: .25em; font-size: 85%; }
+.paper h3 { font-size: 120%; margin: 0; font-weight: normal; font-style: italic; }
 
 #benchmark-search #search { box-sizing: border-box; width: 100%; }
 #benchmark-search .search-container { position: relative; }
