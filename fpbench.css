@@ -14,24 +14,30 @@ body > header h1 { font-size: 150%; margin: 0; line-height: 1.2121; }
 @media screen and (max-width: 600px) {
     body > header img { height: 50px; margin: 0 .5em; }
     body > header h1 { font-size: 120%; padding-top: 0; }
+    html { padding: 0 1ex; }
 }
 body > header p { margin: 0; }
 body > header ul { list-style: outside none; padding: 0; margin: .25em 0 0; }
 body > header li { display: inline; margin-right: 1em; }
 body > header a[href] { color: #2a461b; }
 body > header a[href]:hover { color: #3f6828; }
+body > header a[href]:visited { color: #2a461b; }
 
 a[href] { color: #3465a4; text-decoration: none; }
 a[href]:hover { color: #204a87; text-decoration: underline; }
 a[href]:visited { color: #5c3566 }
 a[href]:active { color: #4e9a06 }
 
-body > h2 { background: #72be49; padding: .5em; border-radius: 20px; overflow: auto; }
+body > h2 { display: inline-block; }
+body > h2:after {
+    content: " "; display: block; position: relative; top: -5px;
+    background: #72be49; border-radius: 0 0 5px 5px; height: 7px;
+}
 
 li { margin: .25em 0; overflow: none; }
 
-.columns { display: flex; flex-direction: row; justify-content: space-around; margin: 1em 0; }
-.columns h2 { margin-bottom: 0; }
+.columns { display: flex; flex-direction: row; justify-content: space-around; margin: 1.35em 0; }
+.columns h2 { margin: 0; }
 .columns ul { padding: 0; list-style: none; font-size: 120%; margin: 0; }
 /* Logos on contributors page */
 .columns .logo { width: 125px; height: 125px; margin-top: 1em }
