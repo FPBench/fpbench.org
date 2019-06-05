@@ -21,139 +21,144 @@
   </header>
 
 
-  <p><a href=".">FPBench</a> includes a filtering tool, an FPCore
-  reference interpreter, an accuracy measurement tool, and an exporter
-  to C. It also includes the <a href="fpimp.html">FPImp language</a>
-  for translating imperative code to FPCore.</p>
+  <p><a href=".">FPBench</a> develops two compiler tools for FPCore
+  programs: an <a href="#export">exporter</a> and
+  a <a href="#desugar">desugaring tool</a>. Both are
+  <a href="https://github.com/FPBench/FPBench">available on Github</a>.</p>
 
-  <h2 id="filter">Filtering FPCore benchmarks</h2>
+  <aside>
+    FPBench also provides some <a href="internal.html">internal
+    tools</a>, which are documented but unsupported.
+  </aside>
 
-  <p>
-    The filter script is located in the <kbd>tools</kbd> directory of
-    the FPBench <a href="https://github.com/FPBench/FPBench">codebase</a>.
-  </p>
 
-  <p>The filter script reads a sequence of FPCore benchmarks from the
-  standard input and writes to standard output those that satisfy a
-  predicate:</p>
-
-  <pre class="shell">racket tools/filter.rkt <var>field</var> <var>value</var> &lt; <var>file.fpcore</var></pre>
+  <h2 id="export">Exporting FPCores to other languages</h2>
 
   <p>
-    The <kbd>-v</kbd> or <kbd>--invert</kbd> flag can be passed before
-    the <var>field</var> to invert the predicate.
+    The FPBench exporter compiles FPCore programs to another language.
+    The exporter allows FPBench's benchmarks to be used by tools with
+    a custom input format. The exporter is invoked like so:
   </p>
 
-  <p>The supported fields are:</p>
+  <pre class="shell">racket tools/export.rkt <var>input</var>.fpcore <var>output</var>.<var>lang</var></pre>
+
+  <p>For example, to compile <code>salsa.fpcore</code> to C, run:</p>
+
+  <pre class="shell">racket tools/export.rkt salsa.fpcore salsa.c</pre>
+
+  <p>The exporter infers the output language from the file extension,
+    and will signal an error if the extension is unknown.
+    The <kbd>--lang</kbd> flag can be used to override the file
+    extension.</p>
+
+  <p>Supported languages include:</p>
 
   <dl class="code-terms">
-    <dt>cites</dt>
-    <dd>Allows FPCore benchmarks whose <code>:cite</code> field is a list that includes the <var>value</var>.</dd>
-    <dt>operator</dt>
-    <dd>Allows FPCore benchmarks that use the operator given as
-    the <var>value</var>. Best used by inverting the predicate to
-    filter out benchmarks that use unsupported
-    operations. <code>if</code>, <code>while</code>,
-    and <code>let</code> are considered
-    operators. <code>operation</code> is a synonym
-    for <code>operator</code></dd>
-    <dt>operators</dt>
-    <dd>Allows the FPCore benchmark to contain only operators from a
-    list, given by providing multiple <var>value</var> arguments. Note
-    that while both <code>operator</code> and <code>operators</code>
-    examine the operators used in a benchmark, they filter by fairly
-    different predicates.</dd>
-    <dt><var>property</var></dt>
-    <dd>Allows FPCore benchmarks whose <var>property</var> property is specified to be the given <var>value</var>, or, if no <var>value</var> is provided, that some value is specified.</dd>
+    <dt>c</dt>
+    <dd>C, using the C 99 version of the language.</dd>
+    <dt>go</dt>
+    <dd>Go, using version 1.12 of the language.</dd>
+    <dt>js</dt>
+    <dd>JavaScript, specifically as standardized in ECMAScript Harmony.</dd>
+    <!-- The rest of these are support for specific FP tools -->
+    <dt>fptaylor</dt>
+    <dd>The input format for the <a href="https://github.com/soarlab/FPTaylor">FPTaylor</a> error estimation tool.</dd>
+    <dt>gappa</dt>
+    <dd>The input format for the <a href="http://gappa.gforge.inria.fr/">Gappa</a> verification tool.</dd>
+    <dt>scala</dt>
+    <dd>Scala, or more specifically the input format for the <a href="https://github.com/malyzajko/daisy">Daisy</a> compiler.</dd>
+    <dt>sollya</dt>
+    <dd>The input format for the <a href="http://sollya.gforge.inria.fr/">Sollya</a> tool.</dd>
+    <dt>smt2</dt>
+    <dd>SMT-LIB2 using the floating-point theory.</dd>
+    <dt>wls</dt>
+    <dd>Wolfram Language, for use in <a href="http://www.wolfram.com/mathematica/">Mathematica</a>.</dd>
   </dl>
 
-  <p>The filter script's intended use is in selecting a supported
-    subset of the FPBench benchmark suite. For example, to select all
-    benchmarks that do not use loops or conditionals:</p>
-
-  <pre class="shell">cat benchmarks/*.fpcore |
-  racket tools/filter.rkt --invert operator while |
-  racket tools/filter.rkt --invert operator if</pre>
-  
-  <h2 id="fpcore">The FPCore reference interpreter</h2>
-  
-  <p>
-    The reference interpreter is located in the <kbd>tools/</kbd>
-    directory of the FPBench <a href="https://github.com/FPBench/FPBench">codebase</a>,
-    and can be run with:
-  </p>
-
-  <pre class="shell">racket tools/fpcore.rkt <var>arguments ...</var> &lt; <var>file.fpcore</var></pre>
-
-  <p>The <var>arguments</var> in this case are real numbers using the
-  standard floating-point <a href="spec/fpcore-1.0.html#g:number">number</a>
-  syntax. For example, running:</p>
-
-  <pre class="shell">racket tools/fpcore.rkt 1.0 2.0
-(FPCore (x y) (+ x y))</pre>
-  
-  <p>produces output <code>3.0</code>.</p>
-
-  <p>The <code>fma</code>, <code>expm1</code>, <code>log1p</code>, <code>isnormal</code>, <code>signbit</code>, <code>fmod</code>, <code>remainder</code>, <code>copysign</code>, and <code>nearbyint</code> functions are not yet supported by the reference interpreter.</p>
-
-  <h2 id="sample-accuracy">Statistical Accuracy Measurement</h2>
-
-  <p>
-    FPBench provides a tool to measure the accuracy of FPCore
-    programs. This tool serves as a reference implementation for the
-    <a href="spec/measures-1.0.html">Measures 1.0</a> standard, and
-    uses <i>statistical</i> techniques to
-    measure <i>average</i> <i>forward</i> error. Scaling and
-    non-scaling error are both supported.
-  </p>
-
-  <p>To measure the accuracy of an FPCore program, run:</p>
-
-  <pre class="shell">racket tools/sample-accuracy.rkt &lt; <var>file.fpcore</var></pre>
-
-  <p>The accuracy of each FPCore expression in the file will be
-  printed to the screen. The accuracy measure and measurement
-  technique can be configured:</p>
+  <p>The exporter also supports additional, language-dependent flags, including:</p>
 
   <dl class="code-terms">
-    <dt>--measure</dt>
-    <dd>Configures the pointwise error measure used; it may
-    be <kbd>abs</kbd> for absolute error, <kbd>rel</kbd> for relative
-    error, <kbd>ulp</kbd> for ULPs of error, or <kbd>bit</kbd> for
-    bits of error (the default).</dd>
-
-    <dt>--precision</dt>
-    <dd>How many bits of precision to use to compute the ground truth
-    (the default is 2048). Using more bits is slower but computes a
-    more accurate ground truth and thus produces more-accurate
-    results.</dd>
+    <dt>--runtime</dt>
+    <dd>For <kbd>js</kbd> export, a library to invoke mathematical operations on instead of <code>Math</code>.</dd>
+    <dt>--rel-error</dt>
+    <dd>For <kbd>gappa</kbd> export, produce expressions for relative instead of absolute error.</dd>
+    <dt>--split-or</dt>
+    <dd>For <kbd>gappa</kbd> export, convert preconditions to DNF and create separate Gappa expressions for all conjunctions.</dd>
+    <dt>--subexprs</dt>
+    <dd>For <kbd>gappa</kbd> export, create Gappa expressions for all subexpressions.</dd>
   </dl>
-  
-  <h2 id="core2c">Export to C</h2>
-  
+
+  <p>The argument <kbd>--</kbd> can be used in place of the input or
+  output file names to use standard input and output. When outputting
+  to standard out, the <kbd>--lang</kbd> flag is necessary to specify
+  the output language.</p>
+
+  <h2 id="desugar">Applying transformation to FPCores</h2>
+
   <p>
-    The FPCore exporter to C is located in the <kbd>tools/</kbd>
-    directory of the FPBench <a href="https://github.com/FPBench/FPBench">codebase</a>,
-    and can be run with:
+    The FPBench desugaring tool applies a variety of transformations
+    to FPCore programs, such as common subexpression elimination,
+    precondition simplification, and de- and resugaring. The
+    desugaring tool is invoked like so:
   </p>
 
-  <pre class="shell">racket tools/core2c.rkt &lt; <var>file.fpcore</var> &gt; <var>file.c</var></pre>
+  <pre class="shell">racket tools/desugar.rkt <var>args</var> ... <var>input</var>.fpcore <var>output</var>.fpcore</pre>
 
-  <p>The <var>arguments</var> in this case are real numbers using the
-  standard floating-point <a href="spec/fpcore-1.0.html#g:number">number</a>
-  syntax. For example, running:</p>
+  <p>The list <var>args</var> of arguments names a list of
+  transformations, such as:</p>
 
-  <pre class="shell">racket tools/core2c.rkt &gt; example.c
-(FPCore (x y) (+ x y))</pre>
-  
-  <p>produces the C code:</p>
+  <dl class="code-terms">
+    <dt>--unroll <var>N</var></dt>
+    <dd>Unroll the first <var>N</var> iterations of each loop. Each
+      iteration consists of a <code>let</code> or <code>let*</code> to
+      bind initial values and an <code>if</code> to check the conditions.
+      This sound transformation is frequently combined with the
+      unsound <kbd>--skip-loops</kbd> to simulate loops by their
+      first few iterations.</dd>
 
-  <pre>#include &lt;math.h&gt;
+    <dt>--skip-loops</dt>
+    <dd>Replaces a <code>while</code> loop with a
+    simple <code>let</code> which binds the initial values and
+    executes the body (as if the loop executed zero
+    time). <code>while*</code> loops are likewise transformed
+    into <code>let*</code>.</dd>
 
-double ex0(double x, double y) {
-	return (x + y);
-}
-</pre>
+    <dt>--precondition-ranges</dt>
+    <dd>Weakens the precondition to a conjunction (one conjunct per
+    argument) of a disjunction of ranges. The precondition is
+    guaranteed to be weaker. This transformation is useful for
+    exporting to a language that only allows ranges as preconditions.</dd>
+
+    <dt>--precondition-range</dt>
+    <dd>Like <code>--precondition-ranges</code>, but further weakens
+    to precondition to a conjunction of single ranges for each variable.</dd>
+
+    <dt>--expand-let*</dt>
+    <dd>Expands each <code>let*</code> to a series of
+    nested <code>let</code> expressions.</dd>
+
+    <dt>--expand-while*</dt>
+    <dd>Expands each <code>while*</code> to a <code>while</code> loop
+    with nested <code>let*</code> expressions.</dd>
+
+    <dt>--cse</dt>
+    <dd>Lifts each common subexpression to an intermediate variable
+    bound by a <code>let*</code> expression.</dd>
+
+    <dt>--rational-constants</dt>
+    <dd>Converts
+    every <a href="spec/fpcore-1.1.html#g:number">number</a> to
+    a <a href="spec/fpcore-1.1.html#g:rational">rational</a>.</dd>
+  </dl>
+
+  <p>The transformations which are applied in order (left to right) to
+  each FPCore expression in the input file. The ordering is especially
+  important for pairs of operations such as <kbd>--unroll</kbd>
+  and <kbd>--skip-loops</kbd>.</p>
+
+  <p>Like for the exporter, the argument <kbd>--</kbd> can be used in
+  place of the input or output file names to use standard input and
+  output.</p>
 
 </body>
 </html>
