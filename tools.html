@@ -23,7 +23,7 @@
 
   <p><a href=".">FPBench</a> develops two compiler tools for FPCore
   programs: an <a href="#export">exporter</a> and
-  a <a href="#desugar">desugaring tool</a>. Both are
+  a <a href="#transform">transformation tool</a>. Both are
   <a href="https://github.com/FPBench/FPBench">available on Github</a>.</p>
 
   <aside>
@@ -40,11 +40,11 @@
     a custom input format. The exporter is invoked like so:
   </p>
 
-  <pre class="shell">racket tools/export.rkt <var>input</var>.fpcore <var>output</var>.<var>lang</var></pre>
+  <pre class="shell">racket export.rkt <var>input</var>.fpcore <var>output</var>.<var>lang</var></pre>
 
   <p>For example, to compile <code>salsa.fpcore</code> to C, run:</p>
 
-  <pre class="shell">racket tools/export.rkt salsa.fpcore salsa.c</pre>
+  <pre class="shell">racket export.rkt salsa.fpcore salsa.c</pre>
 
   <p>The exporter infers the output language from the file extension,
     and will signal an error if the extension is unknown.
@@ -78,14 +78,22 @@
   <p>The exporter also supports additional, language-dependent flags, including:</p>
 
   <dl class="code-terms">
+    <dt>--bare</dt>
+    <dd>For <kbd>c</kbd>, <kbd>go</kbd>, and <kbd>scala</kbd> export, skip the file header and footer.</dd>
+    <dt>--namespace</dt>
+    <dd>For <kbd>go</kbd> and <kbd>scala</kbd> export, the name of the top-level object or package name.</dd>
     <dt>--runtime</dt>
     <dd>For <kbd>js</kbd> export, a library to invoke mathematical operations on instead of <code>Math</code>.</dd>
     <dt>--rel-error</dt>
     <dd>For <kbd>gappa</kbd> export, produce expressions for relative instead of absolute error.</dd>
+    <dt>--scale</dt>
+    <dd>For <kbd>fptaylor</kbd> export, the scale factor for operations which are not correctly rounded.</dd>
+    <!--
     <dt>--split-or</dt>
     <dd>For <kbd>gappa</kbd> export, convert preconditions to DNF and create separate Gappa expressions for all conjunctions.</dd>
     <dt>--subexprs</dt>
     <dd>For <kbd>gappa</kbd> export, create Gappa expressions for all subexpressions.</dd>
+    -->
   </dl>
 
   <p>The argument <kbd>-</kbd> can be used in place of the input or
@@ -93,16 +101,16 @@
   to standard out, the <kbd>--lang</kbd> flag is necessary to specify
   the output language.</p>
 
-  <h2 id="desugar">Applying transformation to FPCores</h2>
+  <h2 id="transform">Applying transformations to FPCores</h2>
 
   <p>
-    The FPBench desugaring tool applies a variety of transformations
+    The FPBench transformation tool applies a variety of transformations
     to FPCore programs, such as common subexpression elimination,
     precondition simplification, and de- and resugaring. The
-    desugaring tool is invoked like so:
+    transformation tool is invoked like so:
   </p>
 
-  <pre class="shell">racket tools/desugar.rkt <var>args</var> ... <var>input</var>.fpcore <var>output</var>.fpcore</pre>
+  <pre class="shell">racket transform.rkt <var>args</var> ... <var>input</var>.fpcore <var>output</var>.fpcore</pre>
 
   <p>The list <var>args</var> of arguments names a list of
   transformations, such as:</p>
