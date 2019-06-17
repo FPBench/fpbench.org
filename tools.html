@@ -30,6 +30,32 @@
     FPBench also provides some <a href="internal.html">internal
     tools</a>, which are documented but unsupported.
   </aside>
+  
+  <h2>Installing the FPBench tools</h2>
+
+  <p>
+    The FPBench tools require <a href="https://racket-lang.org">Racket</a>.
+    Use the <a href="http://download.racket-lang.org/racket-v7.3.html">official
+    installer</a> to install Racket, or use distro-provided packages
+    provided they are version 7.0 or later of Racket (earlier versions
+    are not supported).
+  </p>
+
+  <p>
+    Test that Racket is installed correctly and has a correct version:
+  </p>
+
+  <pre class="shell">racket
+Welcome to Racket v7.3.
+> (exit)</pre>
+  
+  <p>Now that Racket is
+  installed, <a href="https://github.com/FPBench/FPBench">download</a>
+  the FPBench tools, and enter the downloaded directory. Run:</p>
+  
+  <pre class="shell">make setup</pre>
+
+  <p>This byte-compiles the FPBench tools, making them fast to run.</p>
 
 
   <h2 id="export">Exporting FPCores to other languages</h2>
