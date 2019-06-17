@@ -2,14 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <title>FPBench Tools</title>
+  <title>FPBench Internal Tools</title>
   <link rel="stylesheet" type="text/css" href="fpbench.css">
 </head>
 <body>
   <header>
     <a href='.' style='color: black; text-decoration: none;'>
       <img src='img/logo.png' height='150' alt='FPBench Logo' />
-      <h1>FPBench Tools</h1>
+      <h1>FPBench Internal Tools</h1>
     </a>
     <p>Interpreters and exporters for FPCore</p>
     <ul>
@@ -128,32 +128,6 @@
     more accurate ground truth and thus produces more-accurate
     results.</dd>
   </dl>
-  
-  <h2 id="core2c">Export to C</h2>
-  
-  <p>
-    The FPCore exporter to C is located in the <kbd>tools/</kbd>
-    directory of the FPBench <a href="https://github.com/FPBench/FPBench">codebase</a>,
-    and can be run with:
-  </p>
-
-  <pre class="shell">racket tools/core2c.rkt &lt; <var>file.fpcore</var> &gt; <var>file.c</var></pre>
-
-  <p>The <var>arguments</var> in this case are real numbers using the
-  standard floating-point <a href="spec/fpcore-1.0.html#g:number">number</a>
-  syntax. For example, running:</p>
-
-  <pre class="shell">racket tools/core2c.rkt &gt; example.c
-(FPCore (x y) (+ x y))</pre>
-  
-  <p>produces the C code:</p>
-
-  <pre>#include &lt;math.h&gt;
-
-double ex0(double x, double y) {
-	return (x + y);
-}
-</pre>
 
 </body>
 </html>
