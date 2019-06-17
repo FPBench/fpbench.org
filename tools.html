@@ -117,8 +117,6 @@ Welcome to Racket v7.3.
     <!--
     <dt>--split-or</dt>
     <dd>For <kbd>gappa</kbd> export, convert preconditions to DNF and create separate Gappa expressions for all conjunctions.</dd>
-    <dt>--subexprs</dt>
-    <dd>For <kbd>gappa</kbd> export, create Gappa expressions for all subexpressions.</dd>
     -->
   </dl>
 
@@ -183,6 +181,10 @@ Welcome to Racket v7.3.
     <dd>Converts
     every <a href="spec/fpcore-1.1.html#g:number">number</a> to
     a <a href="spec/fpcore-1.1.html#g:rational">rational</a>.</dd>
+
+    <dt>--subexprs</dt>
+    <dd>Converts each FPCore into multiple FPCores, one for each
+    subexpression in the original.</dd>
   </dl>
 
   <p>The transformations which are applied in order (left to right) to
