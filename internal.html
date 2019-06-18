@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench Internal Tools</title>
+  <link rel="stylesheet" type="text/css" href="fpbench.css">
+</head>
+<body>
+  <header>
+    <a href='.' style='color: black; text-decoration: none;'>
+      <img src='img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>FPBench Internal Tools</h1>
+    </a>
+    <p>Interpreters and exporters for FPCore</p>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="spec/index.html">Standards</a></li>
+      <li><a href="tools.html">Tools</a></li>
+    </ul>
+  </header>
+
+
+  <p><a href=".">FPBench</a> includes a filtering tool, an FPCore
+  reference interpreter, an accuracy measurement tool, and an exporter
+  to C.</p>
+
+  <h2 id="filter">Filtering FPCore benchmarks</h2>
+
+  <p>
+    The filter script is located in the <kbd>tools</kbd> directory of
+    the FPBench <a href="https://github.com/FPBench/FPBench">codebase</a>.
+  </p>
+
+  <p>The filter script reads a sequence of FPCore benchmarks from the
+  standard input and writes to standard output those that satisfy a
+  predicate:</p>
+
+  <pre class="shell">racket tools/filter.rkt <var>field</var> <var>value</var> &lt; <var>file.fpcore</var></pre>
+
+  <p>
+    The <kbd>-v</kbd> or <kbd>--invert</kbd> flag can be passed before
+    the <var>field</var> to invert the predicate.
+  </p>
+
+  <p>The supported fields are:</p>
+
+  <dl class="code-terms">
+    <dt>cites</dt>
+    <dd>Allows FPCore benchmarks whose <code>:cite</code> field is a list that includes the <var>value</var>.</dd>
+    <dt>operator</dt>
+    <dd>Allows FPCore benchmarks that use the operator given as
+    the <var>value</var>. Best used by inverting the predicate to
+    filter out benchmarks that use unsupported
+    operations. <code>if</code>, <code>while</code>,
+    and <code>let</code> are considered
+    operators. <code>operation</code> is a synonym
+    for <code>operator</code></dd>
+    <dt>operators</dt>
+    <dd>Allows the FPCore benchmark to contain only operators from a
+    list, given by providing multiple <var>value</var> arguments. Note
+    that while both <code>operator</code> and <code>operators</code>
+    examine the operators used in a benchmark, they filter by fairly
+    different predicates.</dd>
+    <dt><var>property</var></dt>
+    <dd>Allows FPCore benchmarks whose <var>property</var> property is specified to be the given <var>value</var>, or, if no <var>value</var> is provided, that some value is specified.</dd>
+  </dl>
+
+  <p>The filter script's intended use is in selecting a supported
+    subset of the FPBench benchmark suite. For example, to select all
+    benchmarks that do not use loops or conditionals:</p>
+
+  <pre class="shell">cat benchmarks/*.fpcore |
+  racket tools/filter.rkt --invert operator while |
+  racket tools/filter.rkt --invert operator if</pre>
+  
+  <h2 id="fpcore">The FPCore reference interpreter</h2>
+  
+  <p>
+    The reference interpreter is located in the <kbd>tools/</kbd>
+    directory of the FPBench <a href="https://github.com/FPBench/FPBench">codebase</a>,
+    and can be run with:
+  </p>
+
+  <pre class="shell">racket tools/fpcore.rkt <var>arguments ...</var> &lt; <var>file.fpcore</var></pre>
+
+  <p>The <var>arguments</var> in this case are real numbers using the
+  standard floating-point <a href="spec/fpcore-1.0.html#g:number">number</a>
+  syntax. For example, running:</p>
+
+  <pre class="shell">racket tools/fpcore.rkt 1.0 2.0
+(FPCore (x y) (+ x y))</pre>
+  
+  <p>produces output <code>3.0</code>.</p>
+
+  <p>The <code>fma</code>, <code>expm1</code>, <code>log1p</code>, <code>isnormal</code>, <code>signbit</code>, <code>fmod</code>, <code>remainder</code>, <code>copysign</code>, and <code>nearbyint</code> functions are not yet supported by the reference interpreter.</p>
+
+  <h2 id="sample-accuracy">Statistical Accuracy Measurement</h2>
+
+  <p>
+    FPBench provides a tool to measure the accuracy of FPCore
+    programs. This tool serves as a reference implementation for the
+    <a href="spec/measures-1.0.html">Measures 1.0</a> standard, and
+    uses <i>statistical</i> techniques to
+    measure <i>average</i> <i>forward</i> error. Scaling and
+    non-scaling error are both supported.
+  </p>
+
+  <p>To measure the accuracy of an FPCore program, run:</p>
+
+  <pre class="shell">racket tools/sample-accuracy.rkt &lt; <var>file.fpcore</var></pre>
+
+  <p>The accuracy of each FPCore expression in the file will be
+  printed to the screen. The accuracy measure and measurement
+  technique can be configured:</p>
+
+  <dl class="code-terms">
+    <dt>--measure</dt>
+    <dd>Configures the pointwise error measure used; it may
+    be <kbd>abs</kbd> for absolute error, <kbd>rel</kbd> for relative
+    error, <kbd>ulp</kbd> for ULPs of error, or <kbd>bit</kbd> for
+    bits of error (the default).</dd>
+
+    <dt>--precision</dt>
+    <dd>How many bits of precision to use to compute the ground truth
+    (the default is 2048). Using more bits is slower but computes a
+    more accurate ground truth and thus produces more-accurate
+    results.</dd>
+  </dl>
+
+</body>
+</html>

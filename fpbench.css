@@ -1,41 +1,55 @@
 body {
-  min-width: 400px; max-width: 800px;
-  margin: 30px auto;
-  font-family: Helvetica, Arial, sans;
-  font-size: 20px;
-  line-heigth: 1.25;
+  min-width: 400px; max-width: 65ex;
+  margin: 0 auto; line-height: 1.5;
+  font-family: Helvetica, Arial, sans; font-size: 20px;
 }
 
-body > header { overflow: auto; margin-bottom: 3rem; font-size: 100; }
-body > header img { float: left; margin-right: 1.5em; height: 100px; }
+body > header {
+    overflow: auto; margin-bottom: 3rem; font-size: 100%;
+    background: #72be49; padding: 1em;
+    border-radius: 0 0 20px 20px;
+}
+body > header img { float: left; margin-right: 1em; height: 100px; }
 body > header h1 { font-size: 150%; margin: 0; line-height: 1.2121; }
 @media screen and (max-width: 600px) {
     body > header img { height: 50px; margin: 0 .5em; }
     body > header h1 { font-size: 120%; padding-top: 0; }
+    html { padding: 0 1ex; }
 }
 body > header p { margin: 0; }
 body > header ul { list-style: outside none; padding: 0; margin: .25em 0 0; }
 body > header li { display: inline; margin-right: 1em; }
+body > header a[href] { color: #2a461b; }
+body > header a[href]:hover { color: #3f6828; }
+body > header a[href]:visited { color: #2a461b; }
 
 a[href] { color: #3465a4; text-decoration: none; }
 a[href]:hover { color: #204a87; text-decoration: underline; }
 a[href]:visited { color: #5c3566 }
 a[href]:active { color: #4e9a06 }
 
+body > h2 { display: inline-block; }
+body > h2:after {
+    content: " "; display: block; position: relative; top: -5px;
+    background: #72be49; border-radius: 0 0 5px 5px; height: 7px;
+}
+
 li { margin: .25em 0; overflow: none; }
 
-nav h2 { font-size: 100%; font-weight: bold; margin: 0; border-bottom: 1px solid gray; }
-nav li { font-size: 100%; list-style: none; }
-nav ul { padding: 0; }
-.columns { display: flex; flex-direction: row; justify-content: space-around; margin: 1em 0; }
+.columns { display: flex; flex-direction: row; justify-content: space-around; margin: 1.35em 0; }
+.columns h2 { margin: 0; }
+.columns ul { padding: 0; list-style: none; font-size: 120%; margin: 0; }
+/* Logos on contributors page */
+.columns .logo { width: 125px; height: 125px; margin-top: 1em }
 
 p { margin: 0 0 1em 0; }
 h1 { font-size: 133%; font-weight: bold; margin: 3em 0 1em 0; }
 h2 { font-size: 122%; font-weight: bold; margin: 2em 0 .5em 0; }
 h3 { font-size: 100%; font-weight: bold; margin: 1em 0 .25em 0; }
 pre, code { font-size: 88%; }
+pre { overflow: auto; background: #eeeeef; padding: .5ex; }
 
-data.suite-name { font-family: mono; }
+data { font-family: mono; }
 
 div.warn { background: #fcc; border: 5px solid #f88; padding: 1em;
            text-align: center; font-size: 120%; }
@@ -65,6 +79,9 @@ aside {
 dl dt { font-weight: bold; margin-top: 1em; }
 dl { margin: 1em 0; }
 
+.pitch { font-size: 135%; }
+.pitch iframe { margin: 0 auto; display: block; border: 1px solid gray; }
+
 dl.code-terms dt { font-family: mono; font-size: 88%; }
 table.code-terms { width: 100%; table-layout: fixed; margin: 1em 0; }
 table.code-terms col { width: 20%; }
@@ -80,19 +97,15 @@ table.counts th, table.counts td { padding: .5ex 0; }
 
 ol.timeline, ol.papers-list { margin: 0; }
 
-ol.timeline { list-style: none; padding: 0 0 0 5em; }
-ol time {
-    float: left; width: 4.5em; margin-left: -5em; clear: left;
-    text-align: right; color: gray;
-}
+ol.timeline { list-style: none; padding: 0; }
+ol.timeline time { color: gray; }
+ol.timeline time:after { content: ": "; }
 ol.timeline li { margin-bottom: 1em; }
-
-.columns .logo { width: 125px; height: 125px; margin-top: 1em }
 
 ol.papers-list { list-style: inside none; padding: 0; }
 ol.papers-list li { margin-bottom: 1em; line-height: 1.5; }
-ol.papers-list header { margin-bottom: .25em; }
-ol.papers-list header h3 { font-size: 110%; margin: 0; font-weight: normal; font-style: italic; }
+.paper { margin-bottom: .25em; font-size: 85%; }
+.paper h3 { font-size: 120%; margin: 0; font-weight: normal; font-style: italic; }
 
 #benchmark-search #search { box-sizing: border-box; width: 100%; }
 #benchmark-search .search-container { position: relative; }
