@@ -468,7 +468,7 @@
       <aside>
         Note that desugaring <code>while*</code> loops results in a quadratic increase in the size of the loop initializations and updates.
       </aside>
-      <pre style="width: 70ex; margin: 1em auto"><code>(while* <var>cond</var> ([<var>x</var> <var>x-init</var> <var>x-update</var>] [<var>y</var> <var>y-init</var> <var>y-update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(while <var>cond</var>
+      <pre style="width: 64ex; margin: 1em auto"><code>(while* <var>cond</var> ([<var>x</var> <var>x-init</var> <var>x-update</var>] [<var>y</var> <var>y-init</var> <var>y-update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(while <var>cond</var>
   ([<var>x</var>
     (let* ([<var>x</var> <var>x-init</var>] [<var>y</var> <var>y-init</var>] ...) <var>x</var>))
     (let* ([<var>x</var> <var>x-update</var>] [<var>y</var> <var>y-update</var>] ...) <var>x</var>))]
