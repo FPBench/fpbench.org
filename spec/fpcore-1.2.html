@@ -2,7 +2,7 @@
 <html lang="en_US">
 <head>
   <meta charset="utf-8"/>
-  <title>FPBench FPCore 1.1</title>
+  <title>FPBench FPCore 1.2</title>
   <link rel="stylesheet" type="text/css" href="../fpbench.css">
 </head>
 <body class="gutter">
@@ -10,7 +10,7 @@
 <header>
     <a href='..' style='color: black; text-decoration: none;'>
       <img src='../img/logo.png' height='150' alt='FPBench Logo' />
-      <h1>FPCore 1.1</h1>
+      <h1>FPCore 1.2</h1>
     </a>
     <p>A common format for floating-point computations</p>
     <ul>
@@ -23,7 +23,7 @@
 
 <main>
 <header>
-  <h1>FPBench 1.1 standards</h1>
+  <h1>FPBench 1.2 standards</h1>
 
   <p>
     <a href="../">FPBench</a> is a standard benchmark suite for the
@@ -33,10 +33,10 @@
   </p>
 
   <ol>
-    <li><a href="fpcore-1.1.html">The FPCore input format</a></li>
-    <li><a href="examples-1.1.html">FPCore example inputs</a></li>
-    <li><a href="metadata-1.1.html">Metadata for FPCore benchmarks</a></li>
-    <li><a href="measures-1.1.html">Standard measures of error</a></li>
+    <li><a href="fpcore-1.2.html">The FPCore input format</a></li>
+    <li><a href="examples-1.2.html">FPCore example inputs</a></li>
+    <li><a href="metadata-1.2.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-1.2.html">Standard measures of error</a></li>
   </ol>
 </header>
 
@@ -102,7 +102,9 @@
       <dd>( <a href="#g:operation" title="Mathematical operation to perform">operation</a> <a href="#g:expr" title="Inputs to operation">expr</a>+ )</dd>
       <dd>( if <a href="#g:expr" title="Conditional">expr</a> <a href="#g:expr" title="Branch if condition is true">expr</a> <a href="#g:expr" title="Branch if condition is false">expr</a> )</dd>
       <dd>( let ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
+      <dd>( let* ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
       <dd>( while <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
+      <dd>( while* <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
       <dd>( cast <a href="#g:expr" title="Expression to round with current rounding context">expr</a> )</dd>
       <dd>( ! <a href="#g:property" title="Rounding context for expression">property</a>* <a href="#g:expr" title="Expression annotated by rounding context">expr</a> )</dd>
 
@@ -113,21 +115,21 @@
       <dd>( digits <a href="#g:decnum" title="Significand">decnum</a> <a href="#g:decnum" title="Exponent">decnum</a> <a href="#g:decnum" title="Base">decnum</a> )</dd>
 
       <dt id="g:property">property</dt>
-      <dd>:<a href="fpcore-1.1.html#g:symbol" title="Property name">symbol</a> <a href="#g:data" title="Property value">data</a></dd>
+      <dd>:<a href="fpcore-1.2.html#g:symbol" title="Property name">symbol</a> <a href="#g:data" title="Property value">data</a></dd>
 
       <aside>
         Note that metadata can contain
-        arbitrary <a href="fpcore-1.1.html#g:data">data</a>, including
+        arbitrary <a href="fpcore-1.2.html#g:data">data</a>, including
         expressions. Implementations may want to special-case
         properties whose values are expressions, to simplify support
-        for <a href="metadata-1.1.html#p:pre">:pre</a>
-        and <a href="metadata-1.1.html#p:spec">:spec</a>.
+        for <a href="metadata-1.2.html#p:pre">:pre</a>
+        and <a href="metadata-1.2.html#p:spec">:spec</a>.
       </aside>
 
       <dt id="g:data">data</dt>
-      <dd><a href="fpcore-1.1.html#g:symbol" title="Symbols are a datum">symbol</a></dd>
-      <dd><a href="fpcore-1.1.html#g:number" title="Numbers are a datum">number</a></dd>
-      <dd><a href="fpcore-1.1.html#g:string" title="Strings are a datum">string</a></dd>
+      <dd><a href="fpcore-1.2.html#g:symbol" title="Symbols are a datum">symbol</a></dd>
+      <dd><a href="fpcore-1.2.html#g:number" title="Numbers are a datum">number</a></dd>
+      <dd><a href="fpcore-1.2.html#g:string" title="Strings are a datum">string</a></dd>
       <dd>( <a href="#g:data" title="Several data are a datum">data</a>* )</dd>
     </dl>
     <caption>High-level grammar of FPCore.
@@ -143,7 +145,7 @@
   <p>
     In this grammar, an <a href="#g:fpcore">FPCore</a> term describes
     a single benchmark, with a set of free variables, a collection of
-    <a href="metadata-1.1.html">metadata properties</a>, and the
+    <a href="metadata-1.2.html">metadata properties</a>, and the
     floating-point expression defining the benchmark. White-space is
     ignored, and lines starting with the semicolon (<code>;</code>)
     are treated as comments and ignored. The basic tokens are defined
@@ -401,7 +403,7 @@
     </dd>
 
     <aside>
-      <code>cast</code> is used for double-rounding—see <a href="examples-1.1.html#cast">the examples</a>. Nested <code>!</code> annotations change the rounding context but do not multiply round values.
+      <code>cast</code> is used for double-rounding—see <a href="examples-1.2.html#cast">the examples</a>. Nested <code>!</code> annotations change the rounding context but do not multiply round values.
     </aside>
     <dt><code>cast</code> expressions</dt>
     <dd>
@@ -435,13 +437,67 @@
       </p>
     </dd>
 
+    <dt><code>let*</code> and <code>while*</code></dt>
+    <dd>
+      <p>
+        <code>let*</code> and <code>while*</code> expressions
+        are sequentially binding variants of <code>let</code> and <code>while</code>,
+        familiar from most lisp dialects.
+        Rather than being evaluated simultaneously,
+        the bindings are evaluated in order,
+        so that <code>(let* ([a b] [b a]) (- a b))</code>
+        is the same as <code>(- b b)</code>
+        and <code>(let* ([a 1] [b a])b)</code>
+        is the same as <code>1</code>.
+        The initializations and updates in the body of a <code>while*</code> loop
+        are performed sequentially in an analogous way.
+      </p>
+
+      <p>
+        <code>let*</code> expressions can be desugared
+        into nested <code>let</code> expressions by the following rule:
+      </p>
+
+        <pre style="width: 45ex; margin: 1em auto"><code>(let* ([<var>var</var> <var>value</var>] <var>rest</var> ...) <var>body</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let ([<var>var</var> <var>value</var>])
+  (let* (<var>rest</var> ...) <var>body</var>))</code></pre>
+
+      <p>
+        Similarly, <code>while*</code> loops can be desugared
+        into regular, simultaneously-binding <code>while</code> and <code>let*</code> expressions (which can be further desugared into <code>let</code>s):
+      </p>
+      <aside>
+        Note that desugaring <code>while*</code> loops results in a quadratic increase in the size of the loop initializations and updates.
+      </aside>
+      <pre style="width: 64ex; margin: 1em auto"><code>(while* <var>cond</var> ([<var>x</var> <var>x-init</var> <var>x-update</var>] [<var>y</var> <var>y-init</var> <var>y-update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(while <var>cond</var>
+  ([<var>x</var>
+    (let* ([<var>x</var> <var>x-init</var>] [<var>y</var> <var>y-init</var>] ...) <var>x</var>))
+    (let* ([<var>x</var> <var>x-update</var>] [<var>y</var> <var>y-update</var>] ...) <var>x</var>))]
+   [<var>y</var>
+    (let* ([<var>x</var> <var>x-init</var>] [<var>y</var> <var>y-init</var>] ...) <var>y</var>))
+    (let* ([<var>x</var> <var>x-update</var>] [<var>y</var> <var>y-update</var>] ...) <var>y</var>))]
+   ...)
+  <var>retexpr</var>)</code></pre>
+
+      <p>
+        Alternatively, a <code>while*</code> loop can be given semantics directly
+        in terms of <code>let*</code>, according to the equality:
+      </p>
+
+      <pre style="width: 55ex; margin: 1em auto"><code>(while* <var>cond</var> ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(let* ([<var>x</var> <var>init</var>] ...)
+  (if <var>cond</var>
+    (while* <var>cond</var> ([<var>x</var> <var>update</var> <var>update</var>] ...) <var>retexpr</var>)
+    <var>retexpr</var>)</code></pre>
+    </dd>
+  </dl>
+  </section>
+
   <section id="rounding">
   <h3>Rounding</h3>
 
   <p>
     FPCore allows the precision of program inputs, constants, and operations
     to be controlled via a <i>rounding context</i>. The context consists of
-    a set of <a href="metadata-1.1.html">metadata properties</a>, which
+    a set of <a href="metadata-1.2.html">metadata properties</a>, which
     affect how function application, casts, and constants are rounded.
   </p>
 
@@ -476,8 +532,8 @@
     FPCore does not restrict the behavior of the rounding function or the set
     of metadata properties that its behavior depends on. Some common precision
     and rounding direction properties are described for the metadata properties
-    <a href="metadata-1.1.html#p:precision"><code>:precision</code></a>
-    and <a href="metadata-1.1.html#p:round"><code>:round</code></a>.
+    <a href="metadata-1.2.html#p:precision"><code>:precision</code></a>
+    and <a href="metadata-1.2.html#p:round"><code>:round</code></a>.
     Tools are not required to support all of these rounding behaviors,
     and are allowed to introduce new ones and new metadata properties
     to control them.
@@ -510,7 +566,7 @@
     precision from the annotation enclosing the
     entire <code>let</code>. Both operations will take place in a
     context that has inherited <code>nearestEven</code> rounding
-    behavior. The <a href="examples-1.1.html#inheriting">examples</a>
+    behavior. The <a href="examples-1.2.html#inheriting">examples</a>
     contain more details.
   </p>
 
