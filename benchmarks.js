@@ -121,8 +121,9 @@ function extra_data(core) {
     var out = [];
     for (var i in core) {
         if (core.hasOwnProperty(i) &&
-            [":name", ":description", "arguments", "operators", ":precision",
-             ":fpbench-domain", ":cite", ":pre", "body", "core", ":example"].indexOf(i) === -1) {
+            i[0] == ":" &&
+            [":name", ":description", ":precision",
+             ":fpbench-domain", ":cite", ":pre", ":example"].indexOf(i) === -1) {
             out.push(render_datum(i.substr(1), "code", core[i]));
         }
     }
@@ -135,6 +136,10 @@ function create_titanic_permalink(core) {
 
 function create_herbie_permalink(core) {
     return "http://herbie.uwplse.org/demo/improve?formula=" + encodeURIComponent(core.core);
+}
+
+function create_fptaylor_permalink(core) {
+    return "http://nimbus.cs.utah.edu:8080/run?input=" + encodeURIComponent(core.core_fptaylor);
 }
 
 function render_result(core) {
@@ -162,6 +167,9 @@ function render_result(core) {
             Element("a", {
                 href: create_herbie_permalink(core)
             }, "Herbie"),
+            core.core_fptaylor && Element("a", {
+                href: create_fptaylor_permalink(core)
+            }, "FPTaylor"),
             // Leave this tool as the last one
             Element("a", {
                 download: "benchmark.fpcore",
