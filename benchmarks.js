@@ -139,7 +139,7 @@ function create_herbie_permalink(core) {
 }
 
 function create_fptaylor_permalink(core) {
-    return "http://nimbus.cs.utah.edu:8080/run?input=" + encodeURIComponent(core.core_fptaylor);
+    return "http://fptaylor.cs.utah.edu/run?input=" + encodeURIComponent(core.core_fptaylor);
 }
 
 function render_result(core) {
@@ -164,7 +164,7 @@ function render_result(core) {
             Element("a", {
                 href: create_titanic_permalink(core)
             }, "Titanic"),
-            Element("a", {
+            core.operators.indexOf("while") === -1 && Element("a", {
                 href: create_herbie_permalink(core)
             }, "Herbie"),
             core.core_fptaylor && Element("a", {
