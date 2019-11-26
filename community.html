@@ -55,8 +55,7 @@
 
     <dt>AMP</dt>
 
-    <!-- TODO: expand acronym? -->
-    <dd>AMP is a tool developed by Ralph Nathan and
+    <dd>AMP (Automated Mixed Precision) is a tool developed by Ralph Nathan and
     <a href="http://people.ee.duke.edu/~sorin/">Daniel Sorin</a> (Duke University)
     for mixed-precision analysis. It begins with a single-precision version of a
     program and uses a variety of metrics and heuristics to gradually raise certain
@@ -71,7 +70,6 @@
 
     <dt>AMPT-GA</dt>
 
-    <!-- TODO: expand acronym? -->
     <dd>AMPT-GA is a tool developed by a multi-institutional team for automated
     source-level mixed-precision for GPU applications, combining various static and
     dynamic analysis approaches.</dd>
@@ -82,12 +80,13 @@
 
     <dt>CADNA / PROMISE</dt>
 
-    <!-- TODO: expand acronym? -->
-    <dd>CADNA estimates round-off errors by replacing floating-point arithmetic with
+    <dd>CADNA (Control of Accuracy and Debugging for Numerical Applications)
+    estimates round-off errors by replacing floating-point arithmetic with
     discrete stochastic arithmetic (DSA), essentially modeling error using
     randomized rounding (up or down) instead of round-to-nearest-even. A new tool
-    called PROMISE uses this technique to perform a delta-debugging search and
-    report mixed precisions for C and C++ programs. </dd>
+    called PROMISE (PRecision OptiMISE) uses this technique to perform a
+    delta-debugging search and report mixed precisions for C and C++ programs.
+    </dd>
 
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1016/j.cpc.2008.02.003">"CADNA: A Library for Estimating Round-off Error Propagation"</a> (CPC'08) </li>
@@ -210,7 +209,7 @@
 
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1145/3213846.3213862">"Exploiting Community Structure for Floating-Point Precision Tuning</a> (ISSTA'18) </li>
-        <!-- TODO: add link from tutorial -->
+        <li> Source: <a href="https://github.com/ucd-plse/HiFPTuner">github.com/ucd-plse/HiFPTuner</a> </li>
     </ul> </dd>
 
     <dt>Precimonious</dt>
@@ -222,15 +221,15 @@
 
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1145/2503210.2503296">"Precimonious: Tuning Assistant for Floating-Point Precision"</a> (SC'13) </li>
-        <li> Main source: <a href="https://github.com/corvette-berkeley/precimonious">github.com/corvette-berkeley/precimonious</a> </li>
-        <!-- TODO: add link from tutorial -->
+        <li> Original source: <a href="https://github.com/corvette-berkeley/precimonious">github.com/corvette-berkeley/precimonious</a> </li>
+        <li> Newer source: <a href="https://github.com/ucd-plse/precimonious">github.com/ucd-plse/precimonious</a> </li>
     </ul> </dd>
 
     <dd> More recent work uses shadow value analysis to speed up the search. </dd>
 
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1145/2884781.2884850">"Floating-Point Precision Tuning Using Blame Analysis"</a> (ICSE'16) </li>
-        <li> Shadow execution source: <a href="https://github.com/corvette-berkeley/shadow-execution">github.com/corvette-berkeley/shadow-execution</a> </li>
+        <li> Source: <a href="https://github.com/corvette-berkeley/shadow-execution">github.com/corvette-berkeley/shadow-execution</a> </li>
     </ul> </dd>
 
     <dt>SHVAL</dt>
@@ -261,7 +260,6 @@
 
     <dt>STOKE</dt>
 
-    <!-- TODO: expand acronym? -->
     <dd> <a href="http://stoke.stanford.edu">STOKE</a> is a general stochastic
     optimization and program synthesis tool from Stanford that has been extended
     to handle floating-point computation. STOKE can trade off accuracy for
@@ -443,8 +441,8 @@
 
     <dt>PRECiSA / FPRoCK</dt>
 
-    <!-- TODO: expand acronym? -->
-    <dd> PRECiSA is a tool from the NIA and NASA that calculates symbolic error
+    <dd> PRECiSA (Program Round-off Error Certifier via Static Analysis) is a
+    tool from the NIA and NASA that calculates symbolic error
     bounds using the <a href="http://pvs.csl.sri.com">PVS</a> language. The authors
     also provide a web interface. More recently, the FPRoCK tool was written in
     collaboration with authors at the University of Utah to solve mixed real and
@@ -574,10 +572,9 @@
 
     <dt>KLEE</dt>
 
-    <!-- TODO: expand acronym? -->
-    <dd> Symbolic execution engine for LLVM with a benchmark suite of example
-    floating-point programs. There is also a <a
-                        href="https://github.com/srg-imperial/klee-float">fork</a>
+    <dd> KLEE is a symbolic execution virtual machine built on LLVM with a
+    benchmark suite of example floating-point programs. There is also a
+    <a href="https://github.com/srg-imperial/klee-float">fork</a>
     that supports reasoning over floating-point constraints. </dd>
 
     <dd> <ul>
@@ -649,7 +646,7 @@
     efficiency. </dd>
 
     <dd> <ul>
-        <!-- TODO: add link for "End of error" book -->
+        <li> Website: <a href="http://www.johngustafson.net/unums.html">johngustafson.net/unums.html</a> </li>
         <li> Source (C/C++ library): <a href="https://github.com/LLNL/unum">github.com/LLNL/unum</a>
             (courtesy of <a href="https://people.llnl.gov/lloyd23">Scott Lloyd</a>, <a href="https://www.llnl.gov">LLNL</a>)</li>
     </ul> </dd>
