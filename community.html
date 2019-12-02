@@ -20,162 +20,678 @@
     </ul>
   </header>
   
-  <p>
-    The floating-point research community has developed many tools
-    that authors of numerical software can use to test, analyze, or
-    improve their code. They are listed here in alphabetical order.
-  </p>
+  <p> The floating-point research community has developed many tools that
+  authors of numerical software can use to test, analyze, or improve their code.
+  They are listed here in alphabetical order and categorized into three general
+  types: 1) <a href="#dynamic">dynamic tools</a>, 2) <a href="#static">static
+  tools</a>, 3) <a href="#commercial">commercial tools</a>, and 4)
+  <a href="#misc">miscellaneous</a>. You can find tutorials for some of these
+  tools at <a href="http://fpanalysistools.org/">fpanalysistools.org</a>. </p>
 
   <p><em>Tools on the list are not endorsed, and need not endorse or
   support the FPBench project.</em> The list is intended to be
   exhaustive.</p>
 
-  <dl class="tools-list">
-    <dt><a href="https://github.com/llnl/adapt-fp">ADAPT</a></dt>
-    <dd>ADAPT is a scalable approach for mixed-precision analysis on HPC
-    workloads using algorithmic differentiation to provide accurate estimates
-    about the final output error. ADAPT provides a floating-point precision
-    sensitivity profile while incurring low overhead, this profile can be used
-    to make algorithmic choices and to develop mixed-precision configurations
-    of a program.</dd>
+  <a name="dynamic">
+  <h2> Dynamic Tools </h2>
 
-    <dt><a href="https://github.com/4tXJ7f/alive">Alive</a></dt>
+  <dl class="dynamic-tools">
+
+    <dt>ADAPT</dt>
+
+    <dd>ADAPT (Automatic Differentiation Applied to Precision Tuning) is a tool
+    developed by <a href="http://w3.cs.jmu.edu/lam2mo/">Mike Lam</a> from JMU
+    and <a href="http://harshithamenon.com/">Harshitha Menon</a> from LLNL. It
+    uses the reverse mode of algorithmic differentiation to determine how much
+    precision is needed in a program's inputs and intermediate results in order
+    to achieve a desired accuracy in its output, converting this information
+    into precision recommendations.</dd>
+
+    <dd> <ul>
+      <li> Paper: <a href="https://dl.acm.org/citation.cfm?id=3291720">"ADAPT: Algorithmic Differentiation Applied to Floating-point Precision Tuning"</a> (SC'18,
+        <a href="papers/2018-Menon-SC.pdf">PDF</a>) </li>
+      <li> Source: <a href="https://github.com/llnl/adapt-fp">github.com/llnl/adapt-fp</a> </li>
+    </ul> </dd>
+
+    <dt>AMP</dt>
+
+    <dd>AMP (Automated Mixed Precision) is a tool developed by Ralph Nathan and
+    <a href="http://people.ee.duke.edu/~sorin/">Daniel Sorin</a> (Duke University)
+    for mixed-precision analysis. It begins with a single-precision version of a
+    program and uses a variety of metrics and heuristics to gradually raise certain
+    portions of the program to higher precision in order to achieve the desired
+    accuracy in the outputs. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1109/PRDC.2013.44">"Applying Reduced Precision Arithmetic to Detect Errors in Floating Point Multiplication"</a> (PRDC'13) </li>
+        <li> Paper: <a href="https://doi.org/10.1109/SC.2014.15">"Recycled Error Bits: Energy-Efficient Architectural Support for Floating Point Accuracy"</a> (SC'14) </li>
+        <li> Paper: <a href="https://arxiv.org/pdf/1606.00251.pdf">"Profile-Driven Automated Mixed Precision"</a> (arXiv) </li>
+    </ul> </dd>
+
+    <dt>AMPT-GA</dt>
+
+    <dd>AMPT-GA is a tool developed by a multi-institutional team for automated
+    source-level mixed-precision for GPU applications, combining various static and
+    dynamic analysis approaches.</dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3330345.3330360">"AMPT-GA: Automatic Mixed Precision Floating Point Tuning for GPU Applications"</a> (ICS'19) </li>
+    </ul> </dd>
+
+    <dt>CADNA / PROMISE</dt>
+
+    <dd>CADNA (Control of Accuracy and Debugging for Numerical Applications)
+    estimates round-off errors by replacing floating-point arithmetic with
+    discrete stochastic arithmetic (DSA), essentially modeling error using
+    randomized rounding (up or down) instead of round-to-nearest-even. A new tool
+    called PROMISE (PRecision OptiMISE) uses this technique to perform a
+    delta-debugging search and report mixed precisions for C and C++ programs.
+    </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1016/j.cpc.2008.02.003">"CADNA: A Library for Estimating Round-off Error Propagation"</a> (CPC'08) </li>
+        <li> Paper: <a href="https://hal.archives-ouvertes.fr/hal-01331917">"Auto-tuning for Floating-point Precision with Discrete Stochastic Arithmetic"</a> (preprint) </li>
+        <li> Website (CADNA): <a href="http://cadna.lip6.fr/index.php">cadna.lip6.fr</a> </li>
+        <li> Website (PROMISE): <a href="http://promise.lip6.fr/">promise.lip6.fr</a> </li>
+    </ul> </dd>
+
+    <dt>CRAFT</dt>
+
+    <dd> CRAFT (Configurable Runtime Analysis for Floating-Point Tuning) was
+    originally a framework based on the <a
+    href="https://github.com/dyninst/dyninst">Dyninst</a>
+    binary analysis toolkit to perform various dynamic floating-point analyses,
+    including cancellation detection, dynamic range tracking, and automated
+    mixed-precision analysis. CRAFT can perform an automated search of a
+    program's instruction space, determining the level of precision necessary in
+    the result of each instruction to pass a user-provided verification routine
+    assuming all other operations are done in double precision. This gives a
+    general overview of the approximate precision requirements of the program,
+    providing insights and guidance for mixed-precision implementation. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1016/j.parco.2012.08.002">"Dynamic Floating-Point Cancellation Detection"</a> (PARCO'13,
+            <a href="papers/2012-Lam-PARCO.pdf">PDF</a>) </li>
+        <li> Paper: <a href="https://doi.org/10.1145/2464996.2465018">"Automatically Adapting Programs for Mixed-Precision Floating-Point Computation"</a> (ICS'13,
+            <a href="papers/2013-Lam-ICS.pdf">PDF</a>) </li>
+        <li> Paper: <a href="http://dx.doi.org/10.1177%2F1094342016652462">"Fine-Grained Floating-Point Precision Analysis"</a> (IJHPCA'16,
+            <a href="papers/2016-Lam-IJHPCA.pdf">PDF</a>) </li>
+        <li> Source: <a href="https://github.com/crafthpc/craft/">github.com/crafthpc/craft</a> </li>
+    </ul> </dd>
+
+    <dd> There is a branch of CRAFT by Andrew Shewmaker (OpenEye Scientific,
+    formerly LANL) that adds a new analysis mode for extracting histograms of
+    all floating-point values encountered during a program run. He has also been
+    building a variant of this tool based on SHVAL (described below). </dd>
+
+    <dd> <ul>
+        <li> Source: <a href="https://github.com/agshew/craft">github.com/agshew/craft</a> </li>
+        <li> Source: <a href="https://github.com/agshew/shval">github.com/agshew/shval</a> </li>
+    </ul> </dd>
+
+    <dt>FloatSmith</dt>
+
+    <dd> FloatSmith is an integration project that provides automated
+    source-to-source tuning and transformation of floating-point code for mixed
+    precision using three existing tools: 1) CRAFT, 2) ADAPT, and 3) TypeForge. The
+    primary search loop is guided by CRAFT and uses TypeForge to prototype
+    mixed-precision versions of an application. ADAPT results can optionally be used
+    to help narrow the search space, and there are a variety of options to customize
+    the search. </dd>
+
+    <dd> <ul>
+        <li> Paper: "Tool Integration for Source-Level Mixed Precision" (Correctness'19, to appear, <a href="papers/2019-Lam-Correctness.pdf">PDF</a>) </li>
+        <li> Source: <a href="https://github.com/crafthpc/floatsmith">github.com/crafthpc/floatsmith</a> </li>
+    </ul> </dd>
+
+    <dt>fpPrecisionTuning</dt>
+
+    <dd> fpPrecisionTuning is a combination of two Python tools (C2mpfr and
+    DistributedSearch) that together can be used to find mixed-precision versions
+    of C programs. Like CRAFT and Precimonious, this tool performs a search over
+    the mixed-precision search space using a user-given error bound, but this tool
+    uses MPFR and source code modification to simulate non-standard precisions. The
+    authors have applied this toolchain to a variety of examples from different
+    domains including fixed-precision computations on an FPGA. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1109/ASPDAC.2017.7858297">"Efficient Floating Point Precision Tuning for Approximate Computing"</a> (ASP-DAC'17) </li>
+        <li> Source: <a href="https://github.com/minhhn2910/fpPrecisionTuning">github.com/minhhn2910/fpPrecisionTuning</a> </li>
+    </ul> </dd>
+
+    <dt>GPUMixer</dt>
+
+    <dd> GPUMixer is a tool written by a multi-institutional team for LLVM-based
+    mixed-precision analysis that is performance-focused, looking for potential
+    speedups first and then verifying their accuracy afterwards. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-030-20656-7_12">"GPUMixer: Performance-Driven Floating-Point Tuning for GPU Scientific Applications"</a> (ISC'19, best paper) </li>
+    </ul> </dd>
+
+    <dt>Herbie</dt>
+
+    <dd>Herbie automatically improves the accuracy of floating-point
+    expressions. Herbie has been used to fix two bugs in
+    <a href="http://mathjs.org/">math.js</a>, and it also provides a
+    <a href="http://herbie.uwplse.org/doc/latest/using-web.html">web interface</a>.
+    </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/2813885.2737959">"Automatically Improving Accuracy for Floating Point Expressions"</a> (PLDI'15) </li>
+        <li> Website: <a href="http://herbie.uwplse.org">herbie.uwplse.org</a> </li>
+        <li> Source: <a href="https://github.com/uwplse/herbie">github.com/uwplse/herbie</a> </li>
+    </ul> </dd>
+
+    <dd> More recently, the authors of Daisy and Herbie have worked together to
+    combine their tools. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-319-95582-7_21">"Combining Tools for Optimization and Analysis of Floating-Point Computations"</a> (FM2018)</li>
+    </ul> </dd>
+
+    <dt>Herbgrind</dt>
+
+    <dd>Herbgrind is a dynamic analysis tool for binaries (built on Valgrind)
+    to help find the root cause of floating-point error in large programs.</dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3192366.3192411">"Finding Root Causes of Floating Point Error"</a> (PLDI'18) </li>
+        <li> Website: <a href="http://herbgrind.ucsd.edu">herbgrind.ucsd.edu</a> </li>
+        <li> Source: <a href="https://github.com/uwplse/herbgrind">github.com/uwplse/herbgrind</a> </li>
+    </ul> </dd>
+
+    <dt>HiFPTuner</dt>
+
+    <dd> HiFPTuner is an extension of Precimonious (see below) that uses dependence
+    analysis and edge profiling to enable a more efficient hierarchical search
+    algorithm for mixed-precision configurations. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3213846.3213862">"Exploiting Community Structure for Floating-Point Precision Tuning</a> (ISSTA'18) </li>
+        <li> Source: <a href="https://github.com/ucd-plse/HiFPTuner">github.com/ucd-plse/HiFPTuner</a> </li>
+    </ul> </dd>
+
+    <dt>Precimonious</dt>
+
+    <dd> Precimonious is a tool written by <a
+        href="http://web.cs.ucdavis.edu/~rubio/">Cindy Rubio González</a> (currently UC
+    Davis) that leverages the <a href="http://llvm.org">LLVM</a> framework to tweak
+    variable declarations to build and prototype mixed-precision configurations. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/2503210.2503296">"Precimonious: Tuning Assistant for Floating-Point Precision"</a> (SC'13) </li>
+        <li> Original source: <a href="https://github.com/corvette-berkeley/precimonious">github.com/corvette-berkeley/precimonious</a> </li>
+        <li> Newer source: <a href="https://github.com/ucd-plse/precimonious">github.com/ucd-plse/precimonious</a> </li>
+    </ul> </dd>
+
+    <dd> More recent work uses shadow value analysis to speed up the search. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/2884781.2884850">"Floating-Point Precision Tuning Using Blame Analysis"</a> (ICSE'16) </li>
+        <li> Source: <a href="https://github.com/corvette-berkeley/shadow-execution">github.com/corvette-berkeley/shadow-execution</a> </li>
+    </ul> </dd>
+
+    <dt>SHVAL</dt>
+
+    <dd> SHVAL (SHadow Value Analysis Library) is a tool by
+    <a href="http://w3.cs.jmu.edu/lam2mo/">Mike Lam</a> that uses the
+    <a href="https://software.intel.com/en-us/articles/pin-a-dynamic-binary-instrumentation-tool">Intel Pin</a>
+    instrumentation framework to perform full heavyweight shadow-value analysis for
+    floating-point arithmetic, effectively allowing developers to simulate any
+    real-numbered representation for which a plugin can be developed. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="http://dl.acm.org/citation.cfm?id=3018826">"Floating-Point Shadow Value Analysis"</a> (ESPT'16 at SC'16,
+            <a href="papers/2016-Lam-ESPT.pdf">PDF</a>)</li>
+        <li> Source: <a href="https://github.com/lam2mo/shval">github.com/lam2mo/shval</a> </li>
+    </ul> </dd>
+
+    <dd> This work was extended by Ramy Medhat (U. of Waterloo) to perform
+    per-address or per-instruction floating-point error analysis. Using this
+    framework, he developed several mixed-precision versions of an image processing
+    library, demonstrating how the tool can assist with making performance, energy,
+    and accuracy tradeoffs in the embedded domain. </dd>
+
+    <dd> <ul>
+      <li> Paper: <a href="https://doi.org/10.1145/3126519">"Managing the Performance/Error Tradeoff of Floating-point Intensive Applications"</a> (EMSOFT'17/TECS2017) </li>
+        <li> Source: <a href="https://github.com/ramymedhat/shval">github.com/ramymedhat/shval</a> </li>
+    </ul> </dd>
+
+    <dt>STOKE</dt>
+
+    <dd> <a href="http://stoke.stanford.edu">STOKE</a> is a general stochastic
+    optimization and program synthesis tool from Stanford that has been extended
+    to handle floating-point computation. STOKE can trade off accuracy for
+    performance for floating-point computations.</dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/2666356.2594302">"Stochastic Optimization of Floating-Point Programs with Tunable Precision"</a> (PLDI'14) </li>
+        <li> Website: <a href="http://stoke.stanford.edu">stoke.stanford.edu</a> </li>
+        <li> Source: <a href="https://github.com/StanfordPL/stoke">github.com/StanfordPL/stoke</a> </li>
+    </ul> </dd>
+
+    <dt>Verificarlo</dt>
+
+    <dd> Verificarlo is a tool written by <a href="http://www.sifflez.org">Pablo de
+        Oliveira Castro</a> (Université de Versailles St-Quentin-en-Yvelines), Eric
+    Petit, and Christophe Denis (ENS Cachan). It leverages the <a href="http://llvm.org">LLVM</a>
+    framework for automated Monte Carlo Arithmetic analysis. </dd>
+
+    <dd> <ul>
+        <li> Source: <a href="https://github.com/verificarlo/verificarlo">github.com/verificarlo/verificarlo</a> </li>
+    </ul> </dd>
+
+    <dt>VeriTracer</dt>
+
+    <dd> Verificarlo (see above) has recently been extended by Yohan Chatelain,
+    including the addition of contextual information as well as a temporal
+    visualization tool called VeriTracer. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1109/ARITH.2018.8464687">"VeriTracer: Context-enriched tracer for floating-point arithmetic analysis"</a> (ARITH'18) </li>
+        <li> Source: <a href="https://github.com/verificarlo/verificarlo/tree/veritracer">github.com/verificarlo/verificarlo/tree/veritracer</a> </li>
+    </ul> </dd>
+
+    <dt>Verrou</dt>
+
+    <dd> Verrou is a Valgrind-based tool written by François Févotte and others from
+    EDT in France. The tool can simulate choosing a random rounding mode for every
+    operation, and performs a delta debugging search to find areas of code that fail
+    a user-provided verification routine under this scheme. It can also use the
+    Verificarlo front-end (see above) for lower overhead.</dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://hal.archives-ouvertes.fr/hal-01383417">"Verrou: Assessing Floating-Point Accuracy Without Recompiling"</a> (unpublished) </li>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-319-63501-9_5">"Studying the Numerical Quality of an Industrial Computing Code: A Case Study on Code_aster"</a> (NSV'17) </li>
+        <li> Source: <a href="https://github.com/edf-hpc/verrou">github.com/edf-hpc/verrou</a> </li>
+    </ul> </dd>
+
+  </dl>
+
+  <a name="static">
+  <h2> Static Tools </h2>
+
+  <dl class="static-tools">
+
+    <dt>Alive / LifeJacket</dt>
+
     <dd>Alive verifies that LLVM IR optimizations don't change program
     behavior, and includes support for floating-point instructions in
     an extension named LifeJacket. Alive has verified 43 LLVM
     optimizations and discovered eight incorrect ones.</dd>
 
-    <dt><a href="https://github.com/rutgers-apl/alive-nj">Alive-NJ</a></dt>
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/2931021.2931024">"LifeJacket: verifying precise floating-point optimizations in LLVM"</a> </li>
+        <li> Source: <a href="https://github.com/4tXJ7f/alive">github.com/4tXJ7f/alive</a> </li>
+    </ul> </dd>
+
+    <dt>Alive</dt>
+
     <dd>Alive-NJ verifies that LLVM IR optimizations don't change
     program behavior, and includes support for floating-point
     instructions. Alive-NJ has found five bugs in LLVM optimization
     passes.</dd>
 
-    <dt><a href="http://www.astree.ens.fr/">Astrée</a></dt>
-    <dd>Astreé is a static analysis tool for C that can prove the
-    absence of runtime exceptions, including in the presence of
-    floating-point operations. It has been used to prove the absence
-    of runtime exceptions in flight control software for Airbus
-    planes.</dd>
+    <dd> <ul>
+        <li> Source: <a href="https://github.com/rutgers-apl/alive-nj">github.com/rutgers-apl/alive-nj</a> </li>
+    </ul> </dd>
 
-    <dt><a href="https://bitbucket.org/icl/bonsai">BONSAI</a></dt>
-    <dd>BONSAI tests and tunes computational kernels.</dd>
+    <dt>cohd / syhd</dt>
 
-    <dt><a href="http://www.posithub.org">Centre for Next-Generation Arithmetic</a></dt>
-    <dd> The NGA team develops and promotes the unum number system which is
-    similar to IEEE 754 format (floating point numbers), but designed to
-    provide greater performance and accuracy. </dd>
+    <dd> Laurent Thévenoux at LIP, ENS de Lyon has written tools for source-to-source
+    error compensation and synthesis of floating-point code. </dd>
 
-    <dt><a href="https://hal.archives-ouvertes.fr/hal-01158399">cohd</a></dt>
-    <dd>cohd is a tool for source-to-source error compensation of floating-point programs.</dd>
+    <dd> <ul>
+        <li> Paper: <a href="http://dx.doi.org/10.1002/cpe.3953">"Automatic source-to-source error compensation of floating-point programs: code synthesis to optimize accuracy and time"</a> (CPE'16) </li>
+        <li> Paper: <a href="http://dx.doi.org/10.1109/CSE.2015.11">"Automatic Source-to-Source Error Compensation of Floating-Point Programs"</a> (CSE'15) </li>
+    </ul> </dd>
 
-    <dt><a href="http://compcert.inria.fr/index.html">CompCert</a></dt>
-    <dd>CompCert is a formally-verified compiler for C, including support for floating-point.</dd>
+    <dt>Daisy</dt>
 
-    <dt><a href="https://github.com/malyzajko/daisy">Daisy</a></dt>
-    <dd>Daisy is a framework for accuracy analysis of numerical
-    programs whose aim is to be modular and extensible.</dd>
+    <dd> Daisy is another tool by <a href="https://people.mpi-sws.org/~eva/">Eva
+    Darulova</a> (the author of Rosa, see below) that combines various types
+    of static and dynamic analysis of floating-point code and is designed to be
+    modular and extensible. Eva also has a paper with Anastasiia Izycheva on
+    computing sound relative errors. They find that this can produce much
+    tighter error bounds than analyzing absolute error, and an implementation is
+    included in Daisy. Finally, Eva has a paper with Einar Horn and Saksham
+    Sharma on mixed-precision tuning in Scala and C, which is also included in
+    Daisy.</dd>
 
-    <dt><a href="http://pruners.github.io/flit">FLiT</a></dt>
-    <dd>FLiT is a reproducibility testing framework that verifies
-    floating-point code under different compilers and compiler
-    optimizations. It finds which compilations change the result of
-    your floating-point code.</dd>
+    <dd> <ul>
+        <li> Paper: <a href="https://dl.acm.org/citation.cfm?id=3207896.3207921">"Sound Mixed-Precision Optimization with Rewriting"</a> (ICCPS'18) </li>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-319-89960-2_15">"Daisy - Framework for Analysis and Optimization of Numerical Programs (Tool Paper)"</a> (TACAS'18)</li>
+        <li> Paper: <a href="https://dl.acm.org/citation.cfm?id=3168462">"On Sound Relative Error Bounds for Floating-Point Arithmetic"</a> (FMCAD'17) </li>
+        <li> Source: <a href="https://github.com/malyzajko/daisy">github.com/malyzajko/daisy</a> </li>
+    </ul> </dd>
 
-    <dt><a href="http://www.lix.polytechnique.fr/Labo/Sylvie.Putot/fluctuat.html">Fluctuat</a></dt>
-    <dd>Fluctuat is a static analysis tool for C that can characterize
-    the errors caused by the approximation inherent in floating-point
-    arithmetic. Fluctuat has been used to verify safety-critical
-    embedded systems.</dd>
+    <dd> More recently, the authors of Daisy and Herbie have worked together to
+    combine their tools. </dd>
 
-    <dt><a href="https://sites.google.com/site/fptaylordemo/">FPTaylor</a></dt>
-    <dd>FPTaylor provides rigorous and accurate bounds on the size of
-    round-off errors in a floating-point computations.</dd>
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-319-95582-7_21">"Combining Tools for Optimization and Analysis of Floating-Point Computations"</a> (FM2018)</li>
+    </ul> </dd>
 
-    <dt><a href="https://github.com/soarlab/FPTuner">FPTuner</a></dt>
-    <dd>FPTuner chooses the precision that will compute a
-    floating-point expression with maximum speed while achieving an
-    error bound.</dd>
+    <dt>dco / scorpio</dt>
 
-    <dt><a href="http://gappa.gforge.inria.fr/">Gappa</a></dt>
+    <dd> A group from CERTH &amp; University of Thessaly and RWTH Aachen have written
+    a significance analysis system using a combination of interval arithmetic and
+    automatic differentiation. The software does not yet seem to be publicly
+    available.</dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/2854038.2854058">"Towards Automatic Significance Analysis for Approximate Computing"</a> (CGO'16) </li>
+    </ul> </dd>
+
+    <dt>Flocq</dt>
+
+    <dd> Flocq is a floating-point formalization for Coq, written by
+    <a href="https://www.lri.fr/~sboldo/">Sylvie Boldo</a> and others. It provides
+    a library of theorems for analyzing arbitrary-precision floating-point
+    arithmetic. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1109/ARITH.2011.40">"Flocq: A Unified Library for Proving Floating-Point Algorithms in Coq"</a> (SCA'11) </li>
+        <li> Book: <a href="https://www.elsevier.com/books/computer-arithmetic-and-formal-proofs/boldo/978-1-78548-112-3">"Computer Arithmetic and Formal Proofs"</a> (Elsevier) </li>
+        <li> Website: <a href="http://flocq.gforge.inria.fr/">flocq.gforge.inria.fr</a> </li>
+    </ul> </dd>
+
+    <dt>FPhile</dt>
+
+    <dd> Floating-point stability analysis via SMT solving and theorem proving. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://pdfs.semanticscholar.org/14b1/05b8d98e81846f83dd19abaed86e45c44df0.pdf">"Verifying (In-)Stability in Floating-point Programs by Increasing Precision, using SMT Solving"</a> </li>
+    </ul> </dd>
+
+    <dt>FPTaylor / FPTuner</dt>
+
+    <dd> A group at the University of Utah describes a way of using partial
+    derivatives and symbolic Taylor series expansions to bound floating-point
+    roundoff error; this achieves much tighter bounds than interval/affine/SMT
+    methods. More recently, they have extended theird work by performing a broad
+    comparison of many error bounding analyses. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-319-19249-9_33">"Rigorous Estimation of Floating-Point Round-off Errors with Symbolic Taylor Expansions"</a> (FM2015) </li>
+        <li> Paper: <a href="https://doi.org/10.1145/3230733">"Rigorous Estimation of Floating-Point Round-off Errors with Symbolic Taylor Expansions"</a> (TOPLAS2019) </li>
+        <li> Source: <a href="https://github.com/soarlab/FPTaylor">github.com/soarlab/FPTaylor</a> </li>
+    </ul> </dd>
+
+    <dd> They have also built a mixed-precision tool for Python code based on this
+    technique. Note that it also requires the commercial
+    <a href="http://www.gurobi.com/products/gurobi-optimizer">Gurobi Optimizer</a>. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3009837.3009846">"Rigorous Floating-Point Mixed-Precision Tuning"</a> (POPL'17) </li>
+        <li> Source: <a href="https://github.com/soarlab/FPTuner">github.com/soarlab/FPTuner</a> </li>
+    </ul> </dd>
+
+    <dt>Gappa</dt>
+
     <dd>Gappa helps automated reasoning about floating-point and
     fixed-point arithmetic. It has been used to prove
     the <a href="https://gforge.inria.fr/scm/browser.php?group_id=5929&extra=crlibm">CRlibm</a>
     implementations of elementary functions correct.</dd>
 
-    <dt><a href="https://herbie.uwplse.org">Herbie</a></dt>
-    <dd>Herbie automatically improves the accuracy of floating-point
-    expressions. Herbie has been used to fix two bugs
-    in <a href="http://mathjs.org/">math.js</a>.</dd>
+    <dd> <ul>
+        <li> Website: <a href="http://gappa.gforge.inria.fr">gappa.gforge.inria.fr</a> </li>
+    </ul> </dd>
 
-    <dt><a href="http://herbgrind.ucsd.edu/">Herbgrind</a></dt>
-    <dd>Herbgrind is a dynamic analysis tool for binaries to help find
-    the root cause of floating-point error in large programs.</dd>
+    <dt>PRECiSA / FPRoCK</dt>
 
-    <dt><a href="http://www.ti3.tu-harburg.de/rump/intlab/">IntLab</a></dt>
-    <dd>IntLab is a fast implementation of interval arithmetic for
-    Matlab and Octave. IntLab focuses on the provable correctness of
-    its results and on speed.</dd>
+    <dd> PRECiSA (Program Round-off Error Certifier via Static Analysis) is a
+    tool from the NIA and NASA that calculates symbolic error
+    bounds using the <a href="http://pvs.csl.sri.com">PVS</a> language. The authors
+    also provide a web interface. More recently, the FPRoCK tool was written in
+    collaboration with authors at the University of Utah to solve mixed real and
+    floating-point programs, which improved the accuracy of PRECiSA. </dd>
 
-    <dt><a href="https://github.com/srg-imperial/klee-float">KLEE-float</a></dt>
-    <dd>A version of the KLEE symbolic execution engine that is designed to support reasoning over floating-point constraints.</dd>
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-319-66266-4_14">"Automatic Estimation of Verified Floating-Point Round-Off Errors via Static Analysis"</a> (SAFECOMP2017) </li>
+        <li> Paper: <a href="http://soarlab.org/2019/03/nfm2019-stfmmr/">"A Mixed Real and Floating-Point Solver"</a> (NFM 2019) </li>
+        <li> Website: <a href="http://precisa.nianet.org">precisa.nianet.org</a> </li>
+        <li> Source: <a href="https://github.com/nasa/PRECiSA">github.com/nasa/PRECiSA</a> </li>
+    </ul> </dd>
 
-    <dt><a href="https://github.com/corvette-berkeley/precimonious">Precimonious</a></dt>
-    <dd>Precimonious finds parts of a program where lower
-    floating-point precision can be used, thus making the program
-    faster, without violating accuracy constraints.</dd>
+    <dt>Real2Float</dt>
 
-    <dt><a href="http://precisa.nianet.org/">PRECiSA</a></dt>
-    <dd>PRECiSA is a fully-automatic static analysis tool for
-    estimating the round-off error of floating-point first-order
-    functional programs in the PVS language.</dd>
+    <dd> Victor Magron and others present a framework for providing upper bounds on
+    absolute roundoff errors using semidefinite programming and sums of squares
+    certificates. The results can be checked using the Coq theorem prover. </dd>
 
-    <dt><a href="http://nl-certify.forge.ocamlcore.org/real2float.html">Real2Float</a></dt>
-    <dd>Real2Float can provide upper bounds for floating-point
-    round-off errors using several different optimization
-    techniques.</dd>
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3015465">"Certified Roundoff Error Bounds Using Semidefinite Programming"</a> (TOMS'17) </li>
+        <li> Source: <a href="https://github.com/afd/real2float">github.com/afd/real2float</a> </li>
+    </ul> </dd>
 
-    <dt><a href="http://formalverification.cs.utah.edu/grt/">S3FP</a></dt>
-    <dd>S3FP searches for inputs that cause floating-point expressions
-    to have high round-off error.</dd>
+    <dt>Rosa</dt>
 
-    <dt><a href="http://perso.univ-perp.fr/nasrine.damouche/Salsa/">Salsa</a></dt>
-    <dd>Salsa improves the accuracy of floating-point computations
-    using static analysis.</dd>
+    <dd> Rosa is a source-to-source translator written by <a
+        href="https://people.mpi-sws.org/~eva/">Eva Darulova</a> (now at MPI-SWS,
+    previously EPFL) for the Scala language. It uses an SMT solver to annotate a
+    program with mixed-precision types. </dd>
 
-    <dt><a href="https://github.com/admk/soap">SOAP</a></dt>
-    <dd>SOAP automatically explores the tradeoff in error, die area,
-    and latency for FPGA implementations of floating-point functions
-    expressed as C programs.</dd>
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3014426">"Towards a Compiler for Reals"</a> (TOPLAS'17) </li>
+        <li> Source: <a href="https://github.com/malyzajko/rosa">github.com/malyzajko/rosa</a> </li>
+    </ul> </dd>
 
-    <dt><a href="http://sollya.gforge.inria.fr/">Sollya</a></dt>
+    <dt>Salsa</dt>
+
+    <dd> Salsa is an abstract-interpretation-based floating-point analysis tool that
+    suggests transformations to minimize floating-point error, and is the dissertation
+    work of <a href="http://perso.univ-perp.fr/nasrine.damouche/">Nasrine Damouche</a>.
+    The source code is not available.
+    </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.29007/j2fd">"Salsa: An Automatic Tool to Improve the Numerical Accuracy of Programs"</a> (AFM'17) </li>
+        <li> Paper: <a href="https://doi.org/10.1007/s10009-016-0435-0">"Improving the numerical accuracy of programs by automatic transformation"</a> (STTT'17, preferred citation) </li>
+        <li> Thesis: <a href="https://tel.archives-ouvertes.fr/tel-01455727/">"Improving the Numerical Accuracy of Floating-Point Programs with Automatic Code Transformation Methods"</a> (2016)</li>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-319-19458-5_3">"Intra-procedural Optimization of the Numerical Accuracy of Programs"</a> (FMICS'15) </li>
+        <li> Website: <a href="http://perso.univ-perp.fr/nasrine.damouche/Salsa/">perso.univ-perp.fr/nasrine.damouche/Salsa/</a> </li>
+    </ul> </dd>
+
+  </dl>
+
+  <a name="commercial">
+  <h2> Commercial Tools </h2>
+
+  <dl class="commercial-tools">
+
+    <dt>Astrée</dt>
+
+    <dd> Astrée is a commercial static analysis tool for proving the correctness
+    of C code, including all floating-point computation. It has been used to
+    prove the absence of runtime exceptions in flight control software for
+    Airbus planes. </dd>
+
+    <dd> <ul>
+        <li> Website: <a href="https://www.absint.com/astree/index.htm">absint.com/astree/index.htm</a> </li>
+    </ul> </dd>
+
+    <dt>Fluctuat</dt>
+
+    <dd> Fluctuat is a commercial, abstract-interpretation-based static analysis tool
+    for analyzing numerical code in C or Ada and characterizing the errors
+    caused by the approximation inherent in floating-point arithmetic. Fluctuat
+    has been used to verify safety-critical embedded systems. It was originally
+    written by <a
+        href="http://www.lix.polytechnique.fr/~goubault/">Eric Goubault</a>, <a
+        href="http://perso.univ-perp.fr/mmartel/">Matthieu Martel</a>, and <a
+        href="http://www.lix.polytechnique.fr/Labo/Sylvie.Putot/">Sylvie Putot</a>.
+    </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1007/3-540-45927-8_14">"Propagation of Roundoff Errors in Finite Precision Computations: A Semantics Approach"</a> (ESOP'02) </li>
+        <li> Paper: <a href="https://doi.org/10.1007/3-540-45927-8_15">"Asserting the Precision of Floating-Point Computations: A Simple Abstract Interpreter"</a> (ESOP'02) </li>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-642-38856-9_1">"Static Analysis by Abstract Interpretation of Numerical Programs and Systems, and FLUCTUAT"</a> (SAS'13) </li>
+        <li> Website: <a href="http://www.lix.polytechnique.fr/Labo/Sylvie.Putot/fluctuat.html">lix.polytechnique.fr/Labo/Sylvie.Putot/fluctuat.html</a> </li>
+    </ul> </dd>
+
+  </dl>
+
+  <a name="misc">
+  <h2> Miscellaneous </h2>
+
+  <dl class="misc-tools">
+
+    <dt> CompCert </dt>
+
+    <dd> CompCert is a compiler that has been formally verified to preserve
+    floating-point semantics using Coq. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="http://dx.doi.org/10.1007/s10817-014-9317-x">"Verified Compilation of Floating-Point Computations"</a> (JAR 2015) </li>
+        <li> Website: <a href="http://compcert.inria.fr">compcert.inria.fr</a> </li>
+    </ul> </dd>
+
+    <dt>FLiT: Floating-point Litmus Tests</dt>
+
+    <dd> FLiT is a test infrastructure for detecting variability in floating-point
+    code due to differences in compilers and execution environments. It is currently
+    developed and maintained by Michael Bentley at the University of Utah. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1109/IISWC.2017.8167780">"FLiT: Cross-Platform Floating-Point Result-Consistency Tester and Workload"</a> (IISWC'17) </li>
+        <li> Website: <a href="https://pruners.github.io/flit/">pruners.github.io/flit</a> </li>
+        <li> Github: <a href="https://github.com/PRUNERS/FLiT">PRUNERS/FLiT</a> </li>
+    </ul> </dd>
+
+    <dt>FPBench</dt>
+
+    <dd> FPBench is a community benchmark project for floating-point examples. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-319-54292-8_6">"Toward a Standard Benchmark Format and Suite for Floating-Point Analysis"</a> (NSV'16) </li>
+        <li> Website: <a href="http://fpbench.org">fpbench.org</a> </li>
+        <li> Source: <a href="https://github.com/FPBench/FPBench">github.com/FPBench/FPBench</a> </li>
+    </ul> </dd>
+
+    <dt>FPHPC Bechmark Suite</dt>
+
+    <dd> This is a collection of programs containing floating-point arithmetic
+    with the immediate goal of aiding the development and evaluation of
+    floating-point precision and correctness analysis tools. The long-term goal
+    is to support and enable the scaling of such tools to provide insights for
+    high-performance computing (HPC) applications. This collection aims to
+    address the "middle ground" between real-valued expressions (such as those
+    contained in the FPBench collection) and full HPC applications. </dd>
+
+    <dd> <ul>
+        <li> Source: <a href="https://github.com/crafthpc/fphpc">github.com/crafthpc/fphpc</a> </li>
+    </ul> </dd>
+
+    <dt>KLEE</dt>
+
+    <dd> KLEE is a symbolic execution virtual machine built on LLVM with a
+    benchmark suite of example floating-point programs. There is also a
+    <a href="https://github.com/srg-imperial/klee-float">fork</a>
+    that supports reasoning over floating-point constraints. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://dl.acm.org/citation.cfm?id=1855756">"KLEE: Unassisted and Automatic Generation of High-Coverage Tests for Complex Systems Programs"</a> (OSDI'08) </li>
+        <li> Website: <a href="https://klee.github.io">klee.github.io</a> </li>
+        <li> Source: <a href="https://github.com/fp-analysis/klee">github.com/fp-analysis/klee</a> (<a href="https://github.com/fp-analysis/fp-examples">examples</a>) </li>
+    </ul> </dd>
+
+    <dt>Posit libraries</dt>
+
+    <dd> Posits are the newest iteration on
+    <a href="http://johngustafson.net">John Gustafson's</a> Unum representation
+    (see below). Unlike Unums, Posits have a fixed overall width but the number
+    of exponent and significand bits vary according to a run-length-encoded
+    "regime" field. It provides higher accuracy and a greater dynamic range than
+    identically-sized IEEE formats.  </dd>
+
+    <dd> <ul>
+        <li> Website: <a href="https://posithub.org">posithub.org</a> (Centre for Next-Generation Arithmetic and SoftPosit) </li>
+        <li> Paper: <a href="http://johngustafson.net/pdfs/BeatingFloatingPoint.pdf">"Beating Floating Point at its Own Game: Posit Arithmetic"</a> </li>
+        <li> Table Generator: <a href="https://www.posithub.org/widget/lookup">posithub.org/widget/lookup</a> </li>
+        <li> Source (Julia/C/C++ library): <a href="https://github.com/Etaphase/FastSigmoids.jl">github.com/Etaphase/FastSigmoids.jl</a>
+            (courtesy of <a href="https://github.com/ityonemo">Isaac Yonemoto</a>, <a href="https://github.com/interplanetary-robot">IREBC</a>) </li>
+        <li> Source (C/C++ library): <a href="https://github.com/libcg/bfp">github.com/libcg/bfp</a>
+            (courtesy of <a href="https://github.com/libcg">Clément Guérin</a>)</li>
+        <li> Source (C++ template library): <a href="https://github.com/stillwater-sc/universal">github.com/stillwater-sc/universal</a> </li>
+    </ul> </dd>
+
+    <dt>S3FP</dt>
+
+    <dd> Another project from the University of Utah (see FPTaylor and FPTuner
+    above), S3FP is a tool for finding floating-point inputs that will maximize
+    error. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/2555243.2555265">"Efficient Search for Inputs Causing High Floating-point Errors"</a> (PPoPP'14) </li>
+        <li> Website: <a href="http://formalverification.cs.utah.edu/grt/">formalverification.cs.utah.edu/grt</a> </li>
+    </ul> </dd>
+
+    <dt>SOAP</dt>
+
+    <dd> SOAP (Structural Optimisation of Arithmetic Programs) is a tool for
+    optimizing FPGA-based implementations of floating-point code. </dd>
+
+    <dd> <ul>
+        <li> Source: <a href="https://github.com/admk/soap">github.com/admk/soap</a> </li>
+    </ul> </dd>
+
+    <dt>Sollya</dt>
+
     <dd>Sollya is a library and environment for safe floating-point
     development, specifically intended to aid the development of math
     library functions.</dd>
 
-    <dt><a href="http://stoke.stanford.edu/">STOKE</a></dt>
-    <dd>STOKE is a optimizer and program synthesizer for x86-64 binary
-    code. STOKE can trade off accuracy for performance for
-    floating-point computations.</dd>
+    <dd> <ul>
+        <li>Website: <a href="http://sollya.gforge.inria.fr/">sollya.gforge.inria.fr</a></li>
+    </dd> </ul>
 
-    <dt><a href="https://hal.archives-ouvertes.fr/hal-01236919">syhd</a></dt>
-    <dd>A tool for synthesizing error compensation for floating-point programs.</dd>
 
-    <dt><a href="http://edf-hpc.github.io/verrou/vr-manual.html">Verrou</a></dt>
-    <dd>Verrou helps look for floating-point round-off errors in
-    programs. Verrou implements a stochastic floating-point
-    arithmetic based on random rounding to identify unstable computations.</dd>
+    <dt>Unum library</dt>
+
+    <dd> Unums ("universal numbers") are a novel binary representation for real
+    numbers by <a href="http://johngustafson.net">John Gustafson</a> that exactly
+    quantifies the uncertainty of a stored value. It extends IEEE floating-point by
+    making both the exponent and signficand fields variable-sized, and it adds an
+    "exact" bit that is set if the number is exact and unset if the number
+    represents a range between representable numbers. It provides a way to obtain
+    mathematically-rigorous results in numeric code at the cost of computational
+    efficiency. </dd>
+
+    <dd> <ul>
+        <li> Website: <a href="http://www.johngustafson.net/unums.html">johngustafson.net/unums.html</a> </li>
+        <li> Source (C/C++ library): <a href="https://github.com/LLNL/unum">github.com/LLNL/unum</a>
+            (courtesy of <a href="https://people.llnl.gov/lloyd23">Scott Lloyd</a>, <a href="https://www.llnl.gov">LLNL</a>)</li>
+    </ul> </dd>
+
+    <dt>VFLOAT</dt>
+
+    <dd> VFLOAT is a a variable-precision floating-point library for FPGAs, developed
+    and maintained by <a href="http://www.coe.neu.edu/Research/rcl/members/MEL/index.html">Miriam Leeser</a>
+    at Northeastern University. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/1839480.1839486">"VFloat: A Variable Precision Fixed- and Floating-Point Library for Reconfigurable Hardware"</a> (TRETS'10) </li>
+        <li> Paper: <a href="https://doi.org/10.1145/2851507">"Open-Source Variable-Precision Floating-Point Library for Major Commercial FPGAs"</a> (TRETS'16) </li>
+        <li> Website: <a href="http://www.coe.neu.edu/Research/rcl/projects/floatingpoint/index.html">Link</a> </li>
+    </ul> </dd>
+
+
+    <!-- TODO: include this?
+
+    <dt><a href="https://bitbucket.org/icl/bonsai">BONSAI</a></dt>
+    <dd>BONSAI tests and tunes computational kernels.</dd>
+
+    -->
+
   </dl>
 
-  <p>Mike Lam maintains
-  a <a href="https://w3.cs.jmu.edu/lam2mo/fpanalysis.html">similar
-  list</a> on his website, with more detailed descriptions and paper
-  links.</p>
-
-  <p>If you are developing a floating-point tool, or know of one that
-  isn't on the list,
-  please <a href="mailto:fpbench@cs.washington.edu">email the
-  list</a>.</p>
+  <p>This list is primarily maintained for the research community by
+  <a href="http://w3.cs.jmu.edu/lam2mo/">Mike Lam</a>.
+  If you are developing or are maintaining a floating-point tool, or know of a
+  tool that isn't on the list, please
+  <a href="mailto:fpbench@cs.washington.edu">email the list</a>.</p>
 
 </body>
 </html>
