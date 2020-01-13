@@ -2,7 +2,7 @@
 <html lang="en_US">
 <head>
   <meta charset="utf-8"/>
-  <title>FPBench FPCore 1.2</title>
+  <title>FPBench FPCore 1.3</title>
   <link rel="stylesheet" type="text/css" href="../fpbench.css">
 </head>
 <body class="gutter">
@@ -10,7 +10,7 @@
 <header>
     <a href='..' style='color: black; text-decoration: none;'>
       <img src='../img/logo.png' height='150' alt='FPBench Logo' />
-      <h1>FPCore 1.2</h1>
+      <h1>FPCore 1.3</h1>
     </a>
     <p>A common format for floating-point computations</p>
     <ul>
@@ -23,7 +23,7 @@
 
 <main>
 <header>
-  <h1>FPBench 1.2 standards</h1>
+  <h1>FPBench 1.3 standards</h1>
 
   <p>
     <a href="../">FPBench</a> is a standard benchmark suite for the
@@ -33,10 +33,10 @@
   </p>
 
   <ol>
-    <li><a href="fpcore-1.2.html">The FPCore input format</a></li>
-    <li><a href="examples-1.2.html">FPCore example inputs</a></li>
-    <li><a href="metadata-1.2.html">Metadata for FPCore benchmarks</a></li>
-    <li><a href="measures-1.2.html">Standard measures of error</a></li>
+    <li><a href="fpcore-1.3.html">The FPCore input format</a></li>
+    <li><a href="examples-1.3.html">FPCore example inputs</a></li>
+    <li><a href="metadata-1.3.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-1.3.html">Standard measures of error</a></li>
   </ol>
 </header>
 
@@ -122,21 +122,21 @@
       <dd>( digits <a href="#g:decnum" title="Significand">decnum</a> <a href="#g:decnum" title="Exponent">decnum</a> <a href="#g:decnum" title="Base">decnum</a> )</dd>
 
       <dt id="g:property">property</dt>
-      <dd>:<a href="fpcore-1.2.html#g:symbol" title="Property name">symbol</a> <a href="#g:data" title="Property value">data</a></dd>
+      <dd>:<a href="fpcore-1.3.html#g:symbol" title="Property name">symbol</a> <a href="#g:data" title="Property value">data</a></dd>
 
       <aside>
         Note that metadata can contain
-        arbitrary <a href="fpcore-1.2.html#g:data">data</a>, including
+        arbitrary <a href="fpcore-1.3.html#g:data">data</a>, including
         expressions. Implementations may want to special-case
         properties whose values are expressions, to simplify support
-        for <a href="metadata-1.2.html#p:pre">:pre</a>
-        and <a href="metadata-1.2.html#p:spec">:spec</a>.
+        for <a href="metadata-1.3.html#p:pre">:pre</a>
+        and <a href="metadata-1.3.html#p:spec">:spec</a>.
       </aside>
 
       <dt id="g:data">data</dt>
-      <dd><a href="fpcore-1.2.html#g:symbol" title="Symbols are a datum">symbol</a></dd>
-      <dd><a href="fpcore-1.2.html#g:number" title="Numbers are a datum">number</a></dd>
-      <dd><a href="fpcore-1.2.html#g:string" title="Strings are a datum">string</a></dd>
+      <dd><a href="fpcore-1.3.html#g:symbol" title="Symbols are a datum">symbol</a></dd>
+      <dd><a href="fpcore-1.3.html#g:number" title="Numbers are a datum">number</a></dd>
+      <dd><a href="fpcore-1.3.html#g:string" title="Strings are a datum">string</a></dd>
       <dd>( <a href="#g:data" title="Several data are a datum">data</a>* )</dd>
     </dl>
     <caption>High-level grammar of FPCore.
@@ -152,7 +152,7 @@
   <p>
     In this grammar, an <a href="#g:fpcore">FPCore</a> term describes
     a single benchmark, with a set of free variables, a collection of
-    <a href="metadata-1.2.html">metadata properties</a>, and the
+    <a href="metadata-1.3.html">metadata properties</a>, and the
     floating-point expression defining the benchmark. White-space is
     ignored, and lines starting with the semicolon (<code>;</code>)
     are treated as comments and ignored. The basic tokens are defined
@@ -258,6 +258,12 @@
     <td>isinf</td><td>isnan</td><td>isnormal</td><td>signbit</td>
     </tr>
     </tbody>
+    <thead><th colspan="5">Supported Tensor Operations</th></thead>
+    <tbody>
+    <tr>
+    <td>dim</td><td>size</td><td>ref</td>
+    </tr>
+    </tbody>
   </table>
 
   <aside>
@@ -285,6 +291,18 @@
     the appropriate order), with equal elements allowed
     for <code>&lt;=</code> and <code>&gt;=</code>, and disallowed
     for <code>&lt;</code> and <code>&gt;</code>.
+  </p>
+
+  <p>Tensor operations do not perform any mathematical calculation;
+    they only manipulate the N-dimensional array data structure of a tensor.
+    For a tensor <i>A</i>,
+    <code>(dim A)</code> returns the number of dimensions of <i>A</i>
+    as an integer,
+    <code>(size A 0)</code> returns the length of the first dimension
+    of <i>A</i> as an integer,
+    and <code>(ref A 1 3)</code> returns the element of <i>A</i>
+    at position (1, 3) - i.e. the second element in the first dimesion,
+    and the fourth in the second dimension.
   </p>
   </section>
 
@@ -410,7 +428,7 @@
     </dd>
 
     <aside>
-      <code>cast</code> is used for double-rounding—see <a href="examples-1.2.html#cast">the examples</a>. Nested <code>!</code> annotations change the rounding context but do not multiply round values.
+      <code>cast</code> is used for double-rounding—see <a href="examples-1.3.html#cast">the examples</a>. Nested <code>!</code> annotations change the rounding context but do not multiply round values.
     </aside>
     <dt><code>cast</code> expressions</dt>
     <dd>
@@ -504,7 +522,7 @@
   <p>
     FPCore allows the precision of program inputs, constants, and operations
     to be controlled via a <i>rounding context</i>. The context consists of
-    a set of <a href="metadata-1.2.html">metadata properties</a>, which
+    a set of <a href="metadata-1.3.html">metadata properties</a>, which
     affect how function application, casts, and constants are rounded.
   </p>
 
@@ -539,8 +557,8 @@
     FPCore does not restrict the behavior of the rounding function or the set
     of metadata properties that its behavior depends on. Some common precision
     and rounding direction properties are described for the metadata properties
-    <a href="metadata-1.2.html#p:precision"><code>:precision</code></a>
-    and <a href="metadata-1.2.html#p:round"><code>:round</code></a>.
+    <a href="metadata-1.3.html#p:precision"><code>:precision</code></a>
+    and <a href="metadata-1.3.html#p:round"><code>:round</code></a>.
     Tools are not required to support all of these rounding behaviors,
     and are allowed to introduce new ones and new metadata properties
     to control them.
@@ -573,7 +591,7 @@
     precision from the annotation enclosing the
     entire <code>let</code>. Both operations will take place in a
     context that has inherited <code>nearestEven</code> rounding
-    behavior. The <a href="examples-1.2.html#inheriting">examples</a>
+    behavior. The <a href="examples-1.3.html#inheriting">examples</a>
     contain more details.
   </p>
 
