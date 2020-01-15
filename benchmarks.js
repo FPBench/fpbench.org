@@ -189,6 +189,7 @@ function render_result(core) {
 
 function render_results(evt) {
     var $out = document.querySelector("#benchmarks");
+    var $all = document.querySelector("#download-all");
     var predicate = get_search();
     if (predicate.text) {
         history.replaceState(null, "", "#" + encodeURIComponent(predicate.text));
@@ -202,6 +203,9 @@ function render_results(evt) {
 
     document.querySelector("#num-found").textContent = subdata.length + " benchmarks";
     if (evt) evt.preventDefault();
+
+    var all_benches = subdata.map(function(core) { return core.core; }).join("\n\n");
+    $all.setAttribute("href", "data:;base64," + btoa(all_benches))
 }
 
 function load_benchmarks(data) {

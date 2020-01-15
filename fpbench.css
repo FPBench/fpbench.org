@@ -138,6 +138,7 @@ ol.papers-list li { margin-bottom: 1em; line-height: 1.5; }
 #benchmarks div.links a { margin-right: 1em; }
 #benchmarks div.links a:before { width: 1em; background-image: attr(data-icon); background-size: contain; }
 #benchmarks div.links a:after { content: " »"; }
+footer { margin: 2em 0; text-align: center; }
 
 #benchmarks a.more { float: right; cursor: pointer; }
 #benchmarks a.more:after { content: " »"; }
