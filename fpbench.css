@@ -54,12 +54,12 @@ h2:after {
 pre, code { font-size: 88%; }
 pre { overflow: auto; background: #D2F8FF; padding: .5ex; }
 
-data { font-family: mono; }
+data { font-family: monospace; }
 
 div.warn { background: #fcc; border: 5px solid #f88; padding: 1em;
            text-align: center; font-size: 120%; }
 
-.grammar { font-family: mono; font-size: 88%; }
+.grammar { font-family: monospace; font-size: 88%; }
 .grammar dt { font-weight: bold; margin-top: 1em; }
 .grammar dt:after { content: " ≔" }
 .grammar dd { margin-left: 0; }
@@ -67,7 +67,7 @@ div.warn { background: #fcc; border: 5px solid #f88; padding: 1em;
 
 a[href*=\#g\:]:before { content: "‹" }
 a[href*=\#g\:]:after { content: "›" }
-a[href*=\#g\:] { font-family: mono; font-size: 88%; }
+a[href*=\#g\:] { font-family: monospace; font-size: 88%; }
 .grammar a[href*=\#g\:] { font-size: 100%; }
 
 figure { margin-right: 0; }
@@ -89,10 +89,11 @@ dd { margin: 0; }
 .pitch { font: 600 133% 'Overpass', Helvetica, Arial, sans-serif; margin: 0 2em; }
 .pitch iframe { margin: 0 auto; display: block; border: 1px solid #204a87; }
 
-dl.code-terms dt { font-family: mono; font-size: 88%; }
+dl.code-terms dt { font-family: monospace; font-size: 88%; }
+table thead { padding-top: 1em; }
 table.code-terms { width: 100%; table-layout: fixed; margin: 1em 0; }
 table.code-terms col { width: 20%; }
-table.code-terms td { font-family: mono; font-size: 88%; }
+table.code-terms td { font-family: monospace; font-size: 88%; }
 
 pre.expr { text-align: center; font-family: monospace; }
 pre.shell::before { content: "$ "; font-weight: bold; }
