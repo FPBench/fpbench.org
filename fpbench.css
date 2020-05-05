@@ -8,10 +8,10 @@ body {
 
 body > header {
     overflow: auto; margin-bottom: 3rem; font-size: 100%;
-    background: #D2F8FF; padding: .75em;
+    background: #D2F8FF80; padding: .75em;
     border-radius: 0 0 20px 20px;
-    border: 1px solid #73D4E5;
-    border-bottom: 5px solid #73D4E5;
+    border: 1px solid #73D4E580;
+    border-bottom: 5px solid #73D4E580;
     border-width: 0 1px 5px;
     font-family: 'Overpass', Helvetica, Arial, sans-serif;
     font-weight: 600;
@@ -52,7 +52,7 @@ h2:after {
     background: #198C0E; border-radius: 0 0 5px 5px; height: 7px;
 }
 pre, code { font-size: 88%; }
-pre { overflow: auto; background: #D2F8FF; padding: .5ex; }
+pre { overflow: auto; background: #D2F8FF80; padding: .5ex; }
 
 data { font-family: monospace; }
 
@@ -99,7 +99,7 @@ pre.expr { text-align: center; font-family: monospace; }
 pre.shell::before { content: "$ "; font-weight: bold; }
 
 table.counts { width: 25%; }
-table.counts thead th { text-align: left; border-bottom: 1px solid #D2F8FF; }
+table.counts thead th { text-align: left; border-bottom: 1px solid #204a87; }
 table.counts tr td:nth-child(2) { text-align: right; }
 table.counts th, table.counts td { padding: .5ex 0; }
 
