@@ -2,7 +2,7 @@
 
 body {
   min-width: 400px; max-width: 65ex;
-  margin: 0 auto; line-height: 1.5;
+  margin: 0 auto 5em; line-height: 1.5;
   font-family: Helvetica, Arial, sans; font-size: 20px;
 }
 
