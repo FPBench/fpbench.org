@@ -86,6 +86,7 @@ dl { margin: 1em 0; }
 dt { font-weight: bold; margin-top: 1em; }
 dd { margin: 0; }
 
+.center { text-align: center; }
 .pitch { font: 600 133% 'Overpass', Helvetica, Arial, sans-serif; margin: 0 2em; }
 .pitch iframe { margin: 0 auto; display: block; border: 1px solid #204a87; }
 
