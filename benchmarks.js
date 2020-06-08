@@ -121,8 +121,9 @@ function extra_data(core) {
     var out = [];
     for (var i in core) {
         if (core.hasOwnProperty(i) &&
-            [":name", ":description", "arguments", "operators", ":precision",
-             ":fpbench-domain", ":cite", ":pre", "body", "core", ":example"].indexOf(i) === -1) {
+            i[0] == ":" &&
+            [":name", ":description", ":precision",
+             ":fpbench-domain", ":cite", ":pre", ":example"].indexOf(i) === -1) {
             out.push(render_datum(i.substr(1), "code", core[i]));
         }
     }
@@ -137,10 +138,14 @@ function create_herbie_permalink(core) {
     return "http://herbie.uwplse.org/demo/improve?formula=" + encodeURIComponent(core.core);
 }
 
+function create_fptaylor_permalink(core) {
+    return "http://fptaylor.cs.utah.edu/run?input=" + encodeURIComponent(core.core_fptaylor);
+}
+
 function render_result(core) {
-    var more_link = Element("a", { className: "more" }, "more");
+    var more_link = Element("a", { className: "more", href: "" }, "more");
     var out = Element("div", [
-        Element("h2", [ core[":name"] || "(unnamed)", more_link ]),
+        Element("h3", [ core[":name"] || "(unnamed)", more_link ]),
         core[":description"] && render_datum("Description", "p", core[":description"]),
         core[":example"] && render_datum("Example", "span", render_example(core[":example"])),
 
@@ -159,9 +164,12 @@ function render_result(core) {
             Element("a", {
                 href: create_titanic_permalink(core)
             }, "Titanic"),
-            Element("a", {
+            core.operators.indexOf("while") === -1 && Element("a", {
                 href: create_herbie_permalink(core)
             }, "Herbie"),
+            core.core_fptaylor && Element("a", {
+                href: create_fptaylor_permalink(core)
+            }, "FPTaylor"),
             // Leave this tool as the last one
             Element("a", {
                 download: "benchmark.fpcore",
@@ -173,14 +181,17 @@ function render_result(core) {
     out.addEventListener("click", function() { out.classList.add("open"); more_link.textContent = "less" });
     more_link.addEventListener("click", function(e) {
         out.classList.toggle("open");
+        e.preventDefault();
         e.stopPropagation();
         more_link.textContent = out.classList.contains("open") ? "less" : "more";
+        return false;
     });
     return out;
 }
 
 function render_results(evt) {
     var $out = document.querySelector("#benchmarks");
+    var $all = document.querySelector("#download-all");
     var predicate = get_search();
     if (predicate.text) {
         history.replaceState(null, "", "#" + encodeURIComponent(predicate.text));
@@ -194,6 +205,9 @@ function render_results(evt) {
 
     document.querySelector("#num-found").textContent = subdata.length + " benchmarks";
     if (evt) evt.preventDefault();
+
+    var all_benches = subdata.map(function(core) { return core.core; }).join("\n\n");
+    $all.setAttribute("href", "data:;base64," + btoa(all_benches))
 }
 
 function load_benchmarks(data) {

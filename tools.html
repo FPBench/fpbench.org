@@ -68,9 +68,9 @@ Welcome to Racket v7.3.
 
   <pre class="shell">racket export.rkt <var>input</var>.fpcore <var>output</var>.<var>lang</var></pre>
 
-  <p>For example, to compile <code>salsa.fpcore</code> to C, run:</p>
+  <p>For example, to compile <code>benchmarks/rump.fpcore</code> to C, run:</p>
 
-  <pre class="shell">racket export.rkt salsa.fpcore salsa.c</pre>
+  <pre class="shell">racket export.rkt benchmarks/rump.fpcore rump.c</pre>
 
   <p>The exporter infers the output language from the file extension,
     and will signal an error if the extension is unknown.

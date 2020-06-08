@@ -95,38 +95,5 @@
 
   <p>The <code>fma</code>, <code>expm1</code>, <code>log1p</code>, <code>isnormal</code>, <code>signbit</code>, <code>fmod</code>, <code>remainder</code>, <code>copysign</code>, and <code>nearbyint</code> functions are not yet supported by the reference interpreter.</p>
 
-  <h2 id="sample-accuracy">Statistical Accuracy Measurement</h2>
-
-  <p>
-    FPBench provides a tool to measure the accuracy of FPCore
-    programs. This tool serves as a reference implementation for the
-    <a href="spec/measures-1.0.html">Measures 1.0</a> standard, and
-    uses <i>statistical</i> techniques to
-    measure <i>average</i> <i>forward</i> error. Scaling and
-    non-scaling error are both supported.
-  </p>
-
-  <p>To measure the accuracy of an FPCore program, run:</p>
-
-  <pre class="shell">racket tools/sample-accuracy.rkt &lt; <var>file.fpcore</var></pre>
-
-  <p>The accuracy of each FPCore expression in the file will be
-  printed to the screen. The accuracy measure and measurement
-  technique can be configured:</p>
-
-  <dl class="code-terms">
-    <dt>--measure</dt>
-    <dd>Configures the pointwise error measure used; it may
-    be <kbd>abs</kbd> for absolute error, <kbd>rel</kbd> for relative
-    error, <kbd>ulp</kbd> for ULPs of error, or <kbd>bit</kbd> for
-    bits of error (the default).</dd>
-
-    <dt>--precision</dt>
-    <dd>How many bits of precision to use to compute the ground truth
-    (the default is 2048). Using more bits is slower but computes a
-    more accurate ground truth and thus produces more-accurate
-    results.</dd>
-  </dl>
-
 </body>
 </html>
