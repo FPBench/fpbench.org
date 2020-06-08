@@ -3,7 +3,7 @@
 body {
   min-width: 400px; max-width: 65ex;
   margin: 0 auto 5em; line-height: 1.5;
-  font-family: Helvetica, Arial, sans; font-size: 20px;
+  font-family: Helvetica, Arial, sans-serif; font-size: 20px;
 }
 
 body > header {
@@ -87,7 +87,7 @@ dt { font-weight: bold; margin-top: 1em; }
 dd { margin: 0; }
 
 .center { text-align: center; }
-.pitch { font: 600 133% 'Overpass', Helvetica, Arial, sans-serif; margin: 0 2em; }
+.pitch { font: 600 133% 'Overpass', Helvetica, Arial, sans-serif; margin: 3rem 2em; }
 .pitch iframe { margin: 0 auto; display: block; border: 1px solid #204a87; }
 
 dl.code-terms dt { font-family: monospace; font-size: 88%; }
@@ -179,3 +179,7 @@ footer { margin: 2em 0; text-align: center; }
 #help.active { display: block; }
 #help > p:last-child { margin-bottom: 0; }
 
+.schedule h1 { margin: 1.5em 0 0; color: #198C0E; }
+.schedule time { float: right; }
+.schedule h3 { margin: 0; font: normal 100% Helvetica, Ariel, sans-serif; }
+.schedule p  { margin: 0 0 .5em; color: #666; }
