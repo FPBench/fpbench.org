@@ -8,13 +8,14 @@ body {
 
 body > header {
     overflow: auto; margin-bottom: 3rem; font-size: 100%;
-    background: #D2F8FF80; padding: .75em;
+    background: #dbfaff; padding: .75em;
     border-radius: 0 0 20px 20px;
-    border: 1px solid #73D4E580;
-    border-bottom: 5px solid #73D4E580;
+    border: 1px solid #93deeb;
+    border-bottom: 5px solid #93deeb;
     border-width: 0 1px 5px;
     font-family: 'Overpass', Helvetica, Arial, sans-serif;
     font-weight: 600;
+    position: relative; z-index: 10;
 }
 body > header img { float: left; margin-right: 1em; height: 100px; }
 body > header h1 { color: #198C0E; font-size: 150%; margin: 0; line-height: 1.2121; }
@@ -178,6 +179,13 @@ footer { margin: 2em 0; text-align: center; }
 }
 #help.active { display: block; }
 #help > p:last-child { margin-bottom: 0; }
+
+#alert {
+    font-size: 120%; text-align: center;
+    background: #fffdbb; border: 1px solid #E9DA8A;
+    border-width: 0 1px 5px; border-radius: 0 0 20px 20px;
+    padding: calc(.5em + 20px) 0 .5em; margin-top: calc(-2em - 20px);
+}
 
 .schedule h1 { margin: 1.5em 0 0; color: #198C0E; }
 .schedule time { float: right; }
