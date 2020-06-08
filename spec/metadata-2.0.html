@@ -2,7 +2,7 @@
 <html lang="en_US">
 <head>
   <meta charset="utf-8"/>
-  <title>FPBench Metadata 1.3</title>
+  <title>FPBench Metadata 2.0</title>
   <link rel="stylesheet" type="text/css" href="../fpbench.css">
 </head>
 <body class="gutter">
@@ -10,7 +10,7 @@
 <header>
     <a href='..' style='color: black; text-decoration: none;'>
       <img src='../img/logo.png' height='150' alt='FPBench Logo' />
-      <h1>Metadata 1.3</h1>
+      <h1>Metadata 2.0</h1>
     </a>
     <p>Common metadata for floating-point computations</p>
     <ul>
@@ -23,7 +23,7 @@
 
 <main>
 <header>
-  <h1>FPBench 1.3 standards</h1>
+  <h1>FPBench 2.0 standards</h1>
 
   <p>
     <a href="../">FPBench</a> is a standard benchmark suite for the
@@ -33,10 +33,10 @@
   </p>
 
   <ol>
-    <li><a href="fpcore-1.3.html">The FPCore input format</a></li>
-    <li><a href="examples-1.3.html">FPCore example inputs</a></li>
-    <li><a href="metadata-1.3.html">Metadata for FPCore benchmarks</a></li>
-    <li><a href="measures-1.3.html">Standard measures of error</a></li>
+    <li><a href="fpcore-2.0.html">The FPCore input format</a></li>
+    <li><a href="examples-2.0.html">FPCore example inputs</a></li>
+    <li><a href="metadata-2.0.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-2.0.html">Standard measures of error</a></li>
   </ol>
 
 </header>
@@ -60,7 +60,7 @@
 </aside>
 
 <p>
-  FPBench 1.3 defines the meaning of the following properties:
+  FPBench 2.0 defines the meaning of the following properties:
 </p>
 
 <dl class="code-terms">
@@ -87,9 +87,9 @@
   <dt id="p:precision">:precision</dt>
   <dd>
     Describes the floating-point precision used
-    for <a href="fpcore-1.3.html#rounding">rounding</a>, using a list
+    for <a href="fpcore-2.0.html#rounding">rounding</a>, using a list
     naming a precision family and its parameters, or using a
-    short-hand <a href="fpcore-1.3.html#g:symbol">symbol</a>
+    short-hand <a href="fpcore-2.0.html#g:symbol">symbol</a>
     synonymous with such a list.
 
     <dl class="code-terms">
@@ -113,7 +113,7 @@
       For example, (fixed 0 8) can represent the 8-bit integers from -128 to 127,
       while (fixed -8 8) can represent magnitudes from -128/128 to 127/128 in steps of 1/128.
       Overflow behavior is determined by the
-      <a href="metadata-1.3.html#p:overflow">overflow</a> property.</dd>
+      <a href="metadata-2.0.html#p:overflow">overflow</a> property.</dd>
 
       <dt>real</dt>
       <dd>A special precision for arbitrary real numbers, where no rounding takes place.</dd>
@@ -132,7 +132,7 @@
 
   <dt id="p:round">:round</dt>
   <dd>
-    The floating-point rounding mode used for <a href="fpcore-1.3.html#rounding">rounding</a>. Expected to be one of the IEEE 754 modes
+    The floating-point rounding mode used for <a href="fpcore-2.0.html#rounding">rounding</a>. Expected to be one of the IEEE 754 modes
     <code>nearestEven</code>, <code>nearestAway</code>, <code>toPositive</code>,
     <code>toNegative</code>, or <code>toZero</code>.
   </dd>
@@ -166,7 +166,7 @@
     A precondition on inputs to the benchmark. Tools should not use
     points that fail the precondition to determine the accuracy of the
     benchmark. It is expected to be
-    an <a href="fpcore-1.3.html#g:expr">expression</a> that
+    an <a href="fpcore-2.0.html#g:expr">expression</a> that
     returns a boolean value. A rounding context can be given explicitly
     for the expression, but if it is not, the default rounding context is assumed
     to have <code>real</code> precision rather than the overall properties specified
