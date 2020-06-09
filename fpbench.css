@@ -183,8 +183,7 @@ footer { margin: 2em 0; text-align: center; }
 .alert {
     font-size: 120%; text-align: center;
     background: #fffdbb; border: 1px solid #E9DA8A;
-    border-width: 1px 1px 5px;
-    padding: .5em;
+    border-width: 1px 1px 5px; padding: .5em; margin: 2em 0;
 }
 
 .alert.in-cover:hover { background: #E9DA8A; cursor: pointer; }
