@@ -110,12 +110,15 @@
       <dd>( let* ( [ <a href="#g:symbol" title="Variable being bound">symbol</a> <a href="#g:expr" title="Value of variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate with bindings">expr</a> )</dd>
       <dd>( while <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
       <dd>( while* <a href="#g:expr" title="Loop condition">expr</a> ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
-      <dd>( for ( [ <a href="#g:symbol" title="Index variable">symbol</a> <a href="#g:expr" title="Size of this dimension">expr</a> ]* ) ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
-      <dd>( for* ( [ <a href="#g:symbol" title="Index variable">symbol</a> <a href="#g:expr" title="Size of this dimension">expr</a> ]* ) ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
+      <dd>( for ( [ <a href="#g:symbol" title="Index variable">symbol</a> <a href="#g:expr" title="Size of this dimension">expr</a> ]* ) <br>
+        &nbsp; &nbsp; ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
+      <dd>( for* ( [ <a href="#g:symbol" title="Index variable">symbol</a> <a href="#g:expr" title="Size of this dimension">expr</a> ]* ) <br>
+        &nbsp; &nbsp; ( [ <a href="#g:symbol" title="Variable mutated in loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate after loop">expr</a> )</dd>
       <dd>( tensor ( [ <a href="#g:symbol" title="Index variable">symbol</a> <a href="#g:expr" title="Size of this dimension">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate in parallel for each tensor element">expr</a> )</dd>
-      <dd>( tensor* <a href="#g:symbol" title="Variable to bind partially computed tensor">symbol</a>? ( [ <a href="#g:symbol" title="Index variable">symbol</a> <a href="#g:expr" title="Size of this dimension">expr</a> ]* ) ( [ <a href="#g:symbol" title="Variable mutated during tensor computation loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* )? <a href="#g:expr" title="Body expression to evaluate sequentially for each tensor element">expr</a> )</dd>
+      <dd>( tensor* ( [ <a href="#g:symbol" title="Index variable">symbol</a> <a href="#g:expr" title="Size of this dimension">expr</a> ]* ) <br>
+        &nbsp; &nbsp; ( [ <a href="#g:symbol" title="Variable mutated during tensor computation loop">symbol</a> <a href="#g:expr" title="Initial variable value">expr</a> <a href="#g:expr" title="Update expression for variable">expr</a> ]* ) <a href="#g:expr" title="Body expression to evaluate sequentially for each tensor element">expr</a> )</dd>
       <dd>( cast <a href="#g:expr" title="Expression to round with current rounding context">expr</a> )</dd>
-      <dd>( data <a href="#g:data" title="Structured data (for tensor literals)">data</a> )</dd>
+      <dd>( array <a href="#g:expr" title="Elements of array">expr</a>* )</dd>
       <dd>( ! <a href="#g:property" title="Rounding context for expression">property</a>* <a href="#g:expr" title="Expression annotated by rounding context">expr</a> )</dd>
 
       <dt id="g:number">number</dt>
@@ -368,6 +371,16 @@
     under <a href="#rounding">Rounding</a>.
   </p>
 
+  <p>
+    Values can be stored in n-dimensional arrays, or <i>tensors</i>.
+    Tensors are created by <code>array</code> and <code>tensor</code>
+    expressions and accessed by the special
+    <code>dim</code>, <code>size</code>, and <code>ref</code> operations;
+    numerical operations are restricted to scalar values.
+    More information about tensors is provided under
+    <a href="#tensors">Data Structures</a>.
+  </p>
+
   <aside>
     When FPCore expressions used mixed or incorrect types, we expect
     tools to inform the user of their error. FPBench provides a type
@@ -375,15 +388,22 @@
   </aside>
 
   <p>
-    Operations that receive values of mixed or incorrect types, such
-    as <code>(+ 1 TRUE)</code>, are illegal and the results of
-    evaluating them undefined.
+    Operations that receive values of mixed or incorrect types,
+    such as <code>(+ 1 TRUE)</code> or <code>(ref PI 5)</code>,
+    are illegal and the results of evaluating them undefined.
   </p>
 
   <dl>
     <dt>Function application</dt>
     <dd>
-      The semantics of function application are standard.
+      <p>
+        The semantics of function application are standard.
+      <p>
+
+      <p>
+        If an FPCore is given an identifier before its list of inputs,
+        then it can be used as a function in other FPCores.
+      </p>
     </dd>
 
     <dt><code>if</code> expressions</dt>
@@ -430,6 +450,30 @@
       </p>
     </dd>
 
+    <dt><code>for</code> expressions</dt>
+    <dd>
+      <aside>
+        <code>for</code> loops are particularly well suited to iterating over tensors.
+      </aside>
+      <p>
+        A <code>for</code> loop is similar to a while loop,
+        but instead of a conditional, the loop is run
+        for a predetermined integer number of steps.
+        <code>for</code> loops with a single index variable
+        can be converted to <code>while</code> loops according to the equality:
+      </p>
+
+        <pre style="width: 50ex; margin: 1em auto"><code>(for ([<var>i</var> <var>n</var>]) ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(while (< i n)
+  ([<var>i</var> 0 (+ <var>i</var> 1)]
+   [<var>x</var> <var>init</var> <var>update</var>] ...)
+  <var>retexpr</var>)</code></pre>
+
+      <p>
+        If multiple index variables are provided, then they are iterated
+        in a nested fashion, with the last variable being the innermost loop.
+      </p>
+    </dd>
+
     <aside>
       <code>cast</code> is used for double-rounding—see <a href="examples-2.0.html#cast">the examples</a>. Nested <code>!</code> annotations change the rounding context but do not multiply round values.
     </aside>
@@ -465,11 +509,10 @@
       </p>
     </dd>
 
-    <dt><code>let*</code> and <code>while*</code></dt>
+    <dt><code>let*</code>, <code>while*</code> and <code>for*</code></dt>
     <dd>
       <p>
-        <code>let*</code> and <code>while*</code> expressions
-        are sequentially binding variants of <code>let</code> and <code>while</code>,
+        <code>let*</code> expressions are sequentially binding variants of <code>let</code>
         familiar from most lisp dialects.
         Rather than being evaluated simultaneously,
         the bindings are evaluated in order,
@@ -477,7 +520,11 @@
         is the same as <code>(- b b)</code>
         and <code>(let* ([a 1] [b a])b)</code>
         is the same as <code>1</code>.
-        The initializations and updates in the body of a <code>while*</code> loop
+      </p>
+
+      <p>
+        The initializations and updates in the body of a <code>while*</code> loop,
+        and in the body (but not the index variables) of a <code>for*</code> loop,
         are performed sequentially in an analogous way.
       </p>
 
@@ -517,6 +564,23 @@
     <var>retexpr</var>)</code></pre>
     </dd>
   </dl>
+  </section>
+
+  <section id="tensors">
+  <h3>Data Structures</h3>
+
+  <p>
+    FPBench provides support for structured data
+    in n-dimensional arrays, or "tensors."
+  </p>
+
+  <dl>
+    <dt><code>array</code></dt>
+    <dd>
+      The semantics of arrays are like those of Racket lists.
+    </dd>
+  </dl>
+
   </section>
 
   <section id="rounding">
