@@ -372,7 +372,7 @@
   </p>
 
   <p>
-    Values can be stored in n-dimensional arrays, or <i>tensors</i>.
+    Values can be stored in N-dimensional arrays, or <i>tensors</i>.
     Tensors are created by <code>array</code> and <code>tensor</code>
     expressions and accessed by the special
     <code>dim</code>, <code>size</code>, and <code>ref</code> operations;
@@ -422,7 +422,7 @@
       the same as <code>(- b a)</code> and <code>(let ([a 1] [b a])
         b)</code> is illegal unless <code>a</code> is available in the
       context. For sequentially binding variables, nest
-      <code>let</code>s.
+      <code>let</code>s, or use sequentially binding form <code>let*</code>.
     </dd>
 
     <dt><code>while</code> expressions</dt>
@@ -509,7 +509,7 @@
       </p>
     </dd>
 
-    <dt><code>let*</code>, <code>while*</code> and <code>for*</code></dt>
+    <dt><code>let*</code>, <code>while*</code>, and <code>for*</code></dt>
     <dd>
       <p>
         <code>let*</code> expressions are sequentially binding variants of <code>let</code>
@@ -562,6 +562,26 @@
   (if <var>cond</var>
     (while* <var>cond</var> ([<var>x</var> <var>update</var> <var>update</var>] ...) <var>retexpr</var>)
     <var>retexpr</var>)</code></pre>
+
+      <p>
+        Like <code>for</code> loops,
+        <code>for*</code> loops with a single index variable
+        can be desugared into <code>while*</code> loops:
+      </p>
+
+        <pre style="width: 50ex; margin: 1em auto"><code>(for* ([<var>i</var> <var>n</var>]) ([<var>x</var> <var>init</var> <var>update</var>] ...) <var>retexpr</var>)<hr style="border-style: double; border-width: 4px 0 0"/>(while* (< i n)
+  ([<var>x</var> <var>init</var> <var>update</var>]
+   ...
+   [<var>i</var> 0 (+ <var>i</var> 1)])
+  <var>retexpr</var>)</code></pre>
+
+      <p>
+        Note that the index variable update
+        is moved after the other updates in the loop body.
+        As with <code>for</code> loops,
+        multiple index variables are iterated in a nested fashion,
+        with the last variable being the innermost loop.
+      </p>
     </dd>
   </dl>
   </section>
@@ -571,13 +591,49 @@
 
   <p>
     FPBench provides support for structured data
-    in n-dimensional arrays, or "tensors."
+    in N-dimensional arrays, or "tensors."
   </p>
 
   <dl>
-    <dt><code>array</code></dt>
+    <dt><code>array</code> literals</dt>
     <dd>
-      The semantics of arrays are like those of Racket lists.
+      Literal arrays behave like lists in most lisp dialects,
+      but they cannot be extended or modified once created.
+      <code>array</code> constructs an array from its arguments;
+      arrays can be nested to form higher-dimensional data structures.
+    </dd>
+  </dl>
+
+  <dl>
+    <dt><code>tensor</code> expressions</dt>
+    <dd>
+      <code>tensor</code> constructs an array dynamically,
+      by tabulating over a set of indices
+      in the same way as a <code>for</code> loop.
+      The body expression is evaluated independently
+      for each element in the array,
+      so there is no interdependence between the values of the elements.
+    </dd>
+  </dl>
+
+  <dl>
+    <dt><code>tensor*</code> expressions</dt>
+    <dd>
+      <p>
+        Like <code>tensor</code>,
+        <code>tensor*</code> constructs an array dynamically,
+        but it enforces the same iteration order as a <code>for*</code> loop
+        and allows dependence between the computed values
+        of the elements.
+      </p>
+
+      <p>
+        In addition to the index variables,
+        <code>tensor*</code> allows for loop updates and inits to be specified;
+        these updates are performed as for a <code>for*</code> loop
+        and the values are available to the element body expression
+        in the same way as the values of the index variables.
+      </p>
     </dd>
   </dl>
 
