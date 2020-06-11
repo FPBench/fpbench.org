@@ -149,7 +149,8 @@
       </p>
 
       <figure>
-        <pre><code>(! :math-library gnu-libm-2.34 (! :round toZero (! :precision binary32 (+ x 1))))</code></pre>
+        <pre><code>(! :math-library gnu-libm-2.34
+  (! :round toZero :precision binary32 (+ x 1)))</code></pre>
       </figure>
 
       <p>
@@ -160,13 +161,105 @@
       </p>
 
       <figure>
-        <pre><code>(! :precision binary64 (- (! :round toPositive (+ x y)) (! :round toNegative (+ x y))))</code></pre>
+        <pre><code>(! :precision binary64 (- (! :round toPositive (+ x y))
+                          (! :round toNegative (+ x y))))</code></pre>
       </figure>
 
       <p>
         all of the operations will take place in a context with <code>binary64</code> precision, but the additions
         will use different rounding directions.
       </p>
+</section>
+
+<section id="tensors">
+  <h2>Using Tensors</h2>
+
+  <p>
+    N-dimensional arrays, or <i>tensors</i>,
+    are useful for working with any kind of structured data,
+    from simple 3D points to complex, multidimensional arrays.
+    Tensors can be constructed in FPCore expressions either as literal arrays
+    or by dynamically tabulating over a set of indices with <code>tensor</code>.
+    Here are two ways of constructing a 2x2 identity matrix:
+  </p>
+
+  <figure>
+    <pre><code>(array (array 1 0)
+       (array 0 1))
+
+(tensor ([i 2] [j 2])
+  (if (== i j) 1 0))</code></pre>
+  </figure>
+
+  <p>
+    Tensors can be nested,
+    and different ways of constructing them can be nested with each other.
+    For example, and <code>n</code> by 3 matrix of zeros (perhaps of 3D points)
+    could be constructed like this:
+  </p>
+
+  <figure>
+    <pre><code>(tensor ([i n])
+  (array 0 0 0))</code></pre>
+  </figure>
+
+  <p>
+    Tensors can also be received as inputs to an FPCore.
+    Each tensor input must be annotated with the sizes of its dimensions;
+    these can either be fixed integers, or symbols that will be bound
+    to the appropriate size when the FPCore is executed.
+    For example, the input array <code>A</code> in the following FPCore
+    must be <code>n</code> by 3. The FPCore returns the first <code>k</code> rows.
+  </p>
+
+  <figure>
+    <pre><code>(FPCore ((A n 3) k)
+ :pre (&lt;= 0 k n)
+  (tensor ([i 0 k])
+    (ref A i)))</code></pre>
+  </figure>
+
+  <p>
+    As purely functional data structures,
+    tensors cannot be modified in any way after they are created.
+    However, they can be copied by another <code>tensor</code> expression,
+    as alluded to in the previous example.
+  </p>
+
+  <p>
+    FPCore does not provide any numerical operations on tensors,
+    only the data structure operations
+    <code>dim</code>, <code>size</code>, and <code>ref</code>.
+    By specifying an identifier
+    to allow an FPCore to be called as an operationin other FPCores,
+    specific tensor operations can be defined,
+    such as matrix multiplication:
+  </p>
+
+  <figure>
+    <pre><code>(FPCore matmul ((A am an) (B bm bn))
+ :pre (== an bm)
+  (tensor ([m am]
+           [n bn])
+    (for ([i bm])
+      ([prod 0 (+ prod (* (ref A m i) (ref B i n)))])
+      prod)))</code></pre>
+  </figure>
+
+  <p>
+    For algorithms with more complicated data dependencies,
+    a <code>tensor*</code> expression can be used
+    to statefully loop over a tensor,
+    for example to compute a partial sum:
+  </p>
+
+  <figure>
+    <pre><code>(FPCore parsum-1d ((A n))
+  (tensor* ([i n])
+    ([sum 0 (+ sum (ref A i))])
+    sum))
+</code></pre>
+  </figure>
 </section>
 
 </main>
