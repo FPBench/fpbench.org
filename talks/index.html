@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <title>FPBench FPTalks 2020</title>
+  <title>FPTalks 2020</title>
   <link rel="stylesheet" type="text/css" href="../fpbench.css">
 </head>
 <body>
@@ -30,6 +30,28 @@
     live-streamed and recorded on Youtube. Each talk will be 10
     minutes long, followed by audience questions.</p>
 
+    <div class="alert registration">
+      <div class="cover"> Register to attend! </div>
+      <form action="https://script.google.com/macros/s/AKfycbxWUeCTidZVCpx9ZrZXYU8vWGdO5a4CnQyF7vwmi9wq1ZCjmh_R/exec" method="post">
+        <div class="field">
+          <label for="name">Name:</label>
+          <input id="name" name="name" type="text" placeholder="Jane Smith" />
+        </div>
+        <div class="field">
+          <label for="email">Email:</label>
+          <input id="email" name="email" type="email" placeholder="you@somewhere.edu" />
+        </div>
+        <div class="field">
+          <label for="affiliation">Affiliation:</label>
+          <input id="affiliation" name="affiliation" type="text" placeholder="University of Somewhere" />
+        </div>
+        <button type="submit">Register!</button>
+      </form>
+      <div class="thank-you">See you at FPTalks 2020!</div>
+      <script src="register.js"></script>
+      <script>setup_registration();</script>
+    </div>
+
     <div class="schedule">
       <h1><time>8:00&ndash;9:00 PDT</time> Session 1</h1>
       <section>
@@ -53,8 +75,8 @@
         <p>Sangeeta Chowdhary, Rutgers University</p>
         <h3>Efficient generation of error-inducing floating-point inputs</h3>
         <p>Hui Guo, University of California at Davis</p>
-        <h3>Discovering discrepancies in numerical libraries</h3>
-        <p>Jackson Vanover, University of California at Davis</p>
+        <h3>Creating correctly rounded math libraries for real number approximations</h3>
+        <p>Jay P. Lim, Rutgers University</p>
       </section>
 
       <h1><time>11:00&ndash;13:00 PDT</time> Lunch</h1>
@@ -81,8 +103,8 @@
         <p>Wonyeol Lee, Stanford University</p>
         <h3>Detecting floating-point errors via atomic conditions</h3>
         <p>Daming Zou, Peking University</p>
-        <h3>Creating correctly rounded math libraries for real number approximations</h3>
-        <p>Jay P. Lim, Rutgers University</p>
+        <h3>Discovering discrepancies in numerical libraries</h3>
+        <p>Jackson Vanover, University of California at Davis</p>
       </section>
     </div>
   </main>

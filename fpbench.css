@@ -180,10 +180,46 @@ footer { margin: 2em 0; text-align: center; }
 #help.active { display: block; }
 #help > p:last-child { margin-bottom: 0; }
 
-#alert {
+.alert {
     font-size: 120%; text-align: center;
     background: #fffdbb; border: 1px solid #E9DA8A;
-    border-width: 0 1px 5px; border-radius: 0 0 20px 20px;
+    border-width: 1px 1px 5px; padding: .5em; margin: 2em 0;
+}
+
+.alert.in-cover:hover { background: #E9DA8A; cursor: pointer; }
+
+.alert form { margin: 1em 0; }
+
+.alert input {
+    font-size: 120%; color: #198C0E;
+    background: #fffdbb; border: 1px solid #E9DA8A;
+    border-width: 0 0 2px;
+}
+
+.alert button {
+    font: 120% 'Overpass', Helvetica, Arial, sans-serif;
+    color: #204a87; text-align: center;
+    background: #dbfaff; padding: .25em 1em; border: 2px solid #93deeb;
+    border-bottom-width: 5px; margin-top: 1em;
+}
+.alert button:hover { background: #93deeb; cursor: pointer; }
+.alert button[disabled] { background: #eee; border-color: #ccc; color: #888;}
+.alert button[disabled]:hover { background: #eee; cursor: auto; }
+
+.field label { width: 20%; display: inline-block; text-align: right; margin: 0 1em; }
+.field input { width: 70%; }
+
+[type=email] { font-family: monospace; }
+.alert ::placeholder { color: #198C0E; opacity: 1; }
+.alert :-ms-input-placeholder { color: #198C0E; }
+.alert ::-ms-input-placeholder { color: #198C0E; }
+
+.registration.in-cover > form, .registration.in-cover > .thank-you { display: none; }
+.registration.in-form > .thank-you { display: none; }
+.registration.in-ty > .cover, .registration.in-ty > form { display: none; }
+
+header + .alert {
+    border-radius: 0 0 20px 20px;
     padding: calc(.5em + 20px) 0 .5em; margin-top: calc(-2em - 20px);
 }
 
