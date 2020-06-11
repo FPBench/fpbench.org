@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en_US">
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench Measures 2.0</title>
+  <link rel="stylesheet" type="text/css" href="../fpbench.css">
+</head>
+<body class="gutter">
+
+<header>
+    <a href='..' style='color: black; text-decoration: none;'>
+      <img src='../img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>Measures 2.0</h1>
+    </a>
+    <p>Error measures for floating-point computations</p>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../benchmarks.html">Benchmarks</a></li>
+      <li><a href="index.html">Standards</a></li>
+      <li><a href="../tools.html">Tools</a></li>
+    </ul>
+</header>
+
+<main>
+<header>
+  <h1>FPBench 2.0 standards</h1>
+
+  <p>
+    <a href="../">FPBench</a> is a standard benchmark suite for the
+    floating point community. The benchmark suite contains a common format
+    for floating-point computation and metadata and a common set
+    of accuracy measures:
+  </p>
+
+  <ol>
+    <li><a href="fpcore-2.0.html">The FPCore input format</a></li>
+    <li><a href="examples-2.0.html">FPCore example inputs</a></li>
+    <li><a href="metadata-2.0.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-2.0.html">Standard measures of error</a></li>
+  </ol>
+
+</header>
+
+<section id="measures">
+<header>
+  <h2>FPBench Standard Measures</h2>
+  
+  <p>
+    FPBench standardizes several measures of accuracy; tools that measure
+    accuracy should state which of the FPBench accuracy measures they use, so
+    that the community can more easily compare tools.
+  </p>
+</header>
+
+<p>
+  FPBench analyses floating-point accuracy along several axes:
+  scaling vs non-scaling error, forward vs. backward error, and maximum vs.
+  average error. Tools that measure error may use sound vs. statistical
+  techniques, and tools that transform programs have several options for how to
+  measure accuracy improvement.
+</p>
+
+<h3>Scaling vs. non-scaling error (\(\varepsilon\))</h3>
+
+<p>
+  There are several ways to measure the error of producing the inaccurate value
+  \(\hat x\) instead of the true value \(x\). Two common mathematical notions are
+  the absolute and relative error:
+</p>
+<figure>
+\[
+\varepsilon_{\text{abs}}(x, x') = \left|x - \hat x\right|
+\quad \text{and} \quad
+\varepsilon_{\text{rel}}(x, x') = \left|\frac{x - \hat x}{x}\right|
+\]
+</figure>
+
+<p>
+  Relative error scales with the quantity being measured, and thus makes sense
+  for measuring both large and small numbers, much like the floating-point
+  format itself. A notion of error more closely tied to the floating-point
+  format is the Units in the Last Place (ULPs) difference.
+</p>
+<aside>
+  Unfortunately, the term Units in the Last Place, or ULPs, means different
+  things in the mathematical and programming communities. We use the definition
+  common for programming tools, such as
+  <a href="https://github.com/StanfordPL/stoke">STOKE-FP</a>.
+</aside>
+<p>
+  Some tools instead use the logarithm of the ULPs, which approximately
+  describes the number of incorrect low-order bits in \(\hat x\). These two
+  measures are defined as:
+</p>
+<figure>
+\[
+\varepsilon_{\text{ulps}}(x, x') = |\mathbb{F} \cap [\min(x, \hat x), \max(x, \hat x)]|
+\quad \text{and} \quad
+\varepsilon_{\text{bits}}(x, x') = \log_2 \varepsilon_{\text{ulps}}(x, x')
+\]
+</figure>
+
+<p>
+  The floating-point numbers are distributed roughly exponentially, so this
+  measure of error scales in a similar manner to relative error; however, it
+  is better-behaved in the presence of denormal numbers and infinities.
+</p>
+
+<h3>Forward vs. backward error (\(\epsilon\))</h3>
+
+<p>
+  Forward error and backward error are two common measures for the error of a
+  mathematical <i>computation</i>. For a true function \(f\) and its
+  approximation \(\hat f\), forward error measures the difference between
+  outputs for a fixed input, while backward error measures the difference
+  between inputs for a fixed output. Formally:
+</p>
+<aside> Where \(n\) is the number of arguments. </aside>
+<figure>
+\[
+  \epsilon_{fwd}(f, \hat{f}, x) = \varepsilon(f(x), \hat{f}(x))
+\]
+\[
+  \epsilon_{bwd}(f, \hat{f}, x) =
+    \min \left\{ \varepsilon(x, x') : x' \in \mathbb{F}^n \land {\hat f}(x') = f(x) \right\}
+\]
+</figure>
+
+<p>
+  Backward error is important for evaluating the stability of an algorithm, and
+  in scientific applications where multiple sources of error (algorithmic error
+      vs. sensor error) must be compared. Existing tools typically measure
+  forward error because backward error can be tricky to compute for
+  floating-point computations, where there may not be an input that produces
+  the true output.
+
+<h3>Average vs. maximum error (\(E\))</h3>
+
+<p>
+  Describing the error of a floating-point computation means summarizing its
+  behaviour across multiple inputs. Existing tools use either maximum or
+  average error for this task. Formally:
+</p>
+<aside>
+  Where \(N\) is the number of valid inputs, and \(n\) is the number of arguments.
+</aside>
+<figure>
+\[
+  E_{\text{max}}(f, \hat{f}) = \max \left\{\epsilon(f, \hat{f}, x) : x \in \mathbb{F}^n\right\}
+  \quad \text{and} \quad
+  E_{\text{avg}}(f, \hat{f}) = \frac{1}{N} \sum_{x\in \mathbb{F}^n} \epsilon(f, \hat{f}, x)
+\]
+</figure>
+
+<p>
+  Worst-case error tends to be easier to measure soundly, while average error
+  tends to be easier to measure statistically.
+</p>
+
+<h3>Sound vs. statistical techniques</h3>
+
+<p>
+  Running a floating-point program on all valid inputs is intractable. Existing
+  tools either soundly overapproximate the error using static analysis, or
+  approximate the error using statistical sampling.
+</p>
+
+<p>
+  Most static techniques are based on interval or affine arithmetic to
+  over-approximate floating-point arithmetic, often using abstract
+  interpretation. Abstract interpretation may use either non-relational or
+  relational abstract domains, and may use acceleration techniques (widenings)
+  to over-approximate loops without unrolling them. While such techniques tend
+  to provide loose over-approximations of the floating-point error of programs,
+  they are fast and provide sound error bounds. In some embedded applications,
+  correctness is critical and unsound techniques will not do.
+</p>
+
+<p>
+  In domains where correctness is not absolutely critical, sampling can provide
+  tight approximations of error. Many sampling techniques are used, including
+  naive random samples and Markov-chain Monte Carlo. These techniques involve
+  running a program multiple times, so they tend to be slower than static
+  analysis.
+</p>
+
+<h3>Measuring improvement (\(\iota\))</h3>
+
+<p>
+  Tools that <i>transform</i> floating-point programs need to compare the
+  accuracy of two floating-point implementations of a function, the original
+  and the transformed. Several comparison measures are possible. Comparisons
+  can use the improvement in worst-case or average error between the original
+  \(\hat f\) and improved \(\hat f'\) implementation of the same mathematical
+  function \(f\):
+</p>
+
+\[
+  \iota_{\text{imp}} = E(f, \hat{f}) - E(f, \hat{f}')
+\]
+
+<p>
+  However, one cannot usually improve the accuracy of a computation
+  simultaneously on all inputs. It is thus often necessary to make a
+  computation less accurate on some points to make it more accurate overall. In
+  this case, it may be useful to report the largest unimprovement, which
+  measures the cost of improving accuracy:
+</p>
+
+<figure>
+\[
+  \iota_{\text{wrs}}(\hat{f},\hat{f}') = \max \left\{ \epsilon(f, \hat{f}', x) - \epsilon(f, \hat{f}', x)
+\ :\ x\in \mathbb{F}^n\right\}
+\]
+</figure>
+
+  <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+</section>
+
+</main>

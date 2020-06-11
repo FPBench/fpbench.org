@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en_US">
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench Examples 2.0</title>
+  <link rel="stylesheet" type="text/css" href="../fpbench.css">
+</head>
+<body class="gutter">
+
+<header>
+    <a href='..' style='color: black; text-decoration: none;'>
+      <img src='../img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>Examples 2.0</h1>
+    </a>
+    <p>Examples of FPCore 2.0 expressions</p>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../benchmarks.html">Benchmarks</a></li>
+      <li><a href="index.html">Standards</a></li>
+      <li><a href="../tools.html">Tools</a></li>
+    </ul>
+</header>
+
+<main>
+<header>
+  <h1>FPBench 2.0 standards</h1>
+
+  <p>
+    <a href="../">FPBench</a> is a standard benchmark suite for the
+    floating-point community. The benchmark suite contains a common format
+    for floating-point computation and metadata and a common set
+    of accuracy measures:
+  </p>
+
+  <ol>
+    <li><a href="fpcore-2.0.html">The FPCore input format</a></li>
+    <li><a href="examples-2.0.html">FPCore example inputs</a></li>
+    <li><a href="metadata-2.0.html">Metadata for FPCore benchmarks</a></li>
+    <li><a href="measures-2.0.html">Standard measures of error</a></li>
+  </ol>
+</header>
+
+<section id="cast">
+  <h2>Rounding with <code>cast</code></h3>
+
+  <p>
+    The <code>cast</code> operation is necessary for explicitly rounding values
+    without performing other numerical operations. Precision annotations specified
+    with <code>!</code> never cause any numerical operations to occur; they only
+    change the rounding context.
+  </p>
+
+  <p>
+    For example, the expression
+  </p>
+
+  <figure>
+    <pre><code>(! :precision binary64 (! :precision binary32 x))</code></pre>
+  </figure>
+
+  <p>
+    will not round the value of the variable <code>x</code>. This expression is the
+    same as simply specifying
+  </p>
+
+  <figure>
+    <pre><code>x</code></pre>
+  </figure>
+
+  <p>
+    regardless of the rounding context. To round <code>x</code>, it is necessary
+    to <code>cast</code> it in a context with the desired precision. The expression
+  </p>
+
+  <figure>
+    <pre><code>(! :precision binary64 (! :precision binary32 (cast x)))</code></pre>
+  </figure>
+
+  <p>
+    will round <code>x</code> to <code>binary32</code> precision (here the outer
+    annotation for <code>binary64</code> precision is redundant, as it will be overwritten by the
+    inner one), while the expression
+  </p>
+
+  <figure>
+    <pre><code>(! :precision binary64 (cast (! :precision binary32 (cast x))))</code></pre>
+  </figure>
+
+  <p>
+    will round <code>x</code> twice, first to <code>binary32</code> precision, and then from <code>binary32</code>
+    to <code>binary64</code> precision.
+  </p>
+
+  <p>
+    Because numerical operations already round their outputs, it should not be necessary
+    to <code>cast</code> in most cases, unless double rounding is specifically intended.
+    For example, in an expression such as
+  </p>
+
+  <figure>
+    <pre><code>(! :precision binary64
+   ([ x (+ y 1)])
+  )</code></pre>
+  </figure>
+
+  <p>
+    the value stored in x will already be rounded to <code>binary64</code> precision,
+    as the addition is done in a context with that precision. Inserting an explicit
+    <code>cast</code> around either the addition or the use of <code>x</code> would
+    cause double rounding, and while in the case of <code>binary64</code> precision
+    this is a no-op, for other rounding contexts it could lead to undesirable behavior.
+  </p>
+</section>
+
+<section id="inheriting">
+  <h2>Inheriting properties in rounding contexts</h2>
+
+      <p>
+        All properties not explicitly specified in a <code>!</code> precision annotation
+        are inherited from the parent context. For the top level expression in an
+        FPCore benchmark, the parent context includes all the overall properties of the benchmark.
+      </p>
+
+      <p>
+        For example, in the following benchmark
+      </p>
+
+      <figure>
+        <pre><code class="fpcore">(FPCore ()
+ :name "foo"
+ :math-library gnu-libm-2.34
+ :spec 0
+  (! :precision binary64 (sin PI)))</code></pre>
+      </figure>
+
+      <p>
+        the <code>sin</code> operation will take place in a context with <code>name</code>
+        <code>"foo"</code>, <code>math-library</code> <code>gnu-libm-2.34</code>, <code>spec</code> 0, and
+        <code>binary64</code> precision. Even properties that are seemingly unrelated to
+        rounding, such as the name of the benchmark, are inherited. The FPCore standard does
+        not prohibit tools from implementing rounding functions that depend on these properties,
+        or other tool-specific properties, although having a rounding function that depends on
+        <code>name</code> is not advised.
+      </p>
+
+      <p>
+        Properties in the rounding context might come from multiple different annotations. For example,
+        in the expression
+      </p>
+
+      <figure>
+        <pre><code>(! :math-library gnu-libm-2.34
+  (! :round toZero :precision binary32 (+ x 1)))</code></pre>
+      </figure>
+
+      <p>
+        the addition will take place as expected in a context with <code>binary32</code> precision,
+        <code>toZero</code> rounding direction, and the <code>gnu-libm-2.34</code> math library. This
+        can be useful if some, but not all, of the properties are shared by multiple subexpressions.
+        For example, in the expression
+      </p>
+
+      <figure>
+        <pre><code>(! :precision binary64 (- (! :round toPositive (+ x y))
+                          (! :round toNegative (+ x y))))</code></pre>
+      </figure>
+
+      <p>
+        all of the operations will take place in a context with <code>binary64</code> precision, but the additions
+        will use different rounding directions.
+      </p>
+</section>
+
+<section id="tensors">
+  <h2>Using Tensors</h2>
+
+  <p>
+    N-dimensional arrays, or <i>tensors</i>,
+    are useful for working with any kind of structured data,
+    from simple 3D points to complex, multidimensional arrays.
+    Tensors can be constructed in FPCore expressions either as literal arrays
+    or by dynamically tabulating over a set of indices with <code>tensor</code>.
+    Here are two ways of constructing a 2x2 identity matrix:
+  </p>
+
+  <figure>
+    <pre><code>(array (array 1 0)
+       (array 0 1))
+
+(tensor ([i 2] [j 2])
+  (if (== i j) 1 0))</code></pre>
+  </figure>
+
+  <p>
+    Tensors can be nested,
+    and different ways of constructing them can be nested with each other.
+    For example, and <code>n</code> by 3 matrix of zeros (perhaps of 3D points)
+    could be constructed like this:
+  </p>
+
+  <figure>
+    <pre><code>(tensor ([i n])
+  (array 0 0 0))</code></pre>
+  </figure>
+
+  <p>
+    Tensors can also be received as inputs to an FPCore.
+    Each tensor input must be annotated with the sizes of its dimensions;
+    these can either be fixed integers, or symbols that will be bound
+    to the appropriate size when the FPCore is executed.
+    For example, the input array <code>A</code> in the following FPCore
+    must be <code>n</code> by 3. The FPCore returns the first <code>k</code> rows.
+  </p>
+
+  <figure>
+    <pre><code>(FPCore ((A n 3) k)
+ :pre (&lt;= 0 k n)
+  (tensor ([i 0 k])
+    (ref A i)))</code></pre>
+  </figure>
+
+  <p>
+    As purely functional data structures,
+    tensors cannot be modified in any way after they are created.
+    However, they can be copied by another <code>tensor</code> expression,
+    as alluded to in the previous example.
+  </p>
+
+  <p>
+    FPCore does not provide any numerical operations on tensors,
+    only the data structure operations
+    <code>dim</code>, <code>size</code>, and <code>ref</code>.
+    By specifying an identifier
+    to allow an FPCore to be called as an operationin other FPCores,
+    specific tensor operations can be defined,
+    such as matrix multiplication:
+  </p>
+
+  <figure>
+    <pre><code>(FPCore matmul ((A am an) (B bm bn))
+ :pre (== an bm)
+  (tensor ([m am]
+           [n bn])
+    (for ([i bm])
+      ([prod 0 (+ prod (* (ref A m i) (ref B i n)))])
+      prod)))</code></pre>
+  </figure>
+
+  <p>
+    For algorithms with more complicated data dependencies,
+    a <code>tensor*</code> expression can be used
+    to statefully loop over a tensor,
+    for example to compute a partial sum:
+  </p>
+
+  <figure>
+    <pre><code>(FPCore parsum-1d ((A n))
+  (tensor* ([i n])
+    ([sum 0 (+ sum (ref A i))])
+    sum))
+</code></pre>
+  </figure>
+</section>
+
+</main>
+</body>
+</html>
