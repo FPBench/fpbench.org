@@ -65,5 +65,6 @@ function setup_registration() {
     var $ty = $alert.querySelector(".thank-you");
     var obj = new RegistrationForm($alert, $cover, $form, $ty);
     if (registered) obj.skip();
+    else if ((new URL(document.location)).searchParams.get("register")) obj.open();
     return obj;
 }
