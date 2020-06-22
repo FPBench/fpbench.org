@@ -63,8 +63,11 @@ function setup_registration() {
     var $alert = $form.parentNode;
     var $cover = $alert.querySelector(".cover");
     var $ty = $alert.querySelector(".thank-you");
+
+    var do_register = typeof (new URL(document.location)).searchParams.get("register") === "string";
+
     var obj = new RegistrationForm($alert, $cover, $form, $ty);
     if (registered) obj.skip();
-    else if ((new URL(document.location)).searchParams.get("register")) obj.open();
+    else if (do_register) obj.open();
     return obj;
 }
