@@ -227,3 +227,7 @@ header + .alert {
 .schedule time { float: right; }
 .schedule h3 { margin: 0; font: normal 100% Helvetica, Ariel, sans-serif; }
 .schedule p  { margin: 0 0 .5em; color: #666; }
+
+.sponsor { overflow: auto; }
+.sponsor img { width: 10em; float: left; margin-right: 1em; }
+
