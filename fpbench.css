@@ -174,11 +174,18 @@ footer { margin: 2em 0; text-align: center; }
 
 #help {
     padding: 1ex; line-height: 1.5;
-    border: 1px solid #aaa; border-top: none;
-    display: none;
+    border: 1px solid #E9DA8A; background: #fffdbb; border-bottom-width: 5px;
+    display: none; position: relative; top: -1px;
 }
 #help.active { display: block; }
 #help > p:last-child { margin-bottom: 0; }
+
+#help:before, #help:after /* Triangle */ {
+    content: " "; display: block; position: absolute; 
+    border-style: none solid solid; border-color: transparent;
+}
+#help:before { border-width: 10px; border-bottom-color: #E9DA8A; top: -10px; right: 1ex; }
+#help:after { border-width: 9px; border-bottom-color: #fffdbb; top: -9px; right: calc(1ex + 1px); }
 
 .alert {
     font-size: 120%; text-align: center;
