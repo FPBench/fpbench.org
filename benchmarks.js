@@ -210,13 +210,30 @@ function render_results(evt) {
     $all.setAttribute("href", "data:;base64," + btoa(all_benches))
 }
 
+function getUrlParameter(name) {
+    var regex = new RegExp('[\\?&]' + name + '=([^&]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
 function load_benchmarks(data) {
     DATA = data;
+    var url = new URL(window.location);
     if (window.location.hash) {
         var s = decodeURIComponent(window.location.hash.substr(1));
         document.querySelector("#search").value = s;
     }
     render_results();
+    if (window.location.search.indexOf("show=") !== -1) {
+        var start = window.location.search.indexOf("show=") + 5;
+        var stop = window.location.search.indexOf("&", start);
+        if (stop === -1) stop = undefined;
+        var show = window.location.search.substring(start, stop).split(",");
+        var $results = document.querySelectorAll("#benchmarks > div");
+        for (var i = 0; i < show.length; i++) {
+            $results[show[i] - 1].dispatchEvent(new Event("click"));
+        }
+    }
     document.querySelector("#search").addEventListener("change", render_results);
     document.querySelector("#benchmark-search").addEventListener("submit", render_results);
     document.querySelector("#overlay .help").addEventListener("click", function() {
