@@ -214,8 +214,8 @@ footer { margin: 2em 0; text-align: center; }
 .alert button[disabled]:hover { background: #eee; cursor: auto; }
 
 .alert dl { margin: 0; }
-.alert dt { width: calc(33% - 2ex); text-align: right; display: inline-block; margin: 0 2ex 0 0; }
-.alert dd { width: 67%; text-align: left; display: inline-block; margin: 0; }
+.alert dt { width: calc(37% - 2ex); text-align: right; display: inline-block; margin: 0 2ex 0 0; }
+.alert dd { width: 63%; text-align: left; display: inline-block; margin: 0; }
 
 .field label { width: 20%; display: inline-block; text-align: right; margin: 0 1em; }
 .field input { width: 70%; }
