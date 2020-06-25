@@ -80,6 +80,21 @@
         <li> Paper: <a href="https://doi.org/10.1145/3330345.3330360">"AMPT-GA: Automatic Mixed Precision Floating Point Tuning for GPU Applications"</a> (ICS'19) </li>
     </ul> </dd>
 
+    <dt><span style="font-variant: small-caps;">Atomu</span></dt>
+
+    <dd><span style="font-variant: small-caps;">Atomu</span> is a tool
+    developed by <a href="https://damingz.github.io">Daming Zou</a>
+    (Peking University) that uses "atomic" condition numbers of individual
+    floating-point operations to estimate the introduced error. It also performs
+    an evolutionary search to find inputs that trigger the highest condition
+    number for each operation. The instrumentation portion of the tool is
+    implemented as an LLVM pass. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3371128">"Detecting Floating-Point Errors via Atomic Conditions"</a> (POPL'20) </li>
+        <li> Source: <a href="https://github.com/FP-Analysis/atomic-condition">github.com/FP-Analysis/atomic-condition</a> </li>
+    </ul> </dd>
+
     <dt>CADNA / PROMISE</dt>
 
     <dd>CADNA (Control of Accuracy and Debugging for Numerical Applications)
@@ -143,6 +158,30 @@
         <li> Source: <a href="https://github.com/crafthpc/floatsmith">github.com/crafthpc/floatsmith</a> </li>
     </ul> </dd>
 
+    <dt>FPDiff</dt>
+
+    <dd> FPDiff is a tool by Jackson Vanover (UC Davis) that performs automated
+    differential testing on mathematical library source code, extracting
+    numerical function signatures, synthesizing drivers, creating equivalence
+    classes of synonymous functions, and executing tests to detect meaningful
+    numerical discrepancies between implementations. </dd>
+
+    <dd> <ul>
+        <li> Paper: "Discovering Discrepancies in Numerical Libraries" (to appear, ISSTA'20) </li>
+        <li> Source: <a href="https://github.com/ucd-plse/FPDiff">github.com/ucd-plse/FPDiff</a> </li>
+    </ul> </dd>
+
+    <dt>FPGen</dt>
+
+    <dd> FPGen is a tool by <a href="https://hguo15.github.io/huiguo.github.io/">Hui Guo</a>
+    (UC Davis) that uses symbolic execution to generate inputs that maximize numerical error,
+    finding more errors than S3FP or KLEE. </dd>
+
+    <dd> <ul>
+        <li> Paper: "Efficient Generation of Error-Inducing Floating-Point Inputs via Symbolic Execution" (to appear, ICSE'20) </li>
+        <li> Source: <a href="https://github.com/ucd-plse/fpgen">github.com/ucd-plse/fpgen</a> </li>
+    </ul> </dd>
+
     <dt>fpPrecisionTuning</dt>
 
     <dd> fpPrecisionTuning is a combination of two Python tools (C2mpfr and
@@ -156,6 +195,20 @@
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1109/ASPDAC.2017.7858297">"Efficient Floating Point Precision Tuning for Approximate Computing"</a> (ASP-DAC'17) </li>
         <li> Source: <a href="https://github.com/minhhn2910/fpPrecisionTuning">github.com/minhhn2910/fpPrecisionTuning</a> </li>
+    </ul> </dd>
+
+    <dt>FPSpy</dt>
+
+    <dd> FPSpy is a tool by <a href="https://users.cs.northwestern.edu/~pdinda/">Peter Dinda</a>
+    (Northwestern) that uses several different forms of runtime analysis to
+    detect and measure various floating-point issues. It is implemented as an
+    <code>LD_PRELOAD</code> library and works on unmodified x64 executables,
+    monitoring floating-point exceptions and other events of interest to
+    report results with varying levels of granularity and overhead. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3369583.3392673">"Spying on the Floating Point Behavior of Existing, Unmodified Scientific Applications"</a> (HPDC'20) </li>
+        <li> Download: <a href="http://presciencelab.org/FPSpy/fpspy-1.0.tgz">fpspy-1.0.tgz</a> </li>
     </ul> </dd>
 
     <dt>GPUMixer</dt>
