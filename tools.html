@@ -11,7 +11,7 @@
       <img src='img/logo.png' height='150' alt='FPBench Logo' />
       <h1>FPBench Tools</h1>
     </a>
-    <p>Interpreters and exporters for FPCore</p>
+    <p>Export and transform FPCores</p>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="benchmarks.html">Benchmarks</a></li>
@@ -21,21 +21,16 @@
   </header>
 
 
-  <p><a href=".">FPBench</a> develops two compiler tools for FPCore
-  programs: an <a href="#export">exporter</a> and
+  <p><a href=".">FPBench</a> ships two compiler tools for FPCore:
+  an <a href="#export">exporter</a> and
   a <a href="#transform">transformation tool</a>. Both are
   <a href="https://github.com/FPBench/FPBench">available on Github</a>.</p>
-
-  <aside>
-    FPBench also provides some <a href="internal.html">internal
-    tools</a>, which are documented but unsupported.
-  </aside>
   
   <h2>Installing the FPBench tools</h2>
 
   <p>
     The FPBench tools require <a href="https://racket-lang.org">Racket</a>.
-    Use the <a href="http://download.racket-lang.org/racket-v7.3.html">official
+    Use the <a href="http://download.racket-lang.org/racket-v7.7.html">official
     installer</a> to install Racket, or use distro-provided packages
     provided they are version 7.0 or later of Racket (earlier versions
     are not supported).
@@ -46,7 +41,7 @@
   </p>
 
   <pre class="shell">racket
-Welcome to Racket v7.3.
+Welcome to Racket v7.7.
 > (exit)</pre>
   
   <p>Now that Racket is
