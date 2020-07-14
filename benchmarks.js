@@ -65,10 +65,14 @@ function get_search() {
             }
         }
 
-        predicate.and(function(core) {
-            var bool = core[field] && ("" + core[field]).toLowerCase().indexOf(word.toLowerCase()) !== -1;
-            return invert ? !bool : bool;
-        });
+        if (field == ":tool") {
+            if (word) predicate.and(function(core) { return TOOLS[word] && TOOLS[word](core) });
+        } else {
+            predicate.and(function(core) {
+                var bool = core[field] && ("" + core[field]).toLowerCase().indexOf(word.toLowerCase()) !== -1;
+                return invert ? !bool : bool;
+            });
+        }
     });
     return predicate;
 }
@@ -130,17 +134,34 @@ function extra_data(core) {
     return out;
 }
 
-function create_titanic_permalink(core) {
+TOOLS = {}
+
+function Tool(name, fn) {
+    TOOLS[name.toLowerCase()] = function(core) {
+        var link = fn(core);
+        return link && Element("a", { href: link }, name);
+    }
+}
+
+Tool("Titanic", function(core) {
     return "http://titanic.uwplse.org/evaluate?core=" + encodeURIComponent(core.core) + "&float_override=false&posit_override=false";
-}
+})
 
-function create_herbie_permalink(core) {
+Tool("Herbie", function(core) {
+    if (core.operators.indexOf("while") >= 0) return false;
+    if (core.operators.indexOf("while*") >= 0) return false;
+    if (core.operators.indexOf("for") >= 0) return false;
+    if (core.operators.indexOf("for*") >= 0) return false;
+    if (core.operators.indexOf("array") >= 0) return false;
+    if (core.operators.indexOf("tensor") >= 0) return false;
+    if (core.operators.indexOf("tensor*") >= 0) return false;
     return "http://herbie.uwplse.org/demo/improve?formula=" + encodeURIComponent(core.core);
-}
+})
 
-function create_fptaylor_permalink(core) {
+Tool("FPTaylor", function(core) {
+    if (!core.core_fptaylor) return false;
     return "http://fptaylor.cs.utah.edu/run?input=" + encodeURIComponent(core.core_fptaylor);
-}
+})
 
 function render_result(core) {
     var more_link = Element("a", { className: "more", href: "" }, "more");
@@ -161,15 +182,7 @@ function render_result(core) {
 
         Element("div", { className: "links", }, [
             Element("strong", "External tools:"),
-            Element("a", {
-                href: create_titanic_permalink(core)
-            }, "Titanic"),
-            core.operators.indexOf("while") === -1 && Element("a", {
-                href: create_herbie_permalink(core)
-            }, "Herbie"),
-            core.core_fptaylor && Element("a", {
-                href: create_fptaylor_permalink(core)
-            }, "FPTaylor"),
+            Object.values(TOOLS).map(function(f) { return f(core); }),
             // Leave this tool as the last one
             Element("a", {
                 download: "benchmark.fpcore",

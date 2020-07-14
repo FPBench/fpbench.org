@@ -20,9 +20,7 @@
     </ul>
   </header>
 
-  <p>Browse the
-  FPBench's <a href="https://github.com/FPBench/FPBench">benchmark
-  suite</a> and send benchmarks to external tools. FPBench is <a href="contributors.html">open for contributions</a>.</p>
+  <p>FPBench is open for contributions. Please <a href="https://github.com/FPBench/FPBench/issues/new?labels=&template=benchmark-contribution.md">contribute your benchmarks</a>.</p>
   
   <form method="get" action="#" id="benchmark-search">
     <div class="search-container">
@@ -35,26 +33,14 @@
   </form>
 
   <section id="help">
-    <p>Type multiple search terms into the search bar to search for
-    benchmarks that match all the terms. Search terms are
-    case-insensitive. Search operators are supported:</p>
+    <p>Search terms are case-insensitive and space-separated. Multiple
+    search terms are ANDed together. Advanced search operators include:</p>
 
-    <dl class="code-terms">
-      <dt>operator:<var>fn</var></dt>
-      <dd>Uses operator <var>fn</var>; for example, <code>operator:exp</code></dd>
-
-      <dt>from:<var>paper</var></dt>
-      <dd>Cited in <var>paper</var>; for example, <code>from:darulova</code></dd>
-
-      <dt>!<var>term<var></dt>
-      <dd>Negates the search of <var>term</var>; for example, <code>!operator:pow</code></dd>
-
-      <dt><var>parameter</var>:</dt>
-      <dd>Benchmarks with any value for <code>:<var>parameter</var></code>; for example, <code>rosa-ensuring:</code></dd>
-
-      <dt><var>parameter</var>:<var>text</var></dt>
-      <dd>Benchmarks whose <code>:<var>parameter</var></code> value includes <var>text</var>; for example, <code>domain:math</code>
-    </dl>
+    <table class="code-terms">
+      <tr><td>operator:exp</td><td>operator:array</td><td>!operator:while</td></tr>
+      <tr><td>example:</td><td>pre:</td><td>rosa-ensuring:</td></tr>
+      <tr><td>from:herbie</td><td>domain:math</td><td>tool:titanic</td></tr>
+    </table>
 
     <p>Bookmark or email the URL to save or share a search!</p>
   </section>
