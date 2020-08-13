@@ -58,6 +58,9 @@ data { font-family: monospace; }
 div.warn { background: #fcc; border: 5px solid #f88; padding: 1em;
            text-align: center; font-size: 120%; }
 
+.events { list-style: none; padding: 0; }
+.events time { float: right; }
+
 .grammar { font-family: monospace; font-size: 88%; }
 .grammar dt { font-weight: bold; margin-top: 1em; }
 .grammar dt:after { content: " ≔" }
