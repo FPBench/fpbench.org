@@ -158,6 +158,22 @@
         <li> Source: <a href="https://github.com/crafthpc/floatsmith">github.com/crafthpc/floatsmith</a> </li>
     </ul> </dd>
 
+
+    <dt>FPDetect</dt>
+
+    <dd> FPDetect is a tool from the University of Utah for synthesizing error
+    detectors for stencil applications. It begins with an offline phase where
+    affine analysis is used to tighly estimate the floating-point precision
+    preserved across computations for intervals of data points. This bound along
+    with an auxiliary direct evaluation technique is then utilized to
+    instantiate optimally situated detectors across the compute space when
+    executing  online. Violations of this bound can be attributed with certainty
+    to errors such as soft-errors or logical bugs. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3402451">"FPDetect: Efficient Reasoning About Stencil Programs Using Selective Direct Evaluation"</a> (TACO'20) </li>
+    </ul> </dd>
+
     <dt>FPDiff</dt>
 
     <dd> FPDiff is a tool by Jackson Vanover (UC Davis) that performs automated
