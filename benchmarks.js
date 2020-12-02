@@ -186,7 +186,7 @@ function render_result(core) {
             // Leave this tool as the last one
             Element("a", {
                 download: "benchmark.fpcore",
-                href: "data:;base64," + btoa(core.core)
+                href: "data:text/plain;base64," + btoa(core.core)
             }, "Download"),
         ]),
     ]);
@@ -220,7 +220,7 @@ function render_results(evt) {
     if (evt) evt.preventDefault();
 
     var all_benches = subdata.map(function(core) { return core.core; }).join("\n\n");
-    $all.setAttribute("href", "data:;base64," + btoa(all_benches))
+    $all.setAttribute("href", "data:text/plain;base64," + btoa(all_benches))
 }
 
 function getUrlParameter(name) {
