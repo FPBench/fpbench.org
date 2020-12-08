@@ -160,7 +160,7 @@ Tool("Herbie", function(core) {
 
 Tool("FPTaylor", function(core) {
     if (!core.core_fptaylor) return false;
-    return "http://fptaylor.cs.utah.edu/run?input=" + encodeURIComponent(core.core_fptaylor);
+    return "https://monadius.github.io/FPTaylorJS/#/?input=" + encodeURIComponent(core.core_fptaylor) + "&config=rel-error%3Dtrue#/";
 })
 
 function render_result(core) {
