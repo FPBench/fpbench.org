@@ -155,7 +155,7 @@ Tool("Herbie", function(core) {
     if (core.operators.indexOf("array") >= 0) return false;
     if (core.operators.indexOf("tensor") >= 0) return false;
     if (core.operators.indexOf("tensor*") >= 0) return false;
-    return "http://herbie.uwplse.org/demo/improve?formula=" + encodeURIComponent(core.core);
+    return "http://herbie.uwplse.org/demo/?fpcore=" + encodeURIComponent(core.core);
 })
 
 Tool("FPTaylor", function(core) {
