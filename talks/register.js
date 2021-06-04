@@ -25,6 +25,7 @@ RegistrationForm.prototype.open = function() {
 
 RegistrationForm.prototype.submit = function() {
     if (!this.alert.classList.contains("in-form")) return;
+    var that = this;
 
     var inputs = this.form.querySelectorAll("input");
     var data = "";
@@ -34,19 +35,17 @@ RegistrationForm.prototype.submit = function() {
     }
 
     var button = this.form.querySelector("button").setAttribute("disabled", "disabled");
-
-    var xhr = new XMLHttpRequest();
-    xhr.open(this.form.method, this.form.action);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.responseType = "json";
-    var that = this;
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) that.done();
+    var script = document.createElement("script");
+    script.async = true;
+    script.src = this.form.action + "?" + data
+    script.onerror = function(evt) { that.done({ "result": "error", "error": "unknown" }) }
+    window.gas_response = function(data) {
+        that.done(data);
     };
-    xhr.send(data);
+    document.querySelector("head").appendChild(script);
 }
 
-RegistrationForm.prototype.done = function() {
+RegistrationForm.prototype.done = function(result) {
     this.alert.classList.replace("in-form", "in-ty");
     this.form.reset();
     this.form.querySelector("button").removeAttribute("disabled");
