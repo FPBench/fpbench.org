@@ -181,6 +181,19 @@
     but it is assumed to have <code>real</code> precision rather than the overall properties specified
     for the FPCore.
   </dd>
+  
+  <dt id="p:alt">:alt</dt>
+  <dd>
+    An alternative formulation of the same benchmark. These alternative formulations could be more
+    accurate or less accurate, or optimized for different hardware, or be the output of an automated
+    tool like a compiler or a synthesizer. To describe the precise manner in which something is an
+    alternative, the <code>:description</code> annotation can be used, but this is not required. A
+    single <code>FPCore</code> expression could have multiple <code>:alt</code> values to represent
+    multiple alternative formulations. Unlike <code>:spec</code>, which is usually assumed to
+    have <code>real</code> precision and thus be unrealizable, <code>:alt</code> is assumed to have
+    the same precision as the overall <code>FPCore</code> and be realizable, though different in
+    some way from the main body expression.
+  </dd>
 
   <dt id="p:math-library">:math-library</dt>
   <dd>
