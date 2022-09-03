@@ -1,0 +1,429 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>FPBench Community Meetings</title>
+  <link rel="stylesheet" type="text/css" href="fpbench.css">
+
+  <style>
+    .community-talk {
+      margin-bottom: 2rem;
+    }
+
+    .when, .title, .speaker, .abstract {
+      margin-bottom: 0.5rem;
+    }
+
+    .when {
+      font-weight: bold;
+      color: #198C0E;
+    }
+
+    .speaker {
+      font-style: italic;
+    }
+
+    .abstract {
+      font-size: 85%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href='index.html'>
+      <img src='img/logo.png' height='150' alt='FPBench Logo' />
+      <h1>FPBench Community Meetings</h1>
+    </a>
+    <p>Monthly get together to discuss all things numeric</p>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="benchmarks.html">Benchmarks</a></li>
+      <li><a href="tools.html">Compilers</a></li>
+      <li><a href="spec/index.html">Standards</a></li>
+    </ul>
+  </header>
+
+  <section class="pitch center">
+    Informal presentations and vibrant discussion.<br>
+    First Thursday every month at 9am Pacific.
+  </section>
+
+  <main>
+
+<!--
+    <div class="community-talk">
+      <div class="when">
+        TODO
+      </div>
+      <div class="title">
+        TODO
+      </div>
+      <div class="speaker">
+        TODO
+      </div>
+      <div class="abstract">
+        TODO
+      </div>
+    </div>
+
+-->
+
+
+<!--
+
+    <div class="community-talk">
+      <div class="when">
+        November 3, 2022
+      </div>
+      <div class="title">
+        TODO
+      </div>
+      <div class="speaker">
+        Chris Uchytil,
+        Mechanical Engineering,
+        University of Washington
+      </div>
+      <div class="abstract">
+        TODO
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        October 6, 2022
+      </div>
+      <div class="title">
+        TODO
+      </div>
+      <div class="speaker">
+        Ignacio Laguna,
+        Center for Applied Scientific Computing,
+        Lawrence Livermore National Laboratory
+      </div>
+      <div class="abstract">
+        TODO
+      </div>
+    </div>
+
+-->
+
+    <div class="community-talk">
+      <div class="when">
+        September 2, 2022
+      </div>
+      <div class="title">
+        Birds-of-a-feather
+      </div>
+      <div class="abstract">
+
+        In this session, community members discussed challenges
+        connecting various floating point analysis and optimization tools.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        August 4, 2022
+      </div>
+      <div class="title">
+        Database Workbench:
+        an Interface for Mixed-initiative Design Space Search
+      </div>
+      <div class="speaker">
+        Edward Misback,
+        Computer Science &amp; Engineering,
+        University of Washington
+      </div>
+      <div class="abstract">
+
+        The Herbie web demo is intended as an accessible tool for making a
+        rough guess at the best way to improve the accuracy of a floating-point
+        expression. It aims to support students learning about floating point
+        error, casual users who just want a high-accuracy replacement
+        expression, and expert users who are comfortable interpreting its
+        results. However, it is designed as a single-step tool and leaves
+        little room for users to iterate or adapt it to numerical analysis
+        tasks, even though its underlying functions have broader applications.
+        We describe how an alternative “database workbench” interface will
+        allow users to leverage Herbie’s power while exploring the design space
+        of replacement expressions more flexibly, including support for the
+        development of third-party expression analysis plugins. We would like
+        to discuss with the FPBench community whether the workflow we describe
+        is compatible with other numerical analysis tools and needs, either as
+        plugins or as separate workbenches with a similar interface.
+
+        <a href='https://docs.google.com/presentation/d/1RQ3tDkAzkoFcCZiA2iDpSuHVEJ-aYESwzwvV8M4Ec_s/edit#slide=id.p'>Slides</a>
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        July 6, 2022
+      </div>
+      <div class="title">
+        <a href='https://fpbench.org/talks/fptalks22.html'>FPTalks 2022!</a>
+      </div>
+      <div class="abstract">
+        A great day of talks from folks across the broader community!
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        May 5, 2022
+      </div>
+      <div class="title">
+        Automatic Datapath Optimization using E-Graphs
+      </div>
+      <div class="speaker">
+        Samuel Coward,
+        Intel &amp Imperial College London
+      </div>
+      <div class="abstract">
+
+        RTL development is hampered by low design space exploration and long
+        debug times. High Level Synthesis and ML techniques are not tackling
+        the nature of optimization RTL teams are doing in complex Graphics type
+        IP. This talk provides initial results on: automatically transforming
+        RTL , exploring the design space, how Intel GFx knowhow is exploited,
+        associated formal verification and how the foundation of the system is
+        using the latest e-graph technology.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        April 7, 2022
+      </div>
+      <div class="title">
+        Choosing Mathematical Function Implementations for Speed and Accuracy
+      </div>
+      <div class="speaker">
+        Ian Briggs,
+        Computer Science,
+        University of Utah
+      </div>
+      <div class="abstract">
+
+        Standard implementations of functions like sin and exp optimize for
+        accuracy, not speed, because they are intended for general-purpose use.
+        But just like many applications tolerate inaccuracy from cancellation,
+        rounding error, and singularities, many applications could also
+        tolerate less-accurate function implementations. This raises an
+        intriguing possibility: speeding up numerical code by using different
+        function implementations.
+
+        Enter OpTuner, an automated tool for selecting the best implementation
+        for each mathematical function call site. OpTuner uses error Taylor
+        series and integer linear programming to compute optimal assignments of
+        297 function implementations to call sites and presents the user with a
+        speed-accuracy Pareto curve. In a case study on the POV-Ray ray tracer,
+        OpTuner speeds up a critical computation by 2.48×, leading to a whole
+        program speedup of 1.09× with no change in the program output; human
+        efforts result in slower code and lower-quality output. On a broader
+        study of 36 standard benchmarks, OpTuner demonstrates speedups of 2.05×
+        for negligible decreases in accuracy and up to 5.37× for error-tolerant
+        applications.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        May 3, 2022
+      </div>
+      <div class="title">
+        CORE-MATH Correctly Rounded Mathematical Functions ... Up to the End User
+      </div>
+      <div class="speaker">
+        <a href='https://members.loria.fr/PZimmermann/'>
+          Paul Zimmerman</a>,
+        Research Fellow at INRIA
+      </div>
+      <div class="abstract">
+
+        The mission of the CORE-MATH project is to provide off-the-shelf
+        open-source mathematical functions with correct rounding that can be
+        integrated into current mathematical libraries (GNU libc, Intel Math
+        Library, AMD Libm, Newlib, OpenLibm, Musl, Apple Libm, llvm-libc, CUDA
+        libm, ROCm).  This presentation covers first results in
+        single-precision (binary32).
+
+        <a href='https://members.loria.fr/PZimmermann/talks/'>Slides</a>
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        February 3, 2022
+      </div>
+      <div class="title">
+        Formal Verification of Numerical Methods for Hamiltonian Systems
+      </div>
+      <div class="speaker">
+        <a href='https://ak-2485.github.io/'>
+          Ariel Kellison</a>,
+        Computer Science,
+        Cornell University
+      </div>
+      <!--
+      <div class="abstract">
+
+        TODO
+
+      </div>
+      -->
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        January 6, 2022
+      </div>
+      <div class="title">
+        Birds-of-a-feather
+      </div>
+      <div class="abstract">
+
+        In this session, community members discussed challenges
+        in training folks to tackle numerical challenges,
+        both in university classrooms and in engineering contexts.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        December 2, 2021
+      </div>
+      <div class="title">
+        Automated Discovery of Invertibility Conditions via Syntax-Guided Synthesis
+      </div>
+      <div class="speaker">
+        Andrew Reynolds,
+        Computer Science,
+        University of Iowa
+      </div>
+      <div class="abstract">
+
+        Satisfiability Modulo Theories (SMT) solvers have gained widespread
+        popularity as reasoning engines in numerous formal methods
+        applications, including in syntax-guided synthesis (SyGuS)
+        applications. In this talk, we focus on an emerging class of
+        applications for syntax-guided synthesis, namely, the use of a SyGuS
+        solver to (partially) automate further development and improvements to
+        the SMT solver itself. We describe several recent features in the SMT
+        solver cvc5 that follow this paradigm. These include syntax-guided
+        enumeration of rewrite rules, selection of test inputs, and discovery
+        of solved forms for quantified constraints. For the latter, we describe
+        how syntax-guided synthesis recently played a pivotal role in the
+        development of a new algorithm for quantified bit-vector constraints
+        based on invertibility conditions, and how this technique can be
+        extended for similar algorithms that target quantified constraints in
+        other theories, including the theory of floating points.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        November 4, 2021
+      </div>
+      <div class="title">
+        Birds-of-a-feather
+      </div>
+      <div class="abstract">
+
+        In this session, community members discussed the challenge of porting
+        applications across diverse number systems: "I have software written in
+        number system X, and hardware with accelerator calls that use number
+        system Y. How should I handle adapting my workload, from all
+        implemented in number system X, to a mixed format with some operations
+        in number system Y?"
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        October 7, 2021
+      </div>
+      <div class="title">
+        Lazy Exact Real Arithmetic Using Floating Point Operations
+      </div>
+      <div class="speaker">
+        Ryan McCleeary,
+        Research Engineer,
+        Numerica
+      </div>
+      <div class="abstract">
+
+        Exact real arithmetic systems can specify any amount of precision on
+        the output of the computations. They are used in a wide variety of
+        applications when a high degree of precision is necessary. Some of
+        these applications include: differential equation solvers, linear
+        equation solvers, large scale mathematical models, and SMT solvers.
+        This talk describes a new exact real arithmetic system which uses lazy
+        list of floating point numbers to represent the real numbers.  It
+        details algorithms for basic arithmetic computations on these
+        structures and proves their correctness.  This proposed system has the
+        advantage of algorithms which can be supported by modern floating point
+        hardware, while still being a lazy exact real arithmetic system
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        November 2, 2020
+      </div>
+      <div class="title">
+        FPY: The future of FPCore
+
+      </div>
+      <div class="speaker">
+        Bill Zorn,
+        Computer Science &amp; Engineering,
+        University of Washington
+      </div>
+      <div class="abstract">
+
+        FPY is a new language for specifying benchmarks that is meant to be
+        easier to write for larger programs while retaining compatibility with
+        existing FPCore-based tools. FPY repackages the precise semantics of
+        FPCore under more familiar and convenient Python-like syntax. This
+        talk will discuss the prototype design and highlight new conveniences
+        FPY affords over FPCore.
+
+        <a href='https://docs.google.com/presentation/d/15KlKe-KU-L8qZa-fJsRq06ro1JOboxwmWAPNH7IsxhY/edit#slide=id.ga74a5d7690_0_15'>Slides</a>
+
+      </div>
+    </div>
+
+<!--
+
+    <div class="community-talk">
+      <div class="when">
+        TODO
+      </div>
+      <div class="title">
+        TODO
+      </div>
+      <div class="speaker">
+        TODO
+      </div>
+      <div class="abstract">
+
+        TODO
+
+      </div>
+    </div>
+
+-->
+
+  </main>
+</body>
+</html>
