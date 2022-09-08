@@ -381,6 +381,281 @@
 
     <div class="community-talk">
       <div class="when">
+        August 5, 2021
+      </div>
+      <div class="title">
+        State of FPBench
+      </div>
+      <div class="abstract">
+
+        In this meeting, the community discussed what the community
+        might most productively focus on in the coming year. The
+        discussion was lively and landed on three major thrusts:
+          (1) categorizing benchmarks by domain and improving licensing,
+          (2) developing "FP course modules" that instructors
+            can easily incorporate into their courses, and
+          (3) increasing industrial outreach to encourage FPCore adoption
+            as a formal, vendor-neutral specification language.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        July 1, 2021
+      </div>
+      <div class="title">
+        Scaling Error Analysis to Billions of FLOPs
+      </div>
+      <div class="speaker">
+        <a href="https://sampollard.github.io/">
+          Sam Pollard</a>,
+        Sandia National Laboratories
+      </div>
+      <div class="abstract">
+
+        Sam Pollard shared his work on floating-point error analysis of kernels
+        with many FLOPs (10^9 or more), by combining FPTaylor and analytical
+        error bounds on inner products.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        May 6, 2021
+      </div>
+      <div class="title">
+        RLIBM-32: Fast and Correct 32-bit Math Libraries
+      </div>
+      <div class="speaker">
+        <a href="https://people.cs.rutgers.edu/~jpl169/">
+          Jay Lim</a>,
+        Computer Science,
+        Rutgers University
+      </div>
+      <div class="abstract">
+
+        RLIBM-32 provides a set of techniques to develop correctly rounded math
+        libraries for 32-bit float and posit types. It enhances our RLibm
+        approach that frames the problem of generating correctly rounded
+        libraries as a linear programming problem in the context of 16-bit
+        types to scale to 32-bit types. Specifically, this talk with detail new
+        algorithms to (1) generate polynomials that produce correctly rounded
+        outputs for all inputs using counterexample guided polynomial
+        generation, (2) generate efficient piecewise polynomials with
+        bit-pattern based domain splitting, and (3) deduce the amount of
+        freedom available to produce correct results when range reduction
+        involves multiple elementary functions. The resultant math library for
+        the 32-bit float type is faster than state-of-the-art math libraries
+        while producing the correct output for all inputs. We have also
+        developed a set of correctly rounded elementary functions for 32-bit
+        posits.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        April 1, 2021
+      </div>
+      <div class="title">
+        SHAMAN: Evaluating Numerical Error for Real C++ Code
+      </div>
+      <div class="speaker">
+        <a href="https://www.nersc.gov/about/nersc-staff/nesap-postdocs/nestor-demeure/">
+          Nestor Demeure</a>,
+        Computer Science,
+        University Paris Saclay
+      </div>
+      <div class="abstract">
+
+        <a href="https://github.com/nestordemeure/shaman">Shaman</a> is a C++11
+        library that use operator overloading and a novel method to evaluate
+        the numerical accuracy of an application.  It has been designed to
+        target high-performance simulations and, thus, we insured that it is
+        not only accurate but also: is fast enough to be tested on very large
+        simulations, is compatible with all of C++ mathematical functions, and
+        is threadsafe and compatible with both OpenMP and MPI. In this talk,
+        Nestor gave a live demo of Shaman's capabilities and discuss its novel
+        design features.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        March 4, 2021
+      </div>
+      <div class="title">
+        POP: Fast and Efficient Bit-level Precision Tuning
+      </div>
+      <div class="speaker">
+        <a href="https://dbenkhal.github.io/">
+          Dorra Ben Khalifa</a>,
+        Informatics,
+        Perpignan University
+      </div>
+      <div class="abstract">
+
+        Dorra gave a great demo of <a href="">POP</a>, a tool from her thesis
+        work on precision tuning. Summarizing from her abstract: POP
+        establishes novel techniques for precision tuning. The main idea of our
+        approach is based on semantic modeling of the propagation of the
+        numerical errors throughout the program source. This yields a system of
+        constraints whose minimal solution gives the best tuning of the
+        program. Based on a static analysis approach, we formulate the problem
+        of precision tuning with two different methods. The first method
+        combines a forward and a backward error analysis which are two popular
+        paradigms of error analysis. Next, our analysis is expressed as a set
+        of linear constraints, made of propositional logic formulas and
+        relations between integer elements only, checked by a SMT solver. The
+        second method consists of generating an Integer Linear Problem (ILP)
+        from the program. This is done by reasoning on the most significant bit
+        and the number of significant bits of the values which are integer
+        quantities. The integer solution to this problem, computed in
+        polynomial time by a classical linear programming solver, gives the
+        optimal data types at bit-level. A finer set of semantic equations is
+        also proposed which does not reduce directly to an ILP problem. We use
+        the policy iteration technique to find a solution.  The POP tool
+        implements both methods, and in this session Dorra demonstrateed it
+        across several benchmarks coming from various application domains such
+        as embedded systems, Internet of Things (IoT), physics, etc.
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        February 4, 2021
+      </div>
+      <div class="title">
+        Keeping Science on Keel When Software Moves
+      </div>
+      <div class="speaker">
+        <a href="https://staff.ucar.edu/users/abaker">
+          Allison Baker</a>,
+        National Center for Atmospheric Research
+      </div>
+      <div class="abstract">
+
+        <p>
+
+        Allison lead a great discussion of her recent CACM article
+        <a href="https://cacm.acm.org/magazines/2021/2/250083-keeping-science-on-keel-when-software-moves/fulltext">
+          Keeping Science on Keel When Software Moves</a>.
+
+        </p><p>
+
+        High performance computing (HPC) is central to solving large problems
+        in science and engineering through the deployment of massive amounts of
+        computational power. The development of important pieces of HPC
+        software spans years or even decades, involving dozens of computer and
+        domain scientists. During this period, the core functionality of the
+        software is made more efficient, new features are added, and the
+        software is ported across multiple platforms. Porting of software in
+        general involves the change of compilers, optimization levels,
+        arithmetic libraries, and many other aspects that determine the machine
+        instructions that actually get executed. Unfortunately, such changes do
+        affect the computed results to a significant (and often worrisome)
+        extent. In a majority of cases, there are not easily definable a priori
+        answers one can check against. A programmer ends up comparing the new
+        answer against a trusted baseline previously established or checks for
+        indirect confirmations such as whether physical properties such as
+        energy are conserved. However, such non-systematic efforts might miss
+        underlying issues, and the code may keep misbehaving until these are
+        fixed.
+
+        </p><p>
+
+        In this session, Allison presented real-world evidence to show that
+        ignoring numerical result changes can lead to misleading scientific
+        conclusions.  She presented techniques and tools that can help
+        computational scientists understand and analyze compiler effects on
+        their scientific code. These techniques are applicable across a wide
+        range of examples to narrow down the root-causes to single files,
+        functions within files, and even computational expressions that affect
+        specific variables. The developer may then rewrite the code selectively
+        and/or suppress the application of certain optimizations to regain more
+        predictable behavior.
+
+        </p>
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        January 7, 2021
+      </div>
+      <div class="title">
+        Community Demos
+      </div>
+      <div class="abstract">
+
+        <p>
+
+        Tanmay Tirpankar
+        https://github.com/arnabd88/Satire
+
+        </p><p>
+
+        Mike Lam
+        https://github.com/crafthpc/floatsmith
+
+        </p>
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        December 3, 2020
+      </div>
+      <div class="title">
+        Rival: An Interval Arithmetic for Robust Error Estimation
+      </div>
+      <div class="speaker">
+        <a href="https://www.oflatt.com/">
+          Oliver Flatt</a>,
+        Computer Science,
+        University of Utah
+      </div>
+      <div class="abstract">
+
+        <p>
+
+        Interval arithmetic is a simple way to compute a mathematical
+        expression to an arbitrary accuracy, widely used for verifying
+        floating-point computations. Yet this simplicity belies challenges.
+        Some inputs violate preconditions or cause domain errors. Others cause
+        the algorithm to enter an infinite loop and fail to compute a ground
+        truth. Plus, finding valid inputs is itself a challenge when invalid
+        and unsamplable points make up the vast majority of the input space.
+        These issues can make interval arithmetic brittle and temperamental.
+
+        </p><p>
+
+        Rival introduces three extensions to interval arithmetic to
+        address these challenges. Error intervals express rich notions of input
+        validity and indicate whether all or some points in an interval violate
+        implicit or explicit preconditions. Movability flags detect futile
+        recomputations and prevent timeouts by indicating whether a
+        higher-precision recomputation will yield a more accurate result. And
+        input search restricts sampling to valid, samplable points, so they are
+        easier to find. We compare these extensions to the state-of-the-art
+        technical computing software Mathematica, and demonstrate that our
+        extensions are able to resolve 60.3% more challenging inputs, return
+        10.2× fewer completely indeterminate results, and avoid 64 cases of
+        fatal error.
+
+        </p>
+
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
         November 2, 2020
       </div>
       <div class="title">
@@ -388,7 +663,8 @@
 
       </div>
       <div class="speaker">
-        Bill Zorn,
+        <a href="https://homes.cs.washington.edu/~billzorn/">
+          Bill Zorn</a>,
         Computer Science &amp; Engineering,
         University of Washington
       </div>
