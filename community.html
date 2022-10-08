@@ -19,7 +19,7 @@
       <li><a href="spec/index.html">Standards</a></li>
     </ul>
   </header>
-  
+
   <p> The floating-point research community has developed many tools that
   authors of numerical software can use to test, analyze, or improve their code.
   They are listed here in alphabetical order and categorized into three general
@@ -44,7 +44,7 @@
 
     <dd>ADAPT (Automatic Differentiation Applied to Precision Tuning) is a tool
     developed by <a href="https://w3.cs.jmu.edu/lam2mo/">Mike Lam</a> from JMU
-    and <a href="http://harshithamenon.com/">Harshitha Menon</a> from LLNL. It
+    and <a href="https://www.harshithamenon.com/">Harshitha Menon</a> from LLNL. It
     uses the reverse mode of algorithmic differentiation to determine how much
     precision is needed in a program's inputs and intermediate results in order
     to achieve a desired accuracy in its output, converting this information
@@ -236,6 +236,17 @@
         <li> Download: <a href="http://presciencelab.org/FPSpy/fpspy-1.0.tgz">fpspy-1.0.tgz</a> </li>
     </ul> </dd>
 
+    <dt>GPU-FPtuner</dt>
+
+    <dd> GPU-FPtuner is a mixed-precision autotuner for GPU applications, built
+      on top of the Rose compiler framework. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1109/HiPC50609.2020.00043">"GPU-FPtuner: Mixed-precision Auto-tuning for Floating-point Applications on GPU"</a> (HiPC'20) </li>
+        <li> Source: <a href="https://github.com/raydongpub/GPU-FPtuner">github.com/raydongpub/GPU-FPtuner</a> </li>
+    </ul> </dd>
+
+
     <dt>GPUMixer</dt>
 
     <dd> GPUMixer is a tool written by a multi-institutional team for LLVM-based
@@ -257,7 +268,7 @@
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1145/2813885.2737959">"Automatically Improving Accuracy for Floating Point Expressions"</a> (PLDI'15) </li>
         <li> Website: <a href="https://herbie.uwplse.org">herbie.uwplse.org</a> </li>
-        <li> Source: <a href="https://github.com/uwplse/herbie">github.com/uwplse/herbie</a> </li>
+        <li> Source: <a href="https://github.com/herbie-fp/herbie">github.com/herbie-fp/herbie</a> </li>
     </ul> </dd>
 
     <dd> The authors of Daisy and Herbie have worked together to
@@ -285,7 +296,7 @@
     algorithm for mixed-precision configurations. </dd>
 
     <dd> <ul>
-        <li> Paper: <a href="https://doi.org/10.1145/3213846.3213862">"Exploiting Community Structure for Floating-Point Precision Tuning</a> (ISSTA'18) </li>
+        <li> Paper: <a href="https://doi.org/10.1145/3213846.3213862">"Exploiting Community Structure for Floating-Point Precision Tuning"</a> (ISSTA'18) </li>
         <li> Source: <a href="https://github.com/ucd-plse/HiFPTuner">github.com/ucd-plse/HiFPTuner</a> </li>
     </ul> </dd>
 
@@ -369,7 +380,7 @@
 
     <dd> SHVAL (SHadow Value Analysis Library) is a tool by
     <a href="https://w3.cs.jmu.edu/lam2mo/">Mike Lam</a> that uses the
-    <a href="https://software.intel.com/content/www/us/en/develop/articles/pin-a-dynamic-binary-instrumentation-tool.html">Intel Pin</a>
+    <a href="https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html">Intel Pin</a>
     instrumentation framework to perform full heavyweight shadow-value analysis for
     floating-point arithmetic, effectively allowing developers to simulate any
     real-numbered representation for which a plugin can be developed. </dd>
@@ -539,7 +550,7 @@
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1109/ARITH.2011.40">"Flocq: A Unified Library for Proving Floating-Point Algorithms in Coq"</a> (SCA'11) </li>
         <li> Book: <a href="https://www.elsevier.com/books/computer-arithmetic-and-formal-proofs/boldo/978-1-78548-112-3">"Computer Arithmetic and Formal Proofs"</a> (Elsevier) </li>
-        <li> Website: <a href="http://flocq.gforge.inria.fr/">flocq.gforge.inria.fr</a> </li>
+        <li> Website: <a href="https://flocq.gitlabpages.inria.fr">flocq.gitlabpages.inria.fr</a> </li>
     </ul> </dd>
 
     <dt>FPhile</dt>
@@ -548,6 +559,16 @@
 
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1109/SYNASC.2013.35">"Verifying (In-)Stability in Floating-point Programs by Increasing Precision, using SMT Solving"</a> </li>
+    </ul> </dd>
+
+    <dt>FPSyn</dt>
+
+    <dd> FPSyn is an implementation of a floating-point predicate synthesis
+      technique that automatically derives an expression to calculate the
+      round-off error bound of the input computation. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1007/978-3-031-15077-7_3">"Synthesis of Rigorous Floating-Point Predicates"</a> (SPIN'22)</li>
     </ul> </dd>
 
     <dt>FPTaylor / FPTuner</dt>
@@ -582,7 +603,16 @@
     implementations of elementary functions correct.</dd>
 
     <dd> <ul>
-        <li> Website: <a href="http://gappa.gforge.inria.fr">gappa.gforge.inria.fr</a> </li>
+        <li> Website: <a href="https://gappa.gitlabpages.inria.fr">gappa.gitlabpages.inria.fr</a> </li>
+    </ul> </dd>
+
+    <dt>moTuner</dt>
+
+    <dd> moTuner is a framework built on LLVM for efficiently tuning
+      mixed-precision operators during compilation. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3528416.3530231">"moTuner: a compiler-based auto-tuning approach for mixed-precision operators"</a> (CF'22) </li>
     </ul> </dd>
 
     <dt>POP</dt>
@@ -675,6 +705,17 @@
     <dd> <ul>
         <li> Paper: <a href="https://doi.org/10.1109/LES.2019.2913774">"TAFFO: Tuning Assistant for Floating to Fixed Point Optimization"</a> (LES'19) </li>
         <li> Website: <a href="https://github.com/HEAPLab/TAFFO">github.com/HEAPLab/TAFFO</a> </li>
+    </ul> </dd>
+
+    <dt>VP Float</dt>
+
+    <dd> VP Float is an extension of the C type system to represent
+    variable-precision floating-point arithmetic. The extension is built using
+    LLVM and has two backend code generators, one for a RISC-V coprocessor and one
+    for the GNU MPFR multi-precision library. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3410463.3414660">"VP Float: First Class Treatment for Variable Precision Floating Point Arithmetic"</a> (PACT'20, poster) </li>
     </ul> </dd>
 
   </dl>
@@ -786,6 +827,18 @@
 
     <dd> <ul>
         <li> Source: <a href="https://github.com/crafthpc/fphpc">github.com/crafthpc/fphpc</a> </li>
+    </ul> </dd>
+
+    <dt>FPVM</dt>
+
+    <dd> FPVM is a floating-point virtual machine proposed and prototyped by
+      Peter Dinda and others at Northwestern University. The goal is to allow an
+      existing application binary to be extended to support alternative
+      arithmetic systems. The current implementation combines static binary
+      analysis with trap-and-emulate execution. </dd>
+
+    <dd> <ul>
+        <li> Paper: <a href="https://doi.org/10.1145/3502181.3531469">"FPVM: Towards a Floating Point Virtual Machine"</a> (HPDC'22)</li>
     </ul> </dd>
 
     <dt>KLEE</dt>
