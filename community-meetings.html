@@ -120,12 +120,15 @@
       </div>
     </div>
 
+-->
+
     <div class="community-talk">
       <div class="when">
         November 3, 2022
       </div>
       <div class="title">
-        TODO
+        A Function-Based Approach to Interactive High-Precision
+        Volumetric Design and Fabrication
       </div>
       <div class="speaker">
         Chris Uchytil,
@@ -133,7 +136,28 @@
         University of Washington
       </div>
       <div class="abstract">
-        TODO
+
+        We present a novel computer-aided design (CAD) modeling system designed
+        to support a modeling range that matches the fabrication range of
+        modern additive manufacturing (AM) systems that are capable of
+        producing large-scale, high-resolution parts. To be useful to designers
+        and fabricators, a modeling system must perform essential functions
+        (such as execution of modeling operations, visualization, and slicing)
+        at interactive rates, and achieving the necessary performance depends
+        on efficient use of both memory and computing capacity. Our approach to
+        achieving necessary performance levels is to implement an implicit
+        function-based representation (f-rep) modeling system, not using a
+        computer algebra system, but instead using just-in-time (JIT)
+        compilation of user-defined functions. Efficient memory usage is
+        achieved via a sparse volume data structure that builds on previous
+        work by Hoetzlein [Hoetzlein 2016]. Computational efficiency is
+        achieved through a combination of interval arithmetic (IA) and
+        massively parallel evaluation on the GPU. We follow [Keeter 2020] and
+        employ IA as the basis for local pruning of the function evaluation
+        tree to minimize the required number of function evaluations, and we
+        take advantage of GPU-parallelism to significantly enhance
+        computational throughput.
+
       </div>
     </div>
 
@@ -142,7 +166,8 @@
         October 6, 2022
       </div>
       <div class="title">
-        TODO
+        Finding Inputs that Trigger Floating-Point Exceptions
+        in GPUs via Bayesian Optimization
       </div>
       <div class="speaker">
         Ignacio Laguna,
@@ -150,11 +175,25 @@
         Lawrence Livermore National Laboratory
       </div>
       <div class="abstract">
-        TODO
+
+        Testing code for floating-point exceptions is crucial as exceptions can
+        quickly propagate and produce unreliable numerical answers. The
+        state-of-the-art to test for floating-point exceptions in GPUs is quite
+        limited and solutions require the application's source code, which
+        precludes their use in accelerated libraries where the source is not
+        publicly available. We present an approach to find inputs that trigger
+        floating-point exceptions in black-box GPU functions, i.e., functions
+        where the source code and information about input bounds are
+        unavailable. Our approach is the first to use Bayesian optimization
+        (BO) to identify such inputs and uses novel strategies to overcome the
+        challenges that arise in applying BO to this problem. We implement our
+        approach in the Xscope framework and demonstrate it on 58 functions
+        from the CUDA Math Library and functions from ten HPC programs. Xscope
+        is able to identify inputs that trigger exceptions in about 72% of the
+        tested functions.
+
       </div>
     </div>
-
--->
 
     <div class="community-talk">
       <div class="when">
