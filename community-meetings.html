@@ -72,6 +72,36 @@
 
 -->
 
+    <div class="community-talk">
+      <div class="when">
+        April 6, 2023
+      </div>
+      <div class="title">
+        Formal and Semi-Formal Verification of Floating-Point Computations in C Programs
+      </div>
+      <div class="speaker">
+        Samuel D. Pollard and Ariel Kellison,
+        Sandia National Laboratories
+      </div>
+      <div class="abstract">
+        For better or worse, the world runs on C, and to a lesser
+        extent, C with IEEE 754 floating point. At Sandia Labs, we
+        often are tasked with the formal verification of
+        high-consequence programs in C. Two methods we use at Sandia
+        to accomplish this verification are: fully constructive proofs
+        of correctness (in the Coq theorem prover), and deductive
+        verification (using Frama-C). In both cases, the addition of
+        numerical computations adds complexity to the programs, via
+        numerical error (e.g., discretization or roundoff error), or
+        run-time errors (such as floating-point exceptions). We
+        discuss our efforts at Sandia Labs to both make numerical
+        models of C programs using Frama-C and its ANSI C
+        specification language (ACSL), as well as functional models in
+        Coq, and how to check whether the relevant C code implements
+        these specifications.
+      </div>
+    </div>
+
 
     <div class="community-talk">
       <div class="when">
@@ -81,7 +111,7 @@
         Automatically generating numerical PDE solvers with Finch
       </div>
       <div class="speaker">
-        Eric Heisler
+        Eric Heisler,
         University of Utah
       </div>
       <div class="abstract">
