@@ -1,4 +1,5 @@
-function RegistrationForm(alert, cover, form, ty) {
+function RegistrationForm(year, alert, cover, form, ty) {
+    this.year = year;
     this.alert = alert;
     this.cover = cover;
     this.form = form;
@@ -49,7 +50,7 @@ RegistrationForm.prototype.done = function(result) {
     this.alert.classList.replace("in-form", "in-ty");
     this.form.reset();
     this.form.querySelector("button").removeAttribute("disabled");
-    window.localStorage["registered"] = "yes";
+    window.localStorage["registered-" + this.year] = "yes";
 }
 
 RegistrationForm.prototype.skip = function() {
@@ -57,15 +58,16 @@ RegistrationForm.prototype.skip = function() {
 }
 
 function setup_registration() {
-    var registered = window.localStorage["registered"];
     var $form = document.querySelector(".registration form");
     var $alert = $form.parentNode;
     var $cover = $alert.querySelector(".cover");
     var $ty = $alert.querySelector(".thank-you");
+    var year = $form.dataset["year"];
 
     var do_register = typeof (new URL(document.location)).searchParams.get("register") === "string";
 
-    var obj = new RegistrationForm($alert, $cover, $form, $ty);
+    var registered = window.localStorage["registered-" + year];
+    var obj = new RegistrationForm(year, $alert, $cover, $form, $ty);
     if (registered) obj.skip();
     else if (do_register) obj.open();
     return obj;

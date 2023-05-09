@@ -196,29 +196,32 @@ footer { margin: 2em 0; text-align: center; }
 .box { background: #eee; border-color: #aaa; }
 .alert { background: #fffdbb; border-color: #E9DA8A; }
 
+.box.in-cover:hover { background: #ddd; cursor: pointer; }
 .alert.in-cover:hover { background: #E9DA8A; cursor: pointer; }
 
-.alert form { margin: 1em 0; }
+.box form, .alert form { margin: 1em 0; }
 
-.alert input {
-    font-size: 120%; color: #198C0E;
-    background: #fffdbb; border: 1px solid #E9DA8A;
-    border-width: 0 0 2px;
-}
+.alert input, .box input { font-size: 120%; border-width: 0 0 2px; border-style: solid; }
+.box input { color: #204a87; background: #eee; border-color: #aaa; }
+.alert input { color: #198C0E; background: #fffdbb; border-color: #E9DA8A; }
 
-.alert button {
+.box button, .alert button {
     font: 120% 'Overpass', Helvetica, Arial, sans-serif;
     color: #204a87; text-align: center;
     background: #dbfaff; padding: .25em 1em; border: 2px solid #93deeb;
     border-bottom-width: 5px; margin-top: 1em;
 }
-.alert button:hover { background: #93deeb; cursor: pointer; }
-.alert button[disabled] { background: #eee; border-color: #ccc; color: #888;}
-.alert button[disabled]:hover { background: #eee; cursor: auto; }
+.box button:hover, .alert button:hover { background: #93deeb; cursor: pointer; }
+.box button[disabled], .alert button[disabled] {
+    background: #eee; border-color: #ccc; color: #888;
+}
+.box button[disabled]:hover, .alert button[disabled]:hover {
+    background: #eee; cursor: auto;
+}
 
-.alert dl { margin: 0; }
-.alert dt { width: calc(37% - 2ex); text-align: right; display: inline-block; margin: 0 2ex 0 0; }
-.alert dd { width: 63%; text-align: left; display: inline-block; margin: 0; }
+.box dl, .alert dl { margin: 0; }
+.box dt, .alert dt { width: calc(37% - 2ex); text-align: right; display: inline-block; margin: 0 2ex 0 0; }
+.box dd, .alert dd { width: 63%; text-align: left; display: inline-block; margin: 0; }
 
 .field label { width: 20%; display: inline-block; text-align: right; margin: 0 1em; }
 .field input { width: 70%; }
