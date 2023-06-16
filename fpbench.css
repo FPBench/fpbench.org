@@ -240,6 +240,7 @@ header + .alert {
     padding: calc(.5em + 20px) 0 .5em; margin-top: calc(-2em - 20px);
 }
 
+.schedule { margin: 1.5em 0; }
 .schedule h1 { margin: 1.5em 0 0; color: #198C0E; }
 .schedule h1 a[href] { color: #204a87; }
 .schedule h1 a[href]:hover { color: #444; }
