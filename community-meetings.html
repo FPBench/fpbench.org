@@ -70,6 +70,82 @@
       </div>
     </div>
 -->
+
+    <div class="community-talk">
+      <div class="when">
+        April 4, 2024
+      </div>
+      <div class="title">
+        Rigorous Error Analysis for Logarithmic Number Systems
+      </div>
+      <div class="speaker">
+        Thanh Son Nguyen, University of Utah
+      </div>
+      <div class="abstract">
+        Logarithmic Number Systems (LNS) hold considerable promise in
+        helping reduce the number of bits needed to represent a high
+        dynamic range of real-numbers with finite precision, and also
+        efficiently support multiplication and division. However,
+        under LNS, addition and subtraction turn into non-linear
+        functions that must be approximated—typically using
+        precomputed table-based functions. Additionally, multiple
+        layers of error correction are typically needed to improve
+        result accuracy. Unfortunately, previous efforts have not
+        characterized the resulting error bound. We provide the first
+        rigorous analysis of LNS, covering detailed techniques such as
+        co-transformation that are crucial to implementing subtraction
+        with reasonable accuracy. We provide theorems capturing the
+        error due to table interpolations, the finite precision of
+        pre-computed values in the tables, and the error introduced by
+        fix-point multiplications involved in LNS implementations. We
+        empirically validate our analysis using a Python
+        implementation, showing that our analytical bounds are tight,
+        and that our testing campaign generates inputs diverse-enough
+        to almost match (but not exceed) the analytical bounds. We
+        close with discussions on how to adapt our analysis to LNS
+        systems with different bases and also discuss many pragmatic
+        ramifications of our work in the broader arena of scientific
+        computing and machine learning.
+      </div>
+    </div>
+
+    <div class="community-talk">
+      <div class="when">
+        March 7, 2024
+      </div>
+      <div class="title">
+        Low-bit Quantization for Efficient and Accurate LLM Serving
+      </div>
+      <div class="speaker">
+        Chien-Yu Lin
+      </div>
+      <div class="abstract">
+        The growing demand for Large Language Models (LLMs) in
+        applications such as content generation, intelligent chatbots,
+        and sentiment analysis poses considerable challenges for LLM
+        service providers. To efficiently use GPU resources and boost
+        throughput, batching multiple requests has emerged as a
+        popular paradigm; to further speed up batching, LLM
+        quantization techniques reduce memory consumption and increase
+        computing capacity. However, prevalent quantization schemes
+        (e.g., 8-bit weight-activation quantization) cannot fully
+        leverage the capabilities of modern GPUs, such as 4-bit
+        integer operators, resulting in sub-optimal performance.
+
+        To maximize LLMs' serving throughput, we introduce Atom, a
+        low-bit quantization method that achieves high throughput
+        improvements with negligible accuracy loss. Atom significantly
+        boosts serving throughput by using low-bit operators and
+        considerably reduces memory consumption via low-bit
+        quantization. It attains high accuracy by applying a novel
+        mixed-precision and fine-grained quantization process. We
+        evaluate Atom on 4-bit weight-activation quantization setups
+        in the serving context. Atom improves end-to-end throughput by
+        up to 7.73× compared to the FP16 and by 2.53× compared to INT8
+        quantization, while maintaining the same latency target.
+      </div>
+    </div>
+
     <div class="community-talk">
       <div class="when">
         February 1, 2024
