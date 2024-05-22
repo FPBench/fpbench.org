@@ -70,7 +70,41 @@
       </div>
     </div>
 -->
-
+    <div class="community-talk">
+      <div class="when">
+        June 6, 2024
+      </div>
+      <div class="title">
+        On the precision loss in approximate homomorphic encryption
+      </div>
+      <div class="speaker">
+        Rachel Player, Royal Hollloway University of London
+      </div>
+      <div class="abstract">
+        Since its introduction at Asiacrypt 2017, the CKKS approximate homomorphic encryption
+        scheme has become one of the most widely used and implemented homomorphic encryption 
+        schemes. Due to the approximate nature of the scheme, application developers using 
+        CKKS must ensure that the evaluation output is within a tolerable error of the corresponding
+        plaintext computation. Choosing appropriate parameters requires a good understanding of 
+        how the noise will grow through the computation. A strong understanding of the noise 
+        growth is also necessary to limit the performance impact of mitigations to the attacks
+        on CKKS presented by Li and Micciancio (Eurocrypt 2021). In this work we present a 
+        comprehensive noise analysis of CKKS, that considers noise coming both from the encoding and
+        homomorphic operations. Our main contribution is the first average-case analysis for CKKS 
+        noise, and we also introduce refinements to prior worst-case noise analyses. We develop 
+        noise heuristics both for the original CKKS scheme and the RNS variant presented
+        at SAC 2018. We then evaluate these heuristics by comparing the predicted noise growth 
+        with experiments in the HEAAN and FullRNS-HEAAN libraries, and by comparing with a 
+        worst-case noise analysis as done in prior work. Our findings show mixed results: while
+        our new analyses lead to heuristic estimates that more closely model the observed noise
+        growth than prior approaches, the new heuristics sometimes slightly underestimate the 
+        observed noise growth. This evidences the need for implementation-specific noise analyses
+        for CKKS, which recent work has shown to be effective for implementations of similar schemes.
+        This is joint work with Anamaria Costache, Benjamin R. Curtis, Erin Hales, Sean Murphy, 
+        and Tabitha Ogilvie.
+      </div>
+    </div>
+    
     <div class="community-talk">
       <div class="when">
         May 2, 2024
