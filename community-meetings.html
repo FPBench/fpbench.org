@@ -70,6 +70,42 @@
       </div>
     </div>
 -->
+
+    <div class="community-talk">
+      <div class="when">
+        August 8, 2024
+      </div>
+      <div class="title">
+        Aster: Sound Mixed Fixed-Point Quantizer for Neural Networks
+      </div>
+      <div class="speaker">
+        Debasmita Lohar, Karlsruhe Institute of Technology
+      </div>
+      <div class="abstract">
+        <p>
+          Neural networks are increasingly becoming integral to safety-critical
+          applications, such as controllers in embedded systems. While formal
+          safety verification focuses on idealized real-valued networks, practical
+          applications require quantization to finite precision, inevitably
+          introducing roundoff errors. Manually optimizing precision, especially
+          for fixed-point implementation, while ensuring safety is complex and
+          time-consuming.
+        </p>
+        <p>
+          In this talk, I will introduce Aster, the sound, fully automated,
+          mixed-precision, fixed-point quantizer for deep feed-forward neural
+          networks. Aster reduces the quantization problem to a mixed-integer
+          linear programming (MILP) problem, thus efficiently determining minimal
+          precision to guarantee predefined error bounds. Our evaluations show
+          that Aster's optimized code reduces machine cycles when compiled to an
+          FPGA with a commercial HLS compiler compared to (sound)
+          state-of-the-art. Furthermore, Aster handles significantly more
+          benchmarks faster, especially for larger networks with thousands of
+          parameters.
+        </p>
+      </div>
+    </div>
+
     <div class="community-talk">
       <div class="when">
         June 6, 2024
