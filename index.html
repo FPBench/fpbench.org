@@ -2,166 +2,1369 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <title>FPBench</title>
+  <title>FPBench Community Meetings</title>
   <link rel="stylesheet" type="text/css" href="fpbench.css">
+
+  <style>
+    details { clear: both; margin-bottom: .5em; }
+    summary { list-style-type: none; }
+    time { float: right; color: }
+    .title { color: #198C0E; }
+    details:has(.abstract) .title { cursor: pointer; }
+    .speaker { font-style: italic; font-size: 90%; }
+    .abstract { font-size: 80%; margin-bottom: 2em; }
+  </style>
 </head>
 <body>
   <header>
-    <a href='.'>
+    <a href='index.html'>
       <img src='img/logo.png' height='150' alt='FPBench Logo' />
       <h1>FPBench</h1>
     </a>
-    <p>Standards and benchmarks for floating-point research</p>
+    <p>Numerics community meetings and resources</p>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="benchmarks.html">Benchmarks</a></li>
-      <li><a href="tools.html">Compilers</a></li>
-      <li><a href="spec/index.html">Standards</a></li>
+      <li><a href="index.html">Events</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="community.html">Tools</a></li>
+      <li><a href="https://groups.google.com/a/fpbench.org/g/fpbench">Mailing List</a></li>
     </ul>
   </header>
 
-  <section class="pitch">
-    <p>
-      <a href="benchmarks.html">Benchmarks</a>,
-      <a href="tools.html">compilers</a>, and <a href="spec/index.html">standards</a>
-      <br/>
-      for the floating-point <a href="community.html">research community</a>.
-    </p>
-
-    <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/SRE2Gky381M" frameborder="0" allowfullscreen></iframe>
-  </section>
-
-  <div class="columns">
-    <div>
-      <h2>Resources</h2>
-      <ul>
-        <li><a href="benchmarks.html">Benchmarks</a></li>
-        <li><a href="tools.html">Compilers</a></li>
-        <li><a href="spec/index.html">Standards</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="https://github.com/FPBench/FPBench/issues/new?labels=&template=benchmark-contribution.md">Contribute</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>Community</h2>
-      <ul>
-        <li><a href="https://join.slack.com/t/fptalks/shared_invite/zt-ft4cn3kn-eZ7WmcozZ37rc0xRGlT5Zg">Slack</a></li>
-        <li><a href="https://groups.google.com/a/fpbench.org/g/fpbench">Announcements</a></li>
-        <li><a href="community-meetings.html">Monthly Forum</a></li>
-        <li><a href="talks/index.html">FPTalks Workshop</a></li>
-        <li><a href="community.html">Community Tools</a></li>
-        <li><a href="papers.html">Citations</a></li>
-      </ul>
-    </div>
+  <div class="pitch">
+    <a href="https://groups.google.com/a/fpbench.org/g/fpbench">Join us</a> for monthly to talk numerics.
   </div>
 
-  <h2>Cite FPBench!</h2>
+  <p>
+    FPBench meets for an hour, on Zoom, on the first Thursday of every month at 9am Pacific.<abbr title="Except that we skip months for the annual workshop and for the winter holidays."><sup>&dagger;</sup></abbr> You can <a href="https://forms.gle/H5aodraRcgcJFq6W8">submit a proposal</a> to present.
+  </p>
 
-  <pre>@article{fpbench,
-  author={Nasrine Damouche and Matthieu Martel and Pavel Panchekha and Jason Qiu and Alex Sanchez-Stern and Zachary Tatlock},
-  title={Toward a Standard Benchmark Format and Suite for Floating-Point Analysis},
-  series={NSV'16},
-  month=July,
-  year=2016
-}</pre>
 
-  <p>Check out the many <a href="papers.html">papers using
-  FPBench</a>, and if you're using FPBench,
-  <a href="https://join.slack.com/t/fptalks/shared_invite/zt-ft4cn3kn-eZ7WmcozZ37rc0xRGlT5Zg">let us know</a>!</p>
+  <main>
+
+<!--
+    <details>
+      <summary>
+        <time>TIME</time>
+        TITLE, use sentence not title case
+        <div class="speaker">
+          TODO, University of TODO
+        </div>
+      </summary>
+      <div class="abstract">
+        TODO
+      </div>
+    </details>
+-->
+
+    <details>
+      <summary>
+      <time>
+        August 8, 2024
+      </time>
+      <div class="title">
+        Aster: sound mixed fixed-point quantizer for neural networks
+      </div>
+      <div class="speaker">
+        Debasmita Lohar, Karlsruhe Institute of Technology
+      </div>
+      </summary>
+      <div class="abstract">
+        <p>
+          Neural networks are increasingly becoming integral to safety-critical
+          applications, such as controllers in embedded systems. While formal
+          safety verification focuses on idealized real-valued networks, practical
+          applications require quantization to finite precision, inevitably
+          introducing roundoff errors. Manually optimizing precision, especially
+          for fixed-point implementation, while ensuring safety is complex and
+          time-consuming.
+        </p>
+        <p>
+          In this talk, I will introduce Aster, the sound, fully automated,
+          mixed-precision, fixed-point quantizer for deep feed-forward neural
+          networks. Aster reduces the quantization problem to a mixed-integer
+          linear programming (MILP) problem, thus efficiently determining minimal
+          precision to guarantee predefined error bounds. Our evaluations show
+          that Aster's optimized code reduces machine cycles when compiled to an
+          FPGA with a commercial HLS compiler compared to (sound)
+          state-of-the-art. Furthermore, Aster handles significantly more
+          benchmarks faster, especially for larger networks with thousands of
+          parameters.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        July 11, 2024
+      </time>
+      <div class="title">
+        <a href="talks/fptalks24.html">FPTalks 2024 annual workshop</a>
+      </div>
+      <div class="speaker">
+        12 speakers at the cutting edge of numerics research
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        June 6, 2024
+      </time>
+      <div class="title">
+        On the precision loss in approximate homomorphic encryption
+      </div>
+      <div class="speaker">
+        Rachel Player, Royal Holloway University of London
+      </div>
+      </summary>
+      <div class="abstract">
+        Since its introduction at Asiacrypt 2017, the CKKS approximate homomorphic encryption
+        scheme has become one of the most widely used and implemented homomorphic encryption 
+        schemes. Due to the approximate nature of the scheme, application developers using 
+        CKKS must ensure that the evaluation output is within a tolerable error of the corresponding
+        plaintext computation. Choosing appropriate parameters requires a good understanding of 
+        how the noise will grow through the computation. A strong understanding of the noise 
+        growth is also necessary to limit the performance impact of mitigations to the attacks
+        on CKKS presented by Li and Micciancio (Eurocrypt 2021). In this work we present a 
+        comprehensive noise analysis of CKKS, that considers noise coming both from the encoding and
+        homomorphic operations. Our main contribution is the first average-case analysis for CKKS 
+        noise, and we also introduce refinements to prior worst-case noise analyses. We develop 
+        noise heuristics both for the original CKKS scheme and the RNS variant presented
+        at SAC 2018. We then evaluate these heuristics by comparing the predicted noise growth 
+        with experiments in the HEAAN and FullRNS-HEAAN libraries, and by comparing with a 
+        worst-case noise analysis as done in prior work. Our findings show mixed results: while
+        our new analyses lead to heuristic estimates that more closely model the observed noise
+        growth than prior approaches, the new heuristics sometimes slightly underestimate the 
+        observed noise growth. This evidences the need for implementation-specific noise analyses
+        for CKKS, which recent work has shown to be effective for implementations of similar schemes.
+        This is joint work with Anamaria Costache, Benjamin R. Curtis, Erin Hales, Sean Murphy, 
+        and Tabitha Ogilvie.
+      </div>
+    </details>
     
-  <h2>Events</h2>
+    <details>
+      <summary>
+      <time>
+        May 2, 2024
+      </time>
+      <div class="title">
+        ReLU hull approximation
+      </div>
+      <div class="speaker">
+        Zhongkui Ma, The University of Queensland
+      </div>
+      </summary>
+      <div class="abstract">
+        Neural networks have offered distinct advantages over traditional
+        techniques. However, the opaque neural networks render their
+        performance vulnerable, in the presence of adversarial samples. This
+        underscores the imperative of formal verification of neural networks,
+        especially in the safety-critical domain. Deep neural networks are
+        composed of multiple hidden layers with neurons, where mathematical
+        operations stack linear and nonlinear (activation functions)
+        operations. Using linear inequalities plays a crucial role in
+        constraining and deducing the ranges of results from nonlinear
+        operations. Considering correlations among input variables of multiple
+        neurons leads to constraints known as multi-neuron constraints, posing
+        a non-trivial high-dimensional challenge in computing the convex hull
+        of functions. This work is dedicated to designing methods for computing
+        multi-neuron constraints for the ReLU function to serve the robustness
+        verification of neural networks. We have introduced a novel approach
+        WRALU (Wrapping ReLU) for computing the convex hull of a ReLU function
+        (<a href='https://popl24.sigplan.org/details/POPL-2024-popl-research-papers/77/ReLU-Hull-Approximation'>published in POPL’24</a>).
+        This method significantly reduces computation
+        time and complexity, constructing fewer constraints to achieve more
+        precise approximations while handling higher dimensions.
+      </div>
+    </details>
 
-  <ol class="events">
-    <li><a href="https://sc21.supercomputing.org/presentation/?id=wksp103&sess=sess107">Correctness 2022</a> <time>18 Nov 2022</time></li>
-    <li><a href="talks/fptalks22.html">FPTalks 2022</a> <time>6 July 2022</time></li>
-    <li><a href="https://sc21.supercomputing.org/presentation/?id=wksp103&sess=sess107">Correctness 2021</a> <time>19 Nov 2021</time></li>
-    <li><a href="talks/fptalks21.html">FPTalks 2021</a> <time>14 July 2021</time></li>
-    <li><a href="https://prog-synth-science.github.io/2020/">Program Synthesis for Scientific Computing</a> <time>4–5 Aug 2020</time></li>
-    <li><a href="talks/fptalks20.html">FPTalks 2020</a> <time>24 June 2020</time></li>
-    <li><a href="http://fpanalysistools.org/LANL/">FP Analysis Tools</a> at LANL <time>Jan 2020</time></li>
-    <li><a href="http://fpanalysistools.org/sc19/">FP Analysis Tools</a> at SC'19 <time>17 Nov 2019</time></li>
-    <li><a href="http://fpanalysistools.org/pearc19/">FP Analysis Tools</a> at PEARC'19 <time>30 Jul 2019</time></li>
-  </ol>
+    <details>
+      <summary>
+      <time>
+        April 4, 2024
+      </time>
+      <div class="title">
+        Rigorous error analysis for logarithmic number systems
+      </div>
+      <div class="speaker">
+        Thanh Son Nguyen, University of Utah
+      </div>
+      </summary>
+      <div class="abstract">
+        Logarithmic Number Systems (LNS) hold considerable promise in
+        helping reduce the number of bits needed to represent a high
+        dynamic range of real-numbers with finite precision, and also
+        efficiently support multiplication and division. However,
+        under LNS, addition and subtraction turn into non-linear
+        functions that must be approximated—typically using
+        precomputed table-based functions. Additionally, multiple
+        layers of error correction are typically needed to improve
+        result accuracy. Unfortunately, previous efforts have not
+        characterized the resulting error bound. We provide the first
+        rigorous analysis of LNS, covering detailed techniques such as
+        co-transformation that are crucial to implementing subtraction
+        with reasonable accuracy. We provide theorems capturing the
+        error due to table interpolations, the finite precision of
+        pre-computed values in the tables, and the error introduced by
+        fix-point multiplications involved in LNS implementations. We
+        empirically validate our analysis using a Python
+        implementation, showing that our analytical bounds are tight,
+        and that our testing campaign generates inputs diverse-enough
+        to almost match (but not exceed) the analytical bounds. We
+        close with discussions on how to adapt our analysis to LNS
+        systems with different bases and also discuss many pragmatic
+        ramifications of our work in the broader arena of scientific
+        computing and machine learning.
+      </div>
+    </details>
 
-  <h2>News</h2>
+    <details>
+      <summary>
+      <time>
+        March 7, 2024
+      </time>
+      <div class="title">
+        Low-bit quantization for efficient and accurate LLM serving
+      </div>
+      <div class="speaker">
+        Chien-Yu Lin, University of Washington
+      </div>
+      </summary>
+      <div class="abstract">
+        The growing demand for Large Language Models (LLMs) in
+        applications such as content generation, intelligent chatbots,
+        and sentiment analysis poses considerable challenges for LLM
+        service providers. To efficiently use GPU resources and boost
+        throughput, batching multiple requests has emerged as a
+        popular paradigm; to further speed up batching, LLM
+        quantization techniques reduce memory consumption and increase
+        computing capacity. However, prevalent quantization schemes
+        (e.g., 8-bit weight-activation quantization) cannot fully
+        leverage the capabilities of modern GPUs, such as 4-bit
+        integer operators, resulting in sub-optimal performance.
 
-  <ol class="timeline">
-    <li><time>July 2021</time>
-      Thanks to the speakers and participants for a fantastic FPTalks 2021!
-      Videos of the talks are now available on the <a href="talks/fptalks21.html">FPTalks webpage</a>.
-    </li>
-    <li><time>July 2020</time>
-      <a href="https://homes.cs.washington.edu/~ztatlock/">Zach</a>
-      and <a href="https://pavpanchekha.com/">Pavel</a> talked about
-      FPBench at <a href="https://nsv2020.github.io">NSV 2020</a>.
-      Watch to hear why building the floating-point community is
-      important to researchers and to users.
-    </li>
-    <li><time>June 2020</time>
-      Thanks to everyone who participated in the first FPTalks workshop on on June 24!
-      Videos of all the talks are available on the <a href="talks/fptalks20.html">FPTalks webpage</a>.
-    </li>
-    <li><time>June 2020</time>
-      The <a href="spec/fpcore-2.0.html">FPCore 2.0</a> standard is now officially released,
-      with support for tensor data structures and composable FPCores.
-    </li>
-    <li><time>Nov 2019</time>
-      <a href="http://davidthien.com">David</a>
-      is talking about FPBench 1.2
-      at the <a href="https://correctness-workshop.github.io/2019/">Correctness 2019</a> workshop
-      at <a href="https://sc19.supercomputing.org">SC'19</a>.
-    </li>
-    <li><time>Mar 2019</time>
-      <a href="https://homes.cs.washington.edu/~ztatlock/">Zach</a>
-      gave a keynote about FPBench (and his projects
-      <a href="https://herbie.uwplse.org">Herbie</a>,
-      <a href="http://herbgrind.ucsd.edu">Herbgrind</a>, and
-      <a href="http://titanic.uwplse.org">Titanic</a>)
-      at <a href="https://posithub.org/conga/2019/">CoNGA’19</a>.</li>
-    <li><time>Jan 2019</time>
-      Check out the new <a href="benchmarks.html">benchmarks browser</a>! You can browse, search, and download the FPBench benchmarks from one convenient place.</li>
-    <li><time>Oct 2018</time>
-      The FPBench 1.1 standards have been finalized! <a href="spec/fpcore-1.1.html">Check them out!</a></li>
-    <li><time>July 2018</time>
-      A draft of the upcoming FPBench 1.1 standards has been released. To
-      preview the changes and leave feedback, see the
-      <a href="https://github.com/FPBench/FPBench.github.io/pull/2">pull request</a>
-      on Github.</li>
-    <li><time>Apr 2018</time>
-      The <a href="https://github.com/malyzajko/daisy">Daisy</a>
-      and <a href="https://herbie.uwplse.org/">Herbie</a> have a paper at
-      <a href="http://www.fm2018.org/">FM’18</a> comparing the two
-      projects using the FPBench benchmarks, formats, and tools.
-      Come talk to them at Oxford!</li>
-    <li><time>Aug 2017</time>
-      FPBench was a hit
-      at <a href="http://www.dagstuhl.de/en/program/calendar/semhp/?semnr=17352">Dagstuhl
-      17352</a> (Analysis and Synthesis of Floating-point Programs),
-      with a talk, a session, and discussions devoted to composing and
-      comparing floating point tools. Thank you to all Dagstuhl
-      participants for clarifying and prioritizing the challenges and
-      for helping shape our next steps.</li>
-    <li><time>Aug 2017</time>
-      <a href="https://homes.cs.washington.edu/~ztatlock/">Zach</a>
-      gave a talk at <a href="https://www.mpi-sws.org/">MPI-SWS</a>
-      (Saarbrüken) on FPBench and the need to create a common
-      benchmark suite. Thank
-      you <a href="https://people.mpi-sws.org/~eva/">Eva Darulova</a>
-      and her students for the invitation and the productive
-      discussion on multiple precisions, benchmark sources, and
-      community building that followed.</li>
-    <li><time>July 2017</time>
-      The 1.0 versions of the <a href="spec/fpcore-1.0.html">FPCore</a>,
-      <a href="spec/metadata-1.0.html">Metadata</a>, and <a href="spec/measures-1.0.html">Measures</a>
-      standards have all been finalized. Build with them!</li>
-    <li><time>July 2016</time>
-      <a href="https://pavpanchekha.com">Pavel Panchekha</a> is giving
-      a talk about FPBench today at the
-      <a href="http://nsv2016.pages.ist.ac.at/">9th NSV</a>.
-      Come learn about our effort to build common resources for the floating-point research community.
-      </li>
-  </ol>
+        To maximize LLMs' serving throughput, we introduce Atom, a
+        low-bit quantization method that achieves high throughput
+        improvements with negligible accuracy loss. Atom significantly
+        boosts serving throughput by using low-bit operators and
+        considerably reduces memory consumption via low-bit
+        quantization. It attains high accuracy by applying a novel
+        mixed-precision and fine-grained quantization process. We
+        evaluate Atom on 4-bit weight-activation quantization setups
+        in the serving context. Atom improves end-to-end throughput by
+        up to 7.73× compared to the FP16 and by 2.53× compared to INT8
+        quantization, while maintaining the same latency target.
+      </div>
+    </details>
 
+    <details>
+      <summary>
+      <time>
+        February 1, 2024
+      </time>
+      <div class="title">
+        Towards optimized multiplierless arithmetic circuits
+      </div>
+      <div class="speaker">
+        Rémi Garcia, University of Rennes
+      </div>
+      </summary>
+      <div class="abstract">
+        Multiplication is a basic operator used in many applications. When 
+        implemented in embedded systems, e.g. FPGAs, these algorithms require
+        highly optimized hardware. Improving the multiplication implementation
+        is an important part of the final hardware cost reduction. This talk 
+        will expose the recent advances on the automatic design of 
+        multiplication of a variable with multiple <emph>a priori</emph> known 
+        constants, this problem is called the Multiple Constant Multiplication
+        (MCM) problem. Using Integer Linear Programming (ILP) permits to 
+        significantly reduce the hardware cost when MCM is implemented using 
+        additions and bit-shifts. The ILP approach has been efficiently used 
+        for various hardware design problems but other approaches exists, such 
+        as SAT/SMT, Constraint Programming, etc. This presentation will
+        introduce a few concepts relating to this ecosystem.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        December 7, 2023
+      </time>
+      <div class="title">
+        Application-specific arithmetic
+      </div>
+      <div class="speaker">
+        Florent de Dinechin, INSA-Lyon/Inria; and Martin Kumm, Fulda University of Applied Sciences
+      </div>
+      </summary>
+      <div class="abstract">
+        A software designer has to carefully select the arithmetic that best
+        suits each step of her application, but the choice is constrained: only
+        a handful of operators are supported in hardware, in only in a handful
+        of precisions.
+        Conversely, when designing for hardware or FPGAs, these constraints
+        become degrees of freedom. Any precision can be designed, any number
+        encoding, but also any operation and function, provided you are clever
+        enough to implement it efficiently as a circuit.
+        <br>
+        This talk will expose some of the opportunities offered by this freedom,
+        and some of the methodologies and tools that allow a designer to build
+        and compose application-specific operators.
+        It may include some inadvertent advertising for our upcoming 800-page
+        book dedicated to these topics.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        November 2, 2023
+      </time>
+      <div class="title">
+        Overview of numerics on the Java Platform
+      </div>
+      <div class="speaker">
+        Joseph D. Darcy, Oracle
+      </div>
+      </summary>
+      <div class="abstract">
+        Come hear an overview of numeric support of the Java platform, an on-going 
+        story ranging over more than a quarter century and spanning standards, 
+        specifications, virtual machines, libraries, and compilers, including resolving 
+        details as small as 2^-1074. The talk does not assume audience members will 
+        already be familiar with the details of the Java platform; attendees are welcome 
+        to ask questions about such details.
+        <br>
+        Joe is a long-time member on the JDK engineering team, first at Sun and later 
+        Oracle. As “Java Floating-Point Czar” he has looked after Java numerics including 
+        contributing to the design of strictfp, adding numerous floating-point math library 
+        methods, and adding hexadecimal floating-point literals to the Java language and 
+        library. Joe was a participant in and interim editor of the 2008 revision to the 
+        IEEE 754 floating-point standard. Outside of numerics, Joe has done other 
+        foundational work on the Java platform including core libraries development, Java 
+        language changes including Project Coin, infrastructure improvements, and reviewing 
+        platform interface updates, together with a smattering of project management and 
+        release management along the way.
+      </div>
+    </details>
+    
+    <details>
+      <summary>
+      <time>
+        October 5, 2023
+      </time>
+      <div class="title">
+        Custom elementary functions for hardware accelerators
+      </div>
+      <div class="speaker">
+        Benjamin Carleton and Adrian Sampson, Cornell University
+      </div>
+      </summary>
+      <div class="abstract">
+        This talk is a work-in-progress report about our efforts to
+        generate customized hardware implementations of fixed-point
+        function approximations for application-specific accelerators.
+        We built a new compiler from FPCore
+        to <a href="https://calyxir.org/">Calyx</a>, our lab’s IR and
+        compiler for translating high-level descriptions to hardware
+        designs. The interesting part is the need to generate
+        efficient polynomial approximations for elementary
+        functions—and the freedom to customize these implementations
+        for the specific accelerator’s context. We have preliminary
+        (but encouraging) comparisons to a commercial high-level
+        synthesis (HLS) compiler. We will seek feedback on the many
+        possibilities for next steps.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        September 7, 2023
+      </time>
+      <div class="title">
+        A PVS formalization of Taylor error expressions
+      </div>
+      <div class="speaker">
+        Jonas Katona, Yale University
+      </div>
+      </summary>
+      <div class="abstract">
+        Due to the limits of finite precision arithmetic, as one works
+        with floating-point representations of real numbers in
+        computer programs, round-off errors tend to accumulate under
+        mathematical operations and may become unacceptably large.
+        Symbolic Taylor Error Expressions is a technique used in the
+        tool FPTaylor to bound the round-off errors accumulated under
+        differentiable mathematical operations which provides a good
+        trade-off between efficiency and accuracy. In this
+        presentation, I will present a formally verified
+        implementation of Symbolic Taylor Error Expressions in a
+        specification language, automated theorem prover, and
+        typechecker called Prototype Verification System (PVS). I will
+        also go over how this formal specification in PVS will enable
+        the integration of Symbolic Taylor Expressions in PRECiSA, a
+        prototype static analysis tool that can compute verified
+        round-off error bounds for floating-point programs.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        August 3, 2023
+      </time>
+      <div class="title">
+        Automated reasoning over the reals
+      </div>
+      <div class="speaker">
+        Soonho Kong, Amazon Web Services
+      </div>
+      </summary>
+      <div class="abstract">
+        In cyber-physical systems such as autonomous driving systems
+        and robotics components, ordinary differential equations and
+        nonlinear functions such as the exponential function and the
+        trigonometric functions appear almost universally. To adopt
+        automated reasoning techniques in these domains, it is
+        necessary to develop a tool that can handle logical encodings
+        with those functions.
+
+        In this talk, I will present the design and implementation of
+        a delta-decision procedure, dReal. First, we will discuss the
+        theory of delta-decidability briefly. Then I will explain 1)
+        how the tool handles nonlinear functions and ordinary
+        differential equations, 2) how it can solve optimization and
+        synthesis problems (∃∀-formulas), and 3) how the tool utilizes
+        multiple cores to speed up the solving process in parallel. I
+        will show that the tool helps tackle instances from real-world
+        applications including bounded model-checking for
+        cyber-physical systems, nonlinear global optimization, and
+        Lyapunov-stability analysis in robotics.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        July 6, 2023
+      </time>
+      <div class="title">
+        <a href="talks/fptalks23.html">FPTalks 2023 annual workshop</a>
+      </div>
+      <div class="speaker">
+        12 speakers at the cutting edge of numerics research
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        June 1, 2023
+      </time>
+      <div class="title">
+        Floating-point education roundtable
+      </div>
+      <div class="speaker">
+        Mike Lam, James Madison University
+      </div>
+      </summary>
+      <div class="abstract">
+        Members of the FPBench community are well-aware of the
+        pitfalls of floating-point representation, but awareness among
+        the wider population of software authors is
+        often <a href="https://doi.org/10.1109/IPDPS.2018.00068">painfully
+        inadequate</a>. There is a surprising dearth of quality
+        educational materials and techniques for teaching these issues
+        to students (both undergraduate and graduate). In this
+        roundtable discussion, we’ll look at some of the current
+        approaches and brainstorm possible approaches to improve the
+        state of the art.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        May 4, 2023
+      </time>
+      <div class="title">
+        Floating-point accuracy anecdotes from real-world products
+      </div>
+      <div class="speaker">
+        Shoaib Kamil, Adobe Research
+      </div>
+      </summary>
+      <div class="abstract">
+        Floating point issues must often be surmounted when building
+        software products that rely on precise computations while
+        still demanding performance. In this talk, I describe two
+        scenarios where existing tools fall short. First, I will
+        describe our efforts to utilize interval computation to better
+        bound quantities representing real numbers, and the rabbit
+        hole we encountered when trying to find an existing
+        off-the-shelf cross-platform interval computation library.
+        From this exploration, we built a cross-platform interval
+        benchmark suite using hand-crafted expressions from real-world
+        code and from FPBench, and evaluated four existing interval
+        libraries for correctness, interval width, and speed. Second,
+        I will describe our experiences using GPU floating point math
+        to emulate integer computations, and the pitfalls even when
+        computing with exactly-representable floating point numbers.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        April 6, 2023
+      </time>
+      <div class="title">
+        Formal and semi-formal verification of C numerics
+      </div>
+      <div class="speaker">
+        Samuel D. Pollard and Ariel Kellison,
+        Sandia National Laboratories
+      </div>
+      </summary>
+      <div class="abstract">
+        For better or worse, the world runs on C, and to a lesser
+        extent, C with IEEE 754 floating point. At Sandia Labs, we
+        often are tasked with the formal verification of
+        high-consequence programs in C. Two methods we use at Sandia
+        to accomplish this verification are: fully constructive proofs
+        of correctness (in the Coq theorem prover), and deductive
+        verification (using Frama-C). In both cases, the addition of
+        numerical computations adds complexity to the programs, via
+        numerical error (e.g., discretization or roundoff error), or
+        run-time errors (such as floating-point exceptions). We
+        discuss our efforts at Sandia Labs to both make numerical
+        models of C programs using Frama-C and its ANSI C
+        specification language (ACSL), as well as functional models in
+        Coq, and how to check whether the relevant C code implements
+        these specifications.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        March 2, 2023
+      </time>
+      <div class="title">
+        Automatically generating numerical PDE solvers with Finch
+      </div>
+      <div class="speaker">
+        Eric Heisler,
+        University of Utah
+      </div>
+      </summary>
+      <div class="abstract">
+        <p>Finch is a domain-specific language for numerically solving differential equations. It employs a variety of numerical techniques, generates code for a number of different target frameworks and languages, and allows almost arbitrary equation input. In addition, it accepts unrestricted modification of the generated code to provide maximal flexibility and hand-optimization. One downside to this (perhaps excessive) flexibility is that numerical instability and the occasional typo can easily turn a solution into a pile of NaNs.
+        <p>Eric will introduce Finch, and demonstrate some of the features relevant to the numerics. We will look at some examples where things turn out just the way we hoped, and some where they don't.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        Dec 8, 2022
+      </time>
+      <div class="title">
+        Low-precision FP8 formats: background and industry status
+      </div>
+      <div class="speaker">
+        Marius Cornea, Intel
+      </div>
+      </summary>
+      <div class="abstract">
+        Marius Cornea, a senior principal engineer at Intel working on math libraries and floating-point (and one of the coauthors of the IEEE Standard 754-2008), will be presenting about new industry standards for low-precision formats. The presentation will examine the reasons for which FP8 formats have emerged, definition details, and variations proposed by industry and academia. We will enumerate a few known (mostly planned) implementations of FP8. We will also look at current standardization work for FP8 formats.
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        November 18, 2022
+      </time>
+      <div class="title">
+        Correctness 2022 annual workshop
+      </div>
+      <div class="speaker">
+        Workshop on HPC software correctness, co-located with SC
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        November 3, 2022
+      </time>
+      <div class="title">
+        Function-Based volumetric design and fabrication
+      </div>
+      <div class="speaker">
+        Chris Uchytil,
+        Mechanical Engineering,
+        University of Washington
+      </div>
+      </summary>
+      <div class="abstract">
+
+        We present a novel computer-aided design (CAD) modeling system designed
+        to support a modeling range that matches the fabrication range of
+        modern additive manufacturing (AM) systems that are capable of
+        producing large-scale, high-resolution parts. To be useful to designers
+        and fabricators, a modeling system must perform essential functions
+        (such as execution of modeling operations, visualization, and slicing)
+        at interactive rates, and achieving the necessary performance depends
+        on efficient use of both memory and computing capacity. Our approach to
+        achieving necessary performance levels is to implement an implicit
+        function-based representation (f-rep) modeling system, not using a
+        computer algebra system, but instead using just-in-time (JIT)
+        compilation of user-defined functions. Efficient memory usage is
+        achieved via a sparse volume data structure that builds on previous
+        work by Hoetzlein [Hoetzlein 2016]. Computational efficiency is
+        achieved through a combination of interval arithmetic (IA) and
+        massively parallel evaluation on the GPU. We follow [Keeter 2020] and
+        employ IA as the basis for local pruning of the function evaluation
+        tree to minimize the required number of function evaluations, and we
+        take advantage of GPU-parallelism to significantly enhance
+        computational throughput.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        October 6, 2022
+      </time>
+      <div class="title">
+        Finding inputs that trigger GPU exceptions
+      </div>
+      <div class="speaker">
+        Ignacio Laguna,
+        Center for Applied Scientific Computing,
+        LLNL
+      </div>
+      </summary>
+      <div class="abstract">
+
+        Testing code for floating-point exceptions is crucial as exceptions can
+        quickly propagate and produce unreliable numerical answers. The
+        state-of-the-art to test for floating-point exceptions in GPUs is quite
+        limited and solutions require the application's source code, which
+        precludes their use in accelerated libraries where the source is not
+        publicly available. We present an approach to find inputs that trigger
+        floating-point exceptions in black-box GPU functions, i.e., functions
+        where the source code and information about input bounds are
+        unavailable. Our approach is the first to use Bayesian optimization
+        (BO) to identify such inputs and uses novel strategies to overcome the
+        challenges that arise in applying BO to this problem. We implement our
+        approach in the Xscope framework and demonstrate it on 58 functions
+        from the CUDA Math Library and functions from ten HPC programs. Xscope
+        is able to identify inputs that trigger exceptions in about 72% of the
+        tested functions.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        September 2, 2022
+      </time>
+      <div class="title">
+        Birds-of-a-feather
+      </div>
+      <div class="speaker">
+        The community discussed the challenges of
+        connecting various analysis tools
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        August 4, 2022
+      </time>
+      <div class="title">
+        Database workbench:
+        mixed-initiative design space search
+      </div>
+      <div class="speaker">
+        Edward Misback,
+        University of Washington
+      </div>
+      </summary>
+      <div class="abstract">
+
+        The Herbie web demo is intended as an accessible tool for making a
+        rough guess at the best way to improve the accuracy of a floating-point
+        expression. It aims to support students learning about floating point
+        error, casual users who just want a high-accuracy replacement
+        expression, and expert users who are comfortable interpreting its
+        results. However, it is designed as a single-step tool and leaves
+        little room for users to iterate or adapt it to numerical analysis
+        tasks, even though its underlying functions have broader applications.
+        We describe how an alternative “database workbench” interface will
+        allow users to leverage Herbie’s power while exploring the design space
+        of replacement expressions more flexibly, including support for the
+        development of third-party expression analysis plugins. We would like
+        to discuss with the FPBench community whether the workflow we describe
+        is compatible with other numerical analysis tools and needs, either as
+        plugins or as separate workbenches with a similar interface.
+
+        <a href='https://docs.google.com/presentation/d/1RQ3tDkAzkoFcCZiA2iDpSuHVEJ-aYESwzwvV8M4Ec_s/edit#slide=id.p'>Slides</a>
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        July 6, 2022
+      </time>
+      <div class="title">
+        <a href='talks/fptalks22.html'>FPTalks 2022 annual workshop</a>
+      </div>
+      <div class="speaker">
+        11 speakers at the cutting edge of numerics research
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        May 5, 2022
+      </time>
+      <div class="title">
+        Automatic datapath optimization using e-graphs
+      </div>
+      <div class="speaker">
+        Samuel Coward,
+        Intel &amp Imperial College London
+      </div>
+      </summary>
+      <div class="abstract">
+
+        RTL development is hampered by low design space exploration and long
+        debug times. High Level Synthesis and ML techniques are not tackling
+        the nature of optimization RTL teams are doing in complex Graphics type
+        IP. This talk provides initial results on: automatically transforming
+        RTL , exploring the design space, how Intel GFx knowhow is exploited,
+        associated formal verification and how the foundation of the system is
+        using the latest e-graph technology.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        April 7, 2022
+      </time>
+      <div class="title">
+        Choosing function implementations for speed and accuracy
+      </div>
+      <div class="speaker">
+        Ian Briggs,
+        Computer Science,
+        University of Utah
+      </div>
+      </summary>
+      <div class="abstract">
+
+        Standard implementations of functions like sin and exp optimize for
+        accuracy, not speed, because they are intended for general-purpose use.
+        But just like many applications tolerate inaccuracy from cancellation,
+        rounding error, and singularities, many applications could also
+        tolerate less-accurate function implementations. This raises an
+        intriguing possibility: speeding up numerical code by using different
+        function implementations.
+
+        Enter OpTuner, an automated tool for selecting the best implementation
+        for each mathematical function call site. OpTuner uses error Taylor
+        series and integer linear programming to compute optimal assignments of
+        297 function implementations to call sites and presents the user with a
+        speed-accuracy Pareto curve. In a case study on the POV-Ray ray tracer,
+        OpTuner speeds up a critical computation by 2.48×, leading to a whole
+        program speedup of 1.09× with no change in the program output; human
+        efforts result in slower code and lower-quality output. On a broader
+        study of 36 standard benchmarks, OpTuner demonstrates speedups of 2.05×
+        for negligible decreases in accuracy and up to 5.37× for error-tolerant
+        applications.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        March 3, 2022
+      </time>
+      <div class="title">
+        CORE-MATH correctly rounded mathematical functions
+      </div>
+      <div class="speaker">
+        Paul Zimmerman, INRIA
+      </div>
+      </summary>
+      <div class="abstract">
+
+        The mission of the CORE-MATH project is to provide off-the-shelf
+        open-source mathematical functions with correct rounding that can be
+        integrated into current mathematical libraries (GNU libc, Intel Math
+        Library, AMD Libm, Newlib, OpenLibm, Musl, Apple Libm, llvm-libc, CUDA
+        libm, ROCm).  This presentation covers first results in
+        single-precision (binary32).
+
+        <a href='https://members.loria.fr/PZimmermann/talks/'>Slides</a>
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        February 3, 2022
+      </time>
+      <div class="title">
+        Formal verification of numerical Hamiltonian systems
+      </div>
+      <div class="speaker">
+        Ariel Kellison, Cornell University
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        January 6, 2022
+      </time>
+      <div class="title">
+        Birds-of-a-feather
+      </div>
+      <div class="speaker">
+        The community discussed
+        training and teaching numerics in academia and industry
+
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        December 2, 2021
+      </time>
+      <div class="title">
+        Automated discovery of invertibility conditions
+      </div>
+      <div class="speaker">
+        Andrew Reynolds, University of Iowa
+      </div>
+      </summary>
+      <div class="abstract">
+
+        Satisfiability Modulo Theories (SMT) solvers have gained widespread
+        popularity as reasoning engines in numerous formal methods
+        applications, including in syntax-guided synthesis (SyGuS)
+        applications. In this talk, we focus on an emerging class of
+        applications for syntax-guided synthesis, namely, the use of a SyGuS
+        solver to (partially) automate further development and improvements to
+        the SMT solver itself. We describe several recent features in the SMT
+        solver cvc5 that follow this paradigm. These include syntax-guided
+        enumeration of rewrite rules, selection of test inputs, and discovery
+        of solved forms for quantified constraints. For the latter, we describe
+        how syntax-guided synthesis recently played a pivotal role in the
+        development of a new algorithm for quantified bit-vector constraints
+        based on invertibility conditions, and how this technique can be
+        extended for similar algorithms that target quantified constraints in
+        other theories, including the theory of floating points.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        November 19, 2021
+      </time>
+      <div class="title">
+        <a href="https://sc22.supercomputing.org/session/?sess=sess448">Correctness 2021 annual workshop</a>
+      </div>
+      <div class="speaker">
+        Workshop on software correctness for HPC applications, co-located with SC
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        November 4, 2021
+      </time>
+      <div class="title">
+        Birds-of-a-feather
+      </div>
+      <div class="speaker">
+        The community discussed the challenge of porting
+        numerical applications
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        October 7, 2021
+      </time>
+      <div class="title">
+        Lazy exact real arithmetic using floating-point operations
+      </div>
+      <div class="speaker">
+        Ryan McCleeary,
+        Numerica
+      </div>
+      </summary>
+      <div class="abstract">
+
+        Exact real arithmetic systems can specify any amount of precision on
+        the output of the computations. They are used in a wide variety of
+        applications when a high degree of precision is necessary. Some of
+        these applications include: differential equation solvers, linear
+        equation solvers, large scale mathematical models, and SMT solvers.
+        This talk describes a new exact real arithmetic system which uses lazy
+        list of floating point numbers to represent the real numbers.  It
+        details algorithms for basic arithmetic computations on these
+        structures and proves their correctness.  This proposed system has the
+        advantage of algorithms which can be supported by modern floating point
+        hardware, while still being a lazy exact real arithmetic system
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        August 5, 2021
+      </time>
+      <div class="title">
+        State of FPBench
+      </div>
+      <div class="speaker">
+        The community discussed FPBench benchmarks, education, and outreach
+      </div>
+      </summary>
+      <div class="abstract">
+
+        In this meeting, the community discussed what the community
+        might most productively focus on in the coming year. The
+        discussion was lively and landed on three major thrusts:
+          (1) categorizing benchmarks by domain and improving licensing,
+          (2) developing "FP course modules" that instructors
+            can easily incorporate into their courses, and
+          (3) increasing industrial outreach to encourage FPCore adoption
+            as a formal, vendor-neutral specification language.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        July 14, 2021
+      </time>
+      <div class="title">
+        <a href='talks/fptalks21.html'>FPTalks 2021 annual workshop</a>
+      </div>
+      <div class="speaker">
+        19 speakers at the cutting edge of numerics research
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        July 1, 2021
+      </time>
+      <div class="title">
+        Scaling error analysis to billions of FLOPs
+      </div>
+      <div class="speaker">
+        Sam Pollard, Sandia National Laboratories
+      </div>
+      </summary>
+      <div class="abstract">
+
+        Sam Pollard shared his work on floating-point error analysis of kernels
+        with many FLOPs (10^9 or more), by combining FPTaylor and analytical
+        error bounds on inner products.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        May 6, 2021
+      </time>
+      <div class="title">
+        RLIBM-32: fast and correct 32-bit math libraries
+      </div>
+      <div class="speaker">
+        Jay Lim,
+        Rutgers University
+      </div>
+      </summary>
+      <div class="abstract">
+
+        RLIBM-32 provides a set of techniques to develop correctly rounded math
+        libraries for 32-bit float and posit types. It enhances our RLibm
+        approach that frames the problem of generating correctly rounded
+        libraries as a linear programming problem in the context of 16-bit
+        types to scale to 32-bit types. Specifically, this talk with detail new
+        algorithms to (1) generate polynomials that produce correctly rounded
+        outputs for all inputs using counterexample guided polynomial
+        generation, (2) generate efficient piecewise polynomials with
+        bit-pattern based domain splitting, and (3) deduce the amount of
+        freedom available to produce correct results when range reduction
+        involves multiple elementary functions. The resultant math library for
+        the 32-bit float type is faster than state-of-the-art math libraries
+        while producing the correct output for all inputs. We have also
+        developed a set of correctly rounded elementary functions for 32-bit
+        posits.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        April 1, 2021
+      </time>
+      <div class="title">
+        SHAMAN: evaluating numerical error for real C++ code
+      </div>
+      <div class="speaker">
+        Nestor Demeure, University Paris Saclay
+      </div>
+      </summary>
+      <div class="abstract">
+
+        <a href="https://github.com/nestordemeure/shaman">Shaman</a> is a C++11
+        library that use operator overloading and a novel method to evaluate
+        the numerical accuracy of an application.  It has been designed to
+        target high-performance simulations and, thus, we insured that it is
+        not only accurate but also: is fast enough to be tested on very large
+        simulations, is compatible with all of C++ mathematical functions, and
+        is threadsafe and compatible with both OpenMP and MPI. In this talk,
+        Nestor gave a live demo of Shaman's capabilities and discuss its novel
+        design features.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        March 4, 2021
+      </time>
+      <div class="title">
+        POP: fast and efficient bit-level precision tuning
+      </div>
+      <div class="speaker">
+        Dorra Ben Khalifa,
+        Perpignan University
+      </div>
+      </summary>
+      <div class="abstract">
+
+        Dorra gave a great demo of <a href="">POP</a>, a tool from her thesis
+        work on precision tuning. Summarizing from her abstract: POP
+        establishes novel techniques for precision tuning. The main idea of our
+        approach is based on semantic modeling of the propagation of the
+        numerical errors throughout the program source. This yields a system of
+        constraints whose minimal solution gives the best tuning of the
+        program. Based on a static analysis approach, we formulate the problem
+        of precision tuning with two different methods. The first method
+        combines a forward and a backward error analysis which are two popular
+        paradigms of error analysis. Next, our analysis is expressed as a set
+        of linear constraints, made of propositional logic formulas and
+        relations between integer elements only, checked by a SMT solver. The
+        second method consists of generating an Integer Linear Problem (ILP)
+        from the program. This is done by reasoning on the most significant bit
+        and the number of significant bits of the values which are integer
+        quantities. The integer solution to this problem, computed in
+        polynomial time by a classical linear programming solver, gives the
+        optimal data types at bit-level. A finer set of semantic equations is
+        also proposed which does not reduce directly to an ILP problem. We use
+        the policy iteration technique to find a solution.  The POP tool
+        implements both methods, and in this session Dorra demonstrateed it
+        across several benchmarks coming from various application domains such
+        as embedded systems, Internet of Things (IoT), physics, etc.
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        February 4, 2021
+      </time>
+      <div class="title">
+        Keeping science on keel when software moves
+      </div>
+      <div class="speaker">
+        Allison Baker,
+        National Center for Atmospheric Research
+      </div>
+      </summary>
+      <div class="abstract">
+
+        <p>
+
+        Allison lead a great discussion of her recent CACM article
+        <a href="https://cacm.acm.org/magazines/2021/2/250083-keeping-science-on-keel-when-software-moves/fulltext">
+          Keeping Science on Keel When Software Moves</a>.
+
+        </p><p>
+
+        High performance computing (HPC) is central to solving large problems
+        in science and engineering through the deployment of massive amounts of
+        computational power. The development of important pieces of HPC
+        software spans years or even decades, involving dozens of computer and
+        domain scientists. During this period, the core functionality of the
+        software is made more efficient, new features are added, and the
+        software is ported across multiple platforms. Porting of software in
+        general involves the change of compilers, optimization levels,
+        arithmetic libraries, and many other aspects that determine the machine
+        instructions that actually get executed. Unfortunately, such changes do
+        affect the computed results to a significant (and often worrisome)
+        extent. In a majority of cases, there are not easily definable a priori
+        answers one can check against. A programmer ends up comparing the new
+        answer against a trusted baseline previously established or checks for
+        indirect confirmations such as whether physical properties such as
+        energy are conserved. However, such non-systematic efforts might miss
+        underlying issues, and the code may keep misbehaving until these are
+        fixed.
+
+        </p><p>
+
+        In this session, Allison presented real-world evidence to show that
+        ignoring numerical result changes can lead to misleading scientific
+        conclusions.  She presented techniques and tools that can help
+        computational scientists understand and analyze compiler effects on
+        their scientific code. These techniques are applicable across a wide
+        range of examples to narrow down the root-causes to single files,
+        functions within files, and even computational expressions that affect
+        specific variables. The developer may then rewrite the code selectively
+        and/or suppress the application of certain optimizations to regain more
+        predictable behavior.
+
+        </p>
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        January 7, 2021
+      </time>
+      <div class="title">
+        Community Demos
+      </div>
+      <div class="speaker">
+        Tanmay Tirpankar, University of Utah; and Mike Lam, James Madison University
+      </div>
+      </summary>
+      <div class="abstract">
+
+        <p>
+
+        Tanmay Tirpankar
+        https://github.com/arnabd88/Satire
+
+        </p><p>
+
+        Mike Lam
+        https://github.com/crafthpc/floatsmith
+
+        </p>
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        December 3, 2020
+      </time>
+      <div class="title">
+        Rival: an interval arithmetic for robust error estimation
+      </div>
+      <div class="speaker">
+        Oliver Flatt,
+        University of Utah
+      </div>
+      </summary>
+      <div class="abstract">
+
+        <p>
+
+        Interval arithmetic is a simple way to compute a mathematical
+        expression to an arbitrary accuracy, widely used for verifying
+        floating-point computations. Yet this simplicity belies challenges.
+        Some inputs violate preconditions or cause domain errors. Others cause
+        the algorithm to enter an infinite loop and fail to compute a ground
+        truth. Plus, finding valid inputs is itself a challenge when invalid
+        and unsamplable points make up the vast majority of the input space.
+        These issues can make interval arithmetic brittle and temperamental.
+
+        </p><p>
+
+        Rival introduces three extensions to interval arithmetic to
+        address these challenges. Error intervals express rich notions of input
+        validity and indicate whether all or some points in an interval violate
+        implicit or explicit preconditions. Movability flags detect futile
+        recomputations and prevent timeouts by indicating whether a
+        higher-precision recomputation will yield a more accurate result. And
+        input search restricts sampling to valid, samplable points, so they are
+        easier to find. We compare these extensions to the state-of-the-art
+        technical computing software Mathematica, and demonstrate that our
+        extensions are able to resolve 60.3% more challenging inputs, return
+        10.2× fewer completely indeterminate results, and avoid 64 cases of
+        fatal error.
+
+        </p>
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        November 2, 2020
+      </time>
+      <div class="title">
+        FPY: the future of FPCore
+      </div>
+      <div class="speaker">
+        Bill Zorn,
+        University of Washington
+      </div>
+      </summary>
+      <div class="abstract">
+
+        FPY is a new language for specifying benchmarks that is meant to be
+        easier to write for larger programs while retaining compatibility with
+        existing FPCore-based tools. FPY repackages the precise semantics of
+        FPCore under more familiar and convenient Python-like syntax. This
+        talk will discuss the prototype design and highlight new conveniences
+        FPY affords over FPCore.
+
+        <a href='https://docs.google.com/presentation/d/15KlKe-KU-L8qZa-fJsRq06ro1JOboxwmWAPNH7IsxhY/edit#slide=id.ga74a5d7690_0_15'>Slides</a>
+
+      </div>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        August 4, 2020
+      </time>
+      <div class="title">
+        <a href="https://prog-synth-science.github.io/2020/">Program Synthesis for Scientific Computing</a>
+      </div>
+      <div class="speaker">
+        Workshop on using software synthesis for next-generation scientific software
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        June 24, 2020
+      </time>
+      <div class="title">
+        <a href='talks/fptalks20.html'>FPTalks 2020 annual workshop</a>
+      </div>
+      <div class="speaker">
+        15 speakers at the cutting edge of numerics research
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>
+        January, 2020
+      </time>
+      <div class="title">
+        <a href="http://fpanalysistools.org/LANL/">FP analysis tools</a>
+      </div>
+      <div class="speaker">
+        A tutorial run at LANL 
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>November 17, 2019</time>
+      <div class="title">
+        <a href="http://fpanalysistools.org/sc19/">FP analysis tools</a>
+      </div>
+      <div class="speaker">
+        A tutorial co-located with SC'19 
+      </div>
+      </summary>
+    </details>
+
+    <details>
+      <summary>
+      <time>July 30, 2019</time>
+      <div class="title">
+        <a href="http://fpanalysistools.org/pearc19/">FP analysis tools</a>
+      </div>
+      <div class="speaker">
+        A tutorial co-located with PEARC'19
+      </div>
+      </summary>
+    </details>
+
+<!--
+
+    <details>
+      <summary>
+      <time>TIME</time>
+      TITLE
+      <div class="speaker">
+        TODO
+      </div>
+      </summary>
+      <div class="abstract">
+
+        TODO
+
+      </div>
+    </details>
+
+-->
+
+  </main>
 </body>
 </html>
