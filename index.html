@@ -107,6 +107,38 @@
 
     <details>
       <summary>
+        <time>Nov 7, 2024</time>
+        <div class="title">
+           Exploring FPGA designs for MX and beyond
+        </div>
+        <div class="speaker">
+          Ebby Samson, Imperial College London
+        </div>
+      </summary>
+      <div class="abstract">
+        A number of companies recently worked together to release the new Open
+        Compute Project MX standard for low-precision computation, aimed at
+        efficient neural network implementation. In our work, we describe and
+        evaluate the first open-source FPGA implementation of the arithmetic
+        defined in the standard. Our designs fully support all the standard's
+        concrete formats for conversion into and out of MX formats and for the
+        standard-defined arithmetic operations, as well as arbitrary
+        fixed-point and floating-point formats. Certain elements of the
+        standard are left as implementation-defined, and we present the first
+        concrete FPGA-inspired choices for these elements. Our library of
+        optimized hardware components is available open source, alongside our
+        open-source Pytorch library for quantization into the new standard,
+        integrated with the Brevitas library so that the community can develop
+        novel neural network designs quantized with MX formats in mind. Our
+        testing shows that MX is very effective for formats such as INT5 or FP6
+        which are not natively supported on GPUs. This gives FPGAs an advantage
+        as they have the flexibility to implement a custom datapath and take
+        advantage of the smaller area footprints offered by these formats.
+      </div>
+    </details>
+
+    <details>
+      <summary>
         <time>Oct 3, 2024</time>
         <div class="title">
           Geometric predicates for unconditionally robust elastodynamics simulation
