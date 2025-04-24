@@ -67,6 +67,31 @@
 
     <details>
       <summary>
+        <time>May 1, 2025</time>
+        <div class="title">
+           Fast branch-free algorithms for extended-precision floating-point arithmetic
+        </div>
+        <div class="speaker">
+          David K. Zhang, Standford University
+        </div>
+      </summary>
+      <div class="abstract">
+        Many scientific and mathematical problems demand extremely precise calculations 
+        exceeding the limits of the double precision (IEEE binary64) floating-point format.
+        However, existing methods for extended-precision computation involve complex 
+        branching algorithms that perform poorly on modern data-parallel processors, 
+        including SIMD CPUs and GPUs. In this talk, I introduce a class of algorithms 
+        called floating-point accumulation networks (FPANs) that enable fast branch-free 
+        extended-precision arithmetic. FPAN-based algorithms outperform standard multiprecision 
+        libraries by orders of magnitude, achieving up to 11.7x the peak performance of QD, 
+        34.4x over CAMPARY, 35.6x over MPFR, and 41.4x over FLINT. I also introduce a new 
+        formal verification technique that leverages automatic theorem provers to rigorously 
+        establish the correctness of these new algorithms.
+      </div>
+    </details>
+    
+    <details>
+      <summary>
         <time>Apr 3, 2025</time>
         <div class="title">
           Fast sound error bounds for mixed-precision real evaluation
