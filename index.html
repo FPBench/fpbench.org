@@ -79,20 +79,20 @@
         </div>
       </summary>
       <div class="abstract">
-        Many scientific and mathematical problems demand extremely precise calculations 
+        Many scientific and mathematical problems demand extremely precise calculations
         exceeding the limits of the double precision (IEEE binary64) floating-point format.
-        However, existing methods for extended-precision computation involve complex 
-        branching algorithms that perform poorly on modern data-parallel processors, 
-        including SIMD CPUs and GPUs. In this talk, I introduce a class of algorithms 
-        called floating-point accumulation networks (FPANs) that enable fast branch-free 
-        extended-precision arithmetic. FPAN-based algorithms outperform standard multiprecision 
-        libraries by orders of magnitude, achieving up to 11.7x the peak performance of QD, 
-        34.4x over CAMPARY, 35.6x over MPFR, and 41.4x over FLINT. I also introduce a new 
-        formal verification technique that leverages automatic theorem provers to rigorously 
+        However, existing methods for extended-precision computation involve complex
+        branching algorithms that perform poorly on modern data-parallel processors,
+        including SIMD CPUs and GPUs. In this talk, I introduce a class of algorithms
+        called floating-point accumulation networks (FPANs) that enable fast branch-free
+        extended-precision arithmetic. FPAN-based algorithms outperform standard multiprecision
+        libraries by orders of magnitude, achieving up to 11.7x the peak performance of QD,
+        34.4x over CAMPARY, 35.6x over MPFR, and 41.4x over FLINT. I also introduce a new
+        formal verification technique that leverages automatic theorem provers to rigorously
         establish the correctness of these new algorithms.
       </div>
     </details>
-    
+
     <details>
       <summary>
         <time>Apr 3, 2025</time>
@@ -104,26 +104,26 @@
         </div>
       </summary>
       <div class="abstract">
-        Evaluating real-valued expressions to high precision is a key 
-        building block in computational mathematics, physics, and numerics. 
-        A typical implementation uses a uniform precision for each 
-        operation, and doubles that precision until the real result can be 
+        Evaluating real-valued expressions to high precision is a key
+        building block in computational mathematics, physics, and numerics.
+        A typical implementation uses a uniform precision for each
+        operation, and doubles that precision until the real result can be
         bounded to some sufficiently narrow interval. However, this is
         wasteful: usually only a few operations really need to be performed
-        at high precision, and the bulk of the expression could use much 
-        lower precision. Uniform precision can also waste iterations 
-        discovering the necessary precision and then still overestimate by 
-        up to a factor of two. We propose to instead use mixed-precision 
+        at high precision, and the bulk of the expression could use much
+        lower precision. Uniform precision can also waste iterations
+        discovering the necessary precision and then still overestimate by
+        up to a factor of two. We propose to instead use mixed-precision
         interval arithmetic to evaluate real-valued expressions. A key
-        challenge is deriving the mixed-precision assignment both soundly 
-        and quickly. To do so, we introduce a sound variation of error 
-        Taylor series and condition numbers, specialized to interval 
-        arithmetic, that can be evaluated with minimal overhead thanks to 
+        challenge is deriving the mixed-precision assignment both soundly
+        and quickly. To do so, we introduce a sound variation of error
+        Taylor series and condition numbers, specialized to interval
+        arithmetic, that can be evaluated with minimal overhead thanks to
         an “exponent trick”. Our implementation, Reval, achieves an
-        average speed-up of 1.47× compared to the state-of-the-art Sollya 
-        tool, with the speed-up increasing to 4.92× on the most difficult 
-        input points. An examination of the precisions used with and without 
-        precision tuning shows that the speed-up results come from quickly 
+        average speed-up of 1.47× compared to the state-of-the-art Sollya
+        tool, with the speed-up increasing to 4.92× on the most difficult
+        input points. An examination of the precisions used with and without
+        precision tuning shows that the speed-up results come from quickly
         assigning lower precisions for the majority of operations
       </div>
     </details>
@@ -139,15 +139,15 @@
         </div>
       </summary>
       <div class="abstract">
-        Safety-critical systems with neural network components require strong 
-        guarantees. While existing verification techniques have shown great 
-        progress towards this goal, they mostly reason on real-valued 
-        abstractions of neural networks. As soon as we consider their 
-        floating-point behaviour, the associated verification problem becomes 
-        harder. In this talk, we discuss a software verification approach to 
-        this problem. In doing so, we introduce NeuroCodeBench, a benchmark 
-        of neural network code for software verification. With it, we show 
-        the advantages and shortcomings of reasoning on neural networks at 
+        Safety-critical systems with neural network components require strong
+        guarantees. While existing verification techniques have shown great
+        progress towards this goal, they mostly reason on real-valued
+        abstractions of neural networks. As soon as we consider their
+        floating-point behaviour, the associated verification problem becomes
+        harder. In this talk, we discuss a software verification approach to
+        this problem. In doing so, we introduce NeuroCodeBench, a benchmark
+        of neural network code for software verification. With it, we show
+        the advantages and shortcomings of reasoning on neural networks at
         the floating-point level.
       </div>
     </details>
@@ -300,7 +300,7 @@
         of fibrous materials.
       </div>
     </details>
-    
+
     <details>
       <summary>
         <time>Sep 5, 2024</time>
@@ -313,25 +313,25 @@
       </summary>
       <div class="abstract">
         A central challenge in scientific computing is managing the tradeoff between accuracy
-        and performance. Scientific applications often require high precision to produce 
-        meaningful results, but achieving this precision can reduce computational speed 
-        and efficiency. For example, using higher precision arithmetic can minimize rounding 
-        errors and improve the reliability of results, but it typically demands more processing 
-        power and memory, which negatively affects performance. As a result, scientific software 
-        developers must carefully balance the need for accuracy with the need for acceptable 
+        and performance. Scientific applications often require high precision to produce
+        meaningful results, but achieving this precision can reduce computational speed
+        and efficiency. For example, using higher precision arithmetic can minimize rounding
+        errors and improve the reliability of results, but it typically demands more processing
+        power and memory, which negatively affects performance. As a result, scientific software
+        developers must carefully balance the need for accuracy with the need for acceptable
         performance.
-        In recent years, programming languages like Rust have demonstrated how carefully 
-        designed type systems can help developers write high-performance code while ensuring 
-        critical properties, such as memory safety. In this talk, we will present our work on 
-        designing type systems that provide guarantees about the accuracy of floating-point 
-        computations. By introducing types that can quantitatively represent the error bounds 
-        of floating-point computations, we can create statically typed programming languages 
-        that alert developers to potentially significant inaccuracies early in the development 
+        In recent years, programming languages like Rust have demonstrated how carefully
+        designed type systems can help developers write high-performance code while ensuring
+        critical properties, such as memory safety. In this talk, we will present our work on
+        designing type systems that provide guarantees about the accuracy of floating-point
+        computations. By introducing types that can quantitatively represent the error bounds
+        of floating-point computations, we can create statically typed programming languages
+        that alert developers to potentially significant inaccuracies early in the development
         process.
       </div>
     </details>
 
-    
+
     <details>
       <summary>
       <time>
@@ -360,29 +360,29 @@
       </summary>
       <div class="abstract">
         Since its introduction at Asiacrypt 2017, the CKKS approximate homomorphic encryption
-        scheme has become one of the most widely used and implemented homomorphic encryption 
-        schemes. Due to the approximate nature of the scheme, application developers using 
+        scheme has become one of the most widely used and implemented homomorphic encryption
+        schemes. Due to the approximate nature of the scheme, application developers using
         CKKS must ensure that the evaluation output is within a tolerable error of the corresponding
-        plaintext computation. Choosing appropriate parameters requires a good understanding of 
-        how the noise will grow through the computation. A strong understanding of the noise 
+        plaintext computation. Choosing appropriate parameters requires a good understanding of
+        how the noise will grow through the computation. A strong understanding of the noise
         growth is also necessary to limit the performance impact of mitigations to the attacks
-        on CKKS presented by Li and Micciancio (Eurocrypt 2021). In this work we present a 
+        on CKKS presented by Li and Micciancio (Eurocrypt 2021). In this work we present a
         comprehensive noise analysis of CKKS, that considers noise coming both from the encoding and
-        homomorphic operations. Our main contribution is the first average-case analysis for CKKS 
-        noise, and we also introduce refinements to prior worst-case noise analyses. We develop 
+        homomorphic operations. Our main contribution is the first average-case analysis for CKKS
+        noise, and we also introduce refinements to prior worst-case noise analyses. We develop
         noise heuristics both for the original CKKS scheme and the RNS variant presented
-        at SAC 2018. We then evaluate these heuristics by comparing the predicted noise growth 
-        with experiments in the HEAAN and FullRNS-HEAAN libraries, and by comparing with a 
+        at SAC 2018. We then evaluate these heuristics by comparing the predicted noise growth
+        with experiments in the HEAAN and FullRNS-HEAAN libraries, and by comparing with a
         worst-case noise analysis as done in prior work. Our findings show mixed results: while
         our new analyses lead to heuristic estimates that more closely model the observed noise
-        growth than prior approaches, the new heuristics sometimes slightly underestimate the 
+        growth than prior approaches, the new heuristics sometimes slightly underestimate the
         observed noise growth. This evidences the need for implementation-specific noise analyses
         for CKKS, which recent work has shown to be effective for implementations of similar schemes.
-        This is joint work with Anamaria Costache, Benjamin R. Curtis, Erin Hales, Sean Murphy, 
+        This is joint work with Anamaria Costache, Benjamin R. Curtis, Erin Hales, Sean Murphy,
         and Tabitha Ogilvie.
       </div>
     </details>
-    
+
     <details>
       <summary>
       <time>
@@ -511,17 +511,17 @@
       </div>
       </summary>
       <div class="abstract">
-        Multiplication is a basic operator used in many applications. When 
+        Multiplication is a basic operator used in many applications. When
         implemented in embedded systems, e.g. FPGAs, these algorithms require
         highly optimized hardware. Improving the multiplication implementation
-        is an important part of the final hardware cost reduction. This talk 
-        will expose the recent advances on the automatic design of 
-        multiplication of a variable with multiple <emph>a priori</emph> known 
+        is an important part of the final hardware cost reduction. This talk
+        will expose the recent advances on the automatic design of
+        multiplication of a variable with multiple <emph>a priori</emph> known
         constants, this problem is called the Multiple Constant Multiplication
-        (MCM) problem. Using Integer Linear Programming (ILP) permits to 
-        significantly reduce the hardware cost when MCM is implemented using 
-        additions and bit-shifts. The ILP approach has been efficiently used 
-        for various hardware design problems but other approaches exists, such 
+        (MCM) problem. Using Integer Linear Programming (ILP) permits to
+        significantly reduce the hardware cost when MCM is implemented using
+        additions and bit-shifts. The ILP approach has been efficiently used
+        for various hardware design problems but other approaches exists, such
         as SAT/SMT, Constraint Programming, etc. This presentation will
         introduce a few concepts relating to this ecosystem.
       </div>
@@ -570,26 +570,26 @@
       </div>
       </summary>
       <div class="abstract">
-        Come hear an overview of numeric support of the Java platform, an on-going 
-        story ranging over more than a quarter century and spanning standards, 
-        specifications, virtual machines, libraries, and compilers, including resolving 
-        details as small as 2^-1074. The talk does not assume audience members will 
-        already be familiar with the details of the Java platform; attendees are welcome 
+        Come hear an overview of numeric support of the Java platform, an on-going
+        story ranging over more than a quarter century and spanning standards,
+        specifications, virtual machines, libraries, and compilers, including resolving
+        details as small as 2^-1074. The talk does not assume audience members will
+        already be familiar with the details of the Java platform; attendees are welcome
         to ask questions about such details.
         <br>
-        Joe is a long-time member on the JDK engineering team, first at Sun and later 
-        Oracle. As “Java Floating-Point Czar” he has looked after Java numerics including 
-        contributing to the design of strictfp, adding numerous floating-point math library 
-        methods, and adding hexadecimal floating-point literals to the Java language and 
-        library. Joe was a participant in and interim editor of the 2008 revision to the 
-        IEEE 754 floating-point standard. Outside of numerics, Joe has done other 
-        foundational work on the Java platform including core libraries development, Java 
-        language changes including Project Coin, infrastructure improvements, and reviewing 
-        platform interface updates, together with a smattering of project management and 
+        Joe is a long-time member on the JDK engineering team, first at Sun and later
+        Oracle. As “Java Floating-Point Czar” he has looked after Java numerics including
+        contributing to the design of strictfp, adding numerous floating-point math library
+        methods, and adding hexadecimal floating-point literals to the Java language and
+        library. Joe was a participant in and interim editor of the 2008 revision to the
+        IEEE 754 floating-point standard. Outside of numerics, Joe has done other
+        foundational work on the Java platform including core libraries development, Java
+        language changes including Project Coin, infrastructure improvements, and reviewing
+        platform interface updates, together with a smattering of project management and
         release management along the way.
       </div>
     </details>
-    
+
     <details>
       <summary>
       <time>
@@ -1554,7 +1554,7 @@
         <a href="http://fpanalysistools.org/LANL/">FP analysis tools</a>
       </div>
       <div class="speaker">
-        A tutorial run at LANL 
+        A tutorial run at LANL
       </div>
       </summary>
     </details>
@@ -1566,7 +1566,7 @@
         <a href="http://fpanalysistools.org/sc19/">FP analysis tools</a>
       </div>
       <div class="speaker">
-        A tutorial co-located with SC'19 
+        A tutorial co-located with SC'19
       </div>
       </summary>
     </details>
