@@ -71,6 +71,49 @@
 <!--
     <details>
       <summary>
+        <time>Oct 2, 2025</time>
+        <div class="title">
+           RLibm-MultiRound: correct, rounding mode-agnostic libraries
+        </div>
+        <div class="speaker">
+          Sehyeok Park, Rutgers University
+        </div>
+      </summary>
+      <div class="abstract">
+        Our RLibm project generates a single implementation for an elementary
+        function that produces correctly rounded results for multiple rounding
+        modes and representations with up to 32-bits. The key insight is to
+        build polynomials that produce the correctly rounded result for a
+        representation with two additional bits when compared to the largest
+        target representation and with the "non-standard" round-to-odd rounding
+        mode, which makes double rounding the RLibm math library result to any
+        smaller target representation innocuous. The resulting approximations
+        are implemented with machine supported floating-point operations with
+        the round-to-nearest rounding mode. When an application uses any other
+        rounding mode, RLibm saves the application's rounding mode, changes the
+        system's rounding mode to round-to-nearest, computes the correctly
+        rounded result, and restores the application's rounding mode. This
+        frequent change of rounding modes has a performance cost.
+
+        In this talk I will cover two new methods to avoid the frequent changes
+        to the rounding mode and the dependence on round-to-nearest. First, our
+        new rounding-invariant outputs method emulates round-to-zero under all
+        rounding modes to implement RLibm's polynomial approximations. Second,
+        our rounding-invariant input bounds method factors any rounding error
+        due to different rounding modes using interval bounds in the RLibm
+        pipeline. Both methods make a different set of trade-offs and improve
+        the performance of resulting libraries by more than 2X.
+
+        Please see the
+        <a href="https://arxiv.org/abs/2504.07409">paper</a>
+        for more info.
+      </div>
+    </details>
+-->
+
+<!--
+    <details>
+      <summary>
         <time>Sep 5, 2025</time>
         <div class="title">
           Bean: a language for backward error analysis
