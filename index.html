@@ -77,7 +77,7 @@
 
   <main>
 
-<!--
+    <!--
     <details>
       <summary>
         <time>TIME</time>
@@ -94,7 +94,7 @@
     </details>
 -->
 
-<!--
+    <!--
     <details>
       <summary>
         <time>May 5, 2026</time>
@@ -111,7 +111,7 @@
     </details>
 -->
 
-<!--
+    <!--
     <details>
       <summary>
         <time>Apr 4, 2026</time>
@@ -161,7 +161,7 @@
     </details>
 -->
 
-<!--
+    <!--
     <details>
       <summary>
         <time>Mar 5, 2026</time>
@@ -178,7 +178,7 @@
     </details>
 -->
 
-<!--
+    <!--
     <details>
       <summary>
         <time>Feb 5, 2026</time>
@@ -195,61 +195,82 @@
     </details>
 -->
 
-<!--
     <details>
       <summary>
         <time>Nov 11, 2025</time>
         <div class="title">
-           TITLE, use sentence not title case
+          Programming with first-class rounding contexts
         </div>
         <div class="speaker">
-          Brett Saikie, University of Washington and Intel Graphics
+          Brett Saiki, University of Washington and Intel Graphics
         </div>
       </summary>
       <div class="abstract">
-        TODO
+        <p>
+          Precise specification of numerical algorithms is essential for
+          design-space exploration, simulation, and verification of possible
+          designs. FPCore, a Scheme-like language that makes rounding explicit and
+          separate from exact mathematical operations, provides one such high-level
+          abstraction. However, its rounding context construct cannot capture a key
+          feature of an emerging class of algorithms: rounding that depends on
+          runtime values. To express and study these designs, we propose making
+          rounding contexts first-class values.
+        </p>
+        <p>
+          We implement these ideas in FPy, a domain-specific language for exploring
+          numerical algorithms. FPy allows programmers to capture both existing
+          FPCore programs, and algorithms with value-dependent rounding that cannot
+          be captured in FPCore. First-class rounding contexts enable systematic
+          exploration, since rounding parameters may be program inputs rather than
+          controlled via ad-hoc metaprogramming. We demonstrate FPy’s effectiveness
+          by analyzing how design parameters affect numerical error on a family of
+          designs from prior work that features value-dependent rounding.
+        </p>
       </div>
     </details>
--->
 
     <details>
       <summary>
         <time>Oct 2, 2025</time>
         <div class="title">
-           RLibm-MultiRound: correct, rounding mode-agnostic libraries
+          RLibm-MultiRound: correct, rounding mode-agnostic libraries
         </div>
         <div class="speaker">
           Sehyeok Park, Rutgers University
         </div>
       </summary>
       <div class="abstract">
-        Our RLibm project generates a single implementation for an elementary
-        function that produces correctly rounded results for multiple rounding
-        modes and representations with up to 32-bits. The key insight is to
-        build polynomials that produce the correctly rounded result for a
-        representation with two additional bits when compared to the largest
-        target representation and with the "non-standard" round-to-odd rounding
-        mode, which makes double rounding the RLibm math library result to any
-        smaller target representation innocuous. The resulting approximations
-        are implemented with machine supported floating-point operations with
-        the round-to-nearest rounding mode. When an application uses any other
-        rounding mode, RLibm saves the application's rounding mode, changes the
-        system's rounding mode to round-to-nearest, computes the correctly
-        rounded result, and restores the application's rounding mode. This
-        frequent change of rounding modes has a performance cost.
-
-        In this talk I will cover two new methods to avoid the frequent changes
-        to the rounding mode and the dependence on round-to-nearest. First, our
-        new rounding-invariant outputs method emulates round-to-zero under all
-        rounding modes to implement RLibm's polynomial approximations. Second,
-        our rounding-invariant input bounds method factors any rounding error
-        due to different rounding modes using interval bounds in the RLibm
-        pipeline. Both methods make a different set of trade-offs and improve
-        the performance of resulting libraries by more than 2X.
-
-        Please see the
-        <a href="https://arxiv.org/abs/2504.07409">paper</a>
-        for more info.
+        <p>
+          Our RLibm project generates a single implementation for an elementary
+          function that produces correctly rounded results for multiple rounding
+          modes and representations with up to 32-bits. The key insight is to
+          build polynomials that produce the correctly rounded result for a
+          representation with two additional bits when compared to the largest
+          target representation and with the "non-standard" round-to-odd rounding
+          mode, which makes double rounding the RLibm math library result to any
+          smaller target representation innocuous. The resulting approximations
+          are implemented with machine supported floating-point operations with
+          the round-to-nearest rounding mode. When an application uses any other
+          rounding mode, RLibm saves the application's rounding mode, changes the
+          system's rounding mode to round-to-nearest, computes the correctly
+          rounded result, and restores the application's rounding mode. This
+          frequent change of rounding modes has a performance cost.
+        </p>
+        <p>
+          In this talk I will cover two new methods to avoid the frequent changes
+          to the rounding mode and the dependence on round-to-nearest. First, our
+          new rounding-invariant outputs method emulates round-to-zero under all
+          rounding modes to implement RLibm's polynomial approximations. Second,
+          our rounding-invariant input bounds method factors any rounding error
+          due to different rounding modes using interval bounds in the RLibm
+          pipeline. Both methods make a different set of trade-offs and improve
+          the performance of resulting libraries by more than 2X.
+        </p>
+        <p>
+          Please see the
+          <a href="https://arxiv.org/abs/2504.07409">paper</a>
+          for more info.
+        </p>
       </div>
     </details>
 
@@ -264,34 +285,39 @@
         </div>
       </summary>
       <div class="abstract">
-        Backward error analysis offers a method for assessing the quality of
-        numerical programs in the presence of floating-point rounding errors.
-        However, techniques from the numerical analysis literature for
-        quantifying backward error require substantial human effort, and there
-        are currently no tools or automated methods for statically deriving
-        sound backward error bounds. To address this gap, we propose Bean, a
-        typed first-order programming language designed to express quantitative
-        bounds on backward error. Bean's type system combines a graded coeffect
-        system with strict linearity to soundly track the flow of backward
-        error through programs. We prove the soundness of our system using a
-        novel categorical semantics, where every Bean program denotes a triple
-        of related transformations that together satisfy a backward error
-        guarantee.
+        <p>
+          Backward error analysis offers a method for assessing the quality of
+          numerical programs in the presence of floating-point rounding errors.
+          However, techniques from the numerical analysis literature for
+          quantifying backward error require substantial human effort, and there
+          are currently no tools or automated methods for statically deriving
+          sound backward error bounds. To address this gap, we propose Bean, a
+          typed first-order programming language designed to express quantitative
+          bounds on backward error. Bean's type system combines a graded coeffect
+          system with strict linearity to soundly track the flow of backward
+          error through programs. We prove the soundness of our system using a
+          novel categorical semantics, where every Bean program denotes a triple
+          of related transformations that together satisfy a backward error
+          guarantee.
+        </p>
+        <p>
+          To illustrate Bean's potential as a practical tool for automated
+          backward error analysis, we implement a variety of standard algorithms
+          from numerical linear algebra in Bean, establishing fine-grained
+          backward error bounds via typing in a compositional style. We also
+          develop a prototype implementation of Bean that infers backward error
+          bounds automatically. Our evaluation shows that these inferred bounds
+          match worst-case theoretical relative backward error bounds from the
+          literature, underscoring Bean's utility in validating a key property of
+          numerical programs: numerical stability.
 
-        To illustrate Bean's potential as a practical tool for automated
-        backward error analysis, we implement a variety of standard algorithms
-        from numerical linear algebra in Bean, establishing fine-grained
-        backward error bounds via typing in a compositional style. We also
-        develop a prototype implementation of Bean that infers backward error
-        bounds automatically. Our evaluation shows that these inferred bounds
-        match worst-case theoretical relative backward error bounds from the
-        literature, underscoring Bean's utility in validating a key property of
-        numerical programs: numerical stability.
-
-        Please see the
-        <a href="https://arxiv.org/abs/2501.14550">paper</a> and
-        <a href="https://github.com/Athena-Types/Bean">code</a>
-        for more info.
+        </p>
+        <p>
+          Please see the
+          <a href="https://arxiv.org/abs/2501.14550">paper</a> and
+          <a href="https://github.com/Athena-Types/Bean">code</a>
+          for more info.
+        </p>
       </div>
     </details>
 
@@ -308,7 +334,6 @@
       </summary>
       <div class="abstract">
         <p>
-
           Although the basic principles of IEEE floating point arithmetic have
           remained largely unchanged since the first edition of my book
           Numerical Computing with IEEE Floating Point Arithmetic was published
@@ -326,7 +351,6 @@
           stability. The book gives many technical details that are not readily
           available elsewhere. The second edition was published by SIAM in May
           2025.
-
         </p>
       </div>
     </details>
@@ -342,57 +366,51 @@
         </div>
       </summary>
       <div class="abstract">
-
         <p>
-
-        Hundreds of GPU programmers are being stymied by the NaNs and INFs that
-        arise during computation, often polluting loss functions (ML) and
-        residuals (HPC). The debugging problem is exacerbated due to GPU kernels
-        being closed-source and launched from scripts written in Python, Julia
-        etc. While one may build binary analysis tools to analyze exceptions,
-        separate tools are needed for different GPUs. Finally one likes to
-        detect exceptions at a higher level (e.g., LLVM): the lack of publicly
-        available GPU support from LLVM makes such tools more easily
-        CPU-targetable.
-
-        </p><p>
-
-        In this talk, we will briefly survey tools that can help detect and
-        diagnose floating-point exceptions. The bulk of this talk will be
-        devoted to covering the tools written at Utah: namely GPU-FPX (for GPU
-        SIMT cores) and its 'nixnan' variant (for GPU Tensor Cores). We run a
-        few demos that illustrate the ease of use of GPU-FPX on a variety of
-        codes: simple data compressors, simple GPTs, and Python/Julia codes.
-        While GPU-FPX currently helps ``X-Ray'' down the stack of kernel calls,
-        knowing what these kernels do and which of the detected exceptions are
-        relevant -- and which exception coercion rules (to normal values) are
-        sound -- remains unsolved. The only clear guidance we know of --
-        consistent exception handling due to Demmel -- does not seem to hold and
-        is inefficient if literally followed. Given that exceptions occur with
-        such high frequencies already and will multiply in their manifestations
-        on different hardware and software, clear guidelines for exception
-        coercion and blame assignment are needed.
-
-        </p><p>
-
-        The talk will highlight how we mined exceptions from Tensor Cores in
-        nixnan (Reference:
-        <a href="https://github.com/ganeshutah/PLDI25-Array-Workshop">github.com/ganeshutah/PLDI25-Array-Workshop</a>
-        ), and also summarize FloatGuard (AMD Exception Checking tool from UC Davis:
-        HPDC'25) and FPChecker (LLVM Exception Checking from Livermore:
-        ISSWC'22). We will devote ~15 mins to garner audience feedback to help
-        us prepare for our SC'25 tutorial on this topic this November in St.
-        Louis, MO.
-
-        </p><p>
-
-        Additional input from:
-        Xinyi Li (Utah),
-        Dolores Miao (UC Davis),
-        Harvey Dam (Utah),
-        Cindy Rubio-Gonzalez (UC Davis),
-        and Ignacio Laguna (LLNL).
-
+          Hundreds of GPU programmers are being stymied by the NaNs and INFs that
+          arise during computation, often polluting loss functions (ML) and
+          residuals (HPC). The debugging problem is exacerbated due to GPU kernels
+          being closed-source and launched from scripts written in Python, Julia
+          etc. While one may build binary analysis tools to analyze exceptions,
+          separate tools are needed for different GPUs. Finally one likes to
+          detect exceptions at a higher level (e.g., LLVM): the lack of publicly
+          available GPU support from LLVM makes such tools more easily
+          CPU-targetable.
+        </p>
+        <p>
+          In this talk, we will briefly survey tools that can help detect and
+          diagnose floating-point exceptions. The bulk of this talk will be
+          devoted to covering the tools written at Utah: namely GPU-FPX (for GPU
+          SIMT cores) and its 'nixnan' variant (for GPU Tensor Cores). We run a
+          few demos that illustrate the ease of use of GPU-FPX on a variety of
+          codes: simple data compressors, simple GPTs, and Python/Julia codes.
+          While GPU-FPX currently helps ``X-Ray'' down the stack of kernel calls,
+          knowing what these kernels do and which of the detected exceptions are
+          relevant -- and which exception coercion rules (to normal values) are
+          sound -- remains unsolved. The only clear guidance we know of --
+          consistent exception handling due to Demmel -- does not seem to hold and
+          is inefficient if literally followed. Given that exceptions occur with
+          such high frequencies already and will multiply in their manifestations
+          on different hardware and software, clear guidelines for exception
+          coercion and blame assignment are needed.
+        </p>
+        <p>
+          The talk will highlight how we mined exceptions from Tensor Cores in
+          nixnan (Reference:
+          <a href="https://github.com/ganeshutah/PLDI25-Array-Workshop">github.com/ganeshutah/PLDI25-Array-Workshop</a>
+          ), and also summarize FloatGuard (AMD Exception Checking tool from UC Davis:
+          HPDC'25) and FPChecker (LLVM Exception Checking from Livermore:
+          ISSWC'22). We will devote ~15 mins to garner audience feedback to help
+          us prepare for our SC'25 tutorial on this topic this November in St.
+          Louis, MO.
+        </p>
+        <p>
+          Additional input from:
+          Xinyi Li (Utah),
+          Dolores Miao (UC Davis),
+          Harvey Dam (Utah),
+          Cindy Rubio-Gonzalez (UC Davis),
+          and Ignacio Laguna (LLNL).
         </p>
       </div>
     </details>
@@ -612,36 +630,42 @@
         </div>
       </summary>
       <div class="abstract">
-        The numerical solution of partial differential equations (PDE) is
-        ubiquitously used for physical simulation in scientific computing and
-        engineering. Ideally, a PDE solver should be opaque: the user provides
-        as input the domain boundary, boundary conditions, and the governing
-        equations, and the code returns an evaluator that can compute the
-        value of the solution at any point of the input domain. This is
-        surprisingly far from being the case for all existing open-source or
-        commercial software, despite the research efforts in this direction
-        and the large academic and industrial interest. To a large extent,
-        this is due to lack of robustness in geometric algorithms used to
-        create the discretization, detect collisions, and evaluate element
-        validity.
-        I will present the incremental potential contact simulation paradigm,
-        which provides strong robustness guarantees in simulation codes,
-        ensuring, for the first time, validity of the trajectories accounting
-        for floating point rounding errors over an entire elastodynamic
-        simulation with contact. A core part of this approach is the use of a
-        conservative line-search to check for collisions between geometric
-        primitives and for ensuring validity of the deforming elements over
-        linear trajectories.
-        I will discuss both problems in depth, showing that SOTA approaches
-        favor numerical efficiency but are unfortunately not robust to
-        floating point rounding, leading to major failures in simulation. I
-        will then present an alternative approach based on judiciously using
-        rational and interval types to ensure provable correctness, while
-        keeping a running time comparable with non-conservative methods.
-        To conclude, I will discuss a set of applications enabled by this
-        approach in microscopy and biomechanics, including traction force
-        estimation on a live zebrafish and efficient modeling and simulation
-        of fibrous materials.
+        <p>
+          The numerical solution of partial differential equations (PDE) is
+          ubiquitously used for physical simulation in scientific computing and
+          engineering. Ideally, a PDE solver should be opaque: the user provides
+          as input the domain boundary, boundary conditions, and the governing
+          equations, and the code returns an evaluator that can compute the
+          value of the solution at any point of the input domain. This is
+          surprisingly far from being the case for all existing open-source or
+          commercial software, despite the research efforts in this direction
+          and the large academic and industrial interest. To a large extent,
+          this is due to lack of robustness in geometric algorithms used to
+          create the discretization, detect collisions, and evaluate element
+          validity.
+        </p>
+        <p>
+          I will present the incremental potential contact simulation paradigm,
+          which provides strong robustness guarantees in simulation codes,
+          ensuring, for the first time, validity of the trajectories accounting
+          for floating point rounding errors over an entire elastodynamic
+          simulation with contact. A core part of this approach is the use of a
+          conservative line-search to check for collisions between geometric
+          primitives and for ensuring validity of the deforming elements over
+          linear trajectories.
+        </p>
+        <p>
+          I will discuss both problems in depth, showing that SOTA approaches
+          favor numerical efficiency but are unfortunately not robust to
+          floating point rounding, leading to major failures in simulation. I
+          will then present an alternative approach based on judiciously using
+          rational and interval types to ensure provable correctness, while
+          keeping a running time comparable with non-conservative methods.
+          To conclude, I will discuss a set of applications enabled by this
+          approach in microscopy and biomechanics, including traction force
+          estimation on a live zebrafish and efficient modeling and simulation
+          of fibrous materials.
+        </p>
       </div>
     </details>
 
@@ -656,22 +680,26 @@
         </div>
       </summary>
       <div class="abstract">
-        A central challenge in scientific computing is managing the tradeoff between accuracy
-        and performance. Scientific applications often require high precision to produce
-        meaningful results, but achieving this precision can reduce computational speed
-        and efficiency. For example, using higher precision arithmetic can minimize rounding
-        errors and improve the reliability of results, but it typically demands more processing
-        power and memory, which negatively affects performance. As a result, scientific software
-        developers must carefully balance the need for accuracy with the need for acceptable
-        performance.
-        In recent years, programming languages like Rust have demonstrated how carefully
-        designed type systems can help developers write high-performance code while ensuring
-        critical properties, such as memory safety. In this talk, we will present our work on
-        designing type systems that provide guarantees about the accuracy of floating-point
-        computations. By introducing types that can quantitatively represent the error bounds
-        of floating-point computations, we can create statically typed programming languages
-        that alert developers to potentially significant inaccuracies early in the development
-        process.
+        <p>
+          A central challenge in scientific computing is managing the tradeoff between accuracy
+          and performance. Scientific applications often require high precision to produce
+          meaningful results, but achieving this precision can reduce computational speed
+          and efficiency. For example, using higher precision arithmetic can minimize rounding
+          errors and improve the reliability of results, but it typically demands more processing
+          power and memory, which negatively affects performance. As a result, scientific software
+          developers must carefully balance the need for accuracy with the need for acceptable
+          performance.
+        </p>
+        <p>
+          In recent years, programming languages like Rust have demonstrated how carefully
+          designed type systems can help developers write high-performance code while ensuring
+          critical properties, such as memory safety. In this talk, we will present our work on
+          designing type systems that provide guarantees about the accuracy of floating-point
+          computations. By introducing types that can quantitatively represent the error bounds
+          of floating-point computations, we can create statically typed programming languages
+          that alert developers to potentially significant inaccuracies early in the development
+          process.
+        </p>
       </div>
     </details>
 
@@ -703,27 +731,32 @@
         </div>
       </summary>
       <div class="abstract">
-        Since its introduction at Asiacrypt 2017, the CKKS approximate homomorphic encryption
-        scheme has become one of the most widely used and implemented homomorphic encryption
-        schemes. Due to the approximate nature of the scheme, application developers using
-        CKKS must ensure that the evaluation output is within a tolerable error of the corresponding
-        plaintext computation. Choosing appropriate parameters requires a good understanding of
-        how the noise will grow through the computation. A strong understanding of the noise
-        growth is also necessary to limit the performance impact of mitigations to the attacks
-        on CKKS presented by Li and Micciancio (Eurocrypt 2021). In this work we present a
-        comprehensive noise analysis of CKKS, that considers noise coming both from the encoding and
-        homomorphic operations. Our main contribution is the first average-case analysis for CKKS
-        noise, and we also introduce refinements to prior worst-case noise analyses. We develop
-        noise heuristics both for the original CKKS scheme and the RNS variant presented
-        at SAC 2018. We then evaluate these heuristics by comparing the predicted noise growth
-        with experiments in the HEAAN and FullRNS-HEAAN libraries, and by comparing with a
-        worst-case noise analysis as done in prior work. Our findings show mixed results: while
-        our new analyses lead to heuristic estimates that more closely model the observed noise
-        growth than prior approaches, the new heuristics sometimes slightly underestimate the
-        observed noise growth. This evidences the need for implementation-specific noise analyses
-        for CKKS, which recent work has shown to be effective for implementations of similar schemes.
-        This is joint work with Anamaria Costache, Benjamin R. Curtis, Erin Hales, Sean Murphy,
-        and Tabitha Ogilvie.
+        <p>
+          Since its introduction at Asiacrypt 2017, the CKKS approximate homomorphic encryption
+          scheme has become one of the most widely used and implemented homomorphic encryption
+          schemes. Due to the approximate nature of the scheme, application developers using
+          CKKS must ensure that the evaluation output is within a tolerable error of the corresponding
+          plaintext computation. Choosing appropriate parameters requires a good understanding of
+          how the noise will grow through the computation. A strong understanding of the noise
+          growth is also necessary to limit the performance impact of mitigations to the attacks
+          on CKKS presented by Li and Micciancio (Eurocrypt 2021).
+        </p>
+        <p>
+          In this work we present a
+          comprehensive noise analysis of CKKS, that considers noise coming both from the encoding and
+          homomorphic operations. Our main contribution is the first average-case analysis for CKKS
+          noise, and we also introduce refinements to prior worst-case noise analyses. We develop
+          noise heuristics both for the original CKKS scheme and the RNS variant presented
+          at SAC 2018. We then evaluate these heuristics by comparing the predicted noise growth
+          with experiments in the HEAAN and FullRNS-HEAAN libraries, and by comparing with a
+          worst-case noise analysis as done in prior work. Our findings show mixed results: while
+          our new analyses lead to heuristic estimates that more closely model the observed noise
+          growth than prior approaches, the new heuristics sometimes slightly underestimate the
+          observed noise growth. This evidences the need for implementation-specific noise analyses
+          for CKKS, which recent work has shown to be effective for implementations of similar schemes.
+          This is joint work with Anamaria Costache, Benjamin R. Curtis, Erin Hales, Sean Murphy,
+          and Tabitha Ogilvie.
+        </p>
       </div>
     </details>
 
@@ -818,29 +851,32 @@
         </div>
       </summary>
       <div class="abstract">
-        The growing demand for Large Language Models (LLMs) in
-        applications such as content generation, intelligent chatbots,
-        and sentiment analysis poses considerable challenges for LLM
-        service providers. To efficiently use GPU resources and boost
-        throughput, batching multiple requests has emerged as a
-        popular paradigm; to further speed up batching, LLM
-        quantization techniques reduce memory consumption and increase
-        computing capacity. However, prevalent quantization schemes
-        (e.g., 8-bit weight-activation quantization) cannot fully
-        leverage the capabilities of modern GPUs, such as 4-bit
-        integer operators, resulting in sub-optimal performance.
-
-        To maximize LLMs' serving throughput, we introduce Atom, a
-        low-bit quantization method that achieves high throughput
-        improvements with negligible accuracy loss. Atom significantly
-        boosts serving throughput by using low-bit operators and
-        considerably reduces memory consumption via low-bit
-        quantization. It attains high accuracy by applying a novel
-        mixed-precision and fine-grained quantization process. We
-        evaluate Atom on 4-bit weight-activation quantization setups
-        in the serving context. Atom improves end-to-end throughput by
-        up to 7.73× compared to the FP16 and by 2.53× compared to INT8
-        quantization, while maintaining the same latency target.
+        <p>
+          The growing demand for Large Language Models (LLMs) in
+          applications such as content generation, intelligent chatbots,
+          and sentiment analysis poses considerable challenges for LLM
+          service providers. To efficiently use GPU resources and boost
+          throughput, batching multiple requests has emerged as a
+          popular paradigm; to further speed up batching, LLM
+          quantization techniques reduce memory consumption and increase
+          computing capacity. However, prevalent quantization schemes
+          (e.g., 8-bit weight-activation quantization) cannot fully
+          leverage the capabilities of modern GPUs, such as 4-bit
+          integer operators, resulting in sub-optimal performance.
+        </p>
+        <p>
+          To maximize LLMs' serving throughput, we introduce Atom, a
+          low-bit quantization method that achieves high throughput
+          improvements with negligible accuracy loss. Atom significantly
+          boosts serving throughput by using low-bit operators and
+          considerably reduces memory consumption via low-bit
+          quantization. It attains high accuracy by applying a novel
+          mixed-precision and fine-grained quantization process. We
+          evaluate Atom on 4-bit weight-activation quantization setups
+          in the serving context. Atom improves end-to-end throughput by
+          up to 7.73× compared to the FP16 and by 2.53× compared to INT8
+          quantization, while maintaining the same latency target.
+        </p>
       </div>
     </details>
 
