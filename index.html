@@ -89,7 +89,9 @@
         </div>
       </summary>
       <div class="abstract">
-        TODO
+        <p>
+          TODO
+        </p>
       </div>
     </details>
 -->
@@ -106,7 +108,9 @@
         </div>
       </summary>
       <div class="abstract">
-        TODO
+        <p>
+          TODO
+        </p>
       </div>
     </details>
 -->
@@ -139,7 +143,8 @@
           conservative, and dynamic methods are more aggressive and potentially
           more effective, the question remains: how do these approaches compare
           in practice?
-        </p><p>
+        </p>
+        <p>
           We present the first comprehensive evaluation of existing
           mixed-precision tuning tools for floating-point programs, offering a
           **quantitative comparison** between sound static and (unsound) dynamic
@@ -173,7 +178,9 @@
         </div>
       </summary>
       <div class="abstract">
-        TODO
+        <p>
+          TODO
+        </p>
       </div>
     </details>
 -->
@@ -190,7 +197,9 @@
         </div>
       </summary>
       <div class="abstract">
-        TODO
+        <p>
+          TODO
+        </p>
       </div>
     </details>
 -->
@@ -310,7 +319,6 @@
           match worst-case theoretical relative backward error bounds from the
           literature, underscoring Bean's utility in validating a key property of
           numerical programs: numerical stability.
-
         </p>
         <p>
           Please see the
@@ -441,17 +449,19 @@
         </div>
       </summary>
       <div class="abstract">
-        Many scientific and mathematical problems demand extremely precise calculations
-        exceeding the limits of the double precision (IEEE binary64) floating-point format.
-        However, existing methods for extended-precision computation involve complex
-        branching algorithms that perform poorly on modern data-parallel processors,
-        including SIMD CPUs and GPUs. In this talk, I introduce a class of algorithms
-        called floating-point accumulation networks (FPANs) that enable fast branch-free
-        extended-precision arithmetic. FPAN-based algorithms outperform standard multiprecision
-        libraries by orders of magnitude, achieving up to 11.7x the peak performance of QD,
-        34.4x over CAMPARY, 35.6x over MPFR, and 41.4x over FLINT. I also introduce a new
-        formal verification technique that leverages automatic theorem provers to rigorously
-        establish the correctness of these new algorithms.
+        <p>
+          Many scientific and mathematical problems demand extremely precise calculations
+          exceeding the limits of the double precision (IEEE binary64) floating-point format.
+          However, existing methods for extended-precision computation involve complex
+          branching algorithms that perform poorly on modern data-parallel processors,
+          including SIMD CPUs and GPUs. In this talk, I introduce a class of algorithms
+          called floating-point accumulation networks (FPANs) that enable fast branch-free
+          extended-precision arithmetic. FPAN-based algorithms outperform standard multiprecision
+          libraries by orders of magnitude, achieving up to 11.7x the peak performance of QD,
+          34.4x over CAMPARY, 35.6x over MPFR, and 41.4x over FLINT. I also introduce a new
+          formal verification technique that leverages automatic theorem provers to rigorously
+          establish the correctness of these new algorithms.
+        </p>
       </div>
     </details>
 
@@ -466,27 +476,29 @@
         </div>
       </summary>
       <div class="abstract">
-        Evaluating real-valued expressions to high precision is a key
-        building block in computational mathematics, physics, and numerics.
-        A typical implementation uses a uniform precision for each
-        operation, and doubles that precision until the real result can be
-        bounded to some sufficiently narrow interval. However, this is
-        wasteful: usually only a few operations really need to be performed
-        at high precision, and the bulk of the expression could use much
-        lower precision. Uniform precision can also waste iterations
-        discovering the necessary precision and then still overestimate by
-        up to a factor of two. We propose to instead use mixed-precision
-        interval arithmetic to evaluate real-valued expressions. A key
-        challenge is deriving the mixed-precision assignment both soundly
-        and quickly. To do so, we introduce a sound variation of error
-        Taylor series and condition numbers, specialized to interval
-        arithmetic, that can be evaluated with minimal overhead thanks to
-        an “exponent trick”. Our implementation, Reval, achieves an
-        average speed-up of 1.47× compared to the state-of-the-art Sollya
-        tool, with the speed-up increasing to 4.92× on the most difficult
-        input points. An examination of the precisions used with and without
-        precision tuning shows that the speed-up results come from quickly
-        assigning lower precisions for the majority of operations
+        <p>
+          Evaluating real-valued expressions to high precision is a key
+          building block in computational mathematics, physics, and numerics.
+          A typical implementation uses a uniform precision for each
+          operation, and doubles that precision until the real result can be
+          bounded to some sufficiently narrow interval. However, this is
+          wasteful: usually only a few operations really need to be performed
+          at high precision, and the bulk of the expression could use much
+          lower precision. Uniform precision can also waste iterations
+          discovering the necessary precision and then still overestimate by
+          up to a factor of two. We propose to instead use mixed-precision
+          interval arithmetic to evaluate real-valued expressions. A key
+          challenge is deriving the mixed-precision assignment both soundly
+          and quickly. To do so, we introduce a sound variation of error
+          Taylor series and condition numbers, specialized to interval
+          arithmetic, that can be evaluated with minimal overhead thanks to
+          an “exponent trick”. Our implementation, Reval, achieves an
+          average speed-up of 1.47× compared to the state-of-the-art Sollya
+          tool, with the speed-up increasing to 4.92× on the most difficult
+          input points. An examination of the precisions used with and without
+          precision tuning shows that the speed-up results come from quickly
+          assigning lower precisions for the majority of operations
+        </p>
       </div>
     </details>
 
@@ -501,16 +513,18 @@
         </div>
       </summary>
       <div class="abstract">
-        Safety-critical systems with neural network components require strong
-        guarantees. While existing verification techniques have shown great
-        progress towards this goal, they mostly reason on real-valued
-        abstractions of neural networks. As soon as we consider their
-        floating-point behaviour, the associated verification problem becomes
-        harder. In this talk, we discuss a software verification approach to
-        this problem. In doing so, we introduce NeuroCodeBench, a benchmark
-        of neural network code for software verification. With it, we show
-        the advantages and shortcomings of reasoning on neural networks at
-        the floating-point level.
+        <p>
+          Safety-critical systems with neural network components require strong
+          guarantees. While existing verification techniques have shown great
+          progress towards this goal, they mostly reason on real-valued
+          abstractions of neural networks. As soon as we consider their
+          floating-point behaviour, the associated verification problem becomes
+          harder. In this talk, we discuss a software verification approach to
+          this problem. In doing so, we introduce NeuroCodeBench, a benchmark
+          of neural network code for software verification. With it, we show
+          the advantages and shortcomings of reasoning on neural networks at
+          the floating-point level.
+        </p>
       </div>
     </details>
 
@@ -527,26 +541,28 @@
         </div>
       </summary>
       <div class="abstract">
-        Linear programs (LP) arise in many domains, such as robotics,
-        databases, machine learning, computer graphics, etc. LP solvers are
-        also widely used in the PL community for analyzing vulnerabilities in C
-        source code, designing correctly rounded Math libraries, repairing deep
-        neural networks, Presburger arithmetic for polyhedral compilation, etc.
-        Linear programs with billions of constraints are beyond the reach of
-        modern LP solvers. However, for many practical applications, the linear
-        program is "low-dimensional", i.e., it has many constraints but only a
-        few unknown variables. In this talk, we'll first discuss how random
-        sampling can be used for provably solving (in terms of expected
-        iterations) feasible low-dimensional linear programs with billions of
-        constraints. Next, we'll discuss how this approach requires
-        enhancements for infeasible linear programs, where a small number of
-        conflicting constraints make the linear program have no solution. We'll
-        show that a geometric perspective can be used for efficiently
-        eliminating the conflicting constraints and computing a solution that
-        satisfies the maximum number of constraints. We'll present applications
-        of our LP solver for generating correctly rounded Math libraries for
-        floating-point variants. Time permitting, we'll also discuss
-        applications in interpretable machine learning.
+        <p>
+          Linear programs (LP) arise in many domains, such as robotics,
+          databases, machine learning, computer graphics, etc. LP solvers are
+          also widely used in the PL community for analyzing vulnerabilities in C
+          source code, designing correctly rounded Math libraries, repairing deep
+          neural networks, Presburger arithmetic for polyhedral compilation, etc.
+          Linear programs with billions of constraints are beyond the reach of
+          modern LP solvers. However, for many practical applications, the linear
+          program is "low-dimensional", i.e., it has many constraints but only a
+          few unknown variables. In this talk, we'll first discuss how random
+          sampling can be used for provably solving (in terms of expected
+          iterations) feasible low-dimensional linear programs with billions of
+          constraints. Next, we'll discuss how this approach requires
+          enhancements for infeasible linear programs, where a small number of
+          conflicting constraints make the linear program have no solution. We'll
+          show that a geometric perspective can be used for efficiently
+          eliminating the conflicting constraints and computing a solution that
+          satisfies the maximum number of constraints. We'll present applications
+          of our LP solver for generating correctly rounded Math libraries for
+          floating-point variants. Time permitting, we'll also discuss
+          applications in interpretable machine learning.
+        </p>
       </div>
     </details>
 
@@ -598,24 +614,26 @@
         </div>
       </summary>
       <div class="abstract">
-        A number of companies recently worked together to release the new Open
-        Compute Project MX standard for low-precision computation, aimed at
-        efficient neural network implementation. In our work, we describe and
-        evaluate the first open-source FPGA implementation of the arithmetic
-        defined in the standard. Our designs fully support all the standard's
-        concrete formats for conversion into and out of MX formats and for the
-        standard-defined arithmetic operations, as well as arbitrary
-        fixed-point and floating-point formats. Certain elements of the
-        standard are left as implementation-defined, and we present the first
-        concrete FPGA-inspired choices for these elements. Our library of
-        optimized hardware components is available open source, alongside our
-        open-source Pytorch library for quantization into the new standard,
-        integrated with the Brevitas library so that the community can develop
-        novel neural network designs quantized with MX formats in mind. Our
-        testing shows that MX is very effective for formats such as INT5 or FP6
-        which are not natively supported on GPUs. This gives FPGAs an advantage
-        as they have the flexibility to implement a custom datapath and take
-        advantage of the smaller area footprints offered by these formats.
+        <p>
+          A number of companies recently worked together to release the new Open
+          Compute Project MX standard for low-precision computation, aimed at
+          efficient neural network implementation. In our work, we describe and
+          evaluate the first open-source FPGA implementation of the arithmetic
+          defined in the standard. Our designs fully support all the standard's
+          concrete formats for conversion into and out of MX formats and for the
+          standard-defined arithmetic operations, as well as arbitrary
+          fixed-point and floating-point formats. Certain elements of the
+          standard are left as implementation-defined, and we present the first
+          concrete FPGA-inspired choices for these elements. Our library of
+          optimized hardware components is available open source, alongside our
+          open-source Pytorch library for quantization into the new standard,
+          integrated with the Brevitas library so that the community can develop
+          novel neural network designs quantized with MX formats in mind. Our
+          testing shows that MX is very effective for formats such as INT5 or FP6
+          which are not natively supported on GPUs. This gives FPGAs an advantage
+          as they have the flexibility to implement a custom datapath and take
+          advantage of the smaller area footprints offered by these formats.
+        </p>
       </div>
     </details>
 
@@ -773,28 +791,30 @@
         </div>
       </summary>
       <div class="abstract">
-        Neural networks have offered distinct advantages over traditional
-        techniques. However, the opaque neural networks render their
-        performance vulnerable, in the presence of adversarial samples. This
-        underscores the imperative of formal verification of neural networks,
-        especially in the safety-critical domain. Deep neural networks are
-        composed of multiple hidden layers with neurons, where mathematical
-        operations stack linear and nonlinear (activation functions)
-        operations. Using linear inequalities plays a crucial role in
-        constraining and deducing the ranges of results from nonlinear
-        operations. Considering correlations among input variables of multiple
-        neurons leads to constraints known as multi-neuron constraints, posing
-        a non-trivial high-dimensional challenge in computing the convex hull
-        of functions. This work is dedicated to designing methods for computing
-        multi-neuron constraints for the ReLU function to serve the robustness
-        verification of neural networks. We have introduced a novel approach
-        WRALU (Wrapping ReLU) for computing the convex hull of a ReLU function
-        (<a
+        <p>
+          Neural networks have offered distinct advantages over traditional
+          techniques. However, the opaque neural networks render their
+          performance vulnerable, in the presence of adversarial samples. This
+          underscores the imperative of formal verification of neural networks,
+          especially in the safety-critical domain. Deep neural networks are
+          composed of multiple hidden layers with neurons, where mathematical
+          operations stack linear and nonlinear (activation functions)
+          operations. Using linear inequalities plays a crucial role in
+          constraining and deducing the ranges of results from nonlinear
+          operations. Considering correlations among input variables of multiple
+          neurons leads to constraints known as multi-neuron constraints, posing
+          a non-trivial high-dimensional challenge in computing the convex hull
+          of functions. This work is dedicated to designing methods for computing
+          multi-neuron constraints for the ReLU function to serve the robustness
+          verification of neural networks. We have introduced a novel approach
+          WRALU (Wrapping ReLU) for computing the convex hull of a ReLU function
+          (<a
           href='https://popl24.sigplan.org/details/POPL-2024-popl-research-papers/77/ReLU-Hull-Approximation'>published
           in POPL’24</a>).
-        This method significantly reduces computation
-        time and complexity, constructing fewer constraints to achieve more
-        precise approximations while handling higher dimensions.
+          This method significantly reduces computation
+          time and complexity, constructing fewer constraints to achieve more
+          precise approximations while handling higher dimensions.
+        </p>
       </div>
     </details>
 
@@ -811,30 +831,32 @@
         </div>
       </summary>
       <div class="abstract">
-        Logarithmic Number Systems (LNS) hold considerable promise in
-        helping reduce the number of bits needed to represent a high
-        dynamic range of real-numbers with finite precision, and also
-        efficiently support multiplication and division. However,
-        under LNS, addition and subtraction turn into non-linear
-        functions that must be approximated—typically using
-        precomputed table-based functions. Additionally, multiple
-        layers of error correction are typically needed to improve
-        result accuracy. Unfortunately, previous efforts have not
-        characterized the resulting error bound. We provide the first
-        rigorous analysis of LNS, covering detailed techniques such as
-        co-transformation that are crucial to implementing subtraction
-        with reasonable accuracy. We provide theorems capturing the
-        error due to table interpolations, the finite precision of
-        pre-computed values in the tables, and the error introduced by
-        fix-point multiplications involved in LNS implementations. We
-        empirically validate our analysis using a Python
-        implementation, showing that our analytical bounds are tight,
-        and that our testing campaign generates inputs diverse-enough
-        to almost match (but not exceed) the analytical bounds. We
-        close with discussions on how to adapt our analysis to LNS
-        systems with different bases and also discuss many pragmatic
-        ramifications of our work in the broader arena of scientific
-        computing and machine learning.
+        <p>
+          Logarithmic Number Systems (LNS) hold considerable promise in
+          helping reduce the number of bits needed to represent a high
+          dynamic range of real-numbers with finite precision, and also
+          efficiently support multiplication and division. However,
+          under LNS, addition and subtraction turn into non-linear
+          functions that must be approximated—typically using
+          precomputed table-based functions. Additionally, multiple
+          layers of error correction are typically needed to improve
+          result accuracy. Unfortunately, previous efforts have not
+          characterized the resulting error bound. We provide the first
+          rigorous analysis of LNS, covering detailed techniques such as
+          co-transformation that are crucial to implementing subtraction
+          with reasonable accuracy. We provide theorems capturing the
+          error due to table interpolations, the finite precision of
+          pre-computed values in the tables, and the error introduced by
+          fix-point multiplications involved in LNS implementations. We
+          empirically validate our analysis using a Python
+          implementation, showing that our analytical bounds are tight,
+          and that our testing campaign generates inputs diverse-enough
+          to almost match (but not exceed) the analytical bounds. We
+          close with discussions on how to adapt our analysis to LNS
+          systems with different bases and also discuss many pragmatic
+          ramifications of our work in the broader arena of scientific
+          computing and machine learning.
+        </p>
       </div>
     </details>
 
@@ -893,19 +915,21 @@
         </div>
       </summary>
       <div class="abstract">
-        Multiplication is a basic operator used in many applications. When
-        implemented in embedded systems, e.g. FPGAs, these algorithms require
-        highly optimized hardware. Improving the multiplication implementation
-        is an important part of the final hardware cost reduction. This talk
-        will expose the recent advances on the automatic design of
-        multiplication of a variable with multiple <emph>a priori</emph> known
-        constants, this problem is called the Multiple Constant Multiplication
-        (MCM) problem. Using Integer Linear Programming (ILP) permits to
-        significantly reduce the hardware cost when MCM is implemented using
-        additions and bit-shifts. The ILP approach has been efficiently used
-        for various hardware design problems but other approaches exists, such
-        as SAT/SMT, Constraint Programming, etc. This presentation will
-        introduce a few concepts relating to this ecosystem.
+        <p>
+          Multiplication is a basic operator used in many applications. When
+          implemented in embedded systems, e.g. FPGAs, these algorithms require
+          highly optimized hardware. Improving the multiplication implementation
+          is an important part of the final hardware cost reduction. This talk
+          will expose the recent advances on the automatic design of
+          multiplication of a variable with multiple <emph>a priori</emph> known
+          constants, this problem is called the Multiple Constant Multiplication
+          (MCM) problem. Using Integer Linear Programming (ILP) permits to
+          significantly reduce the hardware cost when MCM is implemented using
+          additions and bit-shifts. The ILP approach has been efficiently used
+          for various hardware design problems but other approaches exists, such
+          as SAT/SMT, Constraint Programming, etc. This presentation will
+          introduce a few concepts relating to this ecosystem.
+        </p>
       </div>
     </details>
 
@@ -922,20 +946,23 @@
         </div>
       </summary>
       <div class="abstract">
-        A software designer has to carefully select the arithmetic that best
-        suits each step of her application, but the choice is constrained: only
-        a handful of operators are supported in hardware, in only in a handful
-        of precisions.
-        Conversely, when designing for hardware or FPGAs, these constraints
-        become degrees of freedom. Any precision can be designed, any number
-        encoding, but also any operation and function, provided you are clever
-        enough to implement it efficiently as a circuit.
-        <br>
-        This talk will expose some of the opportunities offered by this freedom,
-        and some of the methodologies and tools that allow a designer to build
-        and compose application-specific operators.
-        It may include some inadvertent advertising for our upcoming 800-page
-        book dedicated to these topics.
+        <p>
+          A software designer has to carefully select the arithmetic that best
+          suits each step of her application, but the choice is constrained: only
+          a handful of operators are supported in hardware, in only in a handful
+          of precisions.
+          Conversely, when designing for hardware or FPGAs, these constraints
+          become degrees of freedom. Any precision can be designed, any number
+          encoding, but also any operation and function, provided you are clever
+          enough to implement it efficiently as a circuit.
+        </p>
+        <p>
+          This talk will expose some of the opportunities offered by this freedom,
+          and some of the methodologies and tools that allow a designer to build
+          and compose application-specific operators.
+          It may include some inadvertent advertising for our upcoming 800-page
+          book dedicated to these topics.
+        </p>
       </div>
     </details>
 
@@ -952,23 +979,26 @@
         </div>
       </summary>
       <div class="abstract">
-        Come hear an overview of numeric support of the Java platform, an on-going
-        story ranging over more than a quarter century and spanning standards,
-        specifications, virtual machines, libraries, and compilers, including resolving
-        details as small as 2^-1074. The talk does not assume audience members will
-        already be familiar with the details of the Java platform; attendees are welcome
-        to ask questions about such details.
-        <br>
-        Joe is a long-time member on the JDK engineering team, first at Sun and later
-        Oracle. As “Java Floating-Point Czar” he has looked after Java numerics including
-        contributing to the design of strictfp, adding numerous floating-point math library
-        methods, and adding hexadecimal floating-point literals to the Java language and
-        library. Joe was a participant in and interim editor of the 2008 revision to the
-        IEEE 754 floating-point standard. Outside of numerics, Joe has done other
-        foundational work on the Java platform including core libraries development, Java
-        language changes including Project Coin, infrastructure improvements, and reviewing
-        platform interface updates, together with a smattering of project management and
-        release management along the way.
+        <p>
+          Come hear an overview of numeric support of the Java platform, an on-going
+          story ranging over more than a quarter century and spanning standards,
+          specifications, virtual machines, libraries, and compilers, including resolving
+          details as small as 2^-1074. The talk does not assume audience members will
+          already be familiar with the details of the Java platform; attendees are welcome
+          to ask questions about such details.
+        </p>
+        <p>
+          Joe is a long-time member on the JDK engineering team, first at Sun and later
+          Oracle. As “Java Floating-Point Czar” he has looked after Java numerics including
+          contributing to the design of strictfp, adding numerous floating-point math library
+          methods, and adding hexadecimal floating-point literals to the Java language and
+          library. Joe was a participant in and interim editor of the 2008 revision to the
+          IEEE 754 floating-point standard. Outside of numerics, Joe has done other
+          foundational work on the Java platform including core libraries development, Java
+          language changes including Project Coin, infrastructure improvements, and reviewing
+          platform interface updates, together with a smattering of project management and
+          release management along the way.
+        </p>
       </div>
     </details>
 
@@ -985,19 +1015,21 @@
         </div>
       </summary>
       <div class="abstract">
-        This talk is a work-in-progress report about our efforts to
-        generate customized hardware implementations of fixed-point
-        function approximations for application-specific accelerators.
-        We built a new compiler from FPCore
-        to <a href="https://calyxir.org/">Calyx</a>, our lab’s IR and
-        compiler for translating high-level descriptions to hardware
-        designs. The interesting part is the need to generate
-        efficient polynomial approximations for elementary
-        functions—and the freedom to customize these implementations
-        for the specific accelerator’s context. We have preliminary
-        (but encouraging) comparisons to a commercial high-level
-        synthesis (HLS) compiler. We will seek feedback on the many
-        possibilities for next steps.
+        <p>
+          This talk is a work-in-progress report about our efforts to
+          generate customized hardware implementations of fixed-point
+          function approximations for application-specific accelerators.
+          We built a new compiler from FPCore
+          to <a href="https://calyxir.org/">Calyx</a>, our lab’s IR and
+          compiler for translating high-level descriptions to hardware
+          designs. The interesting part is the need to generate
+          efficient polynomial approximations for elementary
+          functions—and the freedom to customize these implementations
+          for the specific accelerator’s context. We have preliminary
+          (but encouraging) comparisons to a commercial high-level
+          synthesis (HLS) compiler. We will seek feedback on the many
+          possibilities for next steps.
+        </p>
       </div>
     </details>
 
@@ -1014,22 +1046,24 @@
         </div>
       </summary>
       <div class="abstract">
-        Due to the limits of finite precision arithmetic, as one works
-        with floating-point representations of real numbers in
-        computer programs, round-off errors tend to accumulate under
-        mathematical operations and may become unacceptably large.
-        Symbolic Taylor Error Expressions is a technique used in the
-        tool FPTaylor to bound the round-off errors accumulated under
-        differentiable mathematical operations which provides a good
-        trade-off between efficiency and accuracy. In this
-        presentation, I will present a formally verified
-        implementation of Symbolic Taylor Error Expressions in a
-        specification language, automated theorem prover, and
-        typechecker called Prototype Verification System (PVS). I will
-        also go over how this formal specification in PVS will enable
-        the integration of Symbolic Taylor Expressions in PRECiSA, a
-        prototype static analysis tool that can compute verified
-        round-off error bounds for floating-point programs.
+        <p>
+          Due to the limits of finite precision arithmetic, as one works
+          with floating-point representations of real numbers in
+          computer programs, round-off errors tend to accumulate under
+          mathematical operations and may become unacceptably large.
+          Symbolic Taylor Error Expressions is a technique used in the
+          tool FPTaylor to bound the round-off errors accumulated under
+          differentiable mathematical operations which provides a good
+          trade-off between efficiency and accuracy. In this
+          presentation, I will present a formally verified
+          implementation of Symbolic Taylor Error Expressions in a
+          specification language, automated theorem prover, and
+          typechecker called Prototype Verification System (PVS). I will
+          also go over how this formal specification in PVS will enable
+          the integration of Symbolic Taylor Expressions in PRECiSA, a
+          prototype static analysis tool that can compute verified
+          round-off error bounds for floating-point programs.
+        </p>
       </div>
     </details>
 
@@ -1046,25 +1080,28 @@
         </div>
       </summary>
       <div class="abstract">
-        In cyber-physical systems such as autonomous driving systems
-        and robotics components, ordinary differential equations and
-        nonlinear functions such as the exponential function and the
-        trigonometric functions appear almost universally. To adopt
-        automated reasoning techniques in these domains, it is
-        necessary to develop a tool that can handle logical encodings
-        with those functions.
-
-        In this talk, I will present the design and implementation of
-        a delta-decision procedure, dReal. First, we will discuss the
-        theory of delta-decidability briefly. Then I will explain 1)
-        how the tool handles nonlinear functions and ordinary
-        differential equations, 2) how it can solve optimization and
-        synthesis problems (∃∀-formulas), and 3) how the tool utilizes
-        multiple cores to speed up the solving process in parallel. I
-        will show that the tool helps tackle instances from real-world
-        applications including bounded model-checking for
-        cyber-physical systems, nonlinear global optimization, and
-        Lyapunov-stability analysis in robotics.
+        <p>
+          In cyber-physical systems such as autonomous driving systems
+          and robotics components, ordinary differential equations and
+          nonlinear functions such as the exponential function and the
+          trigonometric functions appear almost universally. To adopt
+          automated reasoning techniques in these domains, it is
+          necessary to develop a tool that can handle logical encodings
+          with those functions.
+        </p>
+        <p>
+          In this talk, I will present the design and implementation of
+          a delta-decision procedure, dReal. First, we will discuss the
+          theory of delta-decidability briefly. Then I will explain 1)
+          how the tool handles nonlinear functions and ordinary
+          differential equations, 2) how it can solve optimization and
+          synthesis problems (∃∀-formulas), and 3) how the tool utilizes
+          multiple cores to speed up the solving process in parallel. I
+          will show that the tool helps tackle instances from real-world
+          applications including bounded model-checking for
+          cyber-physical systems, nonlinear global optimization, and
+          Lyapunov-stability analysis in robotics.
+        </p>
       </div>
     </details>
 
@@ -1095,16 +1132,18 @@
         </div>
       </summary>
       <div class="abstract">
-        Members of the FPBench community are well-aware of the
-        pitfalls of floating-point representation, but awareness among
-        the wider population of software authors is
-        often <a href="https://doi.org/10.1109/IPDPS.2018.00068">painfully
+        <p>
+          Members of the FPBench community are well-aware of the
+          pitfalls of floating-point representation, but awareness among
+          the wider population of software authors is
+          often <a href="https://doi.org/10.1109/IPDPS.2018.00068">painfully
           inadequate</a>. There is a surprising dearth of quality
-        educational materials and techniques for teaching these issues
-        to students (both undergraduate and graduate). In this
-        roundtable discussion, we’ll look at some of the current
-        approaches and brainstorm possible approaches to improve the
-        state of the art.
+          educational materials and techniques for teaching these issues
+          to students (both undergraduate and graduate). In this
+          roundtable discussion, we’ll look at some of the current
+          approaches and brainstorm possible approaches to improve the
+          state of the art.
+        </p>
       </div>
     </details>
 
@@ -1121,21 +1160,23 @@
         </div>
       </summary>
       <div class="abstract">
-        Floating point issues must often be surmounted when building
-        software products that rely on precise computations while
-        still demanding performance. In this talk, I describe two
-        scenarios where existing tools fall short. First, I will
-        describe our efforts to utilize interval computation to better
-        bound quantities representing real numbers, and the rabbit
-        hole we encountered when trying to find an existing
-        off-the-shelf cross-platform interval computation library.
-        From this exploration, we built a cross-platform interval
-        benchmark suite using hand-crafted expressions from real-world
-        code and from FPBench, and evaluated four existing interval
-        libraries for correctness, interval width, and speed. Second,
-        I will describe our experiences using GPU floating point math
-        to emulate integer computations, and the pitfalls even when
-        computing with exactly-representable floating point numbers.
+        <p>
+          Floating point issues must often be surmounted when building
+          software products that rely on precise computations while
+          still demanding performance. In this talk, I describe two
+          scenarios where existing tools fall short. First, I will
+          describe our efforts to utilize interval computation to better
+          bound quantities representing real numbers, and the rabbit
+          hole we encountered when trying to find an existing
+          off-the-shelf cross-platform interval computation library.
+          From this exploration, we built a cross-platform interval
+          benchmark suite using hand-crafted expressions from real-world
+          code and from FPBench, and evaluated four existing interval
+          libraries for correctness, interval width, and speed. Second,
+          I will describe our experiences using GPU floating point math
+          to emulate integer computations, and the pitfalls even when
+          computing with exactly-representable floating point numbers.
+        </p>
       </div>
     </details>
 
@@ -1153,21 +1194,23 @@
         </div>
       </summary>
       <div class="abstract">
-        For better or worse, the world runs on C, and to a lesser
-        extent, C with IEEE 754 floating point. At Sandia Labs, we
-        often are tasked with the formal verification of
-        high-consequence programs in C. Two methods we use at Sandia
-        to accomplish this verification are: fully constructive proofs
-        of correctness (in the Coq theorem prover), and deductive
-        verification (using Frama-C). In both cases, the addition of
-        numerical computations adds complexity to the programs, via
-        numerical error (e.g., discretization or roundoff error), or
-        run-time errors (such as floating-point exceptions). We
-        discuss our efforts at Sandia Labs to both make numerical
-        models of C programs using Frama-C and its ANSI C
-        specification language (ACSL), as well as functional models in
-        Coq, and how to check whether the relevant C code implements
-        these specifications.
+        <p>
+          For better or worse, the world runs on C, and to a lesser
+          extent, C with IEEE 754 floating point. At Sandia Labs, we
+          often are tasked with the formal verification of
+          high-consequence programs in C. Two methods we use at Sandia
+          to accomplish this verification are: fully constructive proofs
+          of correctness (in the Coq theorem prover), and deductive
+          verification (using Frama-C). In both cases, the addition of
+          numerical computations adds complexity to the programs, via
+          numerical error (e.g., discretization or roundoff error), or
+          run-time errors (such as floating-point exceptions). We
+          discuss our efforts at Sandia Labs to both make numerical
+          models of C programs using Frama-C and its ANSI C
+          specification language (ACSL), as well as functional models in
+          Coq, and how to check whether the relevant C code implements
+          these specifications.
+        </p>
       </div>
     </details>
 
@@ -1185,13 +1228,15 @@
         </div>
       </summary>
       <div class="abstract">
-        <p>Finch is a domain-specific language for numerically solving differential equations. It employs a variety of
+        <p>
+          Finch is a domain-specific language for numerically solving differential equations. It employs a variety of
           numerical techniques, generates code for a number of different target frameworks and languages, and allows
           almost arbitrary equation input. In addition, it accepts unrestricted modification of the generated code to
           provide maximal flexibility and hand-optimization. One downside to this (perhaps excessive) flexibility is
           that numerical instability and the occasional typo can easily turn a solution into a pile of NaNs.
-        <p>Eric will introduce Finch, and demonstrate some of the features relevant to the numerics. We will look at
+          Eric will introduce Finch, and demonstrate some of the features relevant to the numerics. We will look at
           some examples where things turn out just the way we hoped, and some where they don't.
+        </p>
       </div>
     </details>
 
@@ -1208,11 +1253,13 @@
         </div>
       </summary>
       <div class="abstract">
-        Marius Cornea, a senior principal engineer at Intel working on math libraries and floating-point (and one of the
-        coauthors of the IEEE Standard 754-2008), will be presenting about new industry standards for low-precision
-        formats. The presentation will examine the reasons for which FP8 formats have emerged, definition details, and
-        variations proposed by industry and academia. We will enumerate a few known (mostly planned) implementations of
-        FP8. We will also look at current standardization work for FP8 formats.
+        <p>
+          Marius Cornea, a senior principal engineer at Intel working on math libraries and floating-point (and one of the
+          coauthors of the IEEE Standard 754-2008), will be presenting about new industry standards for low-precision
+          formats. The presentation will examine the reasons for which FP8 formats have emerged, definition details, and
+          variations proposed by industry and academia. We will enumerate a few known (mostly planned) implementations of
+          FP8. We will also look at current standardization work for FP8 formats.
+        </p>
       </div>
     </details>
 
@@ -1245,28 +1292,28 @@
         </div>
       </summary>
       <div class="abstract">
-
-        We present a novel computer-aided design (CAD) modeling system designed
-        to support a modeling range that matches the fabrication range of
-        modern additive manufacturing (AM) systems that are capable of
-        producing large-scale, high-resolution parts. To be useful to designers
-        and fabricators, a modeling system must perform essential functions
-        (such as execution of modeling operations, visualization, and slicing)
-        at interactive rates, and achieving the necessary performance depends
-        on efficient use of both memory and computing capacity. Our approach to
-        achieving necessary performance levels is to implement an implicit
-        function-based representation (f-rep) modeling system, not using a
-        computer algebra system, but instead using just-in-time (JIT)
-        compilation of user-defined functions. Efficient memory usage is
-        achieved via a sparse volume data structure that builds on previous
-        work by Hoetzlein [Hoetzlein 2016]. Computational efficiency is
-        achieved through a combination of interval arithmetic (IA) and
-        massively parallel evaluation on the GPU. We follow [Keeter 2020] and
-        employ IA as the basis for local pruning of the function evaluation
-        tree to minimize the required number of function evaluations, and we
-        take advantage of GPU-parallelism to significantly enhance
-        computational throughput.
-
+        <p>
+          We present a novel computer-aided design (CAD) modeling system designed
+          to support a modeling range that matches the fabrication range of
+          modern additive manufacturing (AM) systems that are capable of
+          producing large-scale, high-resolution parts. To be useful to designers
+          and fabricators, a modeling system must perform essential functions
+          (such as execution of modeling operations, visualization, and slicing)
+          at interactive rates, and achieving the necessary performance depends
+          on efficient use of both memory and computing capacity. Our approach to
+          achieving necessary performance levels is to implement an implicit
+          function-based representation (f-rep) modeling system, not using a
+          computer algebra system, but instead using just-in-time (JIT)
+          compilation of user-defined functions. Efficient memory usage is
+          achieved via a sparse volume data structure that builds on previous
+          work by Hoetzlein [Hoetzlein 2016]. Computational efficiency is
+          achieved through a combination of interval arithmetic (IA) and
+          massively parallel evaluation on the GPU. We follow [Keeter 2020] and
+          employ IA as the basis for local pruning of the function evaluation
+          tree to minimize the required number of function evaluations, and we
+          take advantage of GPU-parallelism to significantly enhance
+          computational throughput.
+        </p>
       </div>
     </details>
 
@@ -1285,23 +1332,23 @@
         </div>
       </summary>
       <div class="abstract">
-
-        Testing code for floating-point exceptions is crucial as exceptions can
-        quickly propagate and produce unreliable numerical answers. The
-        state-of-the-art to test for floating-point exceptions in GPUs is quite
-        limited and solutions require the application's source code, which
-        precludes their use in accelerated libraries where the source is not
-        publicly available. We present an approach to find inputs that trigger
-        floating-point exceptions in black-box GPU functions, i.e., functions
-        where the source code and information about input bounds are
-        unavailable. Our approach is the first to use Bayesian optimization
-        (BO) to identify such inputs and uses novel strategies to overcome the
-        challenges that arise in applying BO to this problem. We implement our
-        approach in the Xscope framework and demonstrate it on 58 functions
-        from the CUDA Math Library and functions from ten HPC programs. Xscope
-        is able to identify inputs that trigger exceptions in about 72% of the
-        tested functions.
-
+        <p>
+          Testing code for floating-point exceptions is crucial as exceptions can
+          quickly propagate and produce unreliable numerical answers. The
+          state-of-the-art to test for floating-point exceptions in GPUs is quite
+          limited and solutions require the application's source code, which
+          precludes their use in accelerated libraries where the source is not
+          publicly available. We present an approach to find inputs that trigger
+          floating-point exceptions in black-box GPU functions, i.e., functions
+          where the source code and information about input bounds are
+          unavailable. Our approach is the first to use Bayesian optimization
+          (BO) to identify such inputs and uses novel strategies to overcome the
+          challenges that arise in applying BO to this problem. We implement our
+          approach in the Xscope framework and demonstrate it on 58 functions
+          from the CUDA Math Library and functions from ten HPC programs. Xscope
+          is able to identify inputs that trigger exceptions in about 72% of the
+          tested functions.
+        </p>
       </div>
     </details>
 
@@ -1334,26 +1381,27 @@
         </div>
       </summary>
       <div class="abstract">
-
-        The Herbie web demo is intended as an accessible tool for making a
-        rough guess at the best way to improve the accuracy of a floating-point
-        expression. It aims to support students learning about floating point
-        error, casual users who just want a high-accuracy replacement
-        expression, and expert users who are comfortable interpreting its
-        results. However, it is designed as a single-step tool and leaves
-        little room for users to iterate or adapt it to numerical analysis
-        tasks, even though its underlying functions have broader applications.
-        We describe how an alternative “database workbench” interface will
-        allow users to leverage Herbie’s power while exploring the design space
-        of replacement expressions more flexibly, including support for the
-        development of third-party expression analysis plugins. We would like
-        to discuss with the FPBench community whether the workflow we describe
-        is compatible with other numerical analysis tools and needs, either as
-        plugins or as separate workbenches with a similar interface.
-
-        <a
+        <p>
+          The Herbie web demo is intended as an accessible tool for making a
+          rough guess at the best way to improve the accuracy of a floating-point
+          expression. It aims to support students learning about floating point
+          error, casual users who just want a high-accuracy replacement
+          expression, and expert users who are comfortable interpreting its
+          results. However, it is designed as a single-step tool and leaves
+          little room for users to iterate or adapt it to numerical analysis
+          tasks, even though its underlying functions have broader applications.
+          We describe how an alternative “database workbench” interface will
+          allow users to leverage Herbie’s power while exploring the design space
+          of replacement expressions more flexibly, including support for the
+          development of third-party expression analysis plugins. We would like
+          to discuss with the FPBench community whether the workflow we describe
+          is compatible with other numerical analysis tools and needs, either as
+          plugins or as separate workbenches with a similar interface.
+        </p>
+        <p>
+          <a
           href='https://docs.google.com/presentation/d/1RQ3tDkAzkoFcCZiA2iDpSuHVEJ-aYESwzwvV8M4Ec_s/edit#slide=id.p'>Slides</a>
-
+        </p>
       </div>
     </details>
 
@@ -1385,15 +1433,15 @@
         </div>
       </summary>
       <div class="abstract">
-
-        RTL development is hampered by low design space exploration and long
-        debug times. High Level Synthesis and ML techniques are not tackling
-        the nature of optimization RTL teams are doing in complex Graphics type
-        IP. This talk provides initial results on: automatically transforming
-        RTL , exploring the design space, how Intel GFx knowhow is exploited,
-        associated formal verification and how the foundation of the system is
-        using the latest e-graph technology.
-
+        <p>
+          RTL development is hampered by low design space exploration and long
+          debug times. High Level Synthesis and ML techniques are not tackling
+          the nature of optimization RTL teams are doing in complex Graphics type
+          IP. This talk provides initial results on: automatically transforming
+          RTL , exploring the design space, how Intel GFx knowhow is exploited,
+          associated formal verification and how the foundation of the system is
+          using the latest e-graph technology.
+        </p>
       </div>
     </details>
 
@@ -1412,27 +1460,28 @@
         </div>
       </summary>
       <div class="abstract">
-
-        Standard implementations of functions like sin and exp optimize for
-        accuracy, not speed, because they are intended for general-purpose use.
-        But just like many applications tolerate inaccuracy from cancellation,
-        rounding error, and singularities, many applications could also
-        tolerate less-accurate function implementations. This raises an
-        intriguing possibility: speeding up numerical code by using different
-        function implementations.
-
-        Enter OpTuner, an automated tool for selecting the best implementation
-        for each mathematical function call site. OpTuner uses error Taylor
-        series and integer linear programming to compute optimal assignments of
-        297 function implementations to call sites and presents the user with a
-        speed-accuracy Pareto curve. In a case study on the POV-Ray ray tracer,
-        OpTuner speeds up a critical computation by 2.48×, leading to a whole
-        program speedup of 1.09× with no change in the program output; human
-        efforts result in slower code and lower-quality output. On a broader
-        study of 36 standard benchmarks, OpTuner demonstrates speedups of 2.05×
-        for negligible decreases in accuracy and up to 5.37× for error-tolerant
-        applications.
-
+        <p>
+          Standard implementations of functions like sin and exp optimize for
+          accuracy, not speed, because they are intended for general-purpose use.
+          But just like many applications tolerate inaccuracy from cancellation,
+          rounding error, and singularities, many applications could also
+          tolerate less-accurate function implementations. This raises an
+          intriguing possibility: speeding up numerical code by using different
+          function implementations.
+        </p>
+        <p>
+          Enter OpTuner, an automated tool for selecting the best implementation
+          for each mathematical function call site. OpTuner uses error Taylor
+          series and integer linear programming to compute optimal assignments of
+          297 function implementations to call sites and presents the user with a
+          speed-accuracy Pareto curve. In a case study on the POV-Ray ray tracer,
+          OpTuner speeds up a critical computation by 2.48×, leading to a whole
+          program speedup of 1.09× with no change in the program output; human
+          efforts result in slower code and lower-quality output. On a broader
+          study of 36 standard benchmarks, OpTuner demonstrates speedups of 2.05×
+          for negligible decreases in accuracy and up to 5.37× for error-tolerant
+          applications.
+        </p>
       </div>
     </details>
 
@@ -1449,16 +1498,17 @@
         </div>
       </summary>
       <div class="abstract">
-
-        The mission of the CORE-MATH project is to provide off-the-shelf
-        open-source mathematical functions with correct rounding that can be
-        integrated into current mathematical libraries (GNU libc, Intel Math
-        Library, AMD Libm, Newlib, OpenLibm, Musl, Apple Libm, llvm-libc, CUDA
-        libm, ROCm). This presentation covers first results in
-        single-precision (binary32).
-
-        <a href='https://members.loria.fr/PZimmermann/talks/'>Slides</a>
-
+        <p>
+          The mission of the CORE-MATH project is to provide off-the-shelf
+          open-source mathematical functions with correct rounding that can be
+          integrated into current mathematical libraries (GNU libc, Intel Math
+          Library, AMD Libm, Newlib, OpenLibm, Musl, Apple Libm, llvm-libc, CUDA
+          libm, ROCm). This presentation covers first results in
+          single-precision (binary32).
+        </p>
+        <p>
+          <a href='https://members.loria.fr/PZimmermann/talks/'>Slides</a>
+        </p>
       </div>
     </details>
 
@@ -1504,23 +1554,23 @@
         </div>
       </summary>
       <div class="abstract">
-
-        Satisfiability Modulo Theories (SMT) solvers have gained widespread
-        popularity as reasoning engines in numerous formal methods
-        applications, including in syntax-guided synthesis (SyGuS)
-        applications. In this talk, we focus on an emerging class of
-        applications for syntax-guided synthesis, namely, the use of a SyGuS
-        solver to (partially) automate further development and improvements to
-        the SMT solver itself. We describe several recent features in the SMT
-        solver cvc5 that follow this paradigm. These include syntax-guided
-        enumeration of rewrite rules, selection of test inputs, and discovery
-        of solved forms for quantified constraints. For the latter, we describe
-        how syntax-guided synthesis recently played a pivotal role in the
-        development of a new algorithm for quantified bit-vector constraints
-        based on invertibility conditions, and how this technique can be
-        extended for similar algorithms that target quantified constraints in
-        other theories, including the theory of floating points.
-
+        <p>
+          Satisfiability Modulo Theories (SMT) solvers have gained widespread
+          popularity as reasoning engines in numerous formal methods
+          applications, including in syntax-guided synthesis (SyGuS)
+          applications. In this talk, we focus on an emerging class of
+          applications for syntax-guided synthesis, namely, the use of a SyGuS
+          solver to (partially) automate further development and improvements to
+          the SMT solver itself. We describe several recent features in the SMT
+          solver cvc5 that follow this paradigm. These include syntax-guided
+          enumeration of rewrite rules, selection of test inputs, and discovery
+          of solved forms for quantified constraints. For the latter, we describe
+          how syntax-guided synthesis recently played a pivotal role in the
+          development of a new algorithm for quantified bit-vector constraints
+          based on invertibility conditions, and how this technique can be
+          extended for similar algorithms that target quantified constraints in
+          other theories, including the theory of floating points.
+        </p>
       </div>
     </details>
 
@@ -1567,19 +1617,19 @@
         </div>
       </summary>
       <div class="abstract">
-
-        Exact real arithmetic systems can specify any amount of precision on
-        the output of the computations. They are used in a wide variety of
-        applications when a high degree of precision is necessary. Some of
-        these applications include: differential equation solvers, linear
-        equation solvers, large scale mathematical models, and SMT solvers.
-        This talk describes a new exact real arithmetic system which uses lazy
-        list of floating point numbers to represent the real numbers. It
-        details algorithms for basic arithmetic computations on these
-        structures and proves their correctness. This proposed system has the
-        advantage of algorithms which can be supported by modern floating point
-        hardware, while still being a lazy exact real arithmetic system
-
+        <p>
+          Exact real arithmetic systems can specify any amount of precision on
+          the output of the computations. They are used in a wide variety of
+          applications when a high degree of precision is necessary. Some of
+          these applications include: differential equation solvers, linear
+          equation solvers, large scale mathematical models, and SMT solvers.
+          This talk describes a new exact real arithmetic system which uses lazy
+          list of floating point numbers to represent the real numbers. It
+          details algorithms for basic arithmetic computations on these
+          structures and proves their correctness. This proposed system has the
+          advantage of algorithms which can be supported by modern floating point
+          hardware, while still being a lazy exact real arithmetic system
+        </p>
       </div>
     </details>
 
@@ -1596,16 +1646,16 @@
         </div>
       </summary>
       <div class="abstract">
-
-        In this meeting, the community discussed what the community
-        might most productively focus on in the coming year. The
-        discussion was lively and landed on three major thrusts:
-        (1) categorizing benchmarks by domain and improving licensing,
-        (2) developing "FP course modules" that instructors
-        can easily incorporate into their courses, and
-        (3) increasing industrial outreach to encourage FPCore adoption
-        as a formal, vendor-neutral specification language.
-
+        <p>
+          In this meeting, the community discussed what the community
+          might most productively focus on in the coming year. The
+          discussion was lively and landed on three major thrusts:
+          (1) categorizing benchmarks by domain and improving licensing,
+          (2) developing "FP course modules" that instructors
+          can easily incorporate into their courses, and
+          (3) increasing industrial outreach to encourage FPCore adoption
+          as a formal, vendor-neutral specification language.
+        </p>
       </div>
     </details>
 
@@ -1636,11 +1686,11 @@
         </div>
       </summary>
       <div class="abstract">
-
-        Sam Pollard shared his work on floating-point error analysis of kernels
-        with many FLOPs (10^9 or more), by combining FPTaylor and analytical
-        error bounds on inner products.
-
+        <p>
+          Sam Pollard shared his work on floating-point error analysis of kernels
+          with many FLOPs (10^9 or more), by combining FPTaylor and analytical
+          error bounds on inner products.
+        </p>
       </div>
     </details>
 
@@ -1658,23 +1708,23 @@
         </div>
       </summary>
       <div class="abstract">
-
-        RLIBM-32 provides a set of techniques to develop correctly rounded math
-        libraries for 32-bit float and posit types. It enhances our RLibm
-        approach that frames the problem of generating correctly rounded
-        libraries as a linear programming problem in the context of 16-bit
-        types to scale to 32-bit types. Specifically, this talk with detail new
-        algorithms to (1) generate polynomials that produce correctly rounded
-        outputs for all inputs using counterexample guided polynomial
-        generation, (2) generate efficient piecewise polynomials with
-        bit-pattern based domain splitting, and (3) deduce the amount of
-        freedom available to produce correct results when range reduction
-        involves multiple elementary functions. The resultant math library for
-        the 32-bit float type is faster than state-of-the-art math libraries
-        while producing the correct output for all inputs. We have also
-        developed a set of correctly rounded elementary functions for 32-bit
-        posits.
-
+        <p>
+          RLIBM-32 provides a set of techniques to develop correctly rounded math
+          libraries for 32-bit float and posit types. It enhances our RLibm
+          approach that frames the problem of generating correctly rounded
+          libraries as a linear programming problem in the context of 16-bit
+          types to scale to 32-bit types. Specifically, this talk with detail new
+          algorithms to (1) generate polynomials that produce correctly rounded
+          outputs for all inputs using counterexample guided polynomial
+          generation, (2) generate efficient piecewise polynomials with
+          bit-pattern based domain splitting, and (3) deduce the amount of
+          freedom available to produce correct results when range reduction
+          involves multiple elementary functions. The resultant math library for
+          the 32-bit float type is faster than state-of-the-art math libraries
+          while producing the correct output for all inputs. We have also
+          developed a set of correctly rounded elementary functions for 32-bit
+          posits.
+        </p>
       </div>
     </details>
 
@@ -1691,17 +1741,17 @@
         </div>
       </summary>
       <div class="abstract">
-
-        <a href="https://github.com/nestordemeure/shaman">Shaman</a> is a C++11
-        library that use operator overloading and a novel method to evaluate
-        the numerical accuracy of an application. It has been designed to
-        target high-performance simulations and, thus, we insured that it is
-        not only accurate but also: is fast enough to be tested on very large
-        simulations, is compatible with all of C++ mathematical functions, and
-        is threadsafe and compatible with both OpenMP and MPI. In this talk,
-        Nestor gave a live demo of Shaman's capabilities and discuss its novel
-        design features.
-
+        <p>
+          <a href="https://github.com/nestordemeure/shaman">Shaman</a> is a C++11
+          library that use operator overloading and a novel method to evaluate
+          the numerical accuracy of an application. It has been designed to
+          target high-performance simulations and, thus, we insured that it is
+          not only accurate but also: is fast enough to be tested on very large
+          simulations, is compatible with all of C++ mathematical functions, and
+          is threadsafe and compatible with both OpenMP and MPI. In this talk,
+          Nestor gave a live demo of Shaman's capabilities and discuss its novel
+          design features.
+        </p>
       </div>
     </details>
 
@@ -1719,31 +1769,31 @@
         </div>
       </summary>
       <div class="abstract">
-
-        Dorra gave a great demo of <a href="">POP</a>, a tool from her thesis
-        work on precision tuning. Summarizing from her abstract: POP
-        establishes novel techniques for precision tuning. The main idea of our
-        approach is based on semantic modeling of the propagation of the
-        numerical errors throughout the program source. This yields a system of
-        constraints whose minimal solution gives the best tuning of the
-        program. Based on a static analysis approach, we formulate the problem
-        of precision tuning with two different methods. The first method
-        combines a forward and a backward error analysis which are two popular
-        paradigms of error analysis. Next, our analysis is expressed as a set
-        of linear constraints, made of propositional logic formulas and
-        relations between integer elements only, checked by a SMT solver. The
-        second method consists of generating an Integer Linear Problem (ILP)
-        from the program. This is done by reasoning on the most significant bit
-        and the number of significant bits of the values which are integer
-        quantities. The integer solution to this problem, computed in
-        polynomial time by a classical linear programming solver, gives the
-        optimal data types at bit-level. A finer set of semantic equations is
-        also proposed which does not reduce directly to an ILP problem. We use
-        the policy iteration technique to find a solution. The POP tool
-        implements both methods, and in this session Dorra demonstrateed it
-        across several benchmarks coming from various application domains such
-        as embedded systems, Internet of Things (IoT), physics, etc.
-
+        <p>
+          Dorra gave a great demo of <a href="">POP</a>, a tool from her thesis
+          work on precision tuning. Summarizing from her abstract: POP
+          establishes novel techniques for precision tuning. The main idea of our
+          approach is based on semantic modeling of the propagation of the
+          numerical errors throughout the program source. This yields a system of
+          constraints whose minimal solution gives the best tuning of the
+          program. Based on a static analysis approach, we formulate the problem
+          of precision tuning with two different methods. The first method
+          combines a forward and a backward error analysis which are two popular
+          paradigms of error analysis. Next, our analysis is expressed as a set
+          of linear constraints, made of propositional logic formulas and
+          relations between integer elements only, checked by a SMT solver. The
+          second method consists of generating an Integer Linear Problem (ILP)
+          from the program. This is done by reasoning on the most significant bit
+          and the number of significant bits of the values which are integer
+          quantities. The integer solution to this problem, computed in
+          polynomial time by a classical linear programming solver, gives the
+          optimal data types at bit-level. A finer set of semantic equations is
+          also proposed which does not reduce directly to an ILP problem. We use
+          the policy iteration technique to find a solution. The POP tool
+          implements both methods, and in this session Dorra demonstrateed it
+          across several benchmarks coming from various application domains such
+          as embedded systems, Internet of Things (IoT), physics, etc.
+        </p>
       </div>
     </details>
 
@@ -1761,16 +1811,12 @@
         </div>
       </summary>
       <div class="abstract">
-
         <p>
-
           Allison lead a great discussion of her recent CACM article
           <a href="https://cacm.acm.org/magazines/2021/2/250083-keeping-science-on-keel-when-software-moves/fulltext">
-            Keeping Science on Keel When Software Moves</a>.
-
+          Keeping Science on Keel When Software Moves</a>.
         </p>
         <p>
-
           High performance computing (HPC) is central to solving large problems
           in science and engineering through the deployment of massive amounts of
           computational power. The development of important pieces of HPC
@@ -1789,10 +1835,8 @@
           energy are conserved. However, such non-systematic efforts might miss
           underlying issues, and the code may keep misbehaving until these are
           fixed.
-
         </p>
         <p>
-
           In this session, Allison presented real-world evidence to show that
           ignoring numerical result changes can lead to misleading scientific
           conclusions. She presented techniques and tools that can help
@@ -1803,9 +1847,7 @@
           specific variables. The developer may then rewrite the code selectively
           and/or suppress the application of certain optimizations to regain more
           predictable behavior.
-
         </p>
-
       </div>
     </details>
 
@@ -1822,20 +1864,14 @@
         </div>
       </summary>
       <div class="abstract">
-
         <p>
-
           Tanmay Tirpankar
           https://github.com/arnabd88/Satire
-
         </p>
         <p>
-
           Mike Lam
           https://github.com/crafthpc/floatsmith
-
         </p>
-
       </div>
     </details>
 
@@ -1853,9 +1889,7 @@
         </div>
       </summary>
       <div class="abstract">
-
         <p>
-
           Interval arithmetic is a simple way to compute a mathematical
           expression to an arbitrary accuracy, widely used for verifying
           floating-point computations. Yet this simplicity belies challenges.
@@ -1864,10 +1898,8 @@
           truth. Plus, finding valid inputs is itself a challenge when invalid
           and unsamplable points make up the vast majority of the input space.
           These issues can make interval arithmetic brittle and temperamental.
-
         </p>
         <p>
-
           Rival introduces three extensions to interval arithmetic to
           address these challenges. Error intervals express rich notions of input
           validity and indicate whether all or some points in an interval violate
@@ -1880,9 +1912,7 @@
           extensions are able to resolve 60.3% more challenging inputs, return
           10.2× fewer completely indeterminate results, and avoid 64 cases of
           fatal error.
-
         </p>
-
       </div>
     </details>
 
@@ -1900,17 +1930,18 @@
         </div>
       </summary>
       <div class="abstract">
-
-        FPY is a new language for specifying benchmarks that is meant to be
-        easier to write for larger programs while retaining compatibility with
-        existing FPCore-based tools. FPY repackages the precise semantics of
-        FPCore under more familiar and convenient Python-like syntax. This
-        talk will discuss the prototype design and highlight new conveniences
-        FPY affords over FPCore.
-
-        <a
+        <p>
+          FPY is a new language for specifying benchmarks that is meant to be
+          easier to write for larger programs while retaining compatibility with
+          existing FPCore-based tools. FPY repackages the precise semantics of
+          FPCore under more familiar and convenient Python-like syntax. This
+          talk will discuss the prototype design and highlight new conveniences
+          FPY affords over FPCore.
+        </p>
+        <p>
+          <a
           href='https://docs.google.com/presentation/d/15KlKe-KU-L8qZa-fJsRq06ro1JOboxwmWAPNH7IsxhY/edit#slide=id.ga74a5d7690_0_15'>Slides</a>
-
+        </p>
       </div>
     </details>
 
@@ -1991,9 +2022,9 @@
       </div>
       </summary>
       <div class="abstract">
-
-        TODO
-
+        <p>
+          TODO
+        </p>
       </div>
     </details>
 
