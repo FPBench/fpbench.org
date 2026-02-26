@@ -101,7 +101,7 @@
       <summary>
         <time>July 2, 2026</time>
         <div class="title">
-           TITLE, use sentence not title case
+          Semantics, Operations, and Properties of P3109 Floating-Point Representations in Lean
         </div>
         <div class="speaker">
           Tung-Che Chang, Rutgers University
@@ -109,7 +109,39 @@
       </summary>
       <div class="abstract">
         <p>
-          TODO
+          The upcoming IEEE-P3109 standard for low-precision
+          floating-point arithmetic can become the foundation of
+          future machine learning hardware and software. Unlike the
+          fixed types of IEEE-754, P3109 introduces a parametric
+          framework defined by bitwidth, precision, signedness, and
+          domain. This flexibility results in a vast combinatorial
+          space of formats -- some with as little as one bit of
+          precision -- alongside novel features such as stochastic
+          rounding and saturation arithmetic. These deviations create
+          a unique verification gap that this paper intends to
+          address.
+        </p>
+
+        <p>
+          This paper presents FLoPS, Formalization in Lean of the
+          P3109 Standard, which is a comprehensive formal model of
+          P3109 in Lean. Our work serves as a rigorous,
+          machine-checked specification that facilitates deep analysis
+          of the standard. We demonstrate the model's utility by
+          verifying foundational properties and analyzing key
+          algorithms within the P3109 context. Specifically, we reveal
+          that FastTwoSum exhibits a novel property of computing exact
+          "overflow error" under saturation using any rounding mode,
+          whereas previously established properties of the
+          ExtractScalar algorithm fail for formats with one bit of
+          precision. This work provides a verified foundation for
+          reasoning about P3109 and enables formal verification of
+          future numerical software. Our Lean development is open
+          source and publicly available.
+        </p>
+
+        <p>
+          More in our <a href="https://arxiv.org/abs/2602.15965">preprint</a>.
         </p>
       </div>
     </details>
