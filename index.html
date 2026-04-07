@@ -166,12 +166,11 @@
     </details>
 -->
 
-    <!--
     <details>
       <summary>
         <time>May 7, 2026</time>
         <div class="title">
-           TITLE, use sentence not title case
+          Accurate models of NVIDIA tensor cores
         </div>
         <div class="speaker">
           Mantas Mikaitis, University of Leeds
@@ -179,11 +178,46 @@
       </summary>
       <div class="abstract">
         <p>
-          TODO
+          Matrix multiplication is a fundamental operation in both training of
+          neural networks and inference. To accelerate matrix multiplication,
+          Graphical Processing Units (GPUs) provide it implemented in hardware.
+          Due to the increased throughput over the software-based matrix
+          multiplication, the multipliers are increasingly used outside of AI,
+          to accelerate various applications in scientific computing. However,
+          matrix multipliers targeted at AI are at present not compliant with
+          IEEE 754 floating-point arithmetic behaviour, with different vendors
+          offering different numerical features. This leads to non-reproducible
+          results across different generations of GPU architectures, at the
+          matrix multiply-accumulate instruction level.
+        </p>
+        <p>
+          To study numerical characteristics of matrix multipliers&mdash;such
+          as rounding behaviour, accumulator width, normalization points, extra
+          carry bits, and others&mdash;test vectors are typically constructed.
+          Yet, these vectors may or may not distinguish between different
+          hardware models, and due to limited hardware availability, their
+          reliability across many different platforms remains largely untested.
+          We present software models for emulating the inner product behavior of
+          low- and mixed-precision matrix multipliers in the V100, A100, H100
+          and B200 data center GPUs in most supported input formats of interest
+          to mixed-precision algorithm developers: 8-, 16-, and 19-bit floating
+          point. These matrix multiplier models are first approximated by
+          determining the numerical features via test vectors designed to trigger
+          outputs sensitive to bit level differences in the implementation,
+          followed by semi-exhaustive comparison (randomised input vectors of
+          10<sup>7</sup> values) between the models and the actual GPU matrix
+          multipliers&mdash;this process is repeated until the model is bit
+          accurate. These models enable verification of test vectors before
+          applying them to real hardware and also support computational
+          scientists and mixed-precision algorithm developers with easy-to-use
+          accurate models available in MATLAB&mdash;we demonstrate their use in
+          multi-word emulation algorithms for matrix multiplication.
+        </p>
+        <p>
+          More in our <a href="https://arxiv.org/abs/2512.07004">preprint</a>.
         </p>
       </div>
     </details>
--->
 
     <details>
       <summary>
